@@ -1,0 +1,53 @@
+PhD Thesis: Table of Contents plan
+
+Introduction
+	- Motivation
+	- Research questions and methodology
+	- Contribution
+	- Thesis organisation and structure
+	- Related publications
+
+Energy transitions
+	- Chapter summary
+	- Introduction
+	- Past of Energy Transitions (0%)
+	- Present of Energy Transition (0%)
+	- Future of Energy Transitions (0%)
+	- Conclusion
+
+Literature Review
+	- Chapter summary
+	- Introduction to energy modelling (90%)
+	- IAMs  (35%)
+	- Optimisation models (60%)
+	- Agent based models  (85%)
+	- Conclusion
+
+ElecSim Model
+	- Chapter summary
+	- Introduction and motivation (100%)
+	- Architecture (95%)
+	- Validation and performance (95%)
+	- Conclusions
+
+Applications
+	- Chapter Summary 
+	- Introduction
+	- Scenario testing (15%)
+	- Carbon optimisation (90%)
+	- 30-minute + day ahead prediction (70%)
+
+Other models
+	- Chapter summary
+	- Introduction (limitations of ABMs) (70%)
+	- FTT:Power model with Reinforcement Learning for Investment (5%)
+	- Conclusion
+
+Conclusions
+	- Thesis Summary
+	- Limitations (40%)
+	- Future Research Direction (70%)
+
+References
+
+Appendix
