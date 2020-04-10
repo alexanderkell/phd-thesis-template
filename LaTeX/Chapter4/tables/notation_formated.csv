@@ -1,0 +1,12 @@
+Parameters,Units,Notation
+Efficiency,\%,$\eta$
+Operating Period,years,$OP$
+Pre-development Period,years,$P_D$
+Construction Period,years,$C_D$
+Pre-development Cost,\textsterling/MW,$P_C$
+Construction Cost,\textsterling/MW,$C_C$
+Infrastructure,\textsterling,$I_C$
+Fixed Operation and Maintenance,\textsterling/MW,$F_C$
+Variable Operation and Maintenance,\textsterling/MW,$V_C$
+Insurance Cost,\textsterling/MW,$In_C$
+Connection Cost,\textsterling/MW,$Con_C$
