@@ -6,6 +6,7 @@ Introduction
 	- Contribution
 	- Thesis organisation and structure
 	- Related publications
+		- Optimising energy and overhead for large parameter space simulations (IGSC 2019, accepted)
 
 Energy transitions
 	- Chapter summary
@@ -21,26 +22,35 @@ Literature Review
 	- IAMs  (35%)
 	- Optimisation models (60%)
 	- Agent based models  (85%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
 	- Conclusion
 
 ElecSim Model
 	- Chapter summary
 	- Introduction and motivation (100%)
 	- Architecture (95%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
 	- Validation and performance (95%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
+		- Long-term electricity market agent based model validation using genetic algorithm based optimization (e-Energy 2020, submitted)
 	- Conclusions
 
 Applications
 	- Chapter Summary 
 	- Introduction
 	- Scenario testing (15%)
+		- Some preliminary scenarios in: ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
 	- Carbon optimisation (90%)
+		- Optimizing carbon tax for decentralized electricity markets using an agent-based model (e-Energy AMLIES workshop 2020, submitted)
 	- 30-minute + day ahead prediction (70%)
+		- Segmenting residential smart meter data for short-Term load forecasting (e-Energy 2018, accepted)
+		- As yet untitled (IGSC 2020, to be submitted)
 
 Other models
 	- Chapter summary
 	- Introduction (limitations of ABMs) (70%)
 	- FTT:Power model with Reinforcement Learning for Investment (5%)
+		- As yet to see whether will be published and where
 	- Conclusion
 
 Conclusions
