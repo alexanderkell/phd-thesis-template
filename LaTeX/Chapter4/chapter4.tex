@@ -88,23 +88,27 @@ Live experimentation of physical processes is often not practical. The costs of 
 
 
 
-%\begin{table*}[]
-%%	\begin{tabular}{|l|c|c|c|c|c|}
-%	\begin{tabular}{lccccc} \toprule
-%		\multicolumn{1}{c}{\textbf{Tool name}} & \textbf{Open Source} & \textbf{Long-Term Investment} & \textbf{Market} & \textbf{Stochastic Inputs} & \textbf{Country Generalisability} \\ \midrule
-%		SEPIA \cite{Harp2000}  & \checkmark           & $\times$                             & \checkmark      & Demand                     & \checkmark                        \\ 
-%		EMCAS ~\cite{Conzelmann}   & $\times$                    & \checkmark                    & \checkmark      & Outages                    & \checkmark                        \\ 
-%		NEMSIM ~\cite{Batten2006}  & ?              & \checkmark                    & \checkmark      & $\times$                          & $\times$                                 \\ 
-%		AMES  ~\cite{Sun2007} & \checkmark           & $\times$                             & Day-ahead       & $\times$                          & $\times$                                 \\ 
-%		PowerACE ~\cite{Rothengatter2007} & $\times$                    & \checkmark                    & \checkmark      & Outages/Demand             & \checkmark                        \\ 
-%		MACSEM  ~\cite{Praca2003}  & ?              & $\times$                             & \checkmark      & $\times$                          & \checkmark                        \\ 
-%		GAPEX  ~\cite{Cincotti2013} & ?              & $\times$                             & Day-ahead       & $\times$                          & \checkmark                        \\ 
-%		EMLab ~\cite{Chappin2017}  & \checkmark           & \checkmark                    & Futures         & $\times$                          & \checkmark                        \\ 
-%		ElecSim                                  & \checkmark           & \checkmark                    & Futures         & \checkmark                 & \checkmark                        \\ \hline
-%	\end{tabular}
-%	\caption{Features of electricity market agent based model tools.}
-%	\label{table:tool_comparison}
-%\end{table*}
+\begin{table}[]
+		\begin{tabular}{cccccc}
+%	\small	
+%	\begin{tabular}{c{2cm}c{0.8cm}c{1cm}c{0.8cm}c{1.2cm}c{1cm}} 
+		
+		\multicolumn{1}{c}{\textbf{Tool name}} & \textbf{Open Source} & \textbf{Long-Term Investment} & \textbf{Market} & \textbf{Stochastic Inputs} & \textbf{Country Generalisability} \\ \midrule
+		SEPIA \cite{Harp2000}  & \checkmark           & $\times$                             & \checkmark      & Demand                     & \checkmark                        \\ 
+		EMCAS ~\cite{Conzelmann}   & $\times$                    & \checkmark                    & \checkmark      & Outages                    & \checkmark                        \\ 
+		NEMSIM ~\cite{Batten2006}  & ?              & \checkmark                    & \checkmark      & $\times$                          & $\times$                                 \\ 
+		AMES  ~\cite{Sun2007} & \checkmark           & $\times$                             & Day-ahead       & $\times$                          & $\times$                                 \\ 
+		GAPEX  ~\cite{Cincotti2013} & ?              & $\times$                             & Day-ahead       & $\times$                          & \checkmark                        \\ 
+		PowerACE \cite{Rothengatter2007} & $\times$                    & \checkmark                    & \checkmark      & Outages Demand             & \checkmark                        \\ 
+		
+		EMLab ~\cite{Chappin2017}  & \checkmark           & \checkmark                    & Futures         & $\times$                          & \checkmark                        \\ 
+		MACSEM  ~\cite{Praca2003}  & ?              & $\times$                             & \checkmark      & $\times$                          & \checkmark                        \\ 
+		ElecSim                                  & \checkmark           & \checkmark                    & Futures         & \checkmark                 & \checkmark                        \\ \hline
+	\end{tabular}
+	\caption{Features of electricity market ABM tools.}
+	\label{table:tool_comparison}
+\end{table}
+
 
 
 % {\color{red}Electricity energy policy modelling is an example where simulation can be used. Real-life experimentation of energy policy is not always feasible due to the long times required to observe results and high risks associated with setting a sub-optimal policy which could radically alter business models and lead to blackouts in electricity supply. Decisions can have long-term impacts, such as producing an electricity market with many expensive and highly polluting coal power plants, they may have ramp-up times, which is the time it takes for a generator to increase electricity production, that are not suitable to accommodate the intermittent electrical flow of renewables. Intermittent electrical flow is where sources of electricity exhibit uncontrolled increases or decreases in output, which is often the case for renewables such as wind, solar, wave and tidal \cite{Challenges2016}. A number of different simulations and computer models have been used to aid policy makers and energy market developers in coming to informed conclusions:}
