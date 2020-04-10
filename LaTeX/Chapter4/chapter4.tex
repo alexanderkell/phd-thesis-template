@@ -91,11 +91,11 @@ Live experimentation of physical processes is often not practical. The costs of 
 \begin{table}[]
 		\begin{tabular}{cccccc}
 %	\small	
-%	\begin{tabular}{c{2cm}c{0.8cm}c{1cm}c{0.8cm}c{1.2cm}c{1cm}} 
+%	\begin{tabular}{c{2cm}c{0.8cm}c{1cm}c{0.8cm}c{1.2cm}c{1cm}}
 		
 		\multicolumn{1}{c}{\textbf{Tool name}} & \textbf{Open Source} & \textbf{Long-Term Investment} & \textbf{Market} & \textbf{Stochastic Inputs} & \textbf{Country Generalisability} \\ \midrule
 		SEPIA \cite{Harp2000}  & \checkmark           & $\times$                             & \checkmark      & Demand                     & \checkmark                        \\ 
-		EMCAS ~\cite{Conzelmann}   & $\times$                    & \checkmark                    & \checkmark      & Outages                    & \checkmark                        \\ 
+		EMCAS \cite{Conzelmann}   & $\times$                    & \checkmark                    & \checkmark      & Outages                    & \checkmark                        \\ 
 		NEMSIM ~\cite{Batten2006}  & ?              & \checkmark                    & \checkmark      & $\times$                          & $\times$                                 \\ 
 		AMES  ~\cite{Sun2007} & \checkmark           & $\times$                             & Day-ahead       & $\times$                          & $\times$                                 \\ 
 		GAPEX  ~\cite{Cincotti2013} & ?              & $\times$                             & Day-ahead       & $\times$                          & \checkmark                        \\ 
@@ -191,141 +191,6 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 
 
 
-\subsection{Second subsection in the first section}
-\dots and some more \dots
-
-\subsubsection{First subsub section in the second subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it \dots
-
-\subsection{Third subsection in the first section}
-\dots and some more \dots
-
-\subsubsection{First subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it and some more and some more and
-some more and some more and some more and some more and some more \dots
-
-\subsubsection{Second subsub section in the third subsection}
-\dots and some more in the first subsub section otherwise it all looks the same
-doesn't it? well we can add some text to it \dots
-
-\section{Second section of the third chapter}
-and here I write more \dots
-
-\section{The layout of formal tables}
-This section has been modified from ``Publication quality tables in \LaTeX*''
- by Simon Fear.
-
-The layout of a table has been established over centuries of experience and 
-should only be altered in extraordinary circumstances. 
-
-When formatting a table, remember two simple guidelines at all times:
-
-\begin{enumerate}
-  \item Never, ever use vertical rules (lines).
-  \item Never use double rules.
-\end{enumerate}
-
-These guidelines may seem extreme but I have
-never found a good argument in favour of breaking them. For
-example, if you feel that the information in the left half of
-a table is so different from that on the right that it needs
-to be separated by a vertical line, then you should use two
-tables instead. Not everyone follows the second guideline:
-
-There are three further guidelines worth mentioning here as they
-are generally not known outside the circle of professional
-typesetters and subeditors:
-
-\begin{enumerate}\setcounter{enumi}{2}
-  \item Put the units in the column heading (not in the body of
-          the table).
-  \item Always precede a decimal point by a digit; thus 0.1
-      {\em not} just .1.
-  \item Do not use `ditto' signs or any other such convention to
-      repeat a previous value. In many circumstances a blank
-      will serve just as well. If it won't, then repeat the value.
-\end{enumerate}
-
-A frequently seen mistake is to use `\textbackslash begin\{center\}' \dots `\textbackslash end\{center\}' inside a figure or table environment. This center environment can cause additional vertical space. If you want to avoid that just use `\textbackslash centering'
-
-
-\begin{table}
-\caption{A badly formatted table}
-\centering
-\label{table:bad_table}
-\begin{tabular}{|l|c|c|c|c|}
-\hline 
-& \multicolumn{2}{c}{Species I} & \multicolumn{2}{c|}{Species II} \\ 
-\hline
-Dental measurement  & mean & SD  & mean & SD  \\ \hline 
-\hline
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-\hline 
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-\hline 
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-\hline 
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-\hline 
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-\hline 
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\hline 
-\end{tabular}
-\end{table}
-
-\begin{table}
-\caption{A nice looking table}
-\centering
-\label{table:nice_table}
-\begin{tabular}{l c c c c}
-\hline 
-\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
-\cline{2-5}
-  & mean & SD  & mean & SD  \\ 
-\hline
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\hline 
-\end{tabular}
-\end{table}
-
-
-\begin{table}
-\caption{Even better looking table using booktabs}
-\centering
-\label{table:good_table}
-\begin{tabular}{l c c c c}
-\toprule
-\multirow{2}{*}{Dental measurement} & \multicolumn{2}{c}{Species I} & \multicolumn{2}{c}{Species II} \\ 
-\cmidrule{2-5}
-  & mean & SD  & mean & SD  \\ 
-\midrule
-I1MD & 6.23 & 0.91 & 5.2  & 0.7  \\
-
-I1LL & 7.48 & 0.56 & 8.7  & 0.71 \\
-
-I2MD & 3.99 & 0.63 & 4.22 & 0.54 \\
-
-I2LL & 6.81 & 0.02 & 6.66 & 0.01 \\
-
-CMD & 13.47 & 0.09 & 10.55 & 0.05 \\
-
-CBL & 11.88 & 0.05 & 13.11 & 0.04\\ 
-\bottomrule
-\end{tabular}
-\end{table}
 
 \subsection{ElecSim Architecture}
 
@@ -338,12 +203,14 @@ CBL & 11.88 & 0.05 & 13.11 & 0.04\\
 	\vskip -6.9mm
 \end{figure}
 
+\begin{landscape}
 \begin{figure*}
 	\centering
-	\includegraphics[width=0.8\linewidth]{Chapter4/figures/low_level_system}
+	\includegraphics[width=\linewidth]{Chapter4/figures/low_level_system}
 	\caption{ElecSim simulation overview}
 	\label{fig:lowlevelsystem}
 \end{figure*}
+\end{landscape}
 
 ElecSim is made up of five fundamental parts: the agents, which are split up into demand and GenCos; power plants; a Power Exchange, which controls an electricity spot market; and the data for parametrisation. A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}.
 
@@ -531,7 +398,7 @@ Validation of models is important to ascertain that the output is accurate. Howe
 We begin by comparing the price duration curve in the year 2018. Figure \ref{fig:price_duration_curve} shows the N2EX Day Ahead Auction Prices of the UK \cite{nordpool_2019}, the Monte-Carlo simulated electricity prices, and the non Monte-Carlo electricity price throughout the year 2018. Fuel prices varying throughout a year, as does $V_C$ and WACC. WACC is sampled from a Gaussian distribution with a standard deviation of $\pm3$\%. $V_C$ is sampled from a uniform distribution between 30\% and 200\% of the mean $V_C$ price, whilst fuel price is sampled from the residuals of an ARIMA model fit on historical data. The N2EX Day Ahead Market is a day ahead market run by Nord Pool AS. Nord Pool AS runs the largest market for electrical energy in Europe, measured in volume traded and in market share \cite{nordpool_2019}.
 \begin{figure}
 	\begin{center}
-		\includegraphics[width=0.35\textwidth]{Chapter4/figures/load_price_duration_curve_comparison-monte-carlo.pdf}
+		\includegraphics[width=0.7\textwidth]{Chapter4/figures/load_price_duration_curve_comparison-monte-carlo.pdf}
 		\caption{Price duration curve which compares real electricity prices to those paid in ElecSim (2018).}
 		\label{fig:price_duration_curve}
 	\end{center}
@@ -829,7 +696,7 @@ This paper details our model and different carbon scenarios. Section \ref{Model}
 
 \begin{figure*}[h]
 	\centering
-	\begin{subfigure}[b]{0.33\textwidth}
+	\begin{subfigure}[b]{0.6\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/demand099-carbon10-datetime.png}
 		\caption[Network2]%
@@ -837,14 +704,14 @@ This paper details our model and different carbon scenarios. Section \ref{Model}
 		\label{fig:demand99carbon10}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.33\textwidth}  
+	\begin{subfigure}[b]{0.6\textwidth}  
 		\centering 
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/demand099-carbon20-datetime.png}
 		\caption[]%
 		{\textsterling20 carbon tax.}
 		\label{fig:demand99carbon20}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.33\textwidth}
+	\begin{subfigure}[b]{0.6\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/demand099-carbon70-datetime.png}
 		\caption[Network2]%
@@ -1574,7 +1441,7 @@ Figure \ref{fig:single_dispatched_day} displays the high utilization of low marg
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.49\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_results_single_day.pdf}
+	\includegraphics[width=0.7\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_results_single_day.pdf}
 	\caption{Example of a single day of dispatched supply.}
 	\label{fig:single_dispatched_day}
 \end{figure}
@@ -1648,7 +1515,7 @@ We chose eight clusters as a compromise between accuracy of the three error metr
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.49\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
+	\includegraphics[width=0.9\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
 	\caption{Number of clusters compared to error metrics.}
 	\label{fig:error_metrics_vs_cluster_number}
 \end{figure}
@@ -1717,7 +1584,7 @@ ElecSim was able to better model the observed fluctuation in nuclear power in 20
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\columnwidth]{Chapter4/figures/e-Energy-2020/results/throughout_years_beis_elecsim_comparison_coal_dropout_leg_below.pdf}
+	\includegraphics[width=0.7\columnwidth]{Chapter4/figures/e-Energy-2020/results/throughout_years_beis_elecsim_comparison_coal_dropout_leg_below.pdf}
 	\caption{Comparison of actual electricity mix vs. ElecSim vs. BEIS projections and taking three coal power plants out of service.}
 	\label{fig:beis_elecsim_historic_comparison}
 \end{figure}
@@ -1748,7 +1615,7 @@ The optimal predicted price duration curve ($PPDC$) closely matches the simulate
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.45\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_price_dur_curve.pdf}
+	\includegraphics[width=0.6\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_price_dur_curve.pdf}
 	\caption{Predicted price duration curve for investment for most accurate run against simulated run in 2018.}
 	\label{fig:best_price_curve}
 \end{figure}
@@ -1761,7 +1628,7 @@ ElecSim was able to model the increase in renewables and stability of nuclear en
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.45\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_coal_dropout_95_ci.pdf}
+	\includegraphics[width=\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_coal_dropout_95_ci.pdf}
 	\caption{Electricity generation mix simulated by ElecSim from 2013 to 2018 compared to observed electricity mix in 2018.}
 	\label{fig:uk_validated_results_2018}
 \end{figure}
@@ -1812,7 +1679,7 @@ The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.45\textwidth]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/best_forward_scenario_below_legend.pdf}
+	\includegraphics[width=\textwidth]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/best_forward_scenario_below_legend.pdf}
 	\caption{Comparison of ElecSim and BEIS' reference scenario from 2018 to 2035.}
 	\label{fig:forward_scenario_beis_elecsim}
 \end{figure}
@@ -1821,7 +1688,7 @@ The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.45\textwidth, height=0.45\textwidth, keepaspectratio]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/optimal_pdc_prices.pdf}
+	\includegraphics[width=\textwidth, height=0.6\textwidth, keepaspectratio]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/optimal_pdc_prices.pdf}
 	\caption{Comparison between optimal price duration curves and simulated price duration curve in 2018.}
 	\label{fig:forward_scenario_best_pdcs}
 \end{figure}
