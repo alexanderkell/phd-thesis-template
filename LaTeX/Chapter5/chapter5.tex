@@ -69,7 +69,7 @@ In this section, the basic principles behind ANNs, Support Vector Regression and
 
 
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{figures/Kell_eEnergy_Fig1.eps}
+	\includegraphics[width=0.4\textwidth]{Chapter5/figures/Kell_eEnergy_Fig1.eps}
 	\caption{A three layer feed forward neural network.}
 	\label{fig:mlp}
 \end{figure}
@@ -146,7 +146,7 @@ The constant $C>0$ determines the trade-off between the flatness of the support 
 Figure \ref{fig:insensitive} demonstrates this principle, where only data points which fall outside of the $\varepsilon$-insensitive tube are penalised in the cost function
 
 \begin{figure}[b]
-	\includegraphics[width=0.45\textwidth]{figures/Kell_eEnergy_Fig2.eps}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/Kell_eEnergy_Fig2.eps}
 	\caption{$\varepsilon$-insensitive band for SVR \cite{Shu2006}.}
 	\label{fig:insensitive}
 \end{figure}
@@ -219,7 +219,7 @@ Smart meter data obtained from the Irish Social Science Data Archive (ISSDA) on 
 The data was recorded between the 14th July 2009 and 31st December 2010, providing 17 months worth of data. For the purposes of cross-validation the data was split into two partitions, the training set and the testing set. The training set made up the first 11 months of data and was used to parametrise the models, whereas the test set is made up of the remaining 6 months of data. This split was chosen to balance the amount of training data with the test data and to give the models a chance to learn the periodicity inherent in a one year period of electricity load. The test set was used for evaluation of the models proposed. Due to the long training times for these algorithms, we worked with a sub-sample of 709 individual Irish homes from the whole dataset. However, we believe that our results would hold over the full dataset.
 
 \begin{figure}[b]
-	\includegraphics[width=0.45\textwidth]{figures/Rplot01.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/Rplot01.png}
 	\caption{Daily load profiles of a single customer over a week between 20th July 2009 and 27th July 2009. }
 	\label{fig:single_user}
 \end{figure}
@@ -232,7 +232,7 @@ Figure \ref{fig:multiple_users} shows eight different residential customer load 
 
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{figures/Rplot02.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/Rplot02.png}
 	\caption{Daily load profiles of different customers over a single day on the 22nd June 2009.}
 	\label{fig:multiple_users}
 \end{figure}
@@ -246,7 +246,7 @@ We propose that clustering similar customer load profiles and aggregating each c
 Figure \ref{fig:similar_customers} displays four different customers with similar load profiles. Each of the users display a strong peak in electricity consumption during the evening and less consumption during the day. These customers may potentially be clustered together by the \textit{k}-means clustering algorithm.
 
 \begin{figure}[b]
-	\includegraphics[width=0.45\textwidth]{figures/similar_cust.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/similar_cust.png}
 	\caption{Figure showing similar load profiles for four different customers on the 22nd July 2009.}
 	\label{fig:similar_customers}
 \end{figure}
@@ -354,7 +354,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 \subsubsection{Random Forest}
 
 \begin{figure}[b]
-	\includegraphics[width=0.45\textwidth]{figures/rforest_parameter_tuning}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/rforest_parameter_tuning}
 	\caption{RMSE vs Number of variables randomly sampled as candidates at each split in the Random Forest model.}
 	\label{fig:rf_param_tune}
 \end{figure}
@@ -390,13 +390,13 @@ To initialize the LSTM, cross-validation was used to select the number of stacke
 
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{figures/results.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{figures/Cluster_Centres.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/Cluster_Centres.png}
 	\caption{Average load profile for each cluster.}
 	\label{fig:clustercentre}
 \end{figure}
@@ -410,7 +410,7 @@ Figure \ref{fig:results} displays the accuracy of the models trained at differen
 Figure \ref{fig:calendar_attr} demonstrates the impact of using calendar attributes such as month, day of the month, and day of the week on prediction accuracy. The results show an increase in prediction accuracy of 6\% for neural networks, 4\% for Random Forests and 1\% for support vector regression when taking into account these variables. It is proposed that the ability for the models to take into account the cyclic yearly, monthly and weekly behaviour improves the results.
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{figures/calendar_attr.png}
+	\includegraphics[width=0.45\textwidth]{Chapter5/figures/calendar_attr.png}
 	\caption{Comparison of accuracy of models with or without calendar attributes.}
 	\label{fig:calendar_attr}
 \end{figure}
@@ -491,7 +491,7 @@ The data was recorded between the 14th July 2009 and 31st December 2010. For the
 
 Figure \ref{fig:similar_customers} displays four residential customer daily load profiles. It can be seen that whilst Customer 1 and Customer 2 have similar load profiles, Customer 3 and Customer 4 have significantly different load profiles.  This demonstrates that, whilst electricity consumption changes per-person, it is possible to cluster similar customers by their load profiles.
 \begin{figure}[b]
-	\includegraphics[width=0.4\textwidth]{figures/Webp_net-resizeimage.png}
+	\includegraphics[width=0.4\textwidth]{Chapter5/figures/Webp_net-resizeimage.png}
 	\caption{Figure showing daily load profiles for four different customers on the 22nd July 2009.}
 	\label{fig:similar_customers}
 \end{figure}
@@ -591,7 +591,7 @@ The Levenberg-Marquardt techniques was once again used to select number of layer
 
 \section{Results}
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{figures/results.png}
+	\includegraphics[width=0.4\textwidth]{Chapter5/figures/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
@@ -602,7 +602,7 @@ The results are shown in figure \ref{fig:results}. These show that clustering si
 The MASE metric also demonstrated that four clusters were optimal for SVR, Neural Networks and Random Forests.
 
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{figures/actual_vs_predicted_enlarged.png}
+	\includegraphics[width=0.4\textwidth]{Chapter5/figures/actual_vs_predicted_enlarged.png}
 	\caption{Real electricity consumption versus predicted electricity consumption between June 16th and June 18th 2010.}
 	\label{fig:act_vs_pred}
 \end{figure}
