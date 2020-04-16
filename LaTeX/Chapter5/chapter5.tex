@@ -354,7 +354,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 \subsubsection{Random Forest}
 
 \begin{figure}[b]
-	\includegraphics[width=0.45\textwidth]{Chapter5/figures/rforest_parameter_tuning}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/rforest_parameter_tuning}
 	\caption{RMSE vs Number of variables randomly sampled as candidates at each split in the Random Forest model.}
 	\label{fig:rf_param_tune}
 \end{figure}
@@ -390,13 +390,13 @@ To initialize the LSTM, cross-validation was used to select the number of stacke
 
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{Chapter5/figures/results.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{Chapter5/figures/Cluster_Centres.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/Cluster_Centres.png}
 	\caption{Average load profile for each cluster.}
 	\label{fig:clustercentre}
 \end{figure}
@@ -410,7 +410,7 @@ Figure \ref{fig:results} displays the accuracy of the models trained at differen
 Figure \ref{fig:calendar_attr} demonstrates the impact of using calendar attributes such as month, day of the month, and day of the week on prediction accuracy. The results show an increase in prediction accuracy of 6\% for neural networks, 4\% for Random Forests and 1\% for support vector regression when taking into account these variables. It is proposed that the ability for the models to take into account the cyclic yearly, monthly and weekly behaviour improves the results.
 
 \begin{figure}
-	\includegraphics[width=0.45\textwidth]{Chapter5/figures/calendar_attr.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/calendar_attr.png}
 	\caption{Comparison of accuracy of models with or without calendar attributes.}
 	\label{fig:calendar_attr}
 \end{figure}
@@ -491,7 +491,7 @@ The data was recorded between the 14th July 2009 and 31st December 2010. For the
 
 Figure \ref{fig:similar_customers} displays four residential customer daily load profiles. It can be seen that whilst Customer 1 and Customer 2 have similar load profiles, Customer 3 and Customer 4 have significantly different load profiles.  This demonstrates that, whilst electricity consumption changes per-person, it is possible to cluster similar customers by their load profiles.
 \begin{figure}[b]
-	\includegraphics[width=0.4\textwidth]{Chapter5/figures/Webp_net-resizeimage.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/Webp_net-resizeimage.png}
 	\caption{Figure showing daily load profiles for four different customers on the 22nd July 2009.}
 	\label{fig:similar_customers}
 \end{figure}
@@ -591,7 +591,7 @@ The Levenberg-Marquardt techniques was once again used to select number of layer
 
 \section{Results}
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{Chapter5/figures/results.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
@@ -602,7 +602,7 @@ The results are shown in figure \ref{fig:results}. These show that clustering si
 The MASE metric also demonstrated that four clusters were optimal for SVR, Neural Networks and Random Forests.
 
 \begin{figure}
-	\includegraphics[width=0.4\textwidth]{Chapter5/figures/actual_vs_predicted_enlarged.png}
+	\includegraphics[width=0.8\textwidth]{Chapter5/figures/actual_vs_predicted_enlarged.png}
 	\caption{Real electricity consumption versus predicted electricity consumption between June 16th and June 18th 2010.}
 	\label{fig:act_vs_pred}
 \end{figure}
