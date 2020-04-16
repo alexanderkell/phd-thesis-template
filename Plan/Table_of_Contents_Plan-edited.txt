@@ -1,0 +1,77 @@
+PhD Thesis: Table of Contents plan
+
+Abstract
+
+
+Introduction
+	- Motivation (Grand vision/plan - How did we deal with it? - List key facts: Simulation, predictions, optimisation)
+	- Research questions and methodology
+	- Contribution (What have we done)
+	- Thesis organisation and structure
+	- Related publications
+		- Optimising energy and overhead for large parameter space simulations (IGSC 2019, accepted) (Used for upskilling to allow for further work -CO2 optimisation, justify this paper)
+
+Background
+	- Prologue
+	- Introduction
+	- Introduction to Energy Markets (for CompSci people)
+	- Introduction to Energy Market Modelling (for CompSci people)
+	- Introduction to Simulation and Machine Learning (For Energy people)
+	- Conclusion
+
+Literature Review
+	- Prologue
+	- Entire Field of Energy Modelling
+	- IAMs  (35%)
+	- Optimisation models (60%)
+	- Agent based models  (85%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
+	- Table of models
+	- Conclusion
+
+# IN THESE SECTIONS DETAIL BITS WHICH HAVE BEEN ADDED IN ADDITION TO THE PAPERS
+# GO TO REVIEWS AND ADD IN THE BITS OF WORK WHICH THE REVIEWERS SUGGEST
+
+ElecSim Model
+	- Prologue
+	- Introduction and motivation (100%)
+	- Architecture (95%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
+	- Validation and performance (95%)
+		- ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
+		- Long-term electricity market agent based model validation using genetic algorithm based optimization (e-Energy 2020, submitted)
+	- Sensitivity Analysis (0%)
+	- Scenario Testing (15%)
+		- Some preliminary scenarios in: ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning (e-Energy workshop 2019, accepted)
+	- Conclusions
+
+Electricity Demand Prediction
+	- Chapter Summary 
+	- Introduction 
+	- Scenario testing (15%)
+	- 30-minute + day ahead prediction (70%)
+		- Segmenting residential smart meter data for short-Term load forecasting (e-Energy 2018, accepted)
+		- As yet untitled (IGSC 2020, to be submitted)
+
+Carbon Optimisation
+	- Prologue
+	- Introduction
+	- Carbon optimisation (90%)
+		- Optimizing carbon tax for decentralized electricity markets using an agent-based model (e-Energy AMLIES workshop 2020, submitted)
+	- Conclusion
+
+Differential Logistic Equation Model
+	- Prologue
+	- Introduction (limitations of ABMs) (70%)
+	- FTT:Power model with Reinforcement Learning for Investment (5%)
+		- As yet to see whether will be published and where
+	- Conclusion
+
+Conclusions (Keep short - key findings, short and punchy to display achievements) 
+	- Thesis Summary
+	- Limitations (40%)
+	- Future Research Direction (70%)
+
+References
+
+Appendix
