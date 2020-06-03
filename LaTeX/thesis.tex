@@ -2,7 +2,13 @@
 % Please have a look at the README.md file for info on how to use the template
 
 %\documentclass[a4paper,12pt,times,numbered,print,index]{Classes/PhD/ThesisPSnPDF}
-\documentclass[a4paper,12pt,times,numbered,print,index,custommargin]{Classes/PhDThesisPSnPDF}
+\documentclass[a4paper,12pt,times,numbered,print,custommargin]{Classes/PhDThesisPSnPDF}
+
+
+%Thesis specific packages
+\usepackage[toc]{glossaries}
+\usepackage[utf8]{inputenc}
+
 
 %e-Energy 2018
 \usepackage{mathtools}
@@ -166,6 +172,10 @@
 % Preamble: Contains packages and user-defined commands and settings
 \input{Preamble/preamble}
 
+% ******************************** Glossaries **********************************
+
+\input{Glossaries/glossaries}
+
 % ************************ Thesis Information & Meta-data **********************
 % Thesis title and author information, refernce file for biblatex
 \input{thesis-info}
@@ -213,7 +223,15 @@
 % \printnomenclature[space] space can be set as 2em between symbol and description
 %\printnomenclature[3em]
 	
-\printnomenclature
+%\printnomenclature
+
+
+%\printglossary[type=\acronymtype]
+
+%\printglossary
+\printnoidxglossaries
+
+
 
 % ******************************** Main Matter *********************************
 \mainmatter
@@ -230,9 +248,22 @@
 
 
 
+
 % ********************************** Back Matter *******************************
 % Backmatter should be commented out, if you are using appendices after References
-%\backmatter
+\backmatter
+
+
+
+% ********************************** Appendices ********************************
+
+\begin{appendices} % Using appendices environment for more functunality
+
+\include{Appendix1/appendix1}
+\include{Appendix2/appendix2}
+
+\end{appendices}
+
 
 % ********************************** Bibliography ******************************
 \begin{spacing}{0.9}
@@ -261,17 +292,8 @@
 
 \end{spacing}
 
-% ********************************** Appendices ********************************
-
-\begin{appendices} % Using appendices environment for more functunality
-
-\include{Appendix1/appendix1}
-\include{Appendix2/appendix2}
-
-\end{appendices}
-
 % *************************************** Index ********************************
-\printthesisindex % If index is present
+%\printthesisindex % If index is present
 
 \end{document}
 %
