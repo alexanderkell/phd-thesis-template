@@ -310,7 +310,7 @@ Once useful information is selected we must encode the data for input into the m
 \begin{table}
 	\caption{List of Input Data for Models}
 	\label{tab:feature}
-	\begin{tabular}{p{3cm}p{5cm}p{8cm}}
+	\begin{tabular}{p{3cm}p{3cm}p{8cm}}
 		\toprule
 		Input & Variable      & Detail description \\
 		\midrule
@@ -337,7 +337,7 @@ To choose the optimum support vector machine kernel cross-validation was also us
 The parameter values selected are shown in Table \ref{tab:kernel}. These parameter values were chosen from the results of cross-validation for each of the different kernels.  From the cross-validation, the linear kernel was found to be the best performing. For this reason, the linear kernel was utilised for prediction of electricity consumption in this paper.
 
 \begin{table}
-	\caption{Prediction Accuracy Based on Type of Kernel}
+\centering
 	\label{tab:kernel}
 	\begin{tabular}{ccl}
 		\toprule
@@ -348,6 +348,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 		Polynomial & C=2, $d=2, r=2$ & 0.0315 \\
 		\bottomrule
 	\end{tabular}
+\caption{Prediction Accuracy Based on Type of Kernel}
 \end{table}
 
 
@@ -534,9 +535,8 @@ Numerical representations were used for the lagged data input. A single binary w
 
 
 \begin{table}
-	\caption{List of Input Data for Models}
 	\label{appendix:feature}
-	\begin{tabular}{p{1cm}p{1.8cm}p{4.8cm}}
+	\begin{tabular}{p{1cm}p{3cm}p{8cm}}
 		\toprule
 		Input & Variable      & Detail description \\
 		\midrule
@@ -547,6 +547,7 @@ Numerical representations were used for the lagged data input. A single binary w
 		22-42 & Lagged inputs & Twenty one numeric inputs representing lagged inputs of previous 3 hours, previous 3 hours of previous day including hour to be predicted, and previous 3 hours of previous week including hour to be predicted \\
 		43    & Holiday       & Single binary digit representing whether the day was a public holiday  \\     \bottomrule                                                           
 	\end{tabular}
+	\caption{List of Input Data for Models}
 \end{table}
 
 \subsection{Experiments}
@@ -561,7 +562,7 @@ The kernels compared were polynomial, radial basis function (RBF) and the linear
 
 The parameter values are shown in Table \ref{tab:kernel}. The linear kernel produced the best results, and therefore chosen as the final model.
 \begin{table}
-	\caption{Prediction Accuracy Based on Type of Kernel}
+\centering
 	\label{tab:kernel}
 	\begin{tabular}{ccl}
 		\toprule
@@ -572,6 +573,7 @@ The parameter values are shown in Table \ref{tab:kernel}. The linear kernel prod
 		Polynomial & C=2, $d=2, r=2$ & 0.03145719 \\
 		\bottomrule
 	\end{tabular}
+\caption{Prediction Accuracy Based on Type of Kernel}
 \end{table}
 \subsubsection{Random Forest}
 The number of variables sampled as candidates at each split was tuned using the validation set.
