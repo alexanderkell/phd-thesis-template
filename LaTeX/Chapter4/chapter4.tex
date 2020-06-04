@@ -50,9 +50,9 @@ Decisions made in an electricity markets may have unintended consequences due to
 
 Simulation is often used to increase understanding as well as to reduce risk and reduce uncertainty. Simulation allows practitioners to realise a physical system in a virtual model. In this context, a model is defined as an approximation of a system through the use of mathematical formulas and algorithms. Through simulation, it is possible to test a system where real life experimentation would not be practical due to reasons such as prohibitively high costs, time constraints or risk of detrimental impacts. This has the dual benefit of minimising the risk of real decisions in the physical system, as well as allowing practitioners to test less risk-averse strategies.
 
-\Glspl{ABM} are a class of computational simulation models composed of autonomous, interacting agents and model the dynamics of a system. Due to the numerous and diverse actors involved in electricity markets, \Glspl{ABM} have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}. 
+\acrfull{abm}s are a class of computational simulation models composed of autonomous, interacting agents and model the dynamics of a system. Due to the numerous and diverse actors involved in electricity markets, \acrshort{abm}x have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}. 
 
-This paper presents ElecSim, an open-source \Gls{ABM} that simulates GenCos in a wholesale electricity market. ElecSim models each GenCo as an independent agent and electricity demand. An electricity market facilitates trades between the two. 
+This paper presents ElecSim, an open-source \acrshort{abm} that simulates GenCos in a wholesale electricity market. ElecSim models each GenCo as an independent agent and electricity demand. An electricity market facilitates trades between the two. 
 
 GenCos make bids for each of their power plants. Their bids are based on the generator's short run marginal cost (SRMC) \cite{Perloff2012}, which excludes capital and fixed costs. The electricity market accepts bids in cost order, also known as merit-order dispatch. GenCos invest in power plants based on expected profitability.	
 
@@ -439,7 +439,6 @@ By observing the processes that emerge from the long-term scenarios, we can see 
 
 \paragraph{Performance}
 
-We used 	
 
 \begin{figure}
 	\centering
@@ -674,7 +673,7 @@ Governmental policy is a tool that can be used to aid in the transition to a low
 
 Simulation is a technique to create a physical system in a virtual world.  In this context a model is defined as a set of mathematical formulas and algorithms which are designed to mimic real life \cite{Forshaw2016}. Simulation allows practitioners to rapidly prototype high risk ideas in this virtual model and assess their outcome before implementation in the real world.
 
-The electricity market in many western democracies consists of multiple heterogenous actors acting for their own best interest \cite{Most2010}. Agent-based modelling is a technique which allows for the simulation of these heterogenous actors with different risk profiles, profit requirements and preferences. A number of agent-based models have been used to model the impact of carbon tax on long term investments \cite{Tang2015, Chen2014, Chappin2017}. \glspl{ABM} have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}.
+The electricity market in many western democracies consists of multiple heterogenous actors acting for their own best interest \cite{Most2010}. Agent-based modelling is a technique which allows for the simulation of these heterogenous actors with different risk profiles, profit requirements and preferences. A number of agent-based models have been used to model the impact of carbon tax on long term investments \cite{Tang2015, Chen2014, Chappin2017}. \acrshort{abm}s have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}.
 
 We model the realisation of the wholesale electricity market in the United Kingdom and adjust carbon tax in our agent-based model to see the effect of long-term investment. Whilst we have modelled the United Kingdom, it would be possible to model for any country with different parameters. We posit that decisions made today can have complex long-term consequences, the process of which can be observed through simulation.
 
@@ -919,11 +918,11 @@ In addition to this, optimization models do not allow for  endogenous behaviour 
 
 %- What is the innovation in this work
 
-The work presented in this paper builds on the \gls{ABM}, ElecSim, developed by Kell \textit{et al.} \cite{Kell}. Agent-based models differ from optimization models by the fact that they are able to explore `\textit{what-if}' questions regarding how a sector could develop under different prospective policies, as opposed to determining optimal trajectories. \glspl{ABM} are particularly pertinent in decentralised electricity markets, where a centralised actor does not dictate investments made within the electricity sector. \glspl{ABM} have the ability to closely mimic the real world by, for example, modelling irrational agents, in this case Generation Companies (GenCos) with incomplete information in uncertain situations \cite{Ghorbani2014}. 
+The work presented in this paper builds on the \acrshort{abm}, ElecSim, developed by Kell \textit{et al.} \cite{Kell}. Agent-based models differ from optimization models by the fact that they are able to explore `\textit{what-if}' questions regarding how a sector could develop under different prospective policies, as opposed to determining optimal trajectories. \acrshort{abm}s are particularly pertinent in decentralised electricity markets, where a centralised actor does not dictate investments made within the electricity sector. \acrshort{abm}s have the ability to closely mimic the real world by, for example, modelling irrational agents, in this case Generation Companies (GenCos) with incomplete information in uncertain situations \cite{Ghorbani2014}. 
 
 There is a desire to validate the ability of energy-models to make long-term predictions. Validation increases confidence in the outputs of a model and leads to an increase in trust amongst the public and policy makers. Energy models, however, are frequently criticised for being insufficiently validated, with the performance of models rarely checked against historical outcomes \cite{Beckman2011}.
 
-In answer to this we postulate that \glspl{ABM} can provide accurate information to decision makers in the context of electricity markets. We increase the temporal granularity of the work by Kell \textit{et al.} \cite{Kell} and use genetic algorithms to tune the model to observed data enabling us to perform validation. This enables us to understand the parameters required to observe certain phenomena, as well as use these fitted parameters to make inferences about the future. 
+In answer to this we postulate that \acrshort{abm}s can provide accurate information to decision makers in the context of electricity markets. We increase the temporal granularity of the work by Kell \textit{et al.} \cite{Kell} and use genetic algorithms to tune the model to observed data enabling us to perform validation. This enables us to understand the parameters required to observe certain phenomena, as well as use these fitted parameters to make inferences about the future. 
 
 
 %- A short description of the solution
@@ -934,7 +933,7 @@ We use a genetic algorithm approach to find an optimal set of price curves predi
 
 Similarly to Nahmmacher \textit{et al.} we demonstrate how clustering of multiple relevant time series such as electricity demand, solar irradiance and wind speed can reduce computational time by selecting representative days ~\cite{Nahmmacher2016}. In this context, representative days are a subset of days that have been chosen due to their ability to approximate the weather and electricity demand in an entire year. Distinct to Nahmacher \textit{et al.} we use a $k$-means clustering approach \cite{forgy65} as opposed to a hierarchical clustering algorithm described by Ward \cite{doi:10.1080/01621459.1963.10500845}. We chose the $k$-means clustering approach due to previous success of this technique in clustering time series \cite{Kell2018a}. 
 
-We measure the accuracy of projections for our improved \gls{ABM} with those of the UK Government's Department for Business, Energy and Industrial Strategy (BEIS) for the UK electricity market between 2013 and 2018. In addition to this, we compare our projections from 2018 to 2035 to those made by BEIS in 2018 \cite{DBEIS2019}.
+We measure the accuracy of projections for our improved \acrshort{abm} with those of the UK Government's Department for Business, Energy and Industrial Strategy (BEIS) for the UK electricity market between 2013 and 2018. In addition to this, we compare our projections from 2018 to 2035 to those made by BEIS in 2018 \cite{DBEIS2019}.
 
 We are able to adequately model the transitional dynamics of the electricity mix in the United Kingdom between 2013 and 2018. During this time there was an ${\sim}88\%$ drop in coal use, ${\sim}44\%$ increase in Combined Cycle Gas Turbines (CCGT), ${\sim}111\% $ increase in wind energy and increase in solar from near zero to ${\sim}1250$MW. We are therefore able to test our model in a transition of sufficient magnitude.
 
@@ -1711,7 +1710,7 @@ The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this paper we have demonstrated that it is possible to use \gls{ABM} to simulate liberalised electricity markets. Through validation we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
+In this paper we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
 
 In addition to this, we were able to compare our long-term scenario to that of the UK Government, Department for Business, Energy \& Industrial strategy. We show that we are able to mimic their reference scenario, however, demonstrate a more realistic increase in nuclear power. The parameters that were gained from optimisation show that the BEIS scenario is realistic, however a high nuclear subsidy may be required.
 

@@ -6,7 +6,7 @@
 
 
 %Thesis specific packages
-\usepackage[toc]{glossaries}
+\usepackage[toc,counter=section,acronym]{glossaries}
 \usepackage[utf8]{inputenc}
 
 
@@ -229,7 +229,12 @@
 %\printglossary[type=\acronymtype]
 
 %\printglossary
-\printnoidxglossaries
+\printnoidxglossaries %[type=\acronymtype]
+
+%\printnoidxglossaries[type=\acronymtype]
+%%%% \newpage just to demonstrate that links are correct
+%\newpage
+%\printnoidxglossaries[type=main]
 
 
 % ******************************** Main Matter *********************************
