@@ -11,6 +11,34 @@
     \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
+
+\section{Prologue}
+
+Test
+
+\section{Introduction}
+
+Test
+
+\section{Literature review}
+
+Test
+
+\section{Carbon optimisation}
+
+Test
+
+\section{Conclusion}
+
+Test
+
+
+
+
+
+
+
+
 \begin{abstract}
 	
 	% Background
@@ -28,9 +56,6 @@
 	
 \end{abstract}
 
-\begin{IEEEkeywords}
-	deep reinforcement learning, bidding strategy, multi-agent system, electricity markets
-\end{IEEEkeywords}
 
 \section{Introduction}
 \label{sec:introduction}
@@ -179,25 +204,25 @@ A copy is made of the actor and critic networks, $Q'(s,a|\theta^{Q'})$ and $\mu'
 	\caption{DDPG Algorithm \cite{Hunt2016}}
 	\begin{algorithmic}[1]
 		\footnotesize
-		\STATE Initialize critic network $Q(s,a|\theta^Q)$ and actor $\mu(s|\theta^\mu)$ with random weights $\theta^Q$ and $\theta^\mu$
-		\STATE Initialize target network $Q'$ and $\mu'$ with weights $\theta^{Q'}\leftarrow\theta^Q,\theta^{\mu'}\leftarrow \theta^{\mu}$
-		\STATE Initialize replay buffer $R$
-		\FOR{\texttt{episode=1,M}}
-		\STATE Initialize a random process $\mathcal{N}$ for action exploration
-		\STATE Receive initial observation state $s_1$
-		\FOR{\texttt{t=1,T}}
-		\STATE Select action $a_t=\mu(s_t|\theta^{\mu})+\mathcal{N}_t$ according to the policy and exploration noise, $\mathcal{N}_t$
-		\STATE Execute action $a_t$ and observe reward $r_t$ and new state $s_{t+1}$
-		\STATE Store transition $(s_t, a_t, r_t, s_{t+1})$ in $R$
-		\STATE Sample a random minibatch of $N$ transitions $(s_i, a_i, r_i, s_{i+1})$ from $R$
-		\STATE Set $y_i=r_i+\gamma Q'(s_{i+1},\mu'(s_{i+1},\mu'(s_{i+1}|\theta^{\mu'})|\theta^{Q'})$
-		\STATE Update critic by minimizing the loss: $$L=\frac{1}{N}\sum_i(y_i-Q(s_i,a_i|\theta^Q))^2$$
-		\STATE Update the actor policy using the sampled policy gradient: $$\triangledown_{\theta^\mu}J\approx \frac{1}{N}\sum_i\triangledown_a Q(s,a|\theta^Q)|_{s=s_i,a=\mu(s_i)}\triangledown_{\theta^\mu}\mu(s|\theta^\mu)|_{s_i}$$
-		\STATE Update the target networks:
+		\State Initialize critic network $Q(s,a|\theta^Q)$ and actor $\mu(s|\theta^\mu)$ with random weights $\theta^Q$ and $\theta^\mu$
+		\State Initialize target network $Q'$ and $\mu'$ with weights $\theta^{Q'}\leftarrow\theta^Q,\theta^{\mu'}\leftarrow \theta^{\mu}$
+		\State Initialize replay buffer $R$
+		\For{\texttt{episode=1,M}}
+		\State Initialize a random process $\mathcal{N}$ for action exploration
+		\State Receive initial observation state $s_1$
+		\For{\texttt{t=1,T}}
+		\State Select action $a_t=\mu(s_t|\theta^{\mu})+\mathcal{N}_t$ according to the policy and exploration noise, $\mathcal{N}_t$
+		\State Execute action $a_t$ and observe reward $r_t$ and new state $s_{t+1}$
+		\State Store transition $(s_t, a_t, r_t, s_{t+1})$ in $R$
+		\State Sample a random minibatch of $N$ transitions $(s_i, a_i, r_i, s_{i+1})$ from $R$
+		\State Set $y_i=r_i+\gamma Q'(s_{i+1},\mu'(s_{i+1},\mu'(s_{i+1}|\theta^{\mu'})|\theta^{Q'})$
+		\State Update critic by minimizing the loss: $$L=\frac{1}{N}\sum_i(y_i-Q(s_i,a_i|\theta^Q))^2$$
+		\State Update the actor policy using the sampled policy gradient: $$\triangledown_{\theta^\mu}J\approx \frac{1}{N}\sum_i\triangledown_a Q(s,a|\theta^Q)|_{s=s_i,a=\mu(s_i)}\triangledown_{\theta^\mu}\mu(s|\theta^\mu)|_{s_i}$$
+		\State Update the target networks:
 		$$\theta^{Q'}\leftarrow\tau\theta^Q+(1-\tau)\theta^{Q'}$$
 		$$\theta^{\mu'}\leftarrow\tau\theta^\mu+(1-\tau)\theta^{\mu'}$$
-		\ENDFOR
-		\ENDFOR
+		\EndFor
+		\EndFor
 	\end{algorithmic}
 \end{algorithm}
 
