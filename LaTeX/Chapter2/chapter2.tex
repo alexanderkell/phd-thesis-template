@@ -14,7 +14,7 @@
 
 \section*{Prologue}
 
-This chapter provides an overview of the relevant material which motivates and underpins the work carried out in this thesis. Section \ref{sec:intro:intro} introduces the problem domain and how such problems can be addressed. In Section \ref{sec:intro:elecmarketsmodelling} an introduction into how electricity markets are modelled. We provide an introduction in Section \ref{sec:intro:simulationmodelling} to simulation and machine learning. Finally, we conclude in Section \ref{sec:intro:conclusion}.
+This chapter provides an overview of the relevant material which motivates and underpins the work carried out in this thesis. Section \ref{sec:intro:elecmarkets} introduces electricity markets and how they are regulated. In Section \ref{sec:intro:elecmarketsmodelling} an introduction into how electricity markets are modelled is shown. We provide an introduction in Section \ref{sec:intro:simulationmodelling} to simulation and machine learning. Finally, we conclude this chapter in Section \ref{sec:intro:conclusion}.
 
 
 %\section{Introduction}
@@ -48,7 +48,40 @@ Ancillary markets, on the other hand, provide a method to facilitate and support
 
 \section{Introduction to Electricity Market Modelling}
 \label{sec:intro:elecmarketsmodelling}
-Test
+
+Modelling electricity markets is a complex task. There exist many variables, actors, services and behaviours within electricity markets which make it impossible to perfectly model the system. Often simplifications must be made, where models are designed for a specific task \cite{Pfenninger2014a}. Large established models exist which model every possible detail, however, with the increase in temporal and spatial resolution required, the computer tractability of these models can be negatively impacted. Many of the large models used today have existed for a long time, before the advent of the internet \cite{Pfenninger2014a}. Therefore, these models and modellers risk being left behind.
+
+Energy and electricity models generally follow two approaches: top-down or a bottom-up approach \cite{Ringkjob2018}. Bottom-up models are often referred to as the engineering approach and are based on detailed technological representations of the energy system. Top-down models, on the other hand, follow an economic approach and consider the long-term changes and macroeconomic relationships \cite{Mai2013}. It is possible to combine both the technological properties and long-term changes by creating a hybrid approach \cite{Fortes2014}.
+
+Within these two approaches there exist four paradigms of models: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) qualitative and mixed methods scenarios \cite{Pfenninger2014a}. These four paradigms can be described as follows:
+
+\begin{enumerate}
+	\item These models cover the entire energy system and use optimization methods. The primary aim of these is to provide scenarios of how the system can involve.
+	\item Models which cover the entire energy system using simulation techniques. These models have a primary purpose of providing forecasts of how the system may evolve.
+	\item These models are focused exclusively on the electricity system. The methods and aims which underpin them vary between models. From optimization and scenarios to simulation and prediction.
+	\item These models rely more on qualitative or mixed methods rather than quantitative approaches.
+\end{enumerate}
+
+In practice, it is possible for models to lie between any of these groups. Table \ref{tab:intro:modeltypes}
+
+\begin{table}[]
+	\footnotesize
+	\caption{Four different model types \cite{Pfenninger2014a}}
+	\label{tab:intro:modeltypes}
+	\begin{tabular}{@{}lll@{}}
+		\toprule
+		Model family                               & Examples                                 & Primary focus                            \\ \midrule
+		Energy system optimisation models          & MARKAL, TIMES, MESSAGE, OSeMOSYS         & Normative scenarios                      \\
+		Energy system simulation models            & LEAP, NEMS, PRIMES                       & Forecasts, predictions                   \\
+		Power system and electricity market models & WASP, PLEXOS, EMCAS, ElecSim             & Operational decisions \\
+		Qualitative and mixed-methods scenarios    & DECC 2050 pathways, Stabilisation wedges & Narrative scenarios                      \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+
+% Difficulty in validating these models
+
+
 
 \section{Introduction to Simulation and Machine Learning}
 \label{sec:intro:simulationmodelling}
