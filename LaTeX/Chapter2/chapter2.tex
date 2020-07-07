@@ -12,26 +12,48 @@
 \fi
 
 
-\section{Prologue}
+\section*{Prologue}
 
-Test
+This chapter provides an overview of the relevant material which motivates and underpins the work carried out in this thesis. Section \ref{sec:intro:intro} introduces the problem domain and how such problems can be addressed. In Section \ref{sec:intro:elecmarketsmodelling} an introduction into how electricity markets are modelled. We provide an introduction in Section \ref{sec:intro:simulationmodelling} to simulation and machine learning. Finally, we conclude in Section \ref{sec:intro:conclusion}.
 
-\section{Introduction}
 
-Test
+%\section{Introduction}
+%\label{sec:intro:intro}
+%
+%The electricity market 
 
 \section{Introduction to Electricity Markets}
+\label{sec:intro:elecmarkets}
 
-Test
+Electricity markets are complex. One of the principal reasons for this is the expense and difficulty of storing electricity. Additionally, as electricity travels over high voltage transmission lines, electricity doesn't always follow simple or unique paths, especially when the transmission lines become congested. Finally, electricity markets require technical overseers to ensure that the entire transmission system operates safely and reliably. 
+
+Another aspect to consider is the fact that electricity is homogeneous. A single unit of electricity produced by a wind turbine is equivalent to a unit of electricity produced by a gas turbine. However, the functioning of different electricity producers, or generators, are not homogenous. Coal, gas and oil power plants can be \gls{dispatched} at the will of a human operator. Their ramp rates are well understood, as is the amount of fuel that is available. \Gls{ires}, however, such as solar, wind and tidal are dependent on the supply of solar irradiance, wind speed and the tide at any moment. Whilst these can be predicted, predictions are often wrong, and perfect knowledge is impossible. Therefore, at times where there is too much supply from \acrfull{ires} generators must be curtailed. In the opposite case, where there is too little supply from \acrshort{ires}, supply must be made up from other sources, such as coal, gas or hydro.
+
+The environmental impact from different electricity generators differs significantly between generators. Whilst gas and coal can be dispatched at a time convenient to the grid operators, they emit \ce{CO2} along with other toxic substances. Wind and solar do not dispatch such substances or gases, but can not be controlled as easily. Storage technologies can be used to fill these gaps, however, large-scale storage depends on large pumped reservoirs that can move water to a higher position when demand for electricity is low, and supply is high. Not all geographies have access to such reservoirs, and therefore would rely on battery technology made from chemicals. However, reaching such high storage capabilities are expensive, and are yet to have been done in the real world. Another option is converting to electricity to hydrogen. However, this technology is also expensive and uncompetitive with traditional fossil fuels such as coal, gas and oil. Currently, \gls{peakerplants} are used to fill these gaps, however these plants are expensive to operate, highly polluting and use fossil fuels. It is expected that these \gls{peakerplants}s will be used increasingly due to the intermittent nature of renewable technologies. 
+
+
+% Control of the grid (national grid) supply and demand
+The electricity grid must match supply with demand at all times. Failure to do so results in an imbalance of supply and demand, and affects the frequency of the electricity network. Large differences between supply and demand can lead to blackouts or oversupply and damage equipment. A number of different markets exist to regulate the supply and demand, running from within seconds, to days-ahead and bilateral contracts which settle electricity for years ahead.
+
+% Reserve, day-ahead, capacity market
+There are a number of different market mechanisms that can be used to balance the supply and demand of electricity. Largely these can be divided between ancillary services and wholesale transactions. Wholesale transactions can occur as bilateral trades or on a day-ahead market. Bilateral trades can occur between two electricity suppliers and those that have an electricity demand. In this case, suppliers and customers create contracts for electricity in advance. Typically, these agents must let the market operator know of their trades. In a day-ahead market, the system price is, in principle, determined by matching offers from generators to bids from consumers at each node to develop a supply and demand equilibrium price. 
+
+Ancillary markets, on the other hand, provide a method to facilitate and support the continuous flow of electricity so that supply continually meets demand. These include markets to regulate power and voltage control as well as frequency control. These markets make use of increasing supply or reducing demand at the times where this is required. 
+
+
+
+
+
+
 
 \section{Introduction to Electricity Market Modelling}
-
+\label{sec:intro:elecmarketsmodelling}
 Test
 
 \section{Introduction to Simulation and Machine Learning}
-
+\label{sec:intro:simulationmodelling}
 Test
 
 \section{Conclusion}
-
+\label{sec:intro:conclusion}
 Test
