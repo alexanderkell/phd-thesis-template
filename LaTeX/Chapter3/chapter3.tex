@@ -61,13 +61,36 @@ Currently, conventional technologies, provide a spinning reserve. Where a spinni
 \section{Optimisation models}
 \label{sec:litreview:optimisation}
 
-Optimisation energy models minimise costs or maximise welfare, defined as the material and physical well-being of people ~\cite{Keles2017}.  Examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general purpose energy systems model~\cite{Pfenninger2014}.
+Large bottom-up optimization models have long been used for energy system modelling. These are based upon a detailed description of the technical components of the energy system. However, because of their high detail, they must often make simplifications to remain tractable. Examples of these simplifications are to limit them to nationally aggregated technology build and yearly or seasonally averaged time-steps \cite{Pfenninger2014}. 
 
+Optimisation models optimise a given quantity. These models generalise minimise costs or maximise welfare, defined as the material and physical well-being of people ~\cite{Keles2017}.  Examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general purpose energy systems model~\cite{Pfenninger2014}.
+
+The majority of optimisation models use a linear programming (LP) approach, which for instance, minimise the total system cost, subject to a set of constraints. An example constraint could be that supply and demand are matched at all times in the grid. Mixed-integer liner programming (MILP) forces certain variables to be integers. This can enable the optimisation of the precise number of power plants or solar panels one should invest in \cite{Ringkjob2018}. It is possible to have non-linear optimisation models. These models use heuristic optimisation. Heuristic optimisation differs from traditional ptimisation modelling, in that they do not necessarily find the optimum solution \cite{Banos2011}.  
+
+The MARKAL/TIMES model developed into TIAM (TIMES Integrated Assessment Model). TIAM is a global version of TIMES which also allows for climate response modelling. The MARKAL/TIMES family of models is developed by the IEA ETSAP. IEA ETSAP are a consortium of researchers from IEA member countries.
+
+Both MARKAL/TIMES and MESSAGE represent possible scenarios of how the energy system may develop on a national, regional or global scale over a number of decades. However, these models do not state how likely each of these scenarios are to develop. These are both linear optimisation models which minimise the total energy system cost. Recent versions also allow for non-linear and mixed integer linear optimisations.
+
+Hybrid models developed in the 1990s \cite{Economics2016}. Hybrid models link bottom-up models with top-down general equilibrium economic models. General equilibrium economic models attempt to characterize economy-wide movements in response to energy system changes. An example of such a model is the MESSAGE-MACRO model \cite{Messner2000} which soft-links two separate models. MESSAGE is a linear model which links to the non-linear MACRO model macroeconomic model. 
+
+MESSAGE-MACRO soft-links these two models. This means that the two models are iteratively solved. In this case, the output from one is used as an input into the other. Over time this will hopefully lead to convergence. MARKAL-MACRO, however, \cite{mannewene92} hard-links the two models into one solution, which solves in a single iteration.
+
+Even though these models have been the established approach for many decades, other examples of optimisation models are being developed. An open-source version of a similar style to MARKAL has been developed, known as OSeMOSYS \cite{Howells2011}. 
 
 Traditional centralised optimisation models are not designed to  describe a system which is out of equilibrium. Optimisation models assume perfect foresight and risk neutral investments with no regulatory uncertainty. The core dynamics which emerge from equilibrium remain a black-box. For example, the model assumes a target will be reached, and does not provide information for which this is not the case. Reasons for this could be investment cycles which move the model away from equilibrium \cite{Chappin2017}.
 
 \section{Simulation models}
 \label{sec:litreview:simulation}
+
+Simulation models simulate an energy system based upon specified equations, characteristics and rules. These are often bottom-up models, and are designed with a high level of technological description \cite{Ringkjob2018}. Agent-based models are a specific case of models, where actors are modelled explicitly as agents with heterogeneous strategies and behaviours.
+
+Whilst energy optimisation models are built open mathematical formulations, simulation models can be built modularly and incorporate a range of methods. These simulation methods can also incorporate optimization based methods as submodules. Examples of these models are NEMS and PRIMES. NEMS is the U.S. Energy Information Administration's National energy Modelling System, whereas PRIMES covers the EU. These models have been used since the 1990s.
+
+The Annual Energy Outlook is produced by NEMS and is used to inform policy decisions by the US Government. NEMS is made up of a number of submodules that are iteratively solved \cite{Gabriel2001}. Whilst each of the submodules can be implemented in different ways, the model can become complex, and therefore difficult to understand. 
+
+PRIMES is also a modular system. An integrating module finds an equilibrium solution for energy supply, demand, cross-border energy trade, and emissions for all European countries \cite{Capros2012}. The analysis that PRIMES has provided has formed the basis of the EU's Energy Roadmap 2050 \cite{Gupta2011}.
+
+LEAP (Long-range Energy Alternatives Planning System) is another simulation model and was developed by the Stockholm Environment Institute \cite{LEAP2012a}. LEAP provides an accounting system for supply with annual timesteps, but can also represent demand with a macroeconomic model. 
 
 
 \subsection{Agent-based models}
@@ -129,7 +152,8 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 
 \section{Equilibrium models}
 \label{sec:litreview:equilibrium}
-Test
+
+Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). These consider the whole economy, and determine the equilibrium across all markets, and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018}. 
 
 %\section{Models}
 %\label{sec:litreview:models}
