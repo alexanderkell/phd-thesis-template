@@ -13,11 +13,16 @@
 
 \section*{Prologue}
 
-Test
+In this chapter we give an introduction to the relevant energy modelling literature. We review the three major types of models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:simulation} introduces simulation models and Section \ref{sec:litreview:equilibrium} introduces equilibrium models. We conclude this chapter in Section \ref{sec:litreview:conclusion}.
 
 \section{Energy Modelling}
+\label{sec:litreview:energymodelling}
 
-Within these two approaches there exist four paradigms of models: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) qualitative and mixed methods scenarios \cite{Pfenninger2014a}. These four paradigms can be described as follows:
+In this thesis we define energy systems as the entire system from extraction of primary energy to use as final energy to supply services and goods \cite{Pfenninger2014a}. These systems can be modelled by different subsections which model technical, environmental and social elements. 
+
+Energy models can typically be classified as top-down macro-economic models or bottom-up techno-economic models~\cite{Bohringer1998}. Top-down models typically focus on behavioural realism with a focus on macro-economic metrics. They are useful for studying economy-wide responses to policies ~\cite{Hall2016}, for example MARKAL-MACRO \cite{Fishbone1981} and LEAP \cite{Heaps2016}. Bottom-up models represent the energy sector in detail, and are written as mathematical programming problems~\cite{Gargiulo2013}. They detail technology explicitly, and can include cost and emissions implications~\cite{Hall2016}.
+
+Within these two classifications, there exist four further paradigms of models within the community: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) qualitative and mixed methods scenarios \cite{Pfenninger2014a}. These four paradigms can be described as follows:
 
 \begin{enumerate}
 	\item These models cover the entire energy system and use optimization methods. The primary aim of these is to provide scenarios of how the system can involve.
@@ -26,7 +31,8 @@ Within these two approaches there exist four paradigms of models: (1) energy sys
 	\item These models rely more on qualitative or mixed methods rather than quantitative approaches.
 \end{enumerate}
 
-In practice, it is possible for models to lie between any of these groups. Table \ref{tab:intro:modeltypes} displays the 
+In practice, it is possible for models to lie between any of these paradigms, and within a top-down or bottom-up approach. Table \ref{tab:intro:modeltypes} displays the model families, examples of such models and their primary focus.
+
 
 \begin{table}[]
 	\footnotesize
@@ -42,22 +48,96 @@ In practice, it is possible for models to lie between any of these groups. Table
 	\end{tabular}
 \end{table}
 
-\section{Optimisation models}
+Within these models, there is a dichotomy between planning models and operational models. Much work has been undertaken to understand the relationship between demand and supply, especially with the increase in \acrshort{ires}. Operational models allow for a high-resolution analysis of dispatch within an energy grid. Planning models allow for long-term analysis of systems, and have therefore, traditionally used a less fine spatial and temporal granularity. It is the case, however, that there is an amalgamation of these two approaches, as long-term planning on models also rely on high temporal and spatial granularity to accommodate \acrshort{ires}.
 
-Test
+With \acrshort{ires} such as wind and solar power, output can vary temporally on many time scales. For example, there may be a gust of wind which lasts a number of seconds, or cloud cover which lasts for less than a minute. In an electricity grid, where supply must meet demand at all times, this can lead to challenges.
+
+Currently, conventional technologies, provide a spinning reserve. Where a spinning reserve can increase or decrease capacity rapidly by increasing or decreasing the torque applied to a generator. However, if \acrshort{ires} is to reduce the size of this spinning reserve, then battery technologies will be required. It is for reasons such as this, that long-term energy models are requiring an increase in temporal granularity.
+
+
+
+
+
+\section{Optimisation models}
+\label{sec:litreview:optimisation}
+
+Optimisation energy models minimise costs or maximise welfare, defined as the material and physical well-being of people ~\cite{Keles2017}.  Examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general purpose energy systems model~\cite{Pfenninger2014}.
+
+
+Traditional centralised optimisation models are not designed to  describe a system which is out of equilibrium. Optimisation models assume perfect foresight and risk neutral investments with no regulatory uncertainty. The core dynamics which emerge from equilibrium remain a black-box. For example, the model assumes a target will be reached, and does not provide information for which this is not the case. Reasons for this could be investment cycles which move the model away from equilibrium \cite{Chappin2017}.
 
 \section{Simulation models}
+\label{sec:litreview:simulation}
 
-Test
+
+\subsection{Agent-based models}
+
+However, electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must therefore be used to encourage changes to attain a desired outcome. It is proposed that these complex agents are modelled using ABMs due to their non-deterministic nature. 
+
+A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:tool_comparison} shows that these do not suit the needs of an open source, long-term market model. We will demonstrate that Monte-Carlo sampling of parameters is also required to increase realism.
+
+There have been a number of recent studies using ABMs which focus on electricity markets, however they often utilize ad-hoc tools which are designed for a particular application \cite{Saxena2019, hadar2019, Kunzel2018}. ElecSim, however, has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address.
+
+Table \ref{table:tool_comparison} contains six columns: tool name, whether the tool is open source or not, whether they model long-term investment in electricity infrastructure, and the markets they model. We determine how the stochasticity of real life is modelled, and determine whether the model is generalisable to different countries. 
+
+
+An open source toolkit is important for reproducibility, transparency and lowering barriers to entry. It enables users to expand the model to their requirements and respective country. The modelling of long-term investment enables scenarios to emerge, and enable users to model investment behaviour. We demonstrate that the use of a Monte-Carlo method improves results.
+
+SEPIA \cite{Harp2000} is a discrete event ABM which utilises Q-learning to model the bids made by GenCos. SEPIA models plants as being always on, and does not have an independent system operator (ISO), which in an electricity market, is an independent non-profit organization for coordinating and controlling of regular operations of the electric power system and market \cite{Zhou2007}. SEPIA does not model a spot market, instead focusing on bilateral contracts. As opposed to this, ElecSim has been designed with a merit-order, spot market in mind. As shown in Table \ref{table:tool_comparison}, SEPIA does not include a long-term investment mechanism. 
+
+EMCAS ~\cite{Conzelmann} is a closed source ABM. EMCAS investigates the interactions between physical infrastructures and economic behaviour of agents. However, ElecSim focuses on the dynamics of the market, and provides a simplified, transparent model of market operation, whilst maintaining robustness of results.
+
+NEMSIM \cite{Grozev2005} is an ABM that represents Australia's National Electricity Market (NEM). Participants are able to grow and change over time using learning algorithms. NEMSIM is non-generalisable to other electricity markets, unlike ElecSim.
+
+AMES ~\cite{Sun2007} is an ABM specific to the US Wholesale Power Market Platform and therefore not generalizable for other countries. GAPEX \cite{Cincotti2013} is an ABM framework for modelling and simulating power exchanges . GAPEX utilises an enhanced version of the reinforcement technique Roth-Erev \cite{RothAE1995} to consider the presence of affine total cost functions. However, neither of these model the long-term dynamics for which ElecSim is designed.
+
+
+
+PowerACE ~\cite{Rothengatter2007} is a closed source ABM of electricity markets that integrates short-term daily electricity trading and long-term investment decisions. PowerACE models the spot market, forward market and a carbon market. Similarly to ElecSim, PowerACE initialises GenCos with each of their power plants. However, as can be seen in Table \ref{table:tool_comparison}, unlike ElecSim, PowerACE does not take into account stochasticity of price risks in electricity markets ~\cite{Most2010}.
+
+EMLab ~\cite{Chappin2017} is an open-source ABM toolkit for the electricity market. Like PowerACE, EMLab models an endogenous carbon market, however, they both differ from ElecSim by not taking into account stochasticity in the electricity markets, such as in outages, fuel prices and operating costs. After correspondence with the authors, however, we were unable to run the current version.
+
+MACSEM \cite{Praca2003} has been used to probe the effects of market rules and conditions by testing different bidding strategies. MACSEM does not model long term investments or stochastic inputs.
+
+
+As can be seen from Table \ref{table:tool_comparison}, none of the tools fill each of the characteristics we have defined. We therefore propose ElecSim to contribute an open source, long-term, stochastic investment model. 
+
+\begin{table*}[]
+	\centering
+	\begin{adjustbox}{angle=90}
+		\begin{tabular}{cccccc}
+			%	\small	
+			%	\begin{tabular}{c{2cm}c{0.8cm}c{1cm}c{0.8cm}c{1.2cm}c{1cm}}
+			
+			\multicolumn{1}{c}{\textbf{Tool name}} & \textbf{Open Source} & \textbf{Long-Term Investment} & \textbf{Market} & \textbf{Stochastic Inputs} & \textbf{Country Generalisability} \\ \midrule
+			SEPIA \cite{Harp2000}  & \checkmark           & $\times$                             & \checkmark      & Demand                     & \checkmark                        \\ 
+			EMCAS \cite{Conzelmann}   & $\times$                    & \checkmark                    & \checkmark      & Outages                    & \checkmark                        \\ 
+			NEMSIM ~\cite{Batten2006}  & ?              & \checkmark                    & \checkmark      & $\times$                          & $\times$                                 \\ 
+			AMES  ~\cite{Sun2007} & \checkmark           & $\times$                             & Day-ahead       & $\times$                          & $\times$                                 \\ 
+			GAPEX  ~\cite{Cincotti2013} & ?              & $\times$                             & Day-ahead       & $\times$                          & \checkmark                        \\ 
+			PowerACE \cite{Rothengatter2007} & $\times$                    & \checkmark                    & \checkmark      & Outages Demand             & \checkmark                        \\ 
+			
+			EMLab ~\cite{Chappin2017}  & \checkmark           & \checkmark                    & Futures         & $\times$                          & \checkmark                        \\ 
+			MACSEM  ~\cite{Praca2003}  & ?              & $\times$                             & \checkmark      & $\times$                          & \checkmark                        \\ 
+			ElecSim                                  & \checkmark           & \checkmark                    & Futures         & \checkmark                 & \checkmark                        \\ \hline
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Features of electricity market ABM tools.}
+	\label{table:tool_comparison}
+\end{table*}
+
 
 \section{Equilibrium models}
-
+\label{sec:litreview:equilibrium}
 Test
 
-\section{Models}
-
-Table goes here
+%\section{Models}
+%\label{sec:litreview:models}
+%
+%Table goes here
 
 \section{Conclusion}
+\label{sec:litreview:conclusion}
+
 
 Test
