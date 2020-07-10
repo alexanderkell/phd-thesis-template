@@ -20,7 +20,7 @@ In this chapter we give an introduction to the relevant energy modelling literat
 
 In this thesis we define energy systems as the entire system from extraction of primary energy to use as final energy to supply services and goods \cite{Pfenninger2014b}. These systems can be modelled by different subsections which model technical, environmental and social elements. 
 
-Energy modelling is a large field, and there have been multiple different reviews which attempt to classify the types of models. This classification can be based upon the mathematical underpinning, the underlying methodology, analytical approach and data requirements. However, this list is not exhaustive. Table \ref{tab:litreview:reviews} shows various reviews that were used as part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
+Energy modelling is a large field, and there have been multiple different reviews which attempt to classify the types of models. This classification can be based upon the mathematical underpinning, the underlying methodology, analytical approach and data requirements. Table \ref{tab:litreview:reviews} shows various reviews that were used as part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
 
 
 \begin{table}[]
@@ -43,7 +43,7 @@ Energy modelling is a large field, and there have been multiple different review
 
 Energy models can typically be classified as top-down macro-economic models or bottom-up techno-economic models~\cite{Bohringer1998}. Top-down models typically focus on behavioural realism with a focus on macro-economic metrics. They are useful for studying economy-wide responses to policies ~\cite{Hall2016}, for example MARKAL-MACRO \cite{Fishbone1981} and LEAP \cite{Heaps2016}. Bottom-up models represent the energy sector in detail, and are written as mathematical programming problems~\cite{Gargiulo2013}. They detail technology explicitly, and can include cost and emissions implications~\cite{Hall2016}.
 
-Within these two classifications, there exist four further paradigms of models within the community: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014a}. These three paradigms can be described as follows:
+Within these two classifications, there exist four further paradigms of models within the community: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014b}. These three paradigms can be described as follows:
 
 \begin{enumerate}
 	\item These models cover the entire energy system and use optimization methods. The primary aim of these is to provide scenarios of how the system can involve.
@@ -52,13 +52,13 @@ Within these two classifications, there exist four further paradigms of models w
 	\item These models focus on long-term growth paths and study the complete economic system.
 \end{enumerate}
 
-In practice, it is possible for models to lie between any of these paradigms, and within a top-down or bottom-up approach. Table \ref{tab:intro:modeltypes} displays the model families, examples of such models and their primary focus.
+In practice, it is possible for models to lie between any of these paradigms, and within a top-down or bottom-up approach. Table \ref{tab:litreview:modeltypes} displays the model families, examples of such models and their primary focus, whereas Table \ref{table:litreview:abm_comparison}
 
 
 \begin{table}[]
 	\footnotesize
-	\caption{Four different model types \cite{Pfenninger2014a}}
-	\label{tab:intro:modeltypes}
+	\caption{Four different model types \cite{Pfenninger2014b}}
+	\label{tab:litreview:modeltypes}
 	\begin{tabular}{p{5cm}p{7cm}ll@{}}
 		\toprule
 		Model family                               & Examples                                 & Primary focus                            \\ \midrule
@@ -120,9 +120,9 @@ Additionally there exist a set of power system models which can help with decisi
 
 WASP (Wien Automatic System Planner) is maintained by the International Atomic Energy Agency (IAEA). It is used primarily for generation expansion planning. WASP uses a custom dynamic programming algorithm, and has a horizon of several decades into the future. 
 
-PLEXOS is a mixed-integer linear programming model which contains detailed modules for power plants, the transmission gird and for capacity expansion. PLEXOS is able to perform analysis at up to 1-minute resolution, which is good for modelling the balancing of \acrshort{ires} at all times. WASP and PLEXOS are both commercial models, which is a similar case for most commonly used large-scale power system models \cite{Pfenninger2014}.
+PLEXOS is a mixed-integer linear programming model which contains detailed modules for power plants, the transmission grid and for capacity expansion. PLEXOS is able to perform analysis at up to 1-minute resolution, which is good for modelling the balancing of \acrshort{ires} at all times. WASP and PLEXOS are both commercial models, which is a similar case for most commonly used large-scale power system models \cite{Pfenninger2014}.
 
-ELMOD is a bottom-up electricity market model. It is considers the engineering and economic daa of the European electricity market, and considers 24 hour windows with an hourly resolution. It is formulated as a non-linear mathematical programming problem, and can be used for applications such as market design or investment decisions.
+ELMOD is a bottom-up electricity market model. It is considers the engineering and economic data of the European electricity market, and considers 24 hour windows with an hourly resolution. It is formulated as a non-linear mathematical programming problem, and can be used for applications such as market design or investment decisions.
 
 
 \subsection{Agent-based models}
@@ -174,7 +174,7 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 			
 			EMLab ~\cite{Chappin2017}  & \checkmark           & \checkmark                    & Futures         & $\times$                          & \checkmark                        \\ 
 			MACSEM  ~\cite{Praca2003}  & ?              & $\times$                             & \checkmark      & $\times$                          & \checkmark                        \\ 
-			ElecSim                                  & \checkmark           & \checkmark                    & Futures         & \checkmark                 & \checkmark                        \\ \hline
+			ElecSim ~\cite{Kell}             & \checkmark           & \checkmark                    & Futures         & \checkmark                 & \checkmark                        \\ \hline
 		\end{tabular}
 	\end{adjustbox}
 	\caption{Features of electricity market agent-based models.}
@@ -193,10 +193,32 @@ E3MG is an econometric simulation developed by Cambridge Econometrics. It models
 
 MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibirum through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic progamming approach as the mathematical underpinning \cite{Hall2016a}.
 
-%\textsc{%\section{Models}
-\label{sec:litreview:models}
 
-In this section we provide a high level overview of the various different types of models. 
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+	\footnotesize
+	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
+		\toprule
+\textbf{Model} & \textbf{Analytical approach} & \textbf{Underlying methodology}                   & \textbf{Mathematical approach}                   & \textbf{Sectoral coverage} & \textbf{Time horizon}            & \textbf{Time step}                                  \\ \midrule
+E3MG           & Hybrid                       & Non-equilibrium                                   & Unknown                                          & Energy-environment-economy & 2100                             & Annually until 2030 and then each decade until 2100 \\
+LEAP           & Hybrid                       & Accounting model                                  & Not available                                    & All sectors                & Medium and long-term             & Annual                                              \\
+MARKAL         & Bottom-up                    & Optimisation                                      & Linear programming, dynamic programming          & Energy sector only         & Medium and long-term             & User-defined                                        \\
+MARKAL-MACRO   & Hybrid                       & Macro-economic for MACRO, optimisation for MARKAL & Non-linear dynamic programming                   & All sectors                & Medium and long-term             & User-defined                                        \\
+NEMS           & Hybrid                       & Optimisation, agent-based, simulation             & Partial equilibrium and linear programming       & Energy system              & Medium (25 years)                & Yearly                                              \\
+OSeMOSYS       & Bottom-up                    & Optimisation                                      & Linear programming and mixed integer programming & Energy sector              & Medium and long-term (2010-2050) & 5-year                                              \\
+PRIMES         & Hybrid                       & Agent-based                                       & Equilibrium model                                & All energy sectors         & Medium to long-term              & Yearly                                              \\
+POLES          & Hybrid                       & Optimisation and simulation                       & Partial equilibrium                              & 15 energy demand sectors   & Long-term (up to 2050)           & Yearly                                              \\
+TIMES          & Bottom-up                    & Optimisation                                      & Linear programming and dynamic programming       & Whole energy sector        & Medium and long-term             & User-chosen time-slices                             \\
+WASP           & Bottom-up                    & Optimisation, simulation                          & Linear programming and dynamic programming       & Power sector               & Medium and long-term             & 12 load duration curves per year                    \\
+MESSAGE        & Bottom-up                    & Optimisation                                      & Dynamic programming                              & Energy sector              & Short, medium and long-term      & User-defined (Multiple of number of years)          \\
+PLEXOS         & Bottom-up                    & Optimisation                                      & Linear programming                               & Electricity sector         & Short-term                       & 1-minute                                            \\
+ELMOD          & Bottom-up                    & Optimisation                                      & Non-linear programming                           & Electricity sector         & Short-term                       & Hourly                                              \\ 
+ElecSim        & Bottom-up                    & Agent-based model                                 & Simulation                                       & Electricity market         & Short, medium and long-term      & Hourly                                              \\ \bottomrule	\end{tabular}
+	\caption{Model schema and presentation of various energy models \cite{Hall2016a}}
+	\label{tab:litreview:modelreview}
+\end{table} 
 
 
 \section{Conclusion}
