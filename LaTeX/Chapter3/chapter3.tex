@@ -103,6 +103,19 @@ Even though these models have been the established approach for many decades, ot
 
 Traditional centralised optimisation models are not designed to  describe a system which is out of equilibrium. Optimisation models assume perfect foresight and risk neutral investments with no regulatory uncertainty. The core dynamics which emerge from equilibrium remain a black-box. For example, the model assumes a target will be reached, and does not provide information for which this is not the case. Reasons for this could be investment cycles which move the model away from equilibrium \cite{Chappin2017}.
 
+
+\section{Equilibrium models}
+\label{sec:litreview:equilibrium}
+
+Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, and determine the equilibrium across all markets, and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016a}. 
+
+POLES is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition \ce{CO2} emissions are recorded and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
+
+E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly timestep until 2030, and then every 10 years until 2100. The demand is calculated endogenously, from econometrics.
+
+MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibirum through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic progamming approach as the mathematical underpinning \cite{Hall2016a}.
+
+
 \section{Simulation models}
 \label{sec:litreview:simulation}
 
@@ -182,16 +195,6 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 \end{table*}
 
 
-\section{Equilibrium models}
-\label{sec:litreview:equilibrium}
-
-Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, and determine the equilibrium across all markets, and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016a}. 
-
-POLES is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition \ce{CO2} emissions are recorded and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
-
-E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly timestep until 2030, and then every 10 years until 2100. The demand is calculated endogenously, from econometrics.
-
-MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibirum through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic progamming approach as the mathematical underpinning \cite{Hall2016a}.
 
 
 
@@ -224,5 +227,13 @@ ElecSim        & Bottom-up                    & Agent-based model               
 \section{Conclusion}
 \label{sec:litreview:conclusion}
 
+In this Chapter we have introduced various electricity market models and the categories that they fall into. However, it is can prove to be challenging to place models within a clear boundary, as many models fall within a continuum. We introduced the concept that traditional models may not have the ability to detail every single component of an electricity market without losing tractability.
 
-Test
+The need for a new paradigm in which decentralised agents act within an environment was discussed. So was the need for a model with high temporal resolution to more accurately model the intermittency of renewable energy. Traditional optimisation models work in a normative, prescriptive way. However, it is not possible to describe a system which is out of equilibrium. Another limitation of the traditional optimisation models is that they assume perfect foresight, with risk neutral investments and no regulatory uncertainty. It assumes that certain scenarios are possible, but does not highlight way a target may not be reached.
+
+It is for these reasons that in this thesis we focus on agent-based models, which move away from the traditional optimisation approach, and allow for a more dynamic solution without rigid mathematical expressions.
+
+
+
+
+
