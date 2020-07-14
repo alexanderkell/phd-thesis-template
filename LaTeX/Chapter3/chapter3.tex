@@ -6,21 +6,23 @@
 \label{chapter:litreview}
 % **************************** Define Graphics Path **************************
 \ifpdf
-    \graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
+\graphicspath{{Chapter3/Figs/Raster/}{Chapter3/Figs/PDF/}{Chapter3/Figs/}}
 \else
-    \graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
+\graphicspath{{Chapter3/Figs/Vector/}{Chapter3/Figs/}}
 \fi
 
 \section*{Prologue}
 
-In this chapter we give an introduction to the relevant energy modelling literature. We review the three major types of models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:simulation} introduces simulation models and Section \ref{sec:litreview:equilibrium} introduces equilibrium models. We conclude this chapter in Section \ref{sec:litreview:conclusion}.
+In this chapter we give an introduction to the relevant energy modelling literature. We review the three major types of quantitative models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:equilibrium} introduces equilibrium models and Section \ref{sec:litreview:simulation} introduces simulation models. We present a table in Section \ref{sec:litreview:modelclassification} which displays a high-level overview of the major models in the literature. We conclude this chapter in Section \ref{sec:litreview:conclusion}.
 
 \section{Energy Modelling}
 \label{sec:litreview:energymodelling}
 
-In this thesis we define energy systems as the entire system from extraction of primary energy to use as final energy to supply services and goods \cite{Pfenninger2014b}. These systems can be modelled by different subsections which model technical, environmental and social elements. 
 
-Energy modelling is a large field, and there have been multiple different reviews which attempt to classify the types of models. This classification can be based upon the mathematical underpinning, the underlying methodology, analytical approach and data requirements. Table \ref{tab:litreview:reviews} shows various reviews that were used as part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
+In this thesis, we define energy systems as the entire energy system; from the extraction of primary energy to the final use of energy to produce and supply services and goods \cite{Pfenninger2014b}. Energy systems models can often be modelled by different submodules. These submodules can model technical, environmental and social elements.
+
+
+Energy modelling is a broad field, and so, there have been multiple reviews which attempt to separate these models into different classifications. Examples of the metrics for classification are the mathematical underpinning, the underlying methodology, analytical approach or data requirements. Table \ref{tab:litreview:reviews} shows the various reviews that were used to inform part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
 
 
 \begin{table}[]
@@ -41,18 +43,18 @@ Energy modelling is a large field, and there have been multiple different review
 
 
 
-Energy models can typically be classified as top-down macro-economic models or bottom-up techno-economic models~\cite{Bohringer1998}. Top-down models typically focus on behavioural realism with a focus on macro-economic metrics. They are useful for studying economy-wide responses to policies ~\cite{Hall2016}, for example MARKAL-MACRO \cite{Fishbone1981} and LEAP \cite{Heaps2016}. Bottom-up models represent the energy sector in detail, and are written as mathematical programming problems~\cite{Gargiulo2013}. They detail technology explicitly, and can include cost and emissions implications~\cite{Hall2016}.
+Energy models can typically be classified as top-down macro-economic models or bottom-up techno-economic models~\cite{Bohringer1998}. Top-down models typically focus on behavioural realism with a focus on macro-economic metrics. They are useful for studying economy-wide responses to policies ~\cite{Hall2016}. Examples of these types of model are MARKAL-MACRO \cite{Fishbone1981} and LEAP \cite{Heaps2016}. Bottom-up models represent the energy sector in detail, and are written as mathematical programming problems~\cite{Gargiulo2013}. They detail technology explicitly, and can include cost and emissions implications~\cite{Hall2016}.
 
-Within these two classifications, there exist four further paradigms of models within the community: (1) energy systems optimization models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014b}. These three paradigms can be described as follows:
+Within these two classifications, there exist four further paradigms of models within the literature: (1) energy systems optimisation models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014b}. These three paradigms can be described as follows:
 
 \begin{enumerate}
-	\item These models cover the entire energy system and use optimization methods. The primary aim of these is to provide scenarios of how the system can involve.
+	\item These models cover the entire energy system and use optimisation methods. The primary aim of these is to provide scenarios of how the system can involve.
 	\item Models which cover the entire energy system using simulation techniques. These models have a primary purpose of providing forecasts of how the system may evolve.
-	\item These models are focused exclusively on the electricity system. The methods and aims which underpin them vary between models. From optimization and scenarios to simulation and prediction.
+	\item These models are focused exclusively on the electricity system. They have a diverse set of methods and aims. Some can be based on optimisation whilst others are based on simulation.
 	\item These models focus on long-term growth paths and study the complete economic system.
 \end{enumerate}
 
-In practice, it is possible for models to lie between any of these paradigms, and within a top-down or bottom-up approach. Table \ref{tab:litreview:modeltypes} displays the model families, examples of such models and their primary focus, whereas Table \ref{table:litreview:abm_comparison}
+In practice, it is possible for models to lie between any of these paradigms and within a top-down or bottom-up approach. Table \ref{tab:litreview:modeltypes} displays the model families, examples of such models and their primary focus.
 
 
 \begin{table}[]
@@ -70,11 +72,11 @@ In practice, it is possible for models to lie between any of these paradigms, an
 	\end{tabular}
 \end{table}
 
-Within these models, there is a dichotomy between planning models and operational models. Much work has been undertaken to understand the relationship between demand and supply, especially with the increase in \acrshort{ires}. Operational models allow for a high-resolution analysis of dispatch within an energy grid. Planning models allow for long-term analysis of systems, and have therefore, traditionally used a less fine spatial and temporal granularity. It is the case, however, that there is an amalgamation of these two approaches, as long-term planning on models also rely on high temporal and spatial granularity to accommodate \acrshort{ires}.
 
-With \acrshort{ires} such as wind and solar power, output can vary temporally on many time scales. For example, there may be a gust of wind which lasts a number of seconds, or cloud cover which lasts for less than a minute. In an electricity grid, where supply must meet demand at all times, this can lead to challenges.
 
-Currently, conventional technologies, provide a spinning reserve. Where a spinning reserve can increase or decrease capacity rapidly by increasing or decreasing the torque applied to a generator. However, if \acrshort{ires} is to reduce the size of this spinning reserve, then battery technologies will be required. It is for reasons such as this, that long-term energy models are requiring an increase in temporal granularity.
+Within the models previously presented, there is a dichotomy between planning models and operational models. Operational models allow for a high-resolution analysis of dispatch within an energy grid. In contrast, planning models allow for long-term analysis of systems. Traditionally these planning models have used a coarse-grained temporal and spatial resolution. However, with the increase in \acrshort{ires} there has been an amalgamation of these two approaches. This is due to the fact that long-term planning models must model the intermittency of \acrshort{ires} to capture the variance of supply of renewable energy.
+
+With \acrshort{ires}, such as wind and solar power, the output can vary temporally on many time scales. For example, there may be a gust of wind which lasts a number of seconds, or cloud cover which lasts for less than a minute. In an electricity grid, where supply must meet demand at all times, this can lead to challenges. Currently, conventional technologies provide a spinning reserve. Where a spinning reserve can increase or decrease capacity rapidly by increasing or decreasing the torque applied to a generator. However, if \acrshort{ires} is to reduce the size of this spinning reserve, then battery technologies will be required. It is for reasons such as this, that long-term energy models require an increase in temporal granularity.
 
 
 
@@ -83,92 +85,91 @@ Currently, conventional technologies, provide a spinning reserve. Where a spinni
 \section{Optimisation models}
 \label{sec:litreview:optimisation}
 
-Large bottom-up optimisation models have long been used for energy system modelling. These are based upon a detailed description of the technical components of the energy system. However, because of their high detail, they must often make simplifications to remain tractable. Examples of these simplifications are to limit them to nationally aggregated technology build and yearly or seasonally averaged time-steps \cite{Pfenninger2014}. 
 
+Large, detailed bottom-up optimisation models have long been used for energy system modelling. These optimisation models are typically based upon a detailed description of the technical components of the energy system. However, due to this fine granularity, simplifications must often be made to ensure tractability of the model. Often the time-steps are seasonally averaged, the models are limited to nationally aggregated technology builds \cite{Pfenninger2014}.
 
+The ultimate goal of optimisation models is to optimise a given quantity. For example, the minimisation of cost or the maximisation of welfare. In this context, welfare can be designed as the material and physical well-being of people~\cite{Keles2017}. Two examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general-purpose energy systems model~\cite{Pfenninger2014}. Optimisation models are able to provide prescriptive, policy-relevant insight and relate near-term actions to long-term outcomes \cite{DeCarolis2012}.
 
-Optimisation models optimise a given quantity. An example is the minimisation of cost or the maximisation of welfare, defined as the material and physical well-being of people ~\cite{Keles2017}.  Examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general purpose energy systems model~\cite{Pfenninger2014}. Optimisation models are able to provide prescriptive, policy relevant insight and relate near-term actions to long-term outcomes \cite{DeCarolis2012}.
-
-The majority of optimisation models use a linear programming (LP) approach, which for instance, minimise the total system cost, subject to a set of constraints. An example constraint could be that supply and demand are matched at all times. Mixed-integer liner programming (MILP) forces certain variables to be integers. This can enable the optimisation of the precise number of power plants or solar panels one should invest in \cite{Ringkjob2018}. It is possible to have non-linear optimisation models. These models use heuristic based optimisation. Heuristic optimisation differs from traditional optimisation modelling in that they do not necessarily find the global optimum \cite{Banos2011}.  
+A linear programming (LP) approach is often used for optimisation. For example, a formulation can be made to minimise the total system cost subject to certain constraints. A constraint could be that of having certain carbon emissions within the model run time, or that supply must meet demand at all times. Mixed-integer linear programming (MILP) approaches force certain variables to be integers. This can be useful when the optimisation of discrete variables is required. For example, the number of power plants or solar panels one should invest in \cite{Ringkjob2018}. It is possible to have non-linear optimisation models. These models use heuristic-based optimisation. Heuristic optimisation differs from traditional optimisation modelling in that they do not necessarily find the global optimum \cite{Banos2011}.  
 
 The MARKAL/TIMES model developed into TIAM (TIMES Integrated Assessment Model). TIAM is a global version of TIMES which also allows for climate response modelling. The MARKAL/TIMES family of models is developed by the IEA ETSAP. IEA ETSAP are a consortium of researchers from IEA member countries.
 
-Both MARKAL/TIMES and MESSAGE represent possible scenarios of how the energy system may develop on a national, regional or global scale over a number of decades. However, these models do not state how likely each of these scenarios are to develop. These are both linear optimisation models which minimise the total energy system cost. Recent versions also allow for non-linear and mixed integer linear optimisations.
+Both MARKAL/TIMES and MESSAGE represent possible scenarios of how the energy system may develop on a national, regional or global scale over a number of decades. However, these models do not state how likely each of these scenarios are to develop. These are both linear optimisation models which minimise the total energy system cost. Recent versions also allow for non-linear and mixed-integer linear optimisations.
 
-Hybrid models were developed in the 1990s \cite{Economics2016}. Hybrid models link bottom-up models with top-down general equilibrium economic models. General equilibrium economic models attempt to characterize economy-wide movements in response to energy system changes. An example of such a model is the MESSAGE-MACRO model \cite{Messner2000} which soft-links two separate models. MESSAGE is a linear model which links to the non-linear MACRO model macroeconomic model. 
+Hybrid models were developed in the 1990s \cite{Economics2016}. Hybrid models link bottom-up models with top-down general equilibrium economic models. General equilibrium economic models attempt to characterise economy-wide movements in response to energy system changes. An example of such a model is the MESSAGE-MACRO model \cite{Messner2000} which soft-links two separate models. MESSAGE is a linear model which links to the non-linear MACRO model macroeconomic model. 
 
-MESSAGE-MACRO soft-links these two models. This means that the two models are iteratively solved. In this case, the output from one is used as an input into the other. Over time this will hopefully lead to convergence. MARKAL-MACRO, however, \cite{mannewene92} hard-links the two models into one solution, which solves in a single iteration.
+MESSAGE-MACRO soft-links these two models. This means that the two models are iteratively solved. In this case, the output from one is used as an input into the other. Over time this will hopefully lead to convergence. MARKAL-MACRO, however, hard-links the two models into one solution, which solves in a single iteration \cite{mannewene92}.
 
 Even though these models have been the established approach for many decades, other examples of optimisation models are being developed. An open-source version of a similar style to MARKAL has been developed, known as OSeMOSYS \cite{Howells2011}. 
 
-Traditional centralised optimisation models are not designed to  describe a system which is out of equilibrium. Optimisation models assume perfect foresight and risk neutral investments with no regulatory uncertainty. The core dynamics which emerge from equilibrium remain a black-box. For example, the model assumes a target will be reached, and does not provide information for which this is not the case. Reasons for this could be investment cycles which move the model away from equilibrium \cite{Chappin2017}.
+There are, however, limitations to optimisation based models: traditional centralised optimisation models are not designed to describe a system which is out of equilibrium. Optimisation models assume perfect foresight and risk-neutral investments with no regulatory uncertainty. The core dynamics which emerge from equilibrium remain a black-box. For example, the model assumes a target will be reached, and does not provide information for which this is not the case. Reasons for this could be investment cycles which move the model away from equilibrium \cite{Chappin2017}.
 
 
 \section{Equilibrium models}
 \label{sec:litreview:equilibrium}
 
-Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, and determine the equilibrium across all markets, and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016a}. 
+Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, determine the equilibrium across all markets and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016a}. 
 
-POLES is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition \ce{CO2} emissions are recorded and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
+POLES is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition, \ce{CO2} emissions are recorded, and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
 
-E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly timestep until 2030, and then every 10 years until 2100. The demand is calculated endogenously, from econometrics.
+E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly time-step until 2030, and then every 10 years until 2100. The demand is calculated endogenously using econometrics.
 
-MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibirum through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic progamming approach as the mathematical underpinning \cite{Hall2016a}.
+MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibrium through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic programming approach as the mathematical underpinning \cite{Hall2016a}.
 
 
 \section{Simulation models}
 \label{sec:litreview:simulation}
 
-Simulation models simulate an energy system based upon specified equations, characteristics and rules. These are often bottom-up models, and are designed with a high level of technological description \cite{Ringkjob2018}. Agent-based models are a specific case of models, where actors are modelled explicitly as agents with heterogeneous strategies and behaviours.
+Simulation models simulate an energy system based upon specified equations, characteristics and rules. These are often bottom-up models, and are designed with a high level of technological description \cite{Ringkjob2018}. Agent-based models are a specific case of simulation models, where actors are modelled explicitly as agents with heterogeneous strategies and behaviours.
 
-Whilst energy optimisation models are built open mathematical formulations, simulation models can be built modularly and incorporate a range of methods. These simulation methods can also incorporate optimization based methods as submodules. Examples of these models are NEMS and PRIMES. NEMS is the U.S. Energy Information Administration's National energy Modelling System, whereas PRIMES covers the EU. These models have been used since the 1990s.
+Whilst energy optimisation models are built open mathematical formulations; simulation models can be built modularly and incorporate a range of methods. These simulation methods can also incorporate optimisation based methods as submodules. Examples of these models are NEMS and PRIMES. NEMS is the US Energy Information Administration's National Energy Modelling System, whereas PRIMES covers the EU. These models have been used since the 1990s.
 
-The Annual Energy Outlook is produced by NEMS and is used to inform policy decisions by the US Government. NEMS is made up of a number of submodules that are iteratively solved \cite{Gabriel2001}. Whilst each of the submodules can be implemented in different ways, the model can become complex, and therefore difficult to understand. 
+The Annual Energy Outlook is produced by NEMS and is used to inform policy decisions by the US Government. NEMS is made up of a number of submodules that are iteratively solved \cite{Gabriel2001}. Whilst each of the submodules can be implemented in different ways; the model can become complex, and therefore difficult to understand. 
 
 PRIMES is also a modular system. An integrating module finds an equilibrium solution for energy supply, demand, cross-border energy trade, and emissions for all European countries \cite{Capros2012}. The analysis that PRIMES has provided has formed the basis of the EU's Energy Roadmap 2050 \cite{Gupta2011}.
 
-LEAP (Long-range Energy Alternatives Planning System) is another simulation model and was developed by the Stockholm Environment Institute \cite{LEAP2012a}. LEAP provides an accounting system for supply with annual timesteps, but can also represent demand with a macroeconomic model. 
+LEAP (Long-range Energy Alternatives Planning System) is another simulation model and was developed by the Stockholm Environment Institute \cite{LEAP2012a}. LEAP provides an accounting system for supply with annual time-steps, but can also represent demand with a macroeconomic model. 
 
-Additionally there exist a set of power system models which can help with decisions such as investment planning or decisions about generator dispatch. Power system models typically have higher temporal detail, so that supply and demand is always matched. Examples of large power systems models include WASP and PLEXOS.
+Additionally, there exist a set of power system models which can help with decisions such as investment planning or decisions about generator dispatch. Power system models typically have greater temporal detail, so that supply and demand is always matched. Examples of large power systems models include WASP and PLEXOS.
 
 WASP (Wien Automatic System Planner) is maintained by the International Atomic Energy Agency (IAEA). It is used primarily for generation expansion planning. WASP uses a custom dynamic programming algorithm, and has a horizon of several decades into the future. 
 
 PLEXOS is a mixed-integer linear programming model which contains detailed modules for power plants, the transmission grid and for capacity expansion. PLEXOS is able to perform analysis at up to 1-minute resolution, which is good for modelling the balancing of \acrshort{ires} at all times. WASP and PLEXOS are both commercial models, which is a similar case for most commonly used large-scale power system models \cite{Pfenninger2014}.
 
-ELMOD is a bottom-up electricity market model. It is considers the engineering and economic data of the European electricity market, and considers 24 hour windows with an hourly resolution. It is formulated as a non-linear mathematical programming problem, and can be used for applications such as market design or investment decisions.
+ELMOD is a bottom-up electricity market model. It considers the engineering and economic data of the European electricity market, and considers 24-hour windows with an hourly resolution. It is formulated as a non-linear mathematical programming problem, and can be used for applications such as market design or investment decisions.
 
 
-\subsection{Agent-based models}
+\subsection*{Agent-based models}
 
-Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must therefore be used to encourage changes to attain a desired outcome. It is proposed that these complex agents are modelled using ABMs due to their non-deterministic nature. 
+In this subsection, we give an outline of current agent-based models available and motivate why the model, ElecSim, is required. Part of the literature review outlined here has been previously published in \cite{Kell}.
 
-A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:tool_comparison} shows that these do not suit the needs of an open source, long-term market model. We will demonstrate that Monte-Carlo sampling of parameters is also required to increase realism.
+Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must therefore, be used to encourage changes to attain a desired outcome. It has been proposed that these complex agents are modelled using ABMs due to their non-deterministic nature \cite{Kell}. 
 
-There have been a number of recent studies using ABMs which focus on electricity markets, however they often utilize ad-hoc tools which are designed for a particular application \cite{Saxena2019, hadar2019, Kunzel2018}. ElecSim, however, has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address.
+A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:tool_comparison} shows, however, that these do not suit the needs of an open source, long-term market model. 
 
-Table \ref{table:litreview:abm_comparison} contains six columns: tool name, whether the tool is open source or not, whether they model long-term investment in electricity infrastructure and the markets they model. We determine how the stochasticity of real life is modelled, and determine whether the model is generalisable to different countries. 
+There have been a number of recent studies using ABMs which focus on electricity markets. However, they often utilise ad-hoc tools which are designed for a particular application \cite{Saxena2019, hadar2019, Kunzel2018}. In our work, we develop the model ElecSim, which has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address by being open source.
+
+Table \ref{table:litreview:abm_comparison} contains six columns: tool name, whether the tool is open source or not, whether they model long-term investment in electricity infrastructure and the markets they model. We determine how the stochasticity of real life is modelled and determine whether the model is generalisable to different countries. 
 
 
-An open source toolkit is important for reproducibility, transparency and lowering barriers to entry. It enables users to expand the model to their requirements and respective country. The modelling of long-term investment enables scenarios to emerge, and enable users to model investment behaviour. We demonstrate that the use of a Monte-Carlo method improves results.
+An open-source toolkit is important for reproducibility, transparency and lowering barriers to entry. It enables users to expand the model to their requirements and respective country. The modelling of long-term investment enables scenarios to emerge and enable users to model investment behaviour. 
 
-SEPIA \cite{Harp2000} is a discrete event ABM which utilises Q-learning to model the bids made by GenCos. SEPIA models plants as being always on, and does not have an independent system operator (ISO), which in an electricity market, is an independent non-profit organization for coordinating and controlling of regular operations of the electric power system and market \cite{Zhou2007}. SEPIA does not model a spot market, instead focusing on bilateral contracts. As opposed to this, ElecSim has been designed with a merit-order, spot market in mind. As shown in Table \ref{table:tool_comparison}, SEPIA does not include a long-term investment mechanism. 
+SEPIA \cite{Harp2000} is a discrete event ABM which utilises Q-learning to model the bids made by GenCos. SEPIA models plants as being always on and does not have an independent system operator (ISO), which in an electricity market, is an independent non-profit organisation for coordinating and controlling of regular operations of the electric power system and market \cite{Zhou2007}. SEPIA does not model a spot market, instead focusing on bilateral contracts. As opposed to this, ElecSim has been designed with a merit-order, spot market in mind. As shown in Table \ref{table:tool_comparison}, SEPIA does not include a long-term investment mechanism. 
 
-EMCAS ~\cite{Conzelmann} is a closed source ABM. EMCAS investigates the interactions between physical infrastructures and economic behaviour of agents. However, ElecSim focuses on the dynamics of the market, and provides a simplified, transparent model of market operation, whilst maintaining robustness of results.
+EMCAS ~\cite{Conzelmann} is a closed source ABM. EMCAS investigates the interactions between physical infrastructures and economic behaviour of agents. However, ElecSim focuses on the dynamics of the market, and provides a simplified, transparent model of market operation, whilst maintaining the robustness of results.
 
 NEMSIM \cite{Grozev2005} is an ABM that represents Australia's National Electricity Market (NEM). Participants are able to grow and change over time using learning algorithms. NEMSIM is non-generalisable to other electricity markets, unlike ElecSim.
 
-AMES ~\cite{Sun2007} is an ABM specific to the US Wholesale Power Market Platform and therefore not generalizable for other countries. GAPEX \cite{Cincotti2013} is an ABM framework for modelling and simulating power exchanges . GAPEX utilises an enhanced version of the reinforcement technique Roth-Erev \cite{RothAE1995} to consider the presence of affine total cost functions. However, neither of these model the long-term dynamics for which ElecSim is designed.
-
-
+AMES ~\cite{Sun2007} is an ABM specific to the US Wholesale Power Market Platform and therefore not generalisable for other countries. GAPEX \cite{Cincotti2013} is an ABM framework for modelling and simulating power exchanges. GAPEX utilises an enhanced version of the reinforcement technique Roth-Erev \cite{RothAE1995} to consider the presence of affine total cost functions. However, neither of these model the long-term dynamics for which ElecSim is designed.
 
 PowerACE ~\cite{Rothengatter2007} is a closed source ABM of electricity markets that integrates short-term daily electricity trading and long-term investment decisions. PowerACE models the spot market, forward market and a carbon market. Similarly to ElecSim, PowerACE initialises GenCos with each of their power plants. However, as can be seen in Table \ref{table:tool_comparison}, unlike ElecSim, PowerACE does not take into account stochasticity of price risks in electricity markets ~\cite{Most2010}.
 
-EMLab ~\cite{Chappin2017} is an open-source ABM toolkit for the electricity market. Like PowerACE, EMLab models an endogenous carbon market, however, they both differ from ElecSim by not taking into account stochasticity in the electricity markets, such as in outages, fuel prices and operating costs. After correspondence with the authors, however, we were unable to run the current version.
+EMLab ~\cite{Chappin2017} is an open-source ABM toolkit for the electricity market. Like PowerACE, EMLab models an endogenous carbon market; however, they both differ from ElecSim by not taking into account stochasticity in the electricity markets, such as in outages, fuel prices and operating costs. After correspondence with the authors, however, we were unable to run the current version.
 
 MACSEM \cite{Praca2003} has been used to probe the effects of market rules and conditions by testing different bidding strategies. MACSEM does not model long term investments or stochastic inputs.
 
 
-As can be seen from Table \ref{table:tool_comparison}, none of the tools fill each of the characteristics we have defined. We therefore propose ElecSim to contribute an open source, long-term, stochastic investment model. 
+As can be seen from Table \ref{table:tool_comparison}, none of the tools fill each of the characteristics we have defined. We therefore propose ElecSim to contribute an open-source, long-term, stochastic investment model. 
 
 \begin{table*}[]
 	\centering
@@ -196,7 +197,10 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 
 
 
+\section{Energy models classification}
+\label{sec:litreview:modelclassification}
 
+In this Section, we present a high-level overview of the various models that are in existence, which fall into various categories as presented by table \ref{tab:litreview:modeltypes}. Table \ref{tab:litreview:modelreview} shows the various models and their analytical approach, underlying methodology, mathematical approach and other information such as sectoral coverage, time horizon and number of time-steps. This list is not exhaustive, however, as we have focused on the major models. 
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
@@ -204,21 +208,21 @@ As can be seen from Table \ref{table:tool_comparison}, none of the tools fill ea
 	\footnotesize
 	\begin{tabular}{@{}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{2cm}}
 		\toprule
-\textbf{Model} & \textbf{Analytical approach} & \textbf{Underlying methodology}                   & \textbf{Mathematical approach}                   & \textbf{Sectoral coverage} & \textbf{Time horizon}            & \textbf{Time step}                                  \\ \midrule
-E3MG           & Hybrid                       & Non-equilibrium                                   & Unknown                                          & Energy-environment-economy & 2100                             & Annually until 2030 and then each decade until 2100 \\
-LEAP           & Hybrid                       & Accounting model                                  & Not available                                    & All sectors                & Medium and long-term             & Annual                                              \\
-MARKAL         & Bottom-up                    & Optimisation                                      & Linear programming, dynamic programming          & Energy sector only         & Medium and long-term             & User-defined                                        \\
-MARKAL-MACRO   & Hybrid                       & Macro-economic for MACRO, optimisation for MARKAL & Non-linear dynamic programming                   & All sectors                & Medium and long-term             & User-defined                                        \\
-NEMS           & Hybrid                       & Optimisation, agent-based, simulation             & Partial equilibrium and linear programming       & Energy system              & Medium (25 years)                & Yearly                                              \\
-OSeMOSYS       & Bottom-up                    & Optimisation                                      & Linear programming and mixed integer programming & Energy sector              & Medium and long-term (2010-2050) & 5-year                                              \\
-PRIMES         & Hybrid                       & Agent-based                                       & Equilibrium model                                & All energy sectors         & Medium to long-term              & Yearly                                              \\
-POLES          & Hybrid                       & Optimisation and simulation                       & Partial equilibrium                              & 15 energy demand sectors   & Long-term (up to 2050)           & Yearly                                              \\
-TIMES          & Bottom-up                    & Optimisation                                      & Linear programming and dynamic programming       & Whole energy sector        & Medium and long-term             & User-chosen time-slices                             \\
-WASP           & Bottom-up                    & Optimisation, simulation                          & Linear programming and dynamic programming       & Power sector               & Medium and long-term             & 12 load duration curves per year                    \\
-MESSAGE        & Bottom-up                    & Optimisation                                      & Dynamic programming                              & Energy sector              & Short, medium and long-term      & User-defined (Multiple of number of years)          \\
-PLEXOS         & Bottom-up                    & Optimisation                                      & Linear programming                               & Electricity sector         & Short-term                       & 1-minute                                            \\
-ELMOD          & Bottom-up                    & Optimisation                                      & Non-linear programming                           & Electricity sector         & Short-term                       & Hourly                                              \\ 
-ElecSim        & Bottom-up                    & Agent-based model                                 & Simulation                                       & Electricity market         & Short, medium and long-term      & Hourly                                              \\ \bottomrule	\end{tabular}
+		\textbf{Model} & \textbf{Analytical approach} & \textbf{Underlying methodology}                   & \textbf{Mathematical approach}                   & \textbf{Sectoral coverage} & \textbf{Time horizon}            & \textbf{Time step}                                  \\ \midrule
+		E3MG           & Hybrid                       & Non-equilibrium                                   & Unknown                                          & Energy-environment-economy & 2100                             & Annually until 2030 and then each decade until 2100 \\
+		LEAP           & Hybrid                       & Accounting model                                  & Not available                                    & All sectors                & Medium and long-term             & Annual                                              \\
+		MARKAL         & Bottom-up                    & Optimisation                                      & Linear programming, dynamic programming          & Energy sector only         & Medium and long-term             & User-defined                                        \\
+		MARKAL-MACRO   & Hybrid                       & Macro-economic for MACRO, optimisation for MARKAL & Non-linear dynamic programming                   & All sectors                & Medium and long-term             & User-defined                                        \\
+		NEMS           & Hybrid                       & Optimisation, agent-based, simulation             & Partial equilibrium and linear programming       & Energy system              & Medium (25 years)                & Yearly                                              \\
+		OSeMOSYS       & Bottom-up                    & Optimisation                                      & Linear programming and mixed integer programming & Energy sector              & Medium and long-term (2010-2050) & 5-year                                              \\
+		PRIMES         & Hybrid                       & Agent-based                                       & Equilibrium model                                & All energy sectors         & Medium to long-term              & Yearly                                              \\
+		POLES          & Hybrid                       & Optimisation and simulation                       & Partial equilibrium                              & 15 energy demand sectors   & Long-term (up to 2050)           & Yearly                                              \\
+		TIMES          & Bottom-up                    & Optimisation                                      & Linear programming and dynamic programming       & Whole energy sector        & Medium and long-term             & User-chosen time-slices                             \\
+		WASP           & Bottom-up                    & Optimisation, simulation                          & Linear programming and dynamic programming       & Power sector               & Medium and long-term             & 12 load duration curves per year                    \\
+		MESSAGE        & Bottom-up                    & Optimisation                                      & Dynamic programming                              & Energy sector              & Short, medium and long-term      & User-defined (Multiple of number of years)          \\
+		PLEXOS         & Bottom-up                    & Optimisation                                      & Linear programming                               & Electricity sector         & Short-term                       & 1-minute                                            \\
+		ELMOD          & Bottom-up                    & Optimisation                                      & Non-linear programming                           & Electricity sector         & Short-term                       & Hourly                                              \\ 
+		ElecSim        & Bottom-up                    & Agent-based model                                 & Simulation                                       & Electricity market         & Short, medium and long-term      & Hourly                                              \\ \bottomrule	\end{tabular}
 	\caption{Model schema and presentation of various energy models \cite{Hall2016a}}
 	\label{tab:litreview:modelreview}
 \end{table} 
@@ -227,11 +231,13 @@ ElecSim        & Bottom-up                    & Agent-based model               
 \section{Conclusion}
 \label{sec:litreview:conclusion}
 
-In this Chapter we have introduced various electricity market models and the categories that they fall into. However, it is can prove to be challenging to place models within a clear boundary, as many models fall within a continuum. We introduced the concept that traditional models may not have the ability to detail every single component of an electricity market without losing tractability.
+In this Chapter, we have introduced various electricity market models and the categories that they fall into. However, it can prove to be challenging to place models within a clear boundary, as many models fall within a continuous spectrum. We introduced the concept that traditional models may not have the ability to detail every single component of an electricity market without losing tractability.
 
-The need for a new paradigm in which decentralised agents act within an environment was discussed. So was the need for a model with high temporal resolution to more accurately model the intermittency of renewable energy. Traditional optimisation models work in a normative, prescriptive way. However, it is not possible to describe a system which is out of equilibrium. Another limitation of the traditional optimisation models is that they assume perfect foresight, with risk neutral investments and no regulatory uncertainty. It assumes that certain scenarios are possible, but does not highlight way a target may not be reached.
+The need for a new paradigm in which decentralised agents act within an environment was discussed. So was the need for a model with high temporal resolution to more accurately model the intermittency of renewable energy. Traditional optimisation models work in a normative, prescriptive way. However, it is not possible to describe a system which is out of equilibrium. Another limitation of the traditional optimisation models is that they assume perfect foresight, with risk-neutral investments and no regulatory uncertainty. It assumes that certain scenarios are possible, but does not highlight the way a target may not be reached.
 
-It is for these reasons that in this thesis we focus on agent-based models, which move away from the traditional optimisation approach, and allow for a more dynamic solution without rigid mathematical expressions.
+It is for these reasons that in this thesis, we focus on agent-based models, which move away from the traditional optimisation approach, and allow for a more dynamic solution without rigid mathematical expressions.
+
+Additionally, we found that there was a gap in the literature for an open-source agent-based model that could model long-term investments, was generalisable to many countries ad modelled stochastic inputs. It is for this reason that we developed the model ElecSim.
 
 
 
