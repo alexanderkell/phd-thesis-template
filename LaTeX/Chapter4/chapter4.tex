@@ -180,7 +180,7 @@ We demonstrate that with a genetic algorithm approach we are able to optimise pa
 A major contribution of this work is to demonstrate that it is possible for agent-based models to accurately model transitions in the UK electricity market. This was achieved by comparing our simulated electricity mix to the observed electricity mix between 2013 and 2018. In this time a transition from coal to natural gas was observed. We demonstrate that a high temporal granularity is required to accurately model fluctuations in wind and solar irradiance for intermittent renewable energy sources.
 
 
-
+\clearpage
 \section{Literature Review}
 
 
@@ -243,8 +243,9 @@ Hoffman \textit{et al.} also developed a retrospective validation of a predecess
 
 
 
-
+\clearpage
 \section{Architecture}
+\label{elecsim:sec:architecture}
 
 In this section we detail the architecture of how ElecSim has been designed.
 
@@ -252,7 +253,7 @@ In this section we detail the architecture of how ElecSim has been designed.
 
 
 
-ElecSim is made up of five fundamental parts: the agents, which are split up into demand and GenCos; power plants; a Power Exchange, which controls an electricity spot market; and the data for parametrisation. A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}.
+ElecSim is made up of six parts: the agents, which are split up into demand and GenCos; power plants; a Power Exchange, which controls an electricity spot market; the time-steps ;and the data for parametrisation. A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}.
 
 \begin{figure}
 	\centering
@@ -300,6 +301,12 @@ For the simulated market, the forecasted data is used to simulate a market $N$ y
 There may be scenarios where demand is forecast to grow significantly, and limited investments have yet been made to meet that demand. The expected price, would be that of lost load. Lost load is defined as the price customers would be willing to pay to avoid disruption in their electricity supply. To avoid GenCos from estimating large profits, and under the assumption that further power plant investments will be made, the lost load price is replaced with a predicted electricity price using linear regression based on prices at lower points of the demand curve. If zero segments of demand are met, then the  lost load price is used to encourage investment. 
 
 Once this data has been forecasted, the NPV can be calculated. GenCos must typically provide a certain percentage of upfront capital, with the rest coming from investors in the form of stock and shares or debt (WACC). The percentage of upfront capital can be customised by the user in the configuration file. The GenCos then invest in the power plants with the highest NPV. 
+
+
+\paragraph{Time-steps} For the time-steps, two approaches were taken. For the first approach, as per Chappin \textit{et al.} \cite{Chappin2017}, we modelled the LDC of electricity demand with twenty segments. Twenty segments enabled us to capture the variation in demand throughout the year to a high degree of accuracy, whilst reducing computational complexity. However, as we show later in Section \ref{elecsim:sec:scenarios}, this led to an overestimation of the supply of \acrshort{ires}. 
+
+For the second approach, we used representative days to model a year. Representative days in this context are a subset of days which have characteristics, that when scaled proportionally can accurately model an entire year. To select these representative days we used a $k$-means approach. We describe this in full detail in Section \ref{elecsim:sec:representative}
+
 
 
 \paragraph{Power Plant Parameters.}\label{elecsim:ssssec:powerplantparameters} Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
@@ -476,7 +483,7 @@ Stochasticity of fuel price within a year was also modelled, to take into accoun
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Representative days}
-\label{sec:details}
+\label{elecsim:sec:representative}
 
 
 In this subsection we describe how we decide the granularity of time-steps. Specifically, we use representative days. Representative days, in this context, are a subset of days which when scaled up to 365 days can adequately represent a year. 
@@ -780,7 +787,7 @@ Figure \ref{fig:single_dispatched_day} displays the high utilization of low marg
 \end{figure}
 
 
-\subsubsection{Selecting representative days}
+\subsubsection{Evaluation of representative days}
 \label{ssec:res_repr_days}
 
 Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics versus number of clusters. Both $CE_{av}$ and $NRMSE_{av}$ display similar behaviour, namely the error improves significantly from a single cluster to eight clusters for both centroids and medoids. For the number of clusters greater than eight there are diminishing returns. For $REE_{av}$, however, the error metric is best at a single cluster, and gets worse with the number of clusters. 
@@ -788,7 +795,6 @@ Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics vers
 
 
 We chose eight clusters as a compromise between accuracy of the three error metrics and compute time of the simulation. This is because, eight was the largest number of clusters that gave us the lowest score for $CE_{av}$, $NRMSE_{av}$ and $REE_{av}$ without significantly increasing compute time. Whilst there was little significant difference between centroid and medoid, we chose to use the medoids due to the fact that the extreme high and low values would not be lost due to averaging \cite{Hilbers2019}.
-
 
 
 
@@ -801,15 +807,21 @@ We chose eight clusters as a compromise between accuracy of the three error metr
 
 
 
-
+\clearpage
 \section{Validation and performance}
 \label{architecture:sec:validation}
 
-\paragraph{Validation}
+In this section we detail the validation approaches taken in our model. For this, we take two approaches. One is to compare the price duration curve of the actual vs. our simulated price duration curve in 2018 using the 20 time-steps per year approach. The other is to use cross-validation between the years 2013 and 2018, using our representative days approach.
+
+
+\subsection{Price Duration Curve Validation}
 
 Validation of models is important to ascertain that the output is accurate. However, it should be noted that these long-term simulations are not predictions of the future, rather possible outcomes based upon certain assumptions. Jager posits that a certain outcome or development path, captured by empirical data, might have developed in a completely different direction due to chance. However, the processes that emerge from a model should be realistic and in keeping with expected behaviour \cite{Jager2006a}.
 
 We begin by comparing the price duration curve in the year 2018. Figure \ref{fig:price_duration_curve} shows the N2EX Day Ahead Auction Prices of the UK \cite{nordpool_2019}, the Monte-Carlo simulated electricity prices, and the non Monte-Carlo electricity price throughout the year 2018. Fuel prices varying throughout a year, as does $V_C$ and WACC. WACC is sampled from a Gaussian distribution with a standard deviation of $\pm3$\%. $V_C$ is sampled from a uniform distribution between 30\% and 200\% of the mean $V_C$ price, whilst fuel price is sampled from the residuals of an ARIMA model fit on historical data. The N2EX Day Ahead Market is a day ahead market run by Nord Pool AS. Nord Pool AS runs the largest market for electrical energy in Europe, measured in volume traded and in market share \cite{nordpool_2019}.
+
+
+
 \begin{figure}
 	\begin{center}
 		\includegraphics[width=0.7\textwidth]{Chapter4/figures/load_price_duration_curve_comparison-monte-carlo.pdf}
@@ -826,6 +838,15 @@ We begin by comparing the price duration curve in the year 2018. Figure \ref{fig
 %\end{table}
 
 
+
+
+
+We ran the initialisation of the model 40 times to capture the price variance. Outliers were removed as on a small number of occasions large jumps in prices at peak demand occurred which deviated from the mean. We did this, as although this does occur in real life, it occurs at a smaller fraction of the time than 5\% of the year (twenty time-steps per year), therefore the results would be unreasonably skewed for the highest demand segment. 
+
+Figure \ref{fig:price_duration_curve} demonstrates very little variance in the non-stochastic case. This is due to the fact that combined cycle gas turbines (CCGTs) set the spot price. These CCGTs have little variance between one another as they were calibrated using the same dataset. By adding stochasticity of fuel prices and operation and maintenance prices, a curve that more closely resembles the actual data occurs. The stochastic curve, however, does not perfectly fit the real data, which may be due to higher variance in fuel prices and historical differences in operation and maintenance costs between power plants. One method of improving this would be fitting the data used to parametrise to the curve.
+
+Table \ref{table:validation_metrics} shows performance metrics of the stochastic and non-stochastic runs versus the actual price duration curve . The stochastic implementation, improves the mean absolute error (MAE) of the non-stochastic case by $52.5\%$.
+
 \begin{table}[]
 	\begin{tabular}{p{4cm}p{4cm}p{2.5cm}p{3cm}}
 		\hline
@@ -839,14 +860,7 @@ We begin by comparing the price duration curve in the year 2018. Figure \ref{fig
 	\label{table:validation_metrics}
 \end{table}
 
-
-We ran the initialisation of the model 40 times to capture the price variance. Outliers were removed as on a small number of occasions large jumps in prices at peak demand occurred which deviated from the mean. We did this, as although this does occur in real life, it occurs at a smaller fraction of the time than 5\% of the year (modelled LDC), therefore the results would be unreasonably skewed for the highest demand segment. 
-
-Figure \ref{fig:price_duration_curve} demonstrates very little variance in the non-stochastic case. This is due to the fact that combined cycle gas turbines (CCGTs) set the spot price. These CCGTs have little variance between one another as they were calibrated using the same dataset. By adding stochasticity of fuel prices and operation and maintenance prices, a curve that more closely resembles the actual data occurs. The stochastic curve, however, does not perfectly fit the real data, which may be due to higher variance in fuel prices and historical differences in operation and maintenance costs between power plants. One method of improving this would be fitting the data used to parametrise to the curve.
-
-Table \ref{table:validation_metrics} shows performance metrics of the stochastic and non-stochastic runs versus the actual price duration curve . The stochastic implementation, improves the mean absolute error (MAE) of the non-stochastic case by $52.5\%$.
-
-By observing the processes that emerge from the long-term scenarios, we can see that carbon price and investment in renewable generation are positively correlated, as would be expected. The highest NPV calculations were for onshore wind and CCGT plants. This is realistic for the United Kingdom, where subsidies are required for other forms of generation such as coal and nuclear.
+%By observing the processes that emerge from the long-term scenarios, we can see that carbon price and investment in renewable generation are positively correlated, as would be expected. The highest NPV calculations were for onshore wind and CCGT plants. This is realistic for the United Kingdom, where subsidies are required for other forms of generation such as coal and nuclear.
 
 
 
@@ -855,28 +869,27 @@ By observing the processes that emerge from the long-term scenarios, we can see 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Problem Formulation}
+\subsection{Representative days validation}
+\label{elecsim:ssec:representative_validation}
+
+In this section we detail the approach taken in this paper to validate our model using representative days as time-steps. 
+
+To achieve this, we use a genetic algorithm to find the predicted price duration curves which lead to the smallest error between our simulated electricity mix and the scenarios tested. The scenarios examined here are the observed electricity mix of the UK between 2013 and 2018 and the BEIS reference scenario projected in 2018 till 2035. When projecting the BEIS reference scenario we also optimise for nuclear subsidy and uncertainty in the price duration curves.
 
 
-In this section we detail the approach taken in this paper to validate our model, including the parameters used for optimization. 
-
-Specifically, we use a genetic algorithm to find the predicted price duration curves which lead to the smallest error between our simulated electricity mix and the scenarios tested. The scenarios examined here are the observed electricity mix of the UK between 2013 and 2018 and the BEIS reference scenario projected in 2018 till 2035. When projecting the BEIS reference scenario we also optimise for nuclear subsidy and uncertainty in the price duration curves.
+%For GenCos to adequately make investments, they must formulate an expectation of future electricity prices over the lifetime of a plant. For this paper, we use the net present value (NPV) metric to compare investments. 
 
 
-For GenCos to adequately make investments, they must formulate an expectation of future electricity prices over the lifetime of a plant. For this paper, we use the net present value (NPV) metric to compare investments. 
+%NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  
 
+%Equation \ref{eq:npv_eq} is the calculation of NPV, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is the total number of years, or lifetime of power plant, and $R_t$ is the net cash flow of the year $t$.
+%\begin{equation} \label{eq:npv_eq}
+%NPV(i, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}
+%\end{equation}
 
-NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  
-
-Equation \ref{eq:npv_eq} is the calculation of NPV, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is the total number of years, or lifetime of power plant, and $R_t$ is the net cash flow of the year $t$.
+As mentioned in Section \ref{elecsim:sec:architecture}, GenCos make investments based upon the net present value. As shown in Equation \ref{architecture:eq:npv_eq}, an expectation of the net cash flow, $R_t$ is required. 
 
 The net cash flow, $R_t$, is calculated by subtracting both the operational and capital costs from revenue over the expected lifetime of the prospective plant. The revenue gained by each prospective plant is the expected price they will gain per expected quantity of MWh sold over the expected lifetime of the plant. This is shown formally in Equation \ref{eq:revenue_total}:
-
-\begin{equation} \label{eq:npv_eq}
-NPV(i, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}
-\end{equation}
-
-
 
 
 \begin{equation}
@@ -896,9 +909,7 @@ C_{var_{h,t}})\right)
 The predicted price duration curve ($PPDC_{h,t}$) is an expectation of future electricity prices over the lifetime of the plant. The $PPDC_{h,t}$ is a function of supply and demand. However, with renewable electricity generator costs falling, future prices are uncertain and largely dependent upon long-term scenarios of electricity generator costs, fuel prices, carbon taxes and investment decisions. \cite{IRENA2014}. Due to the uncertainty of future electricity prices over the horizon of the lifetime of a power plant we have set future electricity prices as an exogenous variable that can be set by the user in ElecSim. 
 
 
-To gain an understanding of expected electricity prices that lead to particular scenarios we use a genetic algorithm optimisation approach. This enables us to understand the range of future electricity prices that lead to certain scenarios developing. In addition, it allows us to understand whether the parameters required for certain scenarios to develop are realistic. This enables us to check the assumptions of our model and the likelihood of scenarios.
-
-Further, using these optimised parameters, we are better able to further explore `\textit{what-if}' scenarios.
+To gain an understanding of expected electricity prices that lead to particular scenarios we use a genetic algorithm optimisation approach. This enables us to understand the range of future electricity prices that lead to certain scenarios developing. In addition, it allows us to understand whether the parameters required for certain scenarios to develop are realistic. This enables us to check the assumptions of our model and the likelihood of scenarios. Further, using these optimised parameters, we are better able to further explore `\textit{what-if}' scenarios.
 
 
 
@@ -924,7 +935,7 @@ For this experiment, we initialised ElecSim with parameters known in 2013 for th
 
 To ensure that the development of the electricity market from 2013 to 2018 was representative of the actual scenario between these years, we set the exogenous variables, such as carbon and fuel prices, to those that were observed during this time period. In other words, the scenario modelled equated to the observed scenario. 
 
-The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from \cite{eu-ets}. Fuel prices for each of the fuels were taken from \cite{beis_fuel_price}. The electricity load data was modelled using data from \cite{gridwatch}, offshore and onshore wind and solar irradiance data was taken from \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
+The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from \cite{eu-ets}. Fuel prices for each of the fuels were taken from \cite{beis_fuel_price}. The electricity load data was modelled using data from \cite{gbnationalgridstatus_2019}, offshore and onshore wind and solar irradiance data was taken from \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
 
 
 
@@ -950,7 +961,7 @@ Equation \ref{eq:problem_formulation} details the optimisation problem formally:
 \subsection{Long-Term Scenario Analysis}
 \label{sssec:scen-analysis}
 
-In addition to verifying the ability for ElecSim to mimic observed investment behaviour over 5 years, we compared ElecSim's long-term behaviour to that of the UK Government's Department for Business, Energy and Industrial Strategy (BEIS) \cite{DBEIS2019}. This scenario shows the projections of generation by technology for all power producers from 2018 to 2035 for the BEIS reference scenario. This is the same scenario as discussed in the next section, \ref{sssec:scenario-details}.
+In addition to verifying the ability for ElecSim to mimic observed investment behaviour over 5 years, we compared ElecSim's long-term behaviour to that of the UK Government's Department for Business, Energy and Industrial Strategy (BEIS) \cite{DBEIS2019}. This scenario shows the projections of generation by technology for all power producers from 2018 to 2035 for the BEIS reference scenario. This is the same scenario as discussed in the next section.
 
 \subsubsection{Scenario}
 \label{sssec:scenario-details}
@@ -994,7 +1005,7 @@ A modification was made to the reward algorithm for the long-term scenario case.
 
 Genetic Algorithms (GAs) are a type of evolutionary algorithm which can be used for optimisation. We chose the genetic algorithm for this application due to its ability to find good solutions with a limited number of simulation runs, ability for parallel computation and its ability to find global optima. These characteristics are useful for our application, as a single simulation can take up to 36 hours. 
 
-In this section we detail the genetic algorithm used in this paper. Initially, a population $P_{0}$ is generated for generation 0. This population of individuals is used for the parameters to the simulation. The output of the simulations for each of the individuals are then evaluated. A subset of these individuals $C_{t+1} \subset P_{t}$ are chosen for mating. This subset is selected proportional to their fitness. With `Fitter' individuals having a higher change of reproducing to create the offspring group $C'_{t+1}$. $C'_{t+1}$ have characteristics dependent on the genetic operators: crossover and mutation. The genetic operators are an implementation decision \cite{FogelDavidB2009}. 
+In this section we detail the genetic algorithm used in this paper. Initially, a population $P_{0}$ is generated for generation 0. This population of individuals is used for the parameters to the simulation. The output of the simulations for each of the individuals are then evaluated. A subset of these individuals $C_{t+1} \subset P_{t}$ are chosen for mating. This subset is selected proportional to their fitness. With `fitter' individuals having a higher change of reproducing to create the offspring group $C'_{t+1}$. $C'_{t+1}$ have characteristics dependent on the genetic operators: crossover and mutation. The genetic operators are an implementation decision \cite{FogelDavidB2009}. 
 
 Once the new population has been created, the new population $P_{t+1}$ is created by merging individuals from $C'_{t+1}$ and $P_{t}$. See Algorithm \ref{genetic-algorithm} for detailed pseudocode.
 
@@ -1025,9 +1036,9 @@ We used the DEAP evolutionary computation framework to create our genetic algori
 \subsubsection{Parameters for Validation with Observed Data}
 \label{ssec:ga_params_valid}
 
-The parameters chosen for the problem explained in Section \ref{sssec:validation} was a population size of $120$, a crossover probability of $50\%$, a mutation probability of $20\%$ and the parameters, $m$ and $c$, as per Equation \ref{eq:problem_formulation}, were given the bounds of $[0.0, 0.004]$ and $[-30, 100]$ respectively. 
+The parameters chosen for the problem explained in Section \ref{sssec:scen-analysis} was a population size of $120$, a crossover probability of $50\%$, a mutation probability of $20\%$ and the parameters, $m$ and $c$, as per Equation \ref{eq:problem_formulation}, were given the bounds of $[0.0, 0.004]$ and $[-30, 100]$ respectively. 
 
-The bounds for $m$ and $c$ were calculated to ensure a positive price duration curve, with a maximum price of $\textsterling300$ for $50,000$MW. The population size was chosen to ensure a wide range of solutions could be explored, whilst limiting compute time to ${\sim}1$ day per generation to allow for sufficient verification of the results. The crossover and mutation probabilities were chosen due to suggestions from the DEAP evolutionary computation framework \cite{Gagn2012}.
+The bounds for $m$ and $c$ were calculated to ensure a positive price duration curve, with a maximum price of \textsterling300 for $50,000$MW. The population size was chosen to ensure a wide range of solutions could be explored, whilst limiting compute time to ${\sim}$1 day per generation to allow for sufficient verification of the results. The crossover and mutation probabilities were chosen due to suggestions from the DEAP evolutionary computation framework \cite{Gagn2012}.
 
 
 \subsubsection{Parameters for Long-Term Scenario Analysis}
@@ -1040,11 +1051,18 @@ The population size was slightly increased, and the bounds reduced when compared
 \subsection{Results}
 \label{sec:results}
 
-Here we present the results of the problem formulation of Sections \ref{sssec:validation} and  \ref{sssec:scen-analysis}. Specifically, we compare the ability of our model to that of BEIS in the context of a historical validation between 2013 and 2018 of the UK electricity market. We also compare our ability to generate scenarios up to 2035 with that of BEIS. 
+Here we present the results of the problem formulation of Section \ref{sssec:scen-analysis}. Specifically, we compare the ability of our model to that of BEIS in the context of a historical validation between 2013 and 2018 of the UK electricity market. We also compare our ability to generate scenarios up to 2035 with that of BEIS. 
 
 \subsubsection{Validation with Observed Data}
 
-Figure \ref{fig:beis_elecsim_historic_comparison} displays the output of ElecSim under the validation scenario, BEIS' projections and the observed electricity mix between 2013 and 2018, as explained in Sub-Section \ref{sssec:validation}.
+Figure \ref{elecsim:fig:beis_elecsim_historic_comparison} displays the output of ElecSim under the validation scenario, BEIS' projections and the observed electricity mix between 2013 and 2018, as explained in Section \ref{elecsim:ssec:representative_validation}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\columnwidth]{Chapter4/figures/e-Energy-2020/results/throughout_years_beis_elecsim_comparison_coal_dropout_leg_below.pdf}
+	\caption{Comparison of actual electricity mix vs. ElecSim vs. BEIS projections and taking three coal power plants out of service.}
+	\label{elecsim:fig:beis_elecsim_historic_comparison}
+\end{figure}
 
 The observed electricity mix changed significantly between 2013 and 2018. A continuous decrease of electricity production from coal throughout this period was observed. 2015 and 2016 saw a marked decrease of coal, which can be explained by the retirement of 3 major coal power plants. The decrease in coal between 2013 and 2016 was largely replaced by an increase in gas. After 2016, renewables play an increasingly large role in the electricity mix and displace gas.
 
@@ -1104,12 +1122,7 @@ ElecSim was able to better model the observed fluctuation in nuclear power in 20
 %\label{fig:beis_elecsim_historic_comparison}
 %\end{figure}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\columnwidth]{Chapter4/figures/e-Energy-2020/results/throughout_years_beis_elecsim_comparison_coal_dropout_leg_below.pdf}
-	\caption{Comparison of actual electricity mix vs. ElecSim vs. BEIS projections and taking three coal power plants out of service.}
-	\label{fig:beis_elecsim_historic_comparison}
-\end{figure}
+
 
 
 
@@ -1127,6 +1140,14 @@ We are able to improve the projections for all generation types when compared to
 
 Figure \ref{fig:best_price_curve} displays the optimal predicted price duration curve ($PPDC$) found by the genetic algorithm. This price curve was used by the GenCos to achieve the results shown in Figure \ref{fig:beis_elecsim_historic_comparison}. 
 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_price_dur_curve.pdf}
+	\caption{Predicted price duration curve for investment for most accurate run against simulated run in 2018.}
+	\label{fig:best_price_curve}
+\end{figure}
+
 The yellow points show the simulated price duration curve for the first year of the simulation (2018). The red line (Simulated Fit (2018)) is a linear regression that approximates the simulated price duration curve (PDC (2018)). The blue line shows the price duration curve predicted ($PPDC$) by the GenCos to be representative of the expected prices over the lifetime of the plant.
 
 %The blue line is the price duration curve simulated in 2018, and the red line is the optimal predicted electricity mix. 
@@ -1135,12 +1156,6 @@ The optimal predicted price duration curve ($PPDC$) closely matches the simulate
 
 
 
-\begin{figure}
-	\centering
-	\includegraphics[width=0.6\textwidth]{Chapter4/figures/e-Energy-2020/results/best_run_price_dur_curve.pdf}
-	\caption{Predicted price duration curve for investment for most accurate run against simulated run in 2018.}
-	\label{fig:best_price_curve}
-\end{figure}
 
 
 
@@ -1210,7 +1225,7 @@ The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\textwidth, height=0.6\textwidth, keepaspectratio]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/optimal_pdc_prices.pdf}
+	\includegraphics[width=0.9\textwidth, keepaspectratio]{Chapter4/figures/e-Energy-2020/results/scenario_analysis/optimal_pdc_prices.pdf}
 	\caption{Comparison between optimal price duration curves and simulated price duration curve in 2018.}
 	\label{fig:forward_scenario_best_pdcs}
 \end{figure}
@@ -1226,11 +1241,15 @@ The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of
 
 
 
-
+\clearpage
 \section{Scenario Testing}
+\label{elecsim:sec:scenarios}
 
+In this Section we display scenario runs of ElecSim using 20 time-steps per year and using representative days
 
-Here we present example scenario runs using ElecSim. We vary the carbon tax and grow or reduce total electricity demand. This enables us to observe the effects of carbon tax on investment. In this paper we have presented scenarios where electricity demand decreases 1\% per year, due to the recent trend in the UK.
+\subsection{Scenarios for 20 time-steps}
+
+In this section we present example scenario runs using ElecSim with 20 time-steps. We vary the carbon tax and grow or reduce total electricity demand. This enables us to observe the effects of carbon tax on investment. In this paper, we have presented scenarios where electricity demand decreases 1\% per year, due to the recent trend in the UK.
 
 %ElecSim was built using python, this enabled us to lower barriers to entry and allow for users to integrate state-of-the-art machine learning and statistical packages in future work. We used project mesa as an open source agent based modelling framework for its ease of use \cite{Masad2015}.
 
@@ -1247,6 +1266,15 @@ Here we present example scenario runs using ElecSim. We vary the carbon tax and 
 For the first scenario run displayed, we have approximated the predictions by the UK Government, where carbon tax increases linearly from \textsterling18 to \textsterling200 by 2050 \cite{Department2016}. Figure \ref{fig:demand99carbon18} demonstrates a significant increase in gas turbines in the first few years, followed by a decrease, with onshore wind increasing.
 
 Figure \ref{fig:demand99carbon40} displays a run with a \textsterling40 carbon tax. This run demonstrates a higher share of onshore wind than in the previous scenario. 
+
+We experimented with the following levels of carbon tax: \textsterling10 (\$13), \textsterling20 (\$26) and \textsterling70 (\$90) with demand decreasing 1\% per year. This was chosen due to the increasing efficiency of homes, industry and technology, and due to the recent trend in the UK. We run each scenario 8 times to capture the stochastic nature of the process. Via the observation of the emergent investment behaviour until 2050, an understanding of how real life investors may behave emerges.
+
+
+Figure \ref{fig:demand99carbon10} shows that with a carbon tax of \textsterling10, whilst renewable technology does grow, gas power plants provide the majority of supply in each year. However, at a level of \textsterling20 the increase in wind turbines is enough to match gas turbines. A carbon tax of \textsterling70, however, shows a near 100\% uptake of wind turbines.
+
+It is infeasible for the power supply to be provided solely by wind turbines today. This overestimation, however, is due to the low time granularity of the model \cite{Collins2017}. This scenario therefore assumes perfect storage capabilities.
+
+
 
 These runs demonstrate that a consistent, but relatively low carbon tax can have a larger impact in the uptake of renewable energy than increasing carbon tax over a long time frame. We hypothesise that an early carbon tax affects the long-term dynamics of the market for many years. We, therefore, suggest early action on carbon tax to transition to a low-carbon energy supply
 
@@ -1381,13 +1409,13 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 %		\label{fig:demand99carbon10}
 %	\end{center}
 %\end{figure}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.85\linewidth]{Chapter4/figures/System_overview_large}
-	\caption{System overview of agent-based market model.}
-	\label{fig:systemoverview}
-	\vskip -6mm
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.85\linewidth]{Chapter4/figures/System_overview_large}
+%	\caption{System overview of agent-based market model.}
+%	\label{fig:systemoverview}
+%	\vskip -6mm
+%\end{figure}
 
 
 \begin{figure*}[h]
@@ -1417,12 +1445,10 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 	\caption{Scenarios from 2020 to 2050 with varying carbon tax.}
 \end{figure*}
 
-We experimented with the following levels of carbon tax: \textsterling10 (\$13), \textsterling20 (\$26) and \textsterling70 (\$90) with demand decreasing 1\% per year. This was chosen due to the increasing efficiency of homes, industry and technology, and due to the recent trend in the UK. We run each scenario 8 times to capture the stochastic nature of the process. Via the observation of the emergent investment behaviour until 2050, an understanding of how real life investors may behave emerges.
 
 
-Figure \ref{fig:demand99carbon10} shows that with a carbon tax of \textsterling10, whilst renewable technology does grow, gas power plants provide the majority of supply in each year. However, at a level of \textsterling20 the increase in wind turbines is enough to match gas turbines. A carbon tax of \textsterling70, however, shows a near 100\% uptake of wind turbines.
 
-It is infeasible for the power supply to be provided solely by wind turbines today. This overestimation, however, is due to the low time granularity of the model \cite{Collins2017}. This scenario therefore assumes perfect storage capabilities.
+
 
 
 
@@ -1431,8 +1457,6 @@ It is infeasible for the power supply to be provided solely by wind turbines tod
 
 
 Agent-based models provide a method of simulating investor behaviour in an electricity market. We observed that an increase in carbon tax had a significant impact on investment. These findings enable policy makers to better understand the impact that their decisions may have. For a high uptake of renewable energy technology, rapid results can be seen after 10 years with a carbon tax of \textsterling70 (\$90).
-
-Agent-based models open up the possibility of testing differing investor behaviours through techniques such as reinforcement learning. This can be extended to incorporate collusion which can have an impact in liberalized electricity markets \cite{Benjamin2016}.
 
 
 
@@ -1475,12 +1499,12 @@ Figure \ref{fig:timingplot} shows the running time for ElecSim with varying inst
 
 
 
-
+\clearpage
 \section{Sensitivity Analysis}
 
 Test
 
-
+\clearpage
 \section{Conclusions}
 
 
@@ -1492,7 +1516,7 @@ Liberalised electricity markets with many heterogenous players are suited to be 
 
 We demonstrated that increasing carbon tax can lead to an increase in investment of low-carbon technologies. We showed that early decisions have a long-term impact on the energy mix. 
 
-Our future work includes comparing agent-learning techniques, using multi-agent reinforcement learning algorithms to allow agents to learn in a non-static environment. We propose the integration of a higher temporal and spatial resolution to model changes in daily demand, as well as capacity factors by region, and transmission effects. This will allow us to model that demand is met at all times and not just on average. 
+%Our future work includes comparing agent-learning techniques, using multi-agent reinforcement learning algorithms to allow agents to learn in a non-static environment. We propose the integration of a higher temporal and spatial resolution to model changes in daily demand, as well as capacity factors by region, and transmission effects. This will allow us to model that demand is met at all times and not just on average. 
 %\begin{itemize}
 %	\item Requirement for agent based models based on imperfect information, liberalised energy markets
 %	\item Requirement for low barriers to entry open source model.
@@ -1521,7 +1545,7 @@ Our future work includes comparing agent-learning techniques, using multi-agent 
 
 
 
-In this paper we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
+In this Chapter we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
 
 In addition to this, we were able to compare our long-term scenario to that of the UK Government, Department for Business, Energy \& Industrial strategy. We show that we are able to mimic their reference scenario, however, demonstrate a more realistic increase in nuclear power. The parameters that were gained from optimisation show that the BEIS scenario is realistic, however a high nuclear subsidy may be required.
 
@@ -1529,7 +1553,7 @@ To improve the accuracy of our model, we used eight representative days of solar
 
 %We used a genetic algorithm to find the parameters that most closely matched the scenarios that we compared. The parameters found were realistic, providing confidence in the underlying dynamics of ElecSim.
 
-In future work we would like to evaluate further scenarios to provide advice to stakeholders, integrate multi-agent reinforcement learning techniques to better model agents in both investment and bidding strategies as well as model different countries. Further work could be to make predicted price duration curves endogenous to the model, however, this could require scenario analysis by each of the GenCos each time they wanted to make an investment.
+%In future work we would like to evaluate further scenarios to provide advice to stakeholders, integrate multi-agent reinforcement learning techniques to better model agents in both investment and bidding strategies as well as model different countries. Further work could be to make predicted price duration curves endogenous to the model, however, this could require scenario analysis by each of the GenCos each time they wanted to make an investment.
 
 In addition to this, a method of dealing with the non-validatable nature of electricity markets, as per the definition of Hodges \textit{et al.} is to vary input parameters over many simulations and look for general trends \cite{Hodges}. This could be achieved using ElecSim through the analysis of a reference case, and a limited set of scenarios which include the most important uncertainties in the model structure, parameters, and data, i.e. alternative scenarios which have both high plausibility and major impacts on the outcomes.
 
