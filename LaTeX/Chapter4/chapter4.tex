@@ -1418,7 +1418,7 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 %\end{figure}
 
 
-\begin{figure*}[h]
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.6\textwidth}
 		\centering
@@ -1443,7 +1443,7 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 		\label{fig:demand99carbon70}
 	\end{subfigure}
 	\caption{Scenarios from 2020 to 2050 with varying carbon tax.}
-\end{figure*}
+\end{figure}
 
 
 
@@ -1460,14 +1460,57 @@ Agent-based models provide a method of simulating investor behaviour in an elect
 
 
 
-%\begin{itemize}
-%	\item Effect of different carbon tax on investments made.
-%	\item Effects of different demand scenarios. (High peaks, high growth, high reduction in demand)
-%	\item Effects of high fuel prices.
-%	\item Different costs of capital (eg. Borrowing for Nuclear of interest rate to equal 2\% at government bonds rate, as opposed to 10\% for private companies.)
-%	\item Different learning rates for renewable costs.
-%	\item The effect of long term carbon tax policy (eg. Carbon price known for next 25 years) vs short term changes in carbon tax.
-%\end{itemize}
+
+\subsection{Scenarios for representative days}
+
+In this section we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{architecture:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. 
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.6\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/10_demand_mix.pdf}
+		\caption{\small \textsterling10 carbon tax.}
+		\label{fig:demand10}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.6\textwidth}  
+		\centering 
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/099_demand_mix.pdf}
+		\caption{\textsterling20 carbon tax.}
+		\label{fig:demand099}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.6\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/098_demand_mix.pdf}
+		\caption{\small \textsterling70 carbon tax.}
+		\label{fig:demand098}
+	\end{subfigure}
+	\caption{Scenarios from 2020 to 2050 with varying carbon tax.}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \subsection{Performance}
 
 
