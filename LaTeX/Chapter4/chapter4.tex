@@ -1356,12 +1356,12 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 
 \begin{figure}
 	\centering
-	\begin{subfigure}{.8\linewidth}
+	\begin{subfigure}{.7\linewidth}
 		\includegraphics[width=\linewidth]{Chapter4/figures/scenarios/demand099-carbon18-datetime.png}
 		\caption{\textsterling26 to \textsterling150 linearly increasing carbon tax.}
 		\label{fig:demand99carbon18}
 	\end{subfigure}
-	\begin{subfigure}{.8\linewidth}
+	\begin{subfigure}{.7\linewidth}
 		\includegraphics[width=\linewidth]{Chapter4/figures/scenarios/demand099-carbon40-datetime.png}
 		\caption{{\textsterling40 carbon tax}}
 		\label{fig:demand99carbon40}
@@ -1463,30 +1463,74 @@ Agent-based models provide a method of simulating investor behaviour in an elect
 
 \subsection{Scenarios for representative days}
 
-In this section we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{architecture:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. 
+In this section we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{architecture:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. We selected an optimal carbon tax level which would reduce both electricity price and carbon emissions, as shown later in Chapter \ref{chapter:carbon}. The optimal carbon tax strategy found in Chapter \ref{chapter:carbon} is shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Each of the scenarios were run 10 times to display any variability in the results. We chose 10 runs to limit both computation time and cost.
 
-\begin{figure}[h]
+
+
+\begin{figure}
 	\centering
-	\begin{subfigure}[b]{0.6\textwidth}
+	\includegraphics[width=0.7\textwidth, keepaspectratio]{Chapter4/figures/scenarios/representative-day-scenarios/optimal_carbon_strategy.pdf}
+	\caption{Optimal carbon tax strategy to reduce both electricity cost and carbon emissions.}
+	\label{elecsim:fig:optimal_carbon_tax_strategy}
+\end{figure}
+
+Figures \ref{elecsim:fig:increasing_demand} and \ref{elecsim:fig:decreasing_demand} show the electricity mixes of various demand scenarios. Figure \ref{elecsim:fig:increasing_demand} displays the scenarios in which demand either stays flat, or decreases by 1\% and 2\%. For these scenarios it can be seen that solar is the dominant electricity supply, supplying ${\sim}$50\%, with nuclear power in second supplying between 20\% and 30\%. With a decreasing demand scenario of 1\% per year, as shown by Figure \ref{fig:demand099}, nuclear provides a higher proportion by the year 2034, of ${\sim}$30\%, however before the year 2033, provides a similar proportion to the other scenarios as shown by Figures \ref{fig:demand10} and \ref{fig:demand098}.
+
+For the scenarios shown in Figure \ref{elecsim:fig:increasing_demand}, CCGT, coal and onshore provide around ${\sim}$10\% each by 2034.  Coal and CCGT, however, progress towards 0\% whereas onshore wind increases. This is to be expected due to the high carbon price, as shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Offshore does not exhibit a high amount of investment. We believe this is the case as offshore wind is more expensive than onshore wind, and in our scenario subsidies other than for nuclear are not modelled.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.6\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/10_demand_mix.pdf}
-		\caption{\small \textsterling10 carbon tax.}
+		\caption{Demand does not increase or decrease.}
 		\label{fig:demand10}
 	\end{subfigure}
 	\hfill
-	\begin{subfigure}[b]{0.6\textwidth}  
+	\begin{subfigure}{0.6\textwidth}  
 		\centering 
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/099_demand_mix.pdf}
-		\caption{\textsterling20 carbon tax.}
+		\caption{Demand reduces by 1\% per year.}
 		\label{fig:demand099}
 	\end{subfigure}
-	\begin{subfigure}[b]{0.6\textwidth}
+	\begin{subfigure}{0.6\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/098_demand_mix.pdf}
-		\caption{\small \textsterling70 carbon tax.}
+		\caption{\small Demand reduces by 2\% per year}
 		\label{fig:demand098}
 	\end{subfigure}
-	\caption{Scenarios from 2020 to 2050 with varying carbon tax.}
+	\caption{Scenarios from 2018 to 2035 with varying demand.}
+	\label{elecsim:fig:increasing_demand}
+\end{figure}
+
+
+Figure \ref{elecsim:fig:decreasing_demand} shows scenarios where demand increases per year. Whilst electricity mix distribution is similar to the scenarios shown in Figure \ref{elecsim:fig:increasing_demand}, solar plays a significantly increased role than nuclear. This may be down to the large expense of nuclear, and the long time of deployment of this type of technology. Solar power, on the other hand, is able to be installed much more quickly to maintain the high demand. This is especially true for the scenarios shown in Figures \ref{fig:demand102} and \ref{fig:demand1025} where demand rises by 2\% and 2.5\% per year respectively. 
+
+
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.6\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/101_demand_mix.pdf}
+		\caption{\small Demand increases by 1\% per year.}
+		\label{fig:demand101}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.6\textwidth}  
+		\centering 
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/102_demand_mix.pdf}
+		\caption{\small Demand increases by 2\% per year.}
+		\label{fig:demand102}
+	\end{subfigure}
+	\begin{subfigure}{0.6\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{Chapter4/figures/scenarios/representative-day-scenarios/1025_demand_mix.pdf}
+		\caption{\small Demand increases by 2.5\% per year}
+		\label{fig:demand1025}
+	\end{subfigure}
+	\caption{Scenarios from 2018 to 2035 with varying demand.}
+	\label{elecsim:fig:decreasing_demand}
 \end{figure}
 
 
@@ -1555,7 +1599,7 @@ Test
 %%%%%%%%%%%%%%%%%%%%%%%%      Paper 1    %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Liberalised electricity markets with many heterogenous players are suited to be modelled with ABMs. ABMs incorporate imperfect information as well as heterogeneous actors. ElecSim models imperfect information through forecasting of electricity demand and future fuel and electricity prices. This leads to agents taking risk on their investments, and model market conditions more realistically.
+Liberalised electricity markets with many heterogeneous players are suited to be modelled with ABMs. ABMs incorporate imperfect information as well as heterogeneous actors. ElecSim models imperfect information through forecasting of electricity demand and future fuel and electricity prices. This leads to agents taking risk on their investments, and model market conditions more realistically.
 
 We demonstrated that increasing carbon tax can lead to an increase in investment of low-carbon technologies. We showed that early decisions have a long-term impact on the energy mix. 
 
