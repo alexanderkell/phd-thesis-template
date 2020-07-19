@@ -35,9 +35,9 @@ However, such a transition needs to be performed in a gradual and non-disruptive
 
 These models can be used to assess scenarios under different variants of government policy, future electricity generation costs and energy demand. These energy modelling tools aim to mimic the behaviour of energy systems through different sets of equations and data sets to determine the energy interactions between different actors and the economy \cite{Machado2019}.
 
-With the increase in decentralised energy markets and renewable energy, a paradigm shift is required from large centralised models with yearly time-steps to models based upon many actors and high resolution time steps \cite{Ringkjob2018, Pfenninger2014b}. For this purpose, in this PhD, I have developed a generalisable long-term agent-based \gls{simulation} of decentralised electricity markets with hourly time steps. Using this \gls{ABM}, I have used various machine learning and statistical models to assess what may happen in the future, what the optimal carbon tax strategies could be, and how to prevent market power within a decentralised electricity market. In addition, I have explored the impact of poor forecasting models on the utilisation and investment of the electricity mix. 
+With the increase in decentralised energy markets and renewable energy, a paradigm shift is required from large centralised models with yearly time-steps to models based upon many actors and high resolution time steps \cite{Ringkjob2018, Pfenninger2014b}. For this purpose, in this PhD, we have developed a generalisable long-term agent-based \gls{simulation} of decentralised electricity markets with hourly time steps. Using this \gls{ABM}, we have used various machine learning and statistical models to assess what may happen in the future, what the optimal carbon tax strategies could be, and how to prevent market power within a decentralised electricity market. In addition, I have explored the impact of poor forecasting models on the utilisation and investment of the electricity mix. 
 
-Much of the work of this PhD focuses on the electricity market in the United Kingdom. However the techniques extend to  decentralized electricity markets with similar characteristics. 
+Much of the work of this PhD focuses on the electricity market in the United Kingdom. However the techniques extend to decentralized electricity markets around the world with similar characteristics. 
 
 
 
@@ -50,12 +50,12 @@ Much of the work of this PhD focuses on the electricity market in the United Kin
 \section{Research questions}
 
 
-In order to understand how the transition to a low-carbon energy supply can be optimised, understood and modelled, a number of different research questions must be investigated:
+In order to understand how the transition to a low-carbon energy supply can be optimised, understood and modelled, a number of research questions must be investigated:
 
 \begin{itemize}
 
 
-	\item \textbf{Electricity market modelling} Current electricity market models model centralised actors with perfect foresight and information. Other models which model actors as having imperfect foresight and information lack the ability to model multiple time-steps over a long time horizon. In addition, the generalisability of such a model is critical, to enable policy makers from around the world to utilise a common model and approach.
+	\item \textbf{Electricity market modelling} Traditional electricity market models model centralised actors with perfect foresight and information. Other models which model actors as having imperfect foresight and information lack the ability to model multiple time-steps over a long time horizon. In addition, the generalisability of such a model is critical, to enable policy makers from around the world to utilise a common model and approach.
 
 	\item \textbf{Modelling the variability of intermittent renewable energy supplies} Intermittent renewable energy can produce electricity at both maximum capacity and at a capacity of zero within the same hour period. It, therefore, becomes important to model these variations in power output over a long-term horizon. Otherwise, the model may overestimate the production of energy from renewables, and underestimate the variability of such technologies.
 
@@ -72,7 +72,7 @@ In order to understand how the transition to a low-carbon energy supply can be o
 
 \section{Methodology}
 
-Primarily, in this work, simulation is used as a tool to better understand and make projections for electricity markets. Specifically,in this thesis, the agent-based modelling paradigm is used. This enables us to model generator companies as individual agents, with heterogeneous strategies and characteristics. These agents have access to imperfect information and imperfect foresight. This methodology differentiates us from the traditional centralised optimisation approach.
+Primarily, in this work, simulation is used as a tool to better understand and make projections for electricity markets. Specifically, in this thesis, the agent-based modelling paradigm is used. This enables us to model generator companies as individual agents, with heterogeneous strategies and characteristics. These agents have access to imperfect information and imperfect foresight. This methodology differentiates us from the traditional centralised optimisation approach.
 
 Machine learning and statistical techniques are used to make short-term forecasts of electricity demand. We use both deep learning and \gls{onlinelearning} to further improve our methods. Online learning is a machine learning approach which utilises new data to update model weights, and does not require the model to be completely retrained. Whereas deep learning utilises neural networks with many different layers.
 
@@ -87,8 +87,8 @@ Finally, we explore the ability for deep reinforcement learning to make strategi
 The work in this thesis makes a number of key contributions:
 
 \begin{enumerate}
-	\item Development of the generalised long-term agent based model for decentralised electricity markets, ElecSim.
-	\item Validation of aforementioned model through the use of cross-validation through five years and comparison with established UK Government model.
+	\item Development of the open-source, generalised long-term agent based model for decentralised electricity markets, ElecSim.
+	\item Validation of the aforementioned model through the use of cross-validation through five years and comparison with the established UK Government model.
 	\item Optimisation of a carbon tax policy for the UK electricity market using multi-objective genetic algorithm.
 	\item Forecasting of electricity demand using machine learning models and exploration of the impact of these errors on the long-term electricity market.
 	\item Exploration of the long-term impact of strategic bidding and collusion on decentralized electricity markets.
@@ -119,7 +119,7 @@ During the course of my PhD I have contributed to the following peer-reviewed pu
 	
 	\item[\textbf{\cite{Kell}}] \textbf{Kell, A., Forshaw, M., \& McGough, A. S. (2019). ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning. The Tenth ACM International Conference on Future Energy Systems (ACM e-Energy), 556–565.}
 	
-	In this work we introduce the agent-based model, ElecSim. We review the current state-of-the art of agent-based models, and detail the technical foundations of how ElecSim works. We use an initial validation method of comparing the price duration curve of our model to that observed in real life. Finally, we present some example scenarios. This work is the basis for \ref{chapter:elecsim}.
+	In this work we introduce the agent-based model, ElecSim. We review the current state-of-the art of agent-based models, and detail the technical foundations of how ElecSim works. We use an initial validation method of comparing the price duration curve of our model to that observed in real life. Finally, we present some example scenarios. This work forms the basis for Chapter \ref{chapter:elecsim}.
 	
 	\item[\textbf{\cite{Kell2019a}}] \textbf{Kell, A., Forshaw, M., \& McGough, A. S. (2019). Modelling carbon tax in the UK electricity market using an agent-based model. E-Energy 2019 - Proceedings of the 10th ACM International Conference on Future Energy Systems, Ldc, 425–427. }
 	
@@ -128,7 +128,7 @@ During the course of my PhD I have contributed to the following peer-reviewed pu
 	
 	\item[\textbf{\cite{Kell2020b}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S. (2020). Long-Term Electricity Market Agent Based Model Validation using Genetic Algorithm based Optimization. The Eleventh ACM International Conference on Future Energy Systems (e-Energy’20).}
 		
-	In this paper, we make further modifications to further improve our simulation. Through the addition of representative days we are able to validate our model between 2013 through 2018 by optimising for lomg-term predicted electricity price. We compare our results to those of the UK Government, for both the a long-term and short-term validation. Our results are comparable to those of the UK Government. This work further extends Chapter \ref{chapter:elecsim}.
+	In this paper, we make further modifications to further improve our simulation. Through the addition of representative days we are able to validate our model between 2013 through 2018 by optimising for long-term predicted electricity price. We compare our results to those of the UK Government, for both the a long-term and short-term validation. Our results are comparable to those of the UK Government. This work further extends Chapter \ref{chapter:elecsim}.
 	
 	\item[\textbf{\cite{Kell2018a}}] \textbf{Kell, A., McGough, A. S., \& Forshaw, M. (2018). Segmenting residential smart meter data for short-Term load forecasting. E-Energy 2018 - Proceedings of the 9th ACM International Conference on Future Energy Systems.}
 	
