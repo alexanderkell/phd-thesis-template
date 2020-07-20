@@ -1589,7 +1589,66 @@ Figure \ref{fig:timingplot} shows the running time for ElecSim with varying inst
 \clearpage
 \section{Sensitivity Analysis}
 
-Test
+In this section we investigate a sensitivity analysis of ElecSim, where we vary the weighted average cost of capital and the down payment required for investment. We used the reference scenario discussed in Section \ref{elecsim:sec:scenarios}, with the optimal carbon tax to reduce both emissions and electricity price.
+
+We ran ten iterations per weighted average cost of capital and down payment element. We did this due to the monte-carlo nature of the simulation. We chose ten runs to give us sufficient variance in results, but reduce compute power, to reduce both time and cost of calculation.
+
+\subsection{Results}
+
+Figure \ref{elecsim:fig:wacc_sensitivity} displays the results of the sensitivity analysis for the \Gls{WACC} for non-nuclear power generators. For this, we trialled nine different \acrfull{wacc} values, where a value of 5.9\% is the reference case \cite{KincheloeStephenC1990TWAC}. 
+
+It can be seen that the \acrshort{wacc} has an effect on the total investment in solar, nuclear and CCGT. With a \acrshort{wacc} equal to or greater than 7.4\%, nuclear increases significantly, whilst solar decreases. Nuclear has a \acrshort{wacc} of 10\%, therefore 7.4\% may be the point where nuclear becomes more competitive than solar in an environment where a low-carbon electricity supply is elicited from an optimal carbon tax.
+
+Offshore and coal do not change significantly over different levels of \acrshort{wacc}. This may be due to the fact that CCGT and onshore are more competitive than coal and offshore respectively, without external subsidies. 
+
+Onshore seems to play a larger role at the lowest \acrshort{wacc}, 3.9\%. This may be due to onshore wind's high competitiveness when compared to nuclear.
+
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Chapter4/figures/sensitvity_analysis/wacc_sensitivity_analysis.pdf}
+	\caption{Sensitivity analysis where \acrfull{wacc} was varied. Results compare electricity mix in 2035.}
+	\label{elecsim:fig:wacc_sensitivity}
+\end{figure}
+
+Figure \ref{elecsim:fig:wacc_carbon_sensitivity} displays the relative carbon emissions in 2035. With a low \acrshort{wacc} of 3.9\%, the relative carbon emissions falls, on average, to zero. This seems to be due to the high levels of solar, onshore and nuclear.  
+
+As \acrshort{wacc} increases, so does carbon emissions, until there is a \acrshort{wacc} of 0.5, where it reduces slightly. This is seemingly due to the higher levels of CCGT and coal, which is able to displace solar. However, it must be noted, that in this scenario with the optimal carbon tax, the relative carbon emissions remains low. 
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Chapter4/figures/sensitvity_analysis/wacc_carbon_sensitivity_analysis.pdf}
+	\caption{Sensitivity analysis where weighted average cost of capital (WACC) was varied. Results compare relative carbon emissions in 2035.}
+	\label{elecsim:fig:wacc_carbon_sensitivity}
+\end{figure}
+
+Figure \ref{elecsim:fig:downpayment_sensitivity} displays the sensitivity analysis results for different levels of down payment required for all investments. We varied the down payment required between the values of 10\% and 40\%.
+
+As down payment required increases, so does nuclear and onshore, whilst solar decreases. CCGT also shows an increase with down payment required. The increase in down payment may help nuclear, due to the high costs of \acrshort{wacc}. With a higher down payment, the total costs of the project will fall when compared to other, cheaper, generators. It is likely that nuclear displaces solar in this case. CCGT increases up until a 35\% down payment required. This may be due to the increased use of onshore wind, where CCGT and coal is required to fill for times of low wind speeds.
+
+ 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Chapter4/figures/sensitvity_analysis/downpayment_sensitivity_analysis.pdf}
+	\caption{Sensitivity analysis where percentage of down payment was varied. Results compare electricity mix in 2035.}
+	\label{elecsim:fig:downpayment_sensitivity}
+\end{figure}
+
+Figure \ref{elecsim:fig:downpayment_carbon_sensitivity} displays the relative carbon emissions versus down payment required for investors. As down payment increases, so does relative carbon emissions. This is down to the increasing role that CCGT and coal play in the electricity mix, and decreasing solar capacity. 
+
+A down-payment of 10\% seems to have the lowest carbon emissions. This is due to the high investment in solar, and low investment in CCGT and coal. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\linewidth]{Chapter4/figures/sensitvity_analysis/downpayment_carbon_sensitivity_analysis.pdf}
+	\caption{Sensitivity analysis where percentage of down payment was varied. Results compare relative carbon emissions in 2035.}
+	\label{elecsim:fig:downpayment_carbon_sensitivity}
+\end{figure}
+
+
 
 \clearpage
 \section{Conclusions}
@@ -1601,7 +1660,7 @@ Test
 
 Liberalised electricity markets with many heterogeneous players are suited to be modelled with ABMs. ABMs incorporate imperfect information as well as heterogeneous actors. ElecSim models imperfect information through forecasting of electricity demand and future fuel and electricity prices. This leads to agents taking risk on their investments, and model market conditions more realistically.
 
-We demonstrated that increasing carbon tax can lead to an increase in investment of low-carbon technologies. We showed that early decisions have a long-term impact on the energy mix. 
+%We demonstrated that increasing carbon tax can lead to an increase in investment of low-carbon technologies. We showed that early decisions have a long-term impact on the energy mix. 
 
 %Our future work includes comparing agent-learning techniques, using multi-agent reinforcement learning algorithms to allow agents to learn in a non-static environment. We propose the integration of a higher temporal and spatial resolution to model changes in daily demand, as well as capacity factors by region, and transmission effects. This will allow us to model that demand is met at all times and not just on average. 
 %\begin{itemize}
@@ -1632,7 +1691,7 @@ We demonstrated that increasing carbon tax can lead to an increase in investment
 
 
 
-In this Chapter we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
+In this Chapter we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation, we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
 
 In addition to this, we were able to compare our long-term scenario to that of the UK Government, Department for Business, Energy \& Industrial strategy. We show that we are able to mimic their reference scenario, however, demonstrate a more realistic increase in nuclear power. The parameters that were gained from optimisation show that the BEIS scenario is realistic, however a high nuclear subsidy may be required.
 
@@ -1644,6 +1703,9 @@ To improve the accuracy of our model, we used eight representative days of solar
 
 In addition to this, a method of dealing with the non-validatable nature of electricity markets, as per the definition of Hodges \textit{et al.} is to vary input parameters over many simulations and look for general trends \cite{Hodges}. This could be achieved using ElecSim through the analysis of a reference case, and a limited set of scenarios which include the most important uncertainties in the model structure, parameters, and data, i.e. alternative scenarios which have both high plausibility and major impacts on the outcomes.
 
+Additionally, we showed a number of scenarios, and shows that total demand has an effect on electricity mix. An increasing demand, year-on-year, can lead to an increase in solar to accommodate for this demand. However, if demand reduces, there is a higher investment in nuclear, which contributes to the electricity mix by 2034.
+
+We ran a sensitivity analysis of \acrfull{wacc} and down payment required. We showed that these two variables have a large effect on total electricity mix by the year 2035, which in turn effects the total carbon emissions. We therefore show that the input assumptions have an effect on the simulation, which must be considered when analysing model outputs.
 
 
 
