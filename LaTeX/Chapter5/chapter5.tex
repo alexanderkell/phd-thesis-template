@@ -14,7 +14,7 @@
 
 \section{Prologue}
 
-In this Chapter we use several different machine learning and statistical methods to predict electricity demand 30 minutes ahead and a day ahead. The 30 minutes ahead methodology is used in the work on day-ahead work. We utilise the errors from the day ahead predictions to see what the impact of such errors are on the day-ahead market. The work looks specifically at the difference in electricity mix with prediction error, as well as carbon emitted.
+In this Chapter we use several different machine learning and statistical methods to predict electricity demand 30 minutes ahead and a day ahead. The 30 minutes ahead methodology is used in the work on day-ahead work. We utilise the errors from the day ahead predictions to see what the impact of such errors are on the day-ahead market. This work was published in \cite{Kell2018}. The work looks specifically at the difference in electricity mix with prediction error, as well as carbon emitted.
 
 \section{Introduction}
 \label{forecast:sec:introduction}
@@ -114,26 +114,72 @@ The contributions of this work are:
 \section{Literature review}
 \label{forecast:sec:litreview}
 
+In this section we carry out a literature review on 30-minute ahead forecasting, day-ahead forecasting and online forecasting methods. In addition, we cover literature on the impact of forecasting on electricity markets. 
+
+\subsection{30-minute ahead forecasting}
+
+The forecasting of aggregated and clustered electricity demand has been the focus of a considerable amount of research in recent years. The research can generally be classified into two classes, Artificial Intelligence (AI) techniques \cite{Kim2000, Tiong2008,Quilumba2014} and classical time series approaches \cite{Huang2003,Nguyen2017}. For the purposes of this Chapter we have evaluated artificial intelligence techniques.
+
+Singh \textit{et al.} \cite{Singh2012} produced a review of load forecasting techniques and methodologies and reported that hybrid methods, which combine two or more different techniques, are gaining traction, as well as soft computing approaches (AI) such as genetic algorithms. Our work presents a hybrid method which combines \textit{k}-means clustering with multiple different learning algorithms.
+
+\subsubsection{Artificial Intelligence Techniques}
+
+Dillon \textit{et al.} presented a neural network for short term load forecasting. Their neural network consisted of three-layers and used adaptive learning for training \cite{Dillon1991}. They proposed the use of weather information to augment their electricity load data. They found better results with the adaptive neural network than with a linear model, or non-adaptive neural network. In contrast to Dillon our work focuses on a non-adaptive neural network and does not take into account weather information.
+
+Chen \textit{et al.} used an \Gls{ANN} to predict electricity demand of three substations in Taiwan. They integrated temperature data and reported that the best results when forecasting residential and commercial substations were during the week due to the influence of weather \cite{Chen1996}. In contrast to the work done by Chen \textit{et al.}, we focus on client-side prediction using smart meter data as opposed to substation data. We were, therefore, able to cluster the data based on load profile, as opposed to geographical location.
+
+
+\subsubsection{Time Series Approach}
+
+Al-Musaylh \textit{et al.} proposed the use of \acrshort{svr}, an autoregressive integrated moving average (ARIMA) model and a multivariate adaptive regression spline (MARS) in their short term electricity demand forecasting system \cite{Al-Musaylh2018}. They found that for a half, and one-hour forecasting horizons, that the MARS model outperformed both the ARIMA and SVR.
+
+Taylor evaluates different statistical methods including ARIMA, an adaptation of Holt-Winters' exponential smoothing \cite{Holt2004}, and an exponential smoothing method which focuses on the evolution of the intra-day cycle \cite{Taylor2008}. He found that the double seasonal adaptation of the Holt-Winters' exponential smoothing method was the most accurate method for short lead times between 10 and 30 minutes. 
+
+In contrast to Taylor, Fard \textit{et al.} proposed a novel hybrid forecasting method based on both artificial intelligence and classical time series approaches. They utilised the wavelet transform, ARIMA and ANNs for short term load forecasting \cite{Fard2014}. The ARIMA model is created by finding the appropriate order using the Akaike information criterion \cite{Akaike1974}. The ARIMA model models the linear component of the load time series, and the residuals contain the non-linear components. These residuals are then decomposed by the discrete wavelet transform into its sub-frequencies. ANNs are then applied to these sub-frequencies and the outputs of both the ANN and ARIMA models are summed to make the final prediction. They found that this hybrid technique outperformed traditional methods. Our work does not integrate artificial intelligence and classical time series techniques.
+
+\subsubsection{Clustering}
+
+Multiple techniques have been proposed for the clustering of electricity load data prior to forecasting. Both Shu and Luonan, and Nagi \textit{et al.} propose a hybrid approach in which self-organizing maps are used to cluster the data, and Support Vector Regression is used to make predictions \cite{Shu2006,Tiong2008}. This technique proved robust for different data types, and was able to tackle the non-stationarity of the data. Shu showed that this hybrid approach out-performed a single SVR technique, whilst Nagi showed superior results to a traditional ANN system. In contrast to both Nagi \textit{et al.} and Shu and Luonan our work utilises \textit{k}-means as the clustering algorithm 
+
+Quilumba \textit{et al.} also apply machine learning techniques to individual households' electricity consumption by aggregation \cite{Fard2014}. To achieve this aggregation, they use \textit{k}-means clustering to aggregate the households to improve their forecasting ability. The authors also use a neural network based model for forecasting, and show that the number of optimum clusters for forecasting is dependent on the data, with three clusters optimal for a particular dataset, and four for another.
+
+Wijaya \textit{et al.} demonstrated that implementing clusters improved load-forecasting accuracy up to a certain level \cite{Wijaya2010}. Whilst, a study by Ili\'c \textit{et al.} showed that increasing the number of clusters did not improve accuracy \cite{Ilic2013}.
+
+Humeau \textit{et al.} compare MLPs, SVRs and linear regression at predicting smart meter data \cite{Humeau2013}. They aggregate different households and observe which models work the best at each aggregate level. They find that linear regression outperforms both MLP and SVR when forecasting individual households. However, after aggregating over 32 households, SVR outperforms linear regression.
+
+
+\subsection{Online learning}
+
+Multiple papers have looked at demand-side forecasting \cite{Singh2012}. These include both artificial intelligence \cite{Kim2000, Tiong2008,Quilumba2014} and statistical techniques \cite{Huang2003,Nguyen2017}. To the best of our knowledge, the impact of online learning has been discussed with less frequency. In addition to this, our research models the impact of the performance of different algorithms on investments made, electricity sources dispatched and carbon emissions over a 17 year period. To model this, we use the long-term electricity market agent-based model, ElecSim.
+
+There have been several studies in diverse applications on the use of online machine learning to predict time-series data, however, to the best of our knowledge there are limited examples where this is applied to electricity markets. In our work, we trial a different set of algorithms to our problem. Due to time and compute constraints, we do not trial the additional techniques discussed in this literature review within our paper. 
+
+Johansson \textit{et al}. apply online machine learning algorithms for heat demand forecasting \cite{Johansson2017}. They find that their demand predictions display robust behaviour within acceptable error margins. They find that artificial neural networks (ANNs) provide the best forecasting ability of the standard algorithms and can handle data outside of the training set. Johansson \textit{et al.}, however, do not look at the long-term effects of different algorithms on their application.
+
+Baram \textit{et al.} combine an ensemble of active learners by developing an active-learning master algorithm \cite{Baram2003}. To achieve this, they propose a simple maximum entropy criterion that provides effective estimates in realistic settings. Their active-learning master algorithm is empirically shown to, in some cases, outperform the best algorithm in the ensemble on a range of classification problems.
+
+Schmitt \textit{et al} also extends on existing algorithms through an extension of the FLORA algorithm in \cite{Schmitt2008, Widmer1996}. The FLORA algorithm generates a rule-based model, which has the ability to make binary decisions. Their FLORA-MC enhances the FLORA algorithm for multi-classification and numerical input values. They use this algorithm for an ambient computing application. Ambient computing is where computing and communication merges into everyday life. They find that their model outperforms traditional offline learners by orders of magnitude.
+
+Similarly to us, Pindoriya \textit{et al}. trial several different machine learning methods such as adaptive wavelet neural network (AWNN). They find that AWNN has good prediction properties when compared to other forecasting techniques such as wavelet-ARIMA, multilayer perceptron (MLP) and radial basis function (RBF) neural networks as well as the fuzzy neural network (FNN).
+
+
+Goncalves Da Silva \textit{et al}. show the effect of prediction accuracy on local electricity markets \cite{GoncalvesDaSilva2014}. To this end, they compare forecasting of groups of consumers in comparison to single individuals. They trial the use of the Seasonal-Naïve and Holt-Winters algorithms and look at the effect that the errors have on trading in an intra-day electricity market of consumers and prosumers. They found that with a photovoltaic penetration of 50\%, over 10\% of the total generation capacity was uncapitalized and roughly 10, 25 and 28\% of the total traded volume were unnecessary buys, demand imbalances and unnecessary sells respectively. This represents energy that the participant has no control. Uncapitalized generation capacity is where a participant could have produced energy, however, it was not sold on the market. Additionally, due to forecast errors, the participant might have sold less than it should have. Our work, however, focuses on a national electricity market, as opposed to a local market.
+
+
 
 
 \section{Methodology}
 \label{forecast:sec:methodology}
 
 
-\section{Short-term demand forecasting}
-\label{forecast:sec:shortterm}
 
 
-\section{Day-ahead forecasting}
-\label{forecast:sec:longterm}
 
 
-\section{Scenario impact}
-\label{forecast:sec:scenario}
 
-
-\section{Conclusion}
-\label{forecast:sec:conclusion}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%      Paper 1    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 
 
@@ -141,53 +187,6 @@ The contributions of this work are:
 
 
 
-
-
-
-
-
-
-
-\section{Full paper}
-
-\begin{abstract}
-	
-	Short term load forecasting is utilised in real-time scheduling of electricity as well as load-frequency control. This paper aims to improve the accuracy of load-forecasting by using different machine learning techniques to predict 30 minutes ahead using smart meter data. We utilised a \textit{k}-means clustering algorithm to cluster similar individual consumers and fit distinct models for each cluster. Public holidays were taken into consideration to account for changing customer behaviour on these days. We implemented random forests, neural networks, long short-term memory neural networks and support vector regression models and compared their accuracy using mean absolute percentage error (MAPE). The model with the highest accuracy was a random forest, and we found that clustering similar consumers and aggregating their predictions outperformed a single model in each case.
-\end{abstract}
-
-\section{Introduction}
-
-%The energy markets have undergone significant changes in recent years. The liberalisation of the energy industry, technological advancements and policy changes have had a number of effects \cite{Viegas2016} including, a rise in both competition \cite{sioshansi_2009}, and quantity of data collected \cite{Clastres2011}, as well as a requirement to integrate large amounts of intermittent renewable resources \cite{Haben2013a,Kamgarpour2013,Curves2014}.
-
-
-\section{Related Work}
-
-The forecasting of aggregated and clustered electricity demand has been the focus of a considerable amount of research in recent years. The research can generally be classified into two classes, Artificial Intelligence (AI) techniques \cite{Kim2000, Tiong2008,Quilumba2014} and classical time series approaches \cite{Nazarko2005ARIMAApproach,Huang2003,Nguyen2017}. For the purposes of our paper we have evaluated artificial intelligence techniques.
-
-Singh \textit{et al.} \cite{Singh2012} produced a review of load forecasting techniques and methodologies and reported that hybrid methods, which combine two or more different techniques, are gaining traction, as well as soft computing approaches (AI) such as genetic algorithms. Our paper presents a hybrid method which combines \textit{k}-means clustering with multiple different learning algorithms.
-
-\subsection{Artificial Intelligence Techniques}
-
-Dillon \textit{et al.} presented a neural network for short term load forecasting. Their neural network consisted of three-layers and used adaptive learning for training \cite{Dillon1991}. They proposed the use of weather information to augment their electricity load data. They found better results with the adaptive neural network than with a linear model, or non-adaptive neural network. In contrast to Dillon our paper focuses on a non-adaptive neural network and does not take into account weather information.
-
-Chen \textit{et al.} used an \Gls{ANN} to predict electricity demand of three substations in Taiwan. They integrated temperature data and reported that the best results when forecasting residential and commercial substations were during the week due to the influence of weather \cite{Chen1996}. In contrast to the work done by Chen \textit{et al.}, we focus on client-side prediction using smart meter data as opposed to substation data. We were, therefore, able to cluster the data based on load profile, as opposed to geographical location.
-
-
-\subsection{Time Series Approach}
-
-Al-Musaylh \textit{et al.} proposed the use of \acrshort{svr}, an autoregressive integrated moving average (ARIMA) model and a multivariate adaptive regression spline (MARS) in their short term electricity demand forecasting system \cite{Al-Musaylh2018}. They found that for a half, and one-hour forecasting horizons, that the MARS model outperformed both the ARIMA and SVR.
-
-Taylor evaluates different statistical methods including ARIMA, an adaptation of Holt-Winters' exponential smoothing \cite{Holt2004}, and an exponential smoothing method which focuses on the evolution of the intra-day cycle \cite{Taylor2008}. He found that the double seasonal adaptation of the Holt-Winters' exponential smoothing method was the most accurate method for short lead times between 10 and 30 minutes. 
-
-In contrast to Taylor, Fard \textit{et al.} proposed a novel hybrid forecasting method based on both artificial intelligence and classical time series approaches. They utilised the wavelet transform, ARIMA and ANNs for short term load forecasting \cite{Fard2014}. The ARIMA model is created by finding the appropriate order using the Akaike information criterion \cite{Akaike1974}. The ARIMA model models the linear component of the load time series, and the residuals contain the non-linear components. These residuals are then decomposed by the discrete wavelet transform into its sub-frequencies. ANNs are then applied to these sub-frequencies and the outputs of both the ANN and ARIMA models are summed to make the final prediction. They found that this hybrid technique outperformed traditional methods. Our paper, however, does not integrate artificial intelligence and classical time series techniques.
-
-\subsection{Clustering}
-
-Multiple techniques have been proposed for the clustering of electricity load data prior to forecasting. Both Shu and Luonan, and Nagi \textit{et al.} propose a hybrid approach in which self-organizing maps are used to cluster the data, and Support Vector Regression is used to make predictions \cite{Shu2006,Tiong2008}. This technique proved robust for different data types, and was able to tackle the non-stationarity of the data. Shu showed that this hybrid approach out-performed a single SVR technique, whilst Nagi showed superior results to a traditional ANN system. In contrast to both Nagi \textit{et al.} and Shu and Luonan our paper utilises \textit{k}-means as the clustering algorithm 
-
-Similarly to us, Quilumba \textit{et al.} proposed a \textit{k}-means clustering algorithm to cluster similar load profiles \cite{Quilumba2014}. They found that clustering does improve accuracy, and found an optimum number of 3 clusters.
-
-Wijaya \textit{et al.} demonstrated that implementing clusters improved load-forecasting accuracy up to a certain level \cite{Wijaya2010}. Whilst, a study by Ili\'c \textit{et al.} showed that increasing the number of clusters did not improve accuracy \cite{Ilic2013}.
 
 
 \section{Time series forecasting methods}
@@ -332,6 +331,317 @@ RMSE = \sqrt[]{\frac{\sum_{t=1}^n(\hat{y}_i-y_i)^2)}{n}}
 \end{equation}
 
 \noindent where $\hat{y}_i$ are the predicted values, $y_i$ are the observed values, and $n$ is the number of observations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%      Paper 2    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Machine Learning}
+
+Machine learning is a methodology for finding and describing structural patterns in data \cite{Witten2011}. Offline learning models are trained with the data availalable at a single point in time. With non-stationary data where underlying distributions change, the model must be retrained at periodic intervals, determined by how quickly the model goes out of step with the true data. With online learning, the model is able to retrain every time a new data point becomes available, without having to retrain the entire model. This makes these models good for time-series data which exhibit moderate to significant non-stationary properties, such as electricity demand profiles.
+
+
+
+
+
+\subsection{Online learning}
+
+%Online machine learning is a type of machine learning algorithm that can be used on dynamic datasets, such as time-series data. In traditional machine learning algorithms, when new data is obtained, the historical and new data must be used to retrain the entire model with a new model. This can be costly both in terms of time and in computation power \cite{Li2016}. Online algorithms, therefore, avoids the repeated retraining of data and improves the learning efficiency \cite{Rong2009}. Online training can also adapt to situations where the underlying system you are predicting on is changing over time, or non-stationary.
+
+
+
+Examples of online learning algorithms are Passive Aggressive (PA) Regressor \cite{Gzik2014}, Linear Regression, Box-Cox Regressor \cite{Box1964}, K-Neighbors Regressor \cite{forgy65} and Multilayer perceptron regressor \cite{Hinton1989}. For our work, we trial the stated algorithms, in addition to a host of offline learning techniques. The offline techniques trialled were Lasso regression \cite{Tibshirani1996a}, ridge regression \cite{GeladiPaul1994Mrac},  Elastic Net \cite{Geostatistics2010}, Least Angle Regression \cite{Fike1988}, Extra Trees Regressor \cite{Fike1988}, Random Forest Regressor \cite{Breiman2001}, AdaBoost Regressor \cite{Freund1997}, Gradient Boosting Regressor \cite{316} and Support vector regression \cite{Cortes1995}. We chose the boosting and random forest techniques due to previous successes of these algorithms when applied to electricity demand forecasting \cite{Kell2018}. We trialled the additional algorithms due to availability of these algorithms using the scikit-learn package and online learning package, Creme \cite{scikit-learn,creme}. %, and online versions of Multilayer perceptron regressor, K-Neighbors regressor, linear regression.
+
+%We trial the previously mentioned statistical and machine learning algorithms and vary the parameters using grid search and cross-validation using scikit-learn \cite{scikit-learn}.
+
+\subsection{Linear regression models}
+
+
+Linear regression is a linear approach to modelling the relationship between a dependent variable and one or more independent variables. Linear regressions can be used for both online and offline learning. In this work, we used them for both online and offline learning. Linear regression models are often fitted using the least squares approach. The least squares approach minimizes the sum of the squares of the residuals. 
+
+Other methods for fitting linear regressions are by minimizing a penalized version of the least squares cost function, such as in ridge and lasso regression \cite{Tibshirani1996a, GeladiPaul1994Mrac}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
+
+In ridge regression, the OLS loss function is augmented so that we not only minimize the sum of squared residuals but also penalized the size of parameter estimates, in order to shrink them towards zero:
+\begin{equation}
+L_{ridge}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}\hat{\beta^2_j}=||y-X\hat{\beta}||^2+\lambda||\hat{\beta}||^2.
+\end{equation}
+
+Where $\lambda$ is the regularization penalty which can be chosen through cross-validation, or the value that minimizes the cross-validated sum of squared residuals, for instance. $n$ is the number of observations of the response variable, $Y$, with a linear combination of $m$ predictor variables, $X$, and we solve for $\hat{\beta}$, where $\hat{\beta}$ are the OLS parameter estimates.
+
+
+
+Lasso is a linear regression technique which performs both variable selection and regularization. It is a type of regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, such as the mean. The lasso model encourages models with fewer parameters. This enables the selection of models with fewer numbers of parameters, or automate the process of variable selection.
+
+Under Lasso the loss is defined as:
+
+\begin{equation}
+L_{lasso}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}|\hat{\beta}_j|.
+\end{equation}
+
+The only difference between lasso and ridge regression is the penalty term.
+
+Elastic net is a regularization regression that linearly combines the penalties of the lasso and ridge methods. Specifically, Elastic Net aims to minimize the following loss function:
+\begin{equation}
+L_{enet}(\hat{\beta})=\frac{\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2}{2n}+\lambda(\frac{1-\alpha}{2}\sum^m_{j=1}\hat{\beta}^2_j+\alpha\sum^m_{j=1}|\hat{\beta_j}|),
+\end{equation}
+where $\alpha$ is the mixing parameter between ridge ($\alpha=0$) and lasso ($\alpha=1$). The two parameters $\lambda$ and $\alpha$ can be tuned.
+
+
+Least Angle Regression (LARS) provides a mean of producing an estimate of which variables to include in a linear regression, as well as their coefficients.
+
+
+%\subsubsection{Boosting methods}
+%
+%%AdaBoost Regressor, Gradient Boosting Regressor
+
+
+
+\subsection{Decision tree-based algorithms}
+
+The decision tree is a model which goes from observations to output using simple decision rules inferred from data features \cite{Quinlan}. To build a regression tree, recursive binary splitting is used on the training data. Recursive binary splitting is a greedy top-down algorithm used to minimize the residual sum of squares. The RSS, in the case of a partitioned feature space with $M$ partitions, is given by:
+
+\begin{equation}
+RSS=\sum^M_{m=1}\sum_{i\in R_m}(y-\hat{y}_{R_m})^2.
+\end{equation}
+
+\noindent Where $y$ is the value to be predicted, $\hat{y}$ is the predicted value for partition $R_m$.
+
+
+
+Beginning at the top of the tree, a split is made into two branches. This split is carried out multiple times and the split is chosen that minimizes the current RSS. To obtain the best sequence of subtrees cost complexity, pruning is used as a function of $\alpha$. $\alpha$ is a tuning parameter that balances the depth of the tree and the fit to the training data. This parameter can be tuned using cross-validation.
+
+
+The AdaBoost training process selects only the features of a model known to improve the predictive power of the model \cite{Freund1997}. By doing this, the dimensionality of the model is reduced and can improve compute time. This can be used in conjunction with multiple different models. In our paper, we utilized the decision tree based algorithm with AdaBoost.
+
+
+Random Forests are an ensemble learning method for classification and regression \cite{Breiman2001}. Ensemble learning methods use multiple learning algorithms to obtain better predictive performance. They work by constructing multiple decision trees at training time, and outputting the predicted value that is the mode of the predictions of the individual trees.
+
+To ensure that the individual decision trees within a Random Forest are not correlated, bagging is used to sample from the data. Bagging is the process of randomly sampling with replacement of the training set and fitting the trees. This has the benefit of reducing the variance of the model without increasing the bias. 
+
+Random Forests differ in one way from this bagging procedure. Namely, using a modified tree learning algorithm that selects, at each candidate split in the learning process, a random subset of the features, known as feature bagging. Feature bagging is undertaken due to the fact that some predictors with a high predictive ability may be selected many times by the individual trees, leading to a highly correlated Random Forest.
+
+ExtraTrees adds one further step of randomization \cite{Fike1988}. ExtraTrees stands for extremely randomized trees. There are two main differences between ExtraTrees and Random Forests. Namely, each tree is trained using the whole learning sample (And not a bootstrap sample), and the top-down splitting in the tree learner is randomized. That is, instead of computing an optimal cut-point for each feature, a random cut-point is selected from a uniform distribution. The split that yields the highest score is then chosen to split the node. 
+
+
+\subsection{Gradient Boosting}
+
+Gradient boosting is also an ensemble model \cite{316}. Gradient boosting optimizes a cost-function over function space by iteratively choosing a function that points in the negative gradient descent direction, known as a gradient descent method.
+
+\subsection{Support vector regression}
+
+Support vector regression is an algorithm which finds a hyperplane and decision boundary to map an input domain to an output \cite{Cortes1995}. The hyperplane is chosen by minimizing the error within a certain tolerance.
+
+Suppose we have the training set: $(x_1,y_1), \ldots,(x_i,y_i),\ldots,(x_n,y_n)$, where $x_i$ is the input, and $y_i$ is the output value of $x_i$. Support Vector Regression solves an optimization problem \cite{Shu2006,Chen2004}, under given parameters $C>0$ and $\varepsilon >0$, the form of support vector regression is \cite{Drucker1997}: 
+
+\begin{equation}
+\min_{\omega,b,\xi,\xi^{*}}\frac{1}{2}\omega^T\omega+C\sum_{i=1}^{n}(\xi_i+\xi_i^*)
+\end{equation}
+
+\noindent subject to
+\begin{align}
+\begin{multlined}
+\label{svr:constrains}
+y_i-(\omega^T\phi(x_i)+b)\leq\varepsilon+\xi_i^{*},\\
+(\omega^T\phi(x_i)+b)-y_i\leq\varepsilon+\xi_i,\\
+\xi_i,\xi^*_i\geq0,i=1,\ldots,n
+\end{multlined}
+\end{align}
+
+\noindent $x_i$ is mapped to a higher dimensional space using the function $\phi$. The $\varepsilon$-insensitive tube $(\omega^T\phi(x_i)+b)-y_i\leq\varepsilon$ is a range in which errors are permitted. $\xi_i$ and $\xi^*_i$ are slack variables which allow errors for data points which fall outside of $\varepsilon$. This enables the optimization to take into account the fact that data does not always fall within the $\varepsilon$ range \cite{Smola2004}.
+
+The constant $C>0$ determines the trade-off between the flatness of the support vector function. $\omega$ is the model fit by the SVR. The parameters which control regression quality are the cost of error $C$, the width of the tube $\varepsilon$, and the mapping function $\phi$ \cite{Shu2006,Chen2004}. 
+
+
+\subsection{K-Neighbors Regressor}
+
+K-Neighbors regression is a non-parametric method used for regression \cite{forgy65}. The input consists of a new data point, and the algorithm finds the \textit{k} closest training examples in the feature space. The output is the average value of the \textit{k} nearest neighbours.
+
+
+
+\subsection{Multilayer perceptron}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{Chapter5/figures/market-forecasting/methods/Kell_eEnergy_Fig1.eps}
+	\caption{A three-layer feed forward neural network.}
+	\label{fig:mlp}
+\end{figure}
+
+A neural network can be used in both offline and online cases. In this work, we used them for both online and offline.
+
+Artificial Neural Networks are a model which can model non-linear relationships between input and output data \cite{Akaike1974}. A popular neural network is a feed-forward multilayer perceptron. Fig. \ref{fig:mlp} shows a three-layer feed-forward neural network with a single output unit, \textit{k} hidden units, $n$ input units. $w_{ij}$ is the connection weight from the $i^{th}$ input unit to the $j^{th}$ hidden unit,  and $T_j$ is the connecting weight from the $j^{th}$ hidden unit to the output unit \cite{Pao2007}. These weights transform the input variables in the first layer to the output variable in the final layer using the training data. 
+
+%Typically, a dataset is split into three sections, the test set, training set and validation set. The training set is used to find the connection weights of the network, whilst the test set is used to determine the accuracy of the models. The validation set allows for an unbiased evaluation of the model whilst tuning the hyperparameters, and can avoid overfitting by stopping training if the error begins to increase.
+
+For a univariate time series forecasting problem, suppose we have N observations $y_1, y_2, \ldots, y_N$ in the training set, and $m$ observations in the test set, $y_{N+1}, y_{N+2}, \ldots, y_{N+m}$. In the test set and we are required to predict \textit{m} periods ahead \cite{Pao2007}. 
+
+The training patterns are as follows:
+\begin{align}
+y_{p+m} & =f_{W}(y_p, y_{p-1},\ldots,y_1)\\
+y_{p+m+1} & =f_{W}(y_{p+1}, y_{p},\ldots,y_2)\\
+&\vdotswithin  \notag \\
+y_{N} & =f_{W}(y_{N-m},y_{N-m-1},\ldots,y_{N-m-p+1})
+\end{align}
+
+\noindent where $f_{W}(\cdot)$ represents the MLP network and $W$ are the weights. For brevity we omit $W$. The training patterns use previous time-series points, for example, $y_p, y_{p-1},\ldots,y_1$ as the time series is univariate. That is, we only have the time series in which we can draw inferences from. In addition, these time series points are correlated, and therefore provide information that can be used to predict the next time point.
+
+The $m$ testing patterns are 
+
+\begin{align}
+y_{N+1} & =f_{W}(y_{N+1-m}, y_{N-m},\ldots,y_{N-m-p+2})\\
+y_{N+2} & =f_{W}(y_{N+2-m}, y_{N-m+1},\ldots,y_{N-m-p+3})\\
+&\vdotswithin  \notag \\
+y_{N+m} & =f_{W}(y_{N},y_{N-1},\ldots,y_{N-p+1}).
+\end{align}
+
+The training objective is to minimize the overall predictive mean sum of squared estimate of errors (SSE) by adjusting the connection weights. For this network structure the SSE can be written as:
+\begin{equation}
+SSE = \sum_{i=p+m}^N(y_i-\hat{y}_i)
+\end{equation}
+
+\noindent where $\hat{y}_i$ is the prediction from the network. The number of input nodes corresponds to the number of lagged observations. Having too few or too many input nodes can affect the predictive ability of the neural network \cite{Pao2007}.
+
+It is also possible to vary the hyperparameter, the number of input units. Typically, various different configurations of units are trialled, with the best configuration being used in production. The weights $W$ in $f_W$ are trained using a process called backpropagation, which uses labelled data and gradient descent to update and optimize the weights.
+
+\subsection{Online Algorithms}
+
+In this Section we discuss the algorithms which were used exclusively for online learning in this work.
+
+\subsection{Box-Cox regressor}
+
+In this subsection, we discuss the Box-Cox regressor. Ordinary least square is a method for estimating the unknown parameters in a linear regression model. It estimates these unknown parameters by the principle of least squares. Specifically, it minimizes the sum of the squares of the differences between the observed variables and those predicted by the linear function.
+
+The ordinary least squares regression assumes a normal distribution of residuals. However, when this is not the case, the Box-Cox Regression may be useful \cite{Box1964}. It transforms the dependent variable using the Box-Cox Transformation function and employs maximum likelihood estimation to determine the optimal level of the power parameter lambda. The Box-Cox Regression requires that no dependent variable has any negative values.
+
+%Variable selection and ordinary least squares output dialogues are identical to that of linear regression. 
+
+%The Box-Cox regression will transform the dependent variable as follows:
+%
+%\begin{equation}
+%    y^{(\lambda)} = \frac{y^{\lambda}-1}{\lambda}\:if\:\lambda\neq0
+%\end{equation}
+%\begin{equation}
+%    y^{(\lambda)} = Ln(y)\; if\: \lambda=0
+%\end{equation}
+%
+%\noindent Where $\lambda$ is the power parameter, and the data vectors are $yi=(y_1,\ldots,y_n)$. The optimal value of ($\lambda$) is determined by maximising the following log-likelihood function:
+%
+%\begin{equation}
+%    L^{(\lambda)}=-\frac{n}{2}Ln(\hat{\sigma}^2_{(\lambda)}+(\lambda - 1)\sum_{i=1}^nLn(y_i)
+%\end{equation}
+%
+%\noindent where $\hat{\sigma}^2_{(\lambda)}$ is the estimate of the least squares variance using the transformed y variable. 
+
+\subsection{Passive-Aggressive regressor}
+
+The goal of the Passive-Aggressive (PA) algorithm is to change itself as little as possible to correct for any mistakes and low-confidence predictions it encounters \cite{Gzik2014}. Specifically, with each example PA solves the following optimisation \cite{Ma2009}:
+
+\begin{align}
+\boldsymbol{w}_{t+1}\leftarrow argmin \frac{1}{2}\left|\left|{\boldsymbol{w}_t-\boldsymbol{w}}\right|\right|^2 \\
+s.t. \; \; y_i(\boldsymbol{w}\cdot \boldsymbol{x}_t)\geq1.
+\end{align}
+
+\noindent Where $x_t$ is the input data and $y_i$ the output data, and $w_t$ are the weights for the PA algorithm. Updates occur when the inner product does not exceed a fixed confidence margin - i.e., $y_i(\boldsymbol{w}\cdot \boldsymbol{x}_t)\geq1$. The closed-form update for all examples is as follows:
+\begin{equation}
+\boldsymbol{w}_{t+1}\leftarrow \boldsymbol{w}_{t} + \alpha_t y_t \boldsymbol{x}_t
+\end{equation}
+
+\noindent where 
+
+\begin{equation}
+\alpha_t=max\left\{\frac{1-y_t(\boldsymbol{w}_t\cdot\boldsymbol{x}_t)}{\left|\left|\boldsymbol{x}_t\right|\right|^2},0\right\}. 	
+\end{equation}
+
+\noindent $a_t$ is derived from a derivation process which uses the Lagrange multiplier. For full details of the derivation see \cite{Gzik2014}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Short-term demand forecasting}
+\label{forecast:sec:shortterm}
+
+
+\section{Day-ahead forecasting}
+\label{forecast:sec:longterm}
+
+
+\section{Scenario impact}
+\label{forecast:sec:scenario}
+
+
+\section{Conclusion}
+\label{forecast:sec:conclusion}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Full paper}
+
+\begin{abstract}
+	
+	Short term load forecasting is utilised in real-time scheduling of electricity as well as load-frequency control. This paper aims to improve the accuracy of load-forecasting by using different machine learning techniques to predict 30 minutes ahead using smart meter data. We utilised a \textit{k}-means clustering algorithm to cluster similar individual consumers and fit distinct models for each cluster. Public holidays were taken into consideration to account for changing customer behaviour on these days. We implemented random forests, neural networks, long short-term memory neural networks and support vector regression models and compared their accuracy using mean absolute percentage error (MAPE). The model with the highest accuracy was a random forest, and we found that clustering similar consumers and aggregating their predictions outperformed a single model in each case.
+\end{abstract}
+
+
+
+
 
 
 \section{Methodology}
@@ -804,43 +1114,6 @@ Our results show that we are able to reduce the mean absolute error by 30\% usin
 %% \linenumbers
 
 %% main text
-\section{Introduction}
-\label{sec:intro}
-
-
-\section{Literature Review}
-\label{sec:lit-review}
-
-Multiple papers have looked at demand-side forecasting \cite{Singh2012}. These include both artificial intelligence \cite{Kim2000, Tiong2008,Quilumba2014} and statistical techniques \cite{Huang2003,Nguyen2017}. To the best of our knowledge, the impact of online learning has been discussed with less frequency. In addition to this, our research models the impact of the performance of different algorithms on investments made, electricity sources dispatched and carbon emissions over a 17 year period. To model this, we use the long-term electricity market agent-based model, ElecSim.
-
-\subsection{Offline learning}
-
-Multiple electricity demand forecasting studies have been undertaken for offline learning \cite{Chen2004, Gross1987, Ghofrani}. Studies have been undertaken using both smart meter data, as well as with aggregated demand, similar to the work in this paper. Smart meters are a type of energy meter installed in each house, which monitor electricity usage at short intervals, such as every 15 or 30 minutes.
-
-
-Fard \textit{et al.} propose a new hybrid forecasting method based on the wavelet transform, autoregressive integrated moving average (ARIMA) and artificial neural network (ANN) \cite{Fard2014}. The ARIMA model is utilized to capture the linear component of the time series, with the residuals containing the non-linear components. The non-linear parts are decomposed using the discrete wavelet transform, which finds the sub-frequencies. These residuals are then used to train an ANN  to predict the future residuals. Finally, the ARIMA and ANNs outputs are summed. Their results show that this technique can improve the load forecasting results.    
-
-Humeau \textit{et al.} compare MLPs, SVRs and linear regression at predicting smart meter data \cite{Humeau2013}. They aggregate different households and observe which models work the best at each aggregate level. They find that linear regression outperforms both MLP and SVR when forecasting individual households. However, after aggregating over 32 households, SVR outperforms linear regression.
-
-
-Quilumba \textit{et al.} also apply machine learning techniques to individual households' electricity consumption by aggregation \cite{Fard2014}. To achieve this aggregation, they use \textit{k}-means clustering to aggregate the households to improve their forecasting ability. The authors also use a neural network based model for forecasting, and show that the number of optimum clusters for forecasting is dependent on the data, with three clusters optimal for a particular dataset, and four for another.
-
-In our previous work we evaluate the performance of ANNs, random forests, support vector regression and long short-term memory neural networks \cite{Kell2018a}. We utilize smart meter data, and cluster by household using the k-means clustering algorithm to aggregate groups of demand. We find that through this clustering we are able to reduce the error, with the random forest performing the best.
-
-\subsection{Online learning}
-
-There have been several studies in diverse applications on the use of online machine learning to predict time-series data, however, to the best of our knowledge there are limited examples where this is applied to electricity markets. In our work, we trial a different set of algorithms to our problem. Due to time constraints, we do not trial the additional techniques discussed in this literature review within our paper. 
-
-Johansson \textit{et al}. apply online machine learning algorithms for heat demand forecasting \cite{Johansson2017}. They find that their demand predictions display robust behaviour within acceptable error margins. They find that artificial neural networks (ANNs) provide the best forecasting ability of the standard algorithms and can handle data outside of the training set. Johansson \textit{et al.}, however, do not look at the long-term effects of different algorithms on their application.
-
-Baram \textit{et al.} combine an ensemble of active learners by developing an active-learning master algorithm \cite{Baram2003}. To achieve this, they propose a simple maximum entropy criterion that provides effective estimates in realistic settings. Their active-learning master algorithm is empirically shown to, in some cases, outperform the best algorithm in the ensemble on a range of classification problems.
-
-Schmitt \textit{et al} also extends on existing algorithms through an extension of the FLORA algorithm in \cite{Schmitt2008, Widmer1996}. The FLORA algorithm generates a rule-based model, which has the ability to make binary decisions. Their FLORA-MC enhances the FLORA algorithm for multi-classification and numerical input values. They use this algorithm for an ambient computing application. Ambient computing is where computing and communication merges into everyday life. They find that their model outperforms traditional offline learners by orders of magnitude.
-
-Similarly to us, Pindoriya \textit{et al}. trial several different machine learning methods such as adaptive wavelet neural network (AWNN). They find that AWNN has good prediction properties when compared to other forecasting techniques such as wavelet-ARIMA, multilayer perceptron (MLP) and radial basis function (RBF) neural networks as well as the fuzzy neural network (FNN).
-
-
-Goncalves Da Silva \textit{et al}. show the effect of prediction accuracy on local electricity markets \cite{GoncalvesDaSilva2014}. To this end, they compare forecasting of groups of consumers in comparison to single individuals. They trial the use of the Seasonal-Naïve and Holt-Winters algorithms and look at the effect that the errors have on trading in an intra-day electricity market of consumers and prosumers. They found that with a photovoltaic penetration of 50\%, over 10\% of the total generation capacity was uncapitalized and roughly 10, 25 and 28\% of the total traded volume were unnecessary buys, demand imbalances and unnecessary sells respectively. This represents energy that the participant has no control. Uncapitalized generation capacity is where a participant could have produced energy, however, it was not sold on the market. Additionally, due to forecast errors, the participant might have sold less than it should have. Our work, however, focuses on a national electricity market, as opposed to a local market.
 
 
 
@@ -849,224 +1122,6 @@ Goncalves Da Silva \textit{et al}. show the effect of prediction accuracy on loc
 \section{Material}
 \label{sec:material}
 
-\subsection{Machine Learning}
-
-Machine learning is a methodology for finding and describing structural patterns in data \cite{Witten2011}. Offline learning models are trained with the data availalable at a single point in time. With non-stationary data where underlying distributions change, the model must be retrained at periodic intervals, determined by how quickly the model goes out of step with the true data. With online learning, the model is able to retrain every time a new data point becomes available, without having to retrain the entire model. This makes these models good for time-series data which exhibit moderate to significant non-stationary properties, such as electricity demand profiles.
-
-
-
-
-
-\subsection{Online learning}
-
-%Online machine learning is a type of machine learning algorithm that can be used on dynamic datasets, such as time-series data. In traditional machine learning algorithms, when new data is obtained, the historical and new data must be used to retrain the entire model with a new model. This can be costly both in terms of time and in computation power \cite{Li2016}. Online algorithms, therefore, avoids the repeated retraining of data and improves the learning efficiency \cite{Rong2009}. Online training can also adapt to situations where the underlying system you are predicting on is changing over time, or non-stationary.
-
-
-
-Examples of online learning algorithms are Passive Aggressive (PA) Regressor \cite{Gzik2014}, Linear Regression, Box-Cox Regressor \cite{Box1964}, K-Neighbors Regressor \cite{forgy65} and Multilayer perceptron regressor \cite{Hinton1989}. For our work, we trial the stated algorithms, in addition to a host of offline learning techniques. The offline techniques trialled were Lasso regression \cite{Tibshirani1996a}, ridge regression \cite{GeladiPaul1994Mrac},  Elastic Net \cite{Geostatistics2010}, Least Angle Regression \cite{Fike1988}, Extra Trees Regressor \cite{Fike1988}, Random Forest Regressor \cite{Breiman2001}, AdaBoost Regressor \cite{Freund1997}, Gradient Boosting Regressor \cite{316} and Support vector regression \cite{Cortes1995}. We chose the boosting and random forest techniques due to previous successes of these algorithms when applied to electricity demand forecasting \cite{Kell2018}. We trialled the additional algorithms due to availability of these algorithms using the scikit-learn package and online learning package, Creme \cite{scikit-learn,creme}. %, and online versions of Multilayer perceptron regressor, K-Neighbors regressor, linear regression.
-
-%We trial the previously mentioned statistical and machine learning algorithms and vary the parameters using grid search and cross-validation using scikit-learn \cite{scikit-learn}.
-
-\subsection{Linear regression models}
-
-
-Linear regression is a linear approach to modelling the relationship between a dependent variable and one or more independent variables. Linear regressions can be used for both online and offline learning. In this work, we used them for both online and offline learning. Linear regression models are often fitted using the least squares approach. The least squares approach minimizes the sum of the squares of the residuals. 
-
-Other methods for fitting linear regressions are by minimizing a penalized version of the least squares cost function, such as in ridge and lasso regression \cite{Tibshirani1996a, GeladiPaul1994Mrac}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
-
-In ridge regression, the OLS loss function is augmented so that we not only minimize the sum of squared residuals but also penalized the size of parameter estimates, in order to shrink them towards zero:
-\begin{equation}
-    L_{ridge}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}\hat{\beta^2_j}=||y-X\hat{\beta}||^2+\lambda||\hat{\beta}||^2.
-\end{equation}
-
-Where $\lambda$ is the regularization penalty which can be chosen through cross-validation, or the value that minimizes the cross-validated sum of squared residuals, for instance. $n$ is the number of observations of the response variable, $Y$, with a linear combination of $m$ predictor variables, $X$, and we solve for $\hat{\beta}$, where $\hat{\beta}$ are the OLS parameter estimates.
-
-
-
-Lasso is a linear regression technique which performs both variable selection and regularization. It is a type of regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, such as the mean. The lasso model encourages models with fewer parameters. This enables the selection of models with fewer numbers of parameters, or automate the process of variable selection.
-
-Under Lasso the loss is defined as:
-
-\begin{equation}
-    L_{lasso}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}|\hat{\beta}_j|.
-\end{equation}
-
-The only difference between lasso and ridge regression is the penalty term.
-
-Elastic net is a regularization regression that linearly combines the penalties of the lasso and ridge methods. Specifically, Elastic Net aims to minimize the following loss function:
-\begin{equation}
-L_{enet}(\hat{\beta})=\frac{\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2}{2n}+\lambda(\frac{1-\alpha}{2}\sum^m_{j=1}\hat{\beta}^2_j+\alpha\sum^m_{j=1}|\hat{\beta_j}|),
-\end{equation}
-where $\alpha$ is the mixing parameter between ridge ($\alpha=0$) and lasso ($\alpha=1$). The two parameters $\lambda$ and $\alpha$ can be tuned.
-
-
-Least Angle Regression (LARS) provides a mean of producing an estimate of which variables to include in a linear regression, as well as their coefficients.
-
-
-%\subsubsection{Boosting methods}
-%
-%%AdaBoost Regressor, Gradient Boosting Regressor
-
-
-
-\subsection{Decision tree-based algorithms}
-
-The decision tree is a model which goes from observations to output using simple decision rules inferred from data features \cite{Quinlan}. To build a regression tree, recursive binary splitting is used on the training data. Recursive binary splitting is a greedy top-down algorithm used to minimize the residual sum of squares. The RSS, in the case of a partitioned feature space with $M$ partitions, is given by:
-
-\begin{equation}
-    RSS=\sum^M_{m=1}\sum_{i\in R_m}(y-\hat{y}_{R_m})^2.
-\end{equation}
-
-\noindent Where $y$ is the value to be predicted, $\hat{y}$ is the predicted value for partition $R_m$.
-
-
-
-Beginning at the top of the tree, a split is made into two branches. This split is carried out multiple times and the split is chosen that minimizes the current RSS. To obtain the best sequence of subtrees cost complexity, pruning is used as a function of $\alpha$. $\alpha$ is a tuning parameter that balances the depth of the tree and the fit to the training data. This parameter can be tuned using cross-validation.
-
-
-The AdaBoost training process selects only the features of a model known to improve the predictive power of the model \cite{Freund1997}. By doing this, the dimensionality of the model is reduced and can improve compute time. This can be used in conjunction with multiple different models. In our paper, we utilized the decision tree based algorithm with AdaBoost.
-
-
-Random Forests are an ensemble learning method for classification and regression \cite{Breiman2001}. Ensemble learning methods use multiple learning algorithms to obtain better predictive performance. They work by constructing multiple decision trees at training time, and outputting the predicted value that is the mode of the predictions of the individual trees.
-
-To ensure that the individual decision trees within a Random Forest are not correlated, bagging is used to sample from the data. Bagging is the process of randomly sampling with replacement of the training set and fitting the trees. This has the benefit of reducing the variance of the model without increasing the bias. 
-
-Random Forests differ in one way from this bagging procedure. Namely, using a modified tree learning algorithm that selects, at each candidate split in the learning process, a random subset of the features, known as feature bagging. Feature bagging is undertaken due to the fact that some predictors with a high predictive ability may be selected many times by the individual trees, leading to a highly correlated Random Forest.
-
-ExtraTrees adds one further step of randomization \cite{Fike1988}. ExtraTrees stands for extremely randomized trees. There are two main differences between ExtraTrees and Random Forests. Namely, each tree is trained using the whole learning sample (And not a bootstrap sample), and the top-down splitting in the tree learner is randomized. That is, instead of computing an optimal cut-point for each feature, a random cut-point is selected from a uniform distribution. The split that yields the highest score is then chosen to split the node. 
-
-
-\subsection{Gradient Boosting}
-
-Gradient boosting is also an ensemble model \cite{316}. Gradient boosting optimizes a cost-function over function space by iteratively choosing a function that points in the negative gradient descent direction, known as a gradient descent method.
-
-\subsection{Support vector regression}
-
-Support vector regression is an algorithm which finds a hyperplane and decision boundary to map an input domain to an output \cite{Cortes1995}. The hyperplane is chosen by minimizing the error within a certain tolerance.
-
-Suppose we have the training set: $(x_1,y_1), \ldots,(x_i,y_i),\ldots,(x_n,y_n)$, where $x_i$ is the input, and $y_i$ is the output value of $x_i$. Support Vector Regression solves an optimization problem \cite{Shu2006,Chen2004}, under given parameters $C>0$ and $\varepsilon >0$, the form of support vector regression is \cite{Drucker1997}: 
-
-\begin{equation}
-\min_{\omega,b,\xi,\xi^{*}}\frac{1}{2}\omega^T\omega+C\sum_{i=1}^{n}(\xi_i+\xi_i^*)
-\end{equation}
-
-\noindent subject to
-\begin{align}
-\begin{multlined}
-\label{svr:constrains}
-y_i-(\omega^T\phi(x_i)+b)\leq\varepsilon+\xi_i^{*},\\
-(\omega^T\phi(x_i)+b)-y_i\leq\varepsilon+\xi_i,\\
-\xi_i,\xi^*_i\geq0,i=1,\ldots,n
-\end{multlined}
-\end{align}
-
-\noindent $x_i$ is mapped to a higher dimensional space using the function $\phi$. The $\varepsilon$-insensitive tube $(\omega^T\phi(x_i)+b)-y_i\leq\varepsilon$ is a range in which errors are permitted. $\xi_i$ and $\xi^*_i$ are slack variables which allow errors for data points which fall outside of $\varepsilon$. This enables the optimization to take into account the fact that data does not always fall within the $\varepsilon$ range \cite{Smola2004}.
-
-The constant $C>0$ determines the trade-off between the flatness of the support vector function. $\omega$ is the model fit by the SVR. The parameters which control regression quality are the cost of error $C$, the width of the tube $\varepsilon$, and the mapping function $\phi$ \cite{Shu2006,Chen2004}. 
-
-
-\subsection{K-Neighbors Regressor}
-
-K-Neighbors regression is a non-parametric method used for regression \cite{forgy65}. The input consists of a new data point, and the algorithm finds the \textit{k} closest training examples in the feature space. The output is the average value of the \textit{k} nearest neighbours.
-
-
-
-\subsection{Multilayer perceptron}
-
-
-\begin{figure}
-\centering
-    \includegraphics[width=0.4\textwidth]{Chapter5/figures/market-forecasting/methods/Kell_eEnergy_Fig1.eps}
-    \caption{A three-layer feed forward neural network.}
-    \label{fig:mlp}
-\end{figure}
-
-A neural network can be used in both offline and online cases. In this work, we used them for both online and offline.
-
-Artificial Neural Networks are a model which can model non-linear relationships between input and output data \cite{Akaike1974}. A popular neural network is a feed-forward multilayer perceptron. Fig. \ref{fig:mlp} shows a three-layer feed-forward neural network with a single output unit, \textit{k} hidden units, $n$ input units. $w_{ij}$ is the connection weight from the $i^{th}$ input unit to the $j^{th}$ hidden unit,  and $T_j$ is the connecting weight from the $j^{th}$ hidden unit to the output unit \cite{Pao2007}. These weights transform the input variables in the first layer to the output variable in the final layer using the training data. 
-
-%Typically, a dataset is split into three sections, the test set, training set and validation set. The training set is used to find the connection weights of the network, whilst the test set is used to determine the accuracy of the models. The validation set allows for an unbiased evaluation of the model whilst tuning the hyperparameters, and can avoid overfitting by stopping training if the error begins to increase.
-
-For a univariate time series forecasting problem, suppose we have N observations $y_1, y_2, \ldots, y_N$ in the training set, and $m$ observations in the test set, $y_{N+1}, y_{N+2}, \ldots, y_{N+m}$. In the test set and we are required to predict \textit{m} periods ahead \cite{Pao2007}. 
-
-The training patterns are as follows:
-\begin{align}
-y_{p+m} & =f_{W}(y_p, y_{p-1},\ldots,y_1)\\
-y_{p+m+1} & =f_{W}(y_{p+1}, y_{p},\ldots,y_2)\\
-&\vdotswithin  \notag \\
-y_{N} & =f_{W}(y_{N-m},y_{N-m-1},\ldots,y_{N-m-p+1})
-\end{align}
-
-\noindent where $f_{W}(\cdot)$ represents the MLP network and $W$ are the weights. For brevity we omit $W$. The training patterns use previous time-series points, for example, $y_p, y_{p-1},\ldots,y_1$ as the time series is univariate. That is, we only have the time series in which we can draw inferences from. In addition, these time series points are correlated, and therefore provide information that can be used to predict the next time point.
-
-The $m$ testing patterns are 
-
-\begin{align}
-y_{N+1} & =f_{W}(y_{N+1-m}, y_{N-m},\ldots,y_{N-m-p+2})\\
-y_{N+2} & =f_{W}(y_{N+2-m}, y_{N-m+1},\ldots,y_{N-m-p+3})\\
-&\vdotswithin  \notag \\
-y_{N+m} & =f_{W}(y_{N},y_{N-1},\ldots,y_{N-p+1}).
-\end{align}
-
-The training objective is to minimize the overall predictive mean sum of squared estimate of errors (SSE) by adjusting the connection weights. For this network structure the SSE can be written as:
-\begin{equation}
-SSE = \sum_{i=p+m}^N(y_i-\hat{y}_i)
-\end{equation}
-
-\noindent where $\hat{y}_i$ is the prediction from the network. The number of input nodes corresponds to the number of lagged observations. Having too few or too many input nodes can affect the predictive ability of the neural network \cite{Pao2007}.
-
-It is also possible to vary the hyperparameter, the number of input units. Typically, various different configurations of units are trialled, with the best configuration being used in production. The weights $W$ in $f_W$ are trained using a process called backpropagation, which uses labelled data and gradient descent to update and optimize the weights.
-
-\subsection{Online Algorithms}
-
-In this Section we discuss the algorithms which were used exclusively for online learning in this work.
-
-\subsection{Box-Cox regressor}
-
-In this subsection, we discuss the Box-Cox regressor. Ordinary least square is a method for estimating the unknown parameters in a linear regression model. It estimates these unknown parameters by the principle of least squares. Specifically, it minimizes the sum of the squares of the differences between the observed variables and those predicted by the linear function.
-
-The ordinary least squares regression assumes a normal distribution of residuals. However, when this is not the case, the Box-Cox Regression may be useful \cite{Box1964}. It transforms the dependent variable using the Box-Cox Transformation function and employs maximum likelihood estimation to determine the optimal level of the power parameter lambda. The Box-Cox Regression requires that no dependent variable has any negative values.
-
-%Variable selection and ordinary least squares output dialogues are identical to that of linear regression. 
-
-%The Box-Cox regression will transform the dependent variable as follows:
-%
-%\begin{equation}
-%    y^{(\lambda)} = \frac{y^{\lambda}-1}{\lambda}\:if\:\lambda\neq0
-%\end{equation}
-%\begin{equation}
-%    y^{(\lambda)} = Ln(y)\; if\: \lambda=0
-%\end{equation}
-%
-%\noindent Where $\lambda$ is the power parameter, and the data vectors are $yi=(y_1,\ldots,y_n)$. The optimal value of ($\lambda$) is determined by maximising the following log-likelihood function:
-%
-%\begin{equation}
-%    L^{(\lambda)}=-\frac{n}{2}Ln(\hat{\sigma}^2_{(\lambda)}+(\lambda - 1)\sum_{i=1}^nLn(y_i)
-%\end{equation}
-%
-%\noindent where $\hat{\sigma}^2_{(\lambda)}$ is the estimate of the least squares variance using the transformed y variable. 
-
-\subsection{Passive-Aggressive regressor}
-
-The goal of the Passive-Aggressive (PA) algorithm is to change itself as little as possible to correct for any mistakes and low-confidence predictions it encounters \cite{Gzik2014}. Specifically, with each example PA solves the following optimisation \cite{Ma2009}:
-
-\begin{align}
-    \boldsymbol{w}_{t+1}\leftarrow argmin \frac{1}{2}\left|\left|{\boldsymbol{w}_t-\boldsymbol{w}}\right|\right|^2 \\
-    s.t. \; \; y_i(\boldsymbol{w}\cdot \boldsymbol{x}_t)\geq1.
-\end{align}
-
-\noindent Where $x_t$ is the input data and $y_i$ the output data, and $w_t$ are the weights for the PA algorithm. Updates occur when the inner product does not exceed a fixed confidence margin - i.e., $y_i(\boldsymbol{w}\cdot \boldsymbol{x}_t)\geq1$. The closed-form update for all examples is as follows:
-\begin{equation}
-    \boldsymbol{w}_{t+1}\leftarrow \boldsymbol{w}_{t} + \alpha_t y_t \boldsymbol{x}_t
-\end{equation}
-
-\noindent where 
-
-\begin{equation}
-\alpha_t=max\left\{\frac{1-y_t(\boldsymbol{w}_t\cdot\boldsymbol{x}_t)}{\left|\left|\boldsymbol{x}_t\right|\right|^2},0\right\}. 	
-\end{equation}
-
-\noindent $a_t$ is derived from a derivation process which uses the Lagrange multiplier. For full details of the derivation see \cite{Gzik2014}.
 
 \subsection{Long-term Energy Market Model}
 
