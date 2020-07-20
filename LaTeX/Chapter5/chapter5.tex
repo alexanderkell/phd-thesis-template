@@ -19,7 +19,9 @@ In this Chapter we use several different machine learning and statistical method
 \section{Introduction}
 \label{forecast:sec:introduction}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%      Actual Chapter      %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 
 The need for accurate load forecasting is essential for control and planning of electricity generation in electrical grids due to the fact that supply must meet demand \cite{Lu1993}. Short-term electricity demand forecasting has become increasingly important due to the introduction of competitive energy markets. Accurate estimates of demand are required so that the correct amount of electricity is purchased on the wholesale market \cite{Dillon1991}. Electricity is unique to other commodities in that it must be either consumed the moment that it is generated or stored. The difficulties in storing electricity arise from high installation and maintenance costs, inefficiencies and low capacity \cite{Poonpun2008}. It is therefore important to match demand to supply and thus regulate frequency. Failure to accurately forecast electricity demand can lead to financial loss and/or system-wide blackouts \cite{Hines2008}.
@@ -29,68 +31,45 @@ The integration of higher proportions of intermittent renewable energy sources (
 
 
 
+Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants, not all dispatchable plants are peaker plants. For example coal, which is a dispatchable plant, is run as a base load plant, due to its inability to deal with the fluctuating conditions required of a peaker plant.
 
 
+To reduce reliance on peaker plants, it is helpful to know how much electricity demand there will be in the future so that more efficient plants can be used to meet this expected demand. This is so that these more efficient plants can be brought up to speed at a time suitable to match the demand. Forecasting a day into the future is especially useful in decentralized electricity markets which have day-ahead markets. Decentralized electricity markets are ones where electricity is provided by multiple generation companies, as opposed to a centralized source, such as a government. To aid in this prediction, machine learning and statistical techniques have been used to accurately predict demand based on several different factors and data sources \cite{Kell2018a}, such as weather \cite{Hong2014}, day of the week \cite{Al-Musaylh2018} and holidays \cite{Vrablecova2017}. 
 
 
+The introduction of smart meters in many countries (USA, Europe, Canada and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. Smart meters are digital devices that measure electricity consumption of individual households at regular intervals (intervals of an hour or less) and offer two-way communication between the meter and utility company. Smart meters aid customers to understand precisely how much electricity they consume at different time intervals, and enable dynamic pricing \cite{Abreu2012a}. Dynamic pricing allows utilities to charge varying prices at different times, for instance, charging a higher price when costly generation sources are used in times of peak demand, and lower prices at night time or weekends when demand is low \cite{Liu2016,Ito2013}. In this Chapter we forecast both 30-minutes ahead using smart meter data, as well as 24-hours ahead to simulate the process made for a day-ahead market. 
 
 
+%%%%%%%%%%%%%% 30-minute ahead forecasting
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%      Paper 1    %%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-The introduction of smart meters in many countries (USA, Europe, Canada and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. 800 million smart meters are projected to be installed worldwide by 2020 \cite{Telefonica2014}. Smart meters are digital devices that measure electricity consumption of individual households at regular intervals (intervals of an hour or less) and offer two-way communication between the meter and utility company. Smart meters aid customers to understand precisely how much electricity they consume at different time intervals, and enable dynamic pricing \cite{Abreu2012a}. Dynamic pricing allows utilities to charge varying prices at different times, for instance, charging a higher price when costly generation sources are used in times of peak demand, and lower prices at night time or weekends when demand is low \cite{Liu2016,Ito2013}. 
-
-This paper explores short term load-forecasting at an interval of 30 minutes ahead and clusters similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long-Short Term Memory neural networks (LSTM) \cite{lstm}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
+Firstly, we explore short term load-forecasting at an interval of 30 minutes ahead and cluster similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long-Short Term Memory neural networks (LSTM) \cite{lstm}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
 
 Random Forests are an ensemble based learning method for classification and regression, and are made up of many decision trees. LSTM networks are recurrent neural networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which are made up of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyze data used for regression analysis.
 
 To improve forecasting results, the clustering of smart meter data was evaluated. The technique used for this was \textit{k}-means clustering. An average 24-hour electricity load profile was calculated, and the result used for clustering. The clustered sub-system is then aggregated and separate models trained on this aggregate. The yearly, weekly and daily periodicity of electricity load is accounted for by input variables into the models. Once forecasts for each cluster are made using the individual models, the results are aggregated for the final predictions. These predictions are compared to the actual results and the accuracy measured using mean absolute percentage error (MAPE).
 
-This paper contributes a technique to forecasting smart-meter data through the use of clustering using \textit{k}-means and different learning algorithms. It provides researchers and utilities with methods to maximise forecasting accuracy through the selection of machine learning and clustering algorithms.
-
-This paper is structured as follows: in Section 2 we introduce the state of the art in load forecasting. The methods used in this paper are explored in Section 3. The experiments and their evaluation are discussed in Section 4. The results are discussed in Section 5. In Section 6 we conclude and consider future directions for this work.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%      Paper 2    %%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
-Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand, that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants, not all dispatchable plants are peaker plants. For example coal, which is a dispatchable plant, is run as a base load plant, due to its inability to deal with the fluctuating conditions required of a peaker plant.
 
-To reduce reliance on peaker plants, it is helpful to know how much electricity demand there will be in the future so that more efficient plants can be used to meet this expected demand. This is so that these more efficient plants can be brought up to speed at a time suitable to match the demand. Forecasting a day into the future is especially useful in decentralized electricity markets which have day-ahead markets. Decentralized electricity markets are ones where electricity is provided by multiple generation companies, as opposed to a centralized source, such as a government. To aid in this prediction, machine learning and statistical techniques have been used to accurately predict demand based on several different factors and data sources \cite{Kell2018a}, such as weather \cite{Hong2014}, day of the week \cite{Al-Musaylh2018} and holidays \cite{Vrablecova2017}. 
-
-%- Why the current approaches / systems don't solve the problem
+%%%%%%%%%%%%%% Scenario forecasting
 
 
-%While various studies have looked at how to predict electricity demand at various time horizons with the highest accuracy \cite{Singh2012,Huang2003,Andersen2013}, the impact that poor forecasting accuracy has on investments and dispatch of electricity technology in electricity markets has been studied to a lesser degree.
-
-Various studies have looked at predicting electricity demand at various horizons \cite{Singh2012,Huang2003,Andersen2013}. However, the impact of poor demand predictions on the long-term electricity mix has been studied to a lesser degree.
-
-In this paper, we compare several machine learning and statistical techniques to predict the energy demand for each hour over the next 24-hour horizon. We chose to predict over the next 24 hours to simulate a day-ahead market, which is often seen in decentralized electricity markets. However, our approach could be utilized for differing time horizons. In addition to this, we use our long-term agent-based model, ElecSim \cite{Kell, Kell2020}, to simulate the impact of different forecasting methods on long-term investments, power plant usage and carbon emissions for the years 2018 through 2035 in the United Kingdom. Our approach, however, is generalizable to any country through parametrization of the ElecSim model.
 
 
-%- What is the innovation in this work
+Secondly, we introduce day-ahead forecasting and what impact errors have on the long-term dynamics of the market. Various studies have looked at predicting electricity demand at various horizons \cite{Singh2012,Huang2003,Andersen2013}. However, the impact of poor demand predictions on the long-term electricity mix has been studied to a lesser degree.
 
-%We compare the impact of 11 offline learning algorithms and five online learning algorithms to predict the electricity demand profile over the next 24 hours.
+We compare several machine learning and statistical techniques to predict the energy demand for each hour over the next 24-hour horizon. We chose to predict over the next 24 hours to simulate a day-ahead market, which is often seen in decentralized electricity markets. However, our approach could be utilized for differing time horizons. In addition to this, we use our long-term agent-based model, ElecSim \cite{Kell, Kell2020}, to simulate the impact of different forecasting methods on long-term investments, power plant usage and carbon emissions for the years 2018 through 2035 in the United Kingdom. Our approach, however, is generalizable to any country through parametrization of the ElecSim model.
 
-As part of our work, we utilize online learning methods to improve the accuracy of our predictions. Online learning methods can learn from novel data while maintaining what was learnt from previous data. Online learning is useful for non-stationary datasets, and time-series data where recalculation of a model would take a prohibitive amount of time. Offline learning methods, however, must be retrained every time new data is added. Online approaches are constantly updated and do not require significant pauses while the offline training is being re-run. % By training on data that has already been used for training, the computational load and time required increases.
+
+As part of our work, we utilize online learning methods to improve the accuracy of our predictions. Online learning methods can learn from novel data while maintaining what was learnt from previous data. Online learning is useful for non-stationary datasets, and time-series data where recalculation of a model would take a prohibitive amount of time. Offline learning methods, however, must be retrained every time new data is added. Online approaches are constantly updated and do not require significant pauses while the offline training is being re-run. By training on data that has already been used for training, the computational load and time required increases.
 
 We trial different algorithms and train different models for different times of the year. Specifically, we train different models for the different seasons. We also split weekdays and train both weekends and holidays together. This is due to the fact that holidays and weekend exhibit similar load profiles due to the reduction in industry electricity use and an increase in domestic. This enables a model to become good at a specific subset of the data which share similar patterns, as opposed to having to generalize to all of the data. Examples of the algorithms used are linear regression, lasso regression, random forests, support vector regression, multilayer perceptron neural network, box-cox transformation linear regression and the passive aggressive model. 
 
-We expect a-priori that online algorithms will outperform the offline approach. This is due to the fact that the demand time-series is non-stationary, and thus changes sufficiently over time. In terms of the models, we presume that the machine learning algorithms, such as neural networks, support vector regression and random forests will outperform the statistical methods such as linear regression, lasso regression and box-cox transformation regression. We expect this due to the fact that machine learning has been shown to be able to learn more complex feature representations than statistical methods \cite{Singh2012}. In addition, our previous work has shown that the random forest was able to outperform neural networks, support vector regression and long short term memory neural networks (LSTM) \cite{Kell2018}. 
+We expect a-priori that online algorithms will outperform the offline approach. This is due to the fact that the demand time-series is non-stationary, and thus changes sufficiently over time. In terms of the models, we presume that the machine learning algorithms, such as neural networks, support vector regression and random forests will outperform the statistical methods such as linear regression, lasso regression and box-cox transformation regression. We expect this due to the fact that machine learning has been shown to be able to learn more complex feature representations than statistical methods \cite{Singh2012}. % In addition, our previous work has shown that the random forest was able to outperform neural networks, support vector regression and long short term memory neural networks (LSTM) \cite{Kell2018}. 
 
 However, it should be noted, that such a-priori intuiton, is no substitute for analytical evidence and can (and has) been shown to be wrong in the past, due to imperfect knowledge of the data and understanding of some of the black box models, such as neural networks.
-
-%- A short description of the solution
-
 
 Using online and offline methods, we take the error distributions, or residuals, and fit a variety of distributions to these residuals. We choose the distribution with the lowest sum of squared estimate of errors (SSE). SSE was chosen as the metric to ensure that both positive and negative errors were treated equally, as well as ensuring that large errors were penalized more than smaller errors. We fit over 80 different distributions, which include the Johnson Bounded distribution, the uniform distribution and the gamma distribution. The distribution that best fits the respective residuals is then used and sampled from to adjust the demand in the ElecSim model. We then observe the differences in carbon emissions, and which types of power plants were both invested in and utilized, with each of the different statistical and machine learning methods. To the best of our knowledge, this is the most comprehensive evaluation of online learning techniques to the application of day-ahead load forecasting as well as assessing the impacts of the errors that these models produce on the long-term electricity market dynamics.
 
@@ -99,7 +78,7 @@ Using online and offline methods, we take the error distributions, or residuals,
 
 %- What are the key take-home messages
 
-We show that online learning has a significant impact on reducing the error for predicting electricity consumption a day ahead when compared to traditional offline learning techniques, such as multilayer perceptron artificial neural networks, linear regression, extra trees regression and support vector regression, which are models used in the literature \cite{Lu1993, Ahmad2017, Chen2004}. For a full list of algorithms used in this work see Table \ref{table:hyperparameter-tuning-offline}.
+We show that online learning has a significant impact on reducing the error for predicting electricity consumption a day ahead when compared to traditional offline learning techniques, such as multilayer artificial neural networks, linear regression, extra trees regression and support vector regression, which are models used in the literature \cite{Lu1993, Ahmad2017, Chen2004}. For a full list of algorithms used in this work see Table \ref{table:hyperparameter-tuning-offline}.
 
 We show that the forecasting algorithm has a non-negligible impact on carbon emissions and use of coal, onshore, photovoltaics, reciprocal gas engines and CCGT. Specifically, the amount of coal, photovoltaics, and reciprocal gas used from 2018 to 2035 was proportional to the median absolute error, while both onshore and offshore wind are inversely proportional to the median absolute error.
 
@@ -112,6 +91,7 @@ Total investments in coal, offshore and photovoltaics are proportional to the me
 The contributions of this work are:
 
 \begin{enumerate}
+	\item A methodology to forecast smart-meter using a \textit{k}-means clustering technique.
 	\item The evaluation of different online and offline learning models to forecast the electricity demand profile 24 hours ahead.
 	\item Evaluation of poor predictive ability on the long-term electricity market in the UK through the perturbation of demand in the ElecSim simulation.
 \end{enumerate}
@@ -119,9 +99,16 @@ The contributions of this work are:
 
 
 
-%- Outline of the rest of the work
 
-In Section \ref{sec:lit-review}, we review the literature, including other uses of online learning algorithms and an application to electricity markets. We introduce the dynamics of the ElecSim simulation as well as the methods used in Section \ref{sec:material}. We demonstrate the methodology undertaken in Section \ref{sec:methods}. In Section \ref{sec:results} we demonstrate our results, followed by a discussion in Section \ref{sec:discussion}. We conclude our work in Section \ref{sec:conclusion}.
+
+
+
+
+
+
+
+
+
 
 
 \section{Literature review}
