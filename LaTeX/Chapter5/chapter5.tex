@@ -14,31 +14,141 @@
 
 \section{Prologue}
 
-Test
+In this Chapter we use several different machine learning and statistical methods to predict electricity demand 30 minutes ahead and a day ahead. The 30 minutes ahead methodology is used in the work on day-ahead work. We utilise the errors from the day ahead predictions to see what the impact of such errors are on the day-ahead market. The work looks specifically at the difference in electricity mix with prediction error, as well as carbon emitted.
 
 \section{Introduction}
+\label{forecast:sec:introduction}
 
-Test
+
+
+
+The need for accurate load forecasting is essential for control and planning of electricity generation in electrical grids due to the fact that supply must meet demand \cite{Lu1993}. Short-term electricity demand forecasting has become increasingly important due to the introduction of competitive energy markets. Accurate estimates of demand are required so that the correct amount of electricity is purchased on the wholesale market \cite{Dillon1991}. Electricity is unique to other commodities in that it must be either consumed the moment that it is generated or stored. The difficulties in storing electricity arise from high installation and maintenance costs, inefficiencies and low capacity \cite{Poonpun2008}. It is therefore important to match demand to supply and thus regulate frequency. Failure to accurately forecast electricity demand can lead to financial loss and/or system-wide blackouts \cite{Hines2008}.
+
+
+The integration of higher proportions of intermittent renewable energy sources (IRES) in the electricity grid will mean that the forecasting of electricity demand will become increasingly important and challenging. Examples of IRES are solar panels and wind turbines, which fluctuate in terms of power output based on localized wind speed and solar irradiance. However, as supply must meet demand at all times and the fact that IRES are less predictable than dispatchable energy sources such as coal and combined-cycle gas turbines (CCGTs) this means extra attention must be made in predicting future demand if we wish to keep, or better reduce, the current frequency of blackouts \cite{Lu1993}. A dispatchable source is one that can be turned on and off by human control and therefore, able to adjust output just in time, at a moment convenient for the grid.
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%      Paper 1    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+The introduction of smart meters in many countries (USA, Europe, Canada and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. 800 million smart meters are projected to be installed worldwide by 2020 \cite{Telefonica2014}. Smart meters are digital devices that measure electricity consumption of individual households at regular intervals (intervals of an hour or less) and offer two-way communication between the meter and utility company. Smart meters aid customers to understand precisely how much electricity they consume at different time intervals, and enable dynamic pricing \cite{Abreu2012a}. Dynamic pricing allows utilities to charge varying prices at different times, for instance, charging a higher price when costly generation sources are used in times of peak demand, and lower prices at night time or weekends when demand is low \cite{Liu2016,Ito2013}. 
+
+This paper explores short term load-forecasting at an interval of 30 minutes ahead and clusters similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long-Short Term Memory neural networks (LSTM) \cite{lstm}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
+
+Random Forests are an ensemble based learning method for classification and regression, and are made up of many decision trees. LSTM networks are recurrent neural networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which are made up of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyze data used for regression analysis.
+
+To improve forecasting results, the clustering of smart meter data was evaluated. The technique used for this was \textit{k}-means clustering. An average 24-hour electricity load profile was calculated, and the result used for clustering. The clustered sub-system is then aggregated and separate models trained on this aggregate. The yearly, weekly and daily periodicity of electricity load is accounted for by input variables into the models. Once forecasts for each cluster are made using the individual models, the results are aggregated for the final predictions. These predictions are compared to the actual results and the accuracy measured using mean absolute percentage error (MAPE).
+
+This paper contributes a technique to forecasting smart-meter data through the use of clustering using \textit{k}-means and different learning algorithms. It provides researchers and utilities with methods to maximise forecasting accuracy through the selection of machine learning and clustering algorithms.
+
+This paper is structured as follows: in Section 2 we introduce the state of the art in load forecasting. The methods used in this paper are explored in Section 3. The experiments and their evaluation are discussed in Section 4. The results are discussed in Section 5. In Section 6 we conclude and consider future directions for this work.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%      Paper 2    %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand, that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants, not all dispatchable plants are peaker plants. For example coal, which is a dispatchable plant, is run as a base load plant, due to its inability to deal with the fluctuating conditions required of a peaker plant.
+
+To reduce reliance on peaker plants, it is helpful to know how much electricity demand there will be in the future so that more efficient plants can be used to meet this expected demand. This is so that these more efficient plants can be brought up to speed at a time suitable to match the demand. Forecasting a day into the future is especially useful in decentralized electricity markets which have day-ahead markets. Decentralized electricity markets are ones where electricity is provided by multiple generation companies, as opposed to a centralized source, such as a government. To aid in this prediction, machine learning and statistical techniques have been used to accurately predict demand based on several different factors and data sources \cite{Kell2018a}, such as weather \cite{Hong2014}, day of the week \cite{Al-Musaylh2018} and holidays \cite{Vrablecova2017}. 
+
+%- Why the current approaches / systems don't solve the problem
+
+
+%While various studies have looked at how to predict electricity demand at various time horizons with the highest accuracy \cite{Singh2012,Huang2003,Andersen2013}, the impact that poor forecasting accuracy has on investments and dispatch of electricity technology in electricity markets has been studied to a lesser degree.
+
+Various studies have looked at predicting electricity demand at various horizons \cite{Singh2012,Huang2003,Andersen2013}. However, the impact of poor demand predictions on the long-term electricity mix has been studied to a lesser degree.
+
+In this paper, we compare several machine learning and statistical techniques to predict the energy demand for each hour over the next 24-hour horizon. We chose to predict over the next 24 hours to simulate a day-ahead market, which is often seen in decentralized electricity markets. However, our approach could be utilized for differing time horizons. In addition to this, we use our long-term agent-based model, ElecSim \cite{Kell, Kell2020}, to simulate the impact of different forecasting methods on long-term investments, power plant usage and carbon emissions for the years 2018 through 2035 in the United Kingdom. Our approach, however, is generalizable to any country through parametrization of the ElecSim model.
+
+
+%- What is the innovation in this work
+
+%We compare the impact of 11 offline learning algorithms and five online learning algorithms to predict the electricity demand profile over the next 24 hours.
+
+As part of our work, we utilize online learning methods to improve the accuracy of our predictions. Online learning methods can learn from novel data while maintaining what was learnt from previous data. Online learning is useful for non-stationary datasets, and time-series data where recalculation of a model would take a prohibitive amount of time. Offline learning methods, however, must be retrained every time new data is added. Online approaches are constantly updated and do not require significant pauses while the offline training is being re-run. % By training on data that has already been used for training, the computational load and time required increases.
+
+We trial different algorithms and train different models for different times of the year. Specifically, we train different models for the different seasons. We also split weekdays and train both weekends and holidays together. This is due to the fact that holidays and weekend exhibit similar load profiles due to the reduction in industry electricity use and an increase in domestic. This enables a model to become good at a specific subset of the data which share similar patterns, as opposed to having to generalize to all of the data. Examples of the algorithms used are linear regression, lasso regression, random forests, support vector regression, multilayer perceptron neural network, box-cox transformation linear regression and the passive aggressive model. 
+
+We expect a-priori that online algorithms will outperform the offline approach. This is due to the fact that the demand time-series is non-stationary, and thus changes sufficiently over time. In terms of the models, we presume that the machine learning algorithms, such as neural networks, support vector regression and random forests will outperform the statistical methods such as linear regression, lasso regression and box-cox transformation regression. We expect this due to the fact that machine learning has been shown to be able to learn more complex feature representations than statistical methods \cite{Singh2012}. In addition, our previous work has shown that the random forest was able to outperform neural networks, support vector regression and long short term memory neural networks (LSTM) \cite{Kell2018}. 
+
+However, it should be noted, that such a-priori intuiton, is no substitute for analytical evidence and can (and has) been shown to be wrong in the past, due to imperfect knowledge of the data and understanding of some of the black box models, such as neural networks.
+
+%- A short description of the solution
+
+
+Using online and offline methods, we take the error distributions, or residuals, and fit a variety of distributions to these residuals. We choose the distribution with the lowest sum of squared estimate of errors (SSE). SSE was chosen as the metric to ensure that both positive and negative errors were treated equally, as well as ensuring that large errors were penalized more than smaller errors. We fit over 80 different distributions, which include the Johnson Bounded distribution, the uniform distribution and the gamma distribution. The distribution that best fits the respective residuals is then used and sampled from to adjust the demand in the ElecSim model. We then observe the differences in carbon emissions, and which types of power plants were both invested in and utilized, with each of the different statistical and machine learning methods. To the best of our knowledge, this is the most comprehensive evaluation of online learning techniques to the application of day-ahead load forecasting as well as assessing the impacts of the errors that these models produce on the long-term electricity market dynamics.
+
+
+
+
+%- What are the key take-home messages
+
+We show that online learning has a significant impact on reducing the error for predicting electricity consumption a day ahead when compared to traditional offline learning techniques, such as multilayer perceptron artificial neural networks, linear regression, extra trees regression and support vector regression, which are models used in the literature \cite{Lu1993, Ahmad2017, Chen2004}. For a full list of algorithms used in this work see Table \ref{table:hyperparameter-tuning-offline}.
+
+We show that the forecasting algorithm has a non-negligible impact on carbon emissions and use of coal, onshore, photovoltaics, reciprocal gas engines and CCGT. Specifically, the amount of coal, photovoltaics, and reciprocal gas used from 2018 to 2035 was proportional to the median absolute error, while both onshore and offshore wind are inversely proportional to the median absolute error.
+
+Total investments in coal, offshore and photovoltaics are proportional to the median absolute error, while investments in CCGT, onshore and reciprocal gas engines are inversely proportional.
+
+
+% Contributions of this work
+
+
+The contributions of this work are:
+
+\begin{enumerate}
+	\item The evaluation of different online and offline learning models to forecast the electricity demand profile 24 hours ahead.
+	\item Evaluation of poor predictive ability on the long-term electricity market in the UK through the perturbation of demand in the ElecSim simulation.
+\end{enumerate}
+
+
+
+
+%- Outline of the rest of the work
+
+In Section \ref{sec:lit-review}, we review the literature, including other uses of online learning algorithms and an application to electricity markets. We introduce the dynamics of the ElecSim simulation as well as the methods used in Section \ref{sec:material}. We demonstrate the methodology undertaken in Section \ref{sec:methods}. In Section \ref{sec:results} we demonstrate our results, followed by a discussion in Section \ref{sec:discussion}. We conclude our work in Section \ref{sec:conclusion}.
+
 
 \section{Literature review}
+\label{forecast:sec:litreview}
 
-Test
+
+
+\section{Methodology}
+\label{forecast:sec:methodology}
+
 
 \section{Short-term demand forecasting}
+\label{forecast:sec:shortterm}
 
-Test
 
 \section{Day-ahead forecasting}
+\label{forecast:sec:longterm}
 
-Test
 
 \section{Scenario impact}
+\label{forecast:sec:scenario}
 
-Test
 
 \section{Conclusion}
+\label{forecast:sec:conclusion}
 
-Test
+
 
 
 
@@ -53,23 +163,15 @@ Test
 
 \section{Full paper}
 
+\begin{abstract}
+	
+	Short term load forecasting is utilised in real-time scheduling of electricity as well as load-frequency control. This paper aims to improve the accuracy of load-forecasting by using different machine learning techniques to predict 30 minutes ahead using smart meter data. We utilised a \textit{k}-means clustering algorithm to cluster similar individual consumers and fit distinct models for each cluster. Public holidays were taken into consideration to account for changing customer behaviour on these days. We implemented random forests, neural networks, long short-term memory neural networks and support vector regression models and compared their accuracy using mean absolute percentage error (MAPE). The model with the highest accuracy was a random forest, and we found that clustering similar consumers and aggregating their predictions outperformed a single model in each case.
+\end{abstract}
+
 \section{Introduction}
 
-The energy markets have undergone significant changes in recent years. The liberalisation of the energy industry, technological advancements and policy changes have had a number of effects \cite{Viegas2016} including, a rise in both competition \cite{sioshansi_2009}, and quantity of data collected \cite{Clastres2011}, as well as a requirement to integrate large amounts of intermittent renewable resources \cite{Haben2013a,Kamgarpour2013,Curves2014}.
+%The energy markets have undergone significant changes in recent years. The liberalisation of the energy industry, technological advancements and policy changes have had a number of effects \cite{Viegas2016} including, a rise in both competition \cite{sioshansi_2009}, and quantity of data collected \cite{Clastres2011}, as well as a requirement to integrate large amounts of intermittent renewable resources \cite{Haben2013a,Kamgarpour2013,Curves2014}.
 
-The need for accurate load forecasting is essential for control and planning of electricity generation in electrical grids due to the fact that supply must meet demand \cite{Lu1993}. Short-term electricity demand forecasting has become increasingly important due to the introduction of competitive energy markets. Accurate estimates of demand are required so that the correct amount of electricity is purchased on the wholesale market \cite{Dillon1991}. Electricity is unique to other commodities in that it must be either consumed the moment that it is generated or stored. The difficulties in storing electricity arise from high installation and maintenance costs, inefficiencies and low capacity \cite{Poonpun2008}. It is therefore important to match demand to supply and thus regulate frequency. Failure to accurately forecast electricity demand can lead to financial loss and/or system-wide blackouts \cite{Hines2008}.
-
-The introduction of smart meters in many countries (USA, Europe, Canada and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. 800 million smart meters are projected to be installed worldwide by 2020 \cite{Telefonica2014}. Smart meters are digital devices that measure electricity consumption of individual households at regular intervals (intervals of an hour or less) and offer two-way communication between the meter and utility company. Smart meters aid customers to understand precisely how much electricity they consume at different time intervals, and enable dynamic pricing \cite{Abreu2012a}. Dynamic pricing allows utilities to charge varying prices at different times, for instance, charging a higher price when costly generation sources are used in times of peak demand, and lower prices at night time or weekends when demand is low \cite{Liu2016,Ito2013}. 
-
-This paper explores short term load-forecasting at an interval of 30 minutes ahead and clusters similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long-Short Term Memory neural networks (LSTM) \cite{lstm}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
-
-Random Forests are an ensemble based learning method for classification and regression, and are made up of many decision trees. LSTM networks are recurrent neural networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which are made up of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyze data used for regression analysis.
-
-To improve forecasting results, the clustering of smart meter data was evaluated. The technique used for this was \textit{k}-means clustering. An average 24-hour electricity load profile was calculated, and the result used for clustering. The clustered sub-system is then aggregated and separate models trained on this aggregate. The yearly, weekly and daily periodicity of electricity load is accounted for by input variables into the models. Once forecasts for each cluster are made using the individual models, the results are aggregated for the final predictions. These predictions are compared to the actual results and the accuracy measured using mean absolute percentage error (MAPE).
-
-This paper contributes a technique to forecasting smart-meter data through the use of clustering using \textit{k}-means and different learning algorithms. It provides researchers and utilities with methods to maximise forecasting accuracy through the selection of machine learning and clustering algorithms.
-
-This paper is structured as follows: in Section 2 we introduce the state of the art in load forecasting. The methods used in this paper are explored in Section 3. The experiments and their evaluation are discussed in Section 4. The results are discussed in Section 5. In Section 6 we conclude and consider future directions for this work.
 
 \section{Related Work}
 
@@ -481,198 +583,198 @@ To utilize more of the data and increase the number of models trained these resu
 
 
 
-\section{Note paper}
-
-\section{Introduction}
-
-The energy markets have undergone significant changes in recent years. The liberalisation of the energy industry, technological advancements and policy changes have had numerous effects \cite{Viegas2016}. These include a rise in both competition and data \cite{sioshansi_2009, Clastres2011}. %, as well as a requirement to integrate large amounts of intermittent renewable resources \cite{Haben2013a,Kamgarpour2013,Curves2014}.
-
-Accurate load forecasting is essential for control and planning of electricity generation in electrical grids as supply must meet demand \cite{Lu1993}. Accurate estimates of demand are required so that the correct amount of electricity is purchased on the wholesale market \cite{Dillon1991}. Failure to accurately forecast electricity demand can lead to financial loss or system-wide blackouts \cite{Hines2008}.
-
-The introduction of smart meters in many countries (USA, Europe and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. 800 million smart meters are projected to be installed worldwide by 2020 \cite{Telefonica2014}. 
-
-This paper explores short-term load-forecasting at an interval of 30 minutes ahead and clusters similar users based on their electricity consumption. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long Short-Term Memory Neural Networks (LSTM) \cite{lstm}, Artificial Neural Networks \cite{book:984557} (ANN) and Support Vector Regression (SVR) \cite{Drucker1997}. 
-
-Random Forests are an ensemble-based learning method for classification and regression, and are made up of many decision trees. LSTMs are recurrent Neural Networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which consist of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyse data for regression analysis.
-
-To improve forecasting results, \textit{k}-means clustering of smart meter data was evaluated. An average 24-hour electricity load profile per customer was calculated, and the result used for clustering. The clustered sub-system is then aggregated and separate models trained on these aggregates. The yearly, weekly and daily periodicity of electricity load is accounted for by feature vectors. Once forecasts for each cluster are made using the individual models, the results are aggregated for the final predictions. These predictions are compared to the actual results and the accuracy measured using mean absolute percentage error (MAPE) and mean absolute scaled error (MASE).
-
-This paper provides researchers and utilities with methods to maximise forecasting accuracy through the selection of machine learning and clustering algorithms.
-
-This paper is structured as follows. In Section 2 we explore related work of load forecasting. The experiments and their evaluation are discussed in Section 3. The results are discussed in Section 4. In Section 5 we conclude and consider future directions for this work.
-
-\section{Related Work}
-
-The forecasting of aggregated and clustered electricity demand has been the focus of a considerable amount of research in recent years. The research can generally be classified into two classes, Artificial Intelligence (AI) techniques \cite{Kim2000, Tiong2008,Quilumba2014} and classical time series approaches \cite{Nazarko2005ARIMAApproach,Huang2003,Nguyen2017}. For the purposes of our paper we have reviewed artificial intelligence techniques. Please refer to appendix \ref{appendix:time_series} to explore the literature related to classical time series approaches.
-
-Singh \textit{et al.} produced a review of load forecasting techniques and methodologies and reported that hybrid methods, which combine two or more different techniques, are gaining traction, as well as soft computing approaches (AI) such as genetic algorithms \cite{Singh2012}.
-
-\subsection{Artificial Intelligence Techniques}
-
-Dillon \textit{et al.} presented a Neural Network for short-term load forecasting. Their Neural Network consisted of three-layers and used adaptive learning for training \cite{Dillon1991}. They proposed the use of weather information to augment their electricity load data. They found better results with the Adaptive Neural Network than with a linear model, or Non-Adaptive Neural Network. In contrast to Dillon our paper focuses on a Non-Adaptive Neural Network and does not take into account weather information.
-
-Chen \textit{et al.} used an Artificial Neural Network to predict electricity demand of three substations in Taiwan. They integrated temperature data into the model, and showed a higher degree of accuracy when forecasting demand in residential and commercial substations as opposed to industrial. This was due to the ability to model the high usage of air-conditioners in residential and commercial substations using temperature data \cite{Chen1996}. In contrast to the work by Chen \textit{et al.}, we focus on client-side prediction using smart meter data. We were, therefore, able to cluster the data based on load profile, as opposed to grouping based on geographical location.
-
-
-\subsection{Clustering}
-
-Multiple techniques have been proposed for the clustering of electricity load data prior to forecasting. Shu \textit{et al.} and Nagi \textit{et al.} propose a hybrid approach in which self-organizing maps are used to cluster the data, and Support Vector Regression is used for prediction \cite{Shu2006, Tiong2008}. This technique proved robust for different data types. Shu showed that this hybrid approach out-performed a single SVR technique, whilst Nagi showed superior results to a traditional ANN system. In contrast to both Nagi \textit{et al.} and Shu \textit{et al.} our paper utilises \textit{k}-means as the clustering algorithm.
-
-Wijaya \textit{et al.} demonstrated that implementing  a certain number of clusters improved load-forecasting accuracy \cite{Wijaya2010}. However, a study by Ili\'c \textit{et al.}, showed that increasing the number of clusters did not improve accuracy \cite{Ilic2013}.
-
-\section{Methodology}
-
-The work in this paper was run on a MacBook Pro with a quad-core 3.1GHz Intel Core i7 processor with 16 GB 1867 MHz DDR3 of RAM and a 500GB solid state drive (SSD).
-
-\subsection{Data Collection}
-
-Smart meter data obtained from the Irish Social Science Data Archive (ISSDA) was used in this study \cite{cer_2012}. The Commission for Energy Regulation released a public dataset of anonymised smart meter data from the "\textit{Electricity Smart Metering Customer Behaviour Trials}" \cite{setis}. This dataset is made up of over 5000 Irish homes and businesses and is sampled at 30-minute intervals.
-
-The data was recorded between the 14th July 2009 and 31st December 2010. For the purposes of cross-validation this data was split into a training, validation, and testing set. The training set consisted of the first 9 months of data and used to train the models, the validation set consisted of the following 2 months of data and used to tune the hyperparameters, and the test set included the remaining 6 months and used for measuring error. These splits were chosen to balance the training data with the test data and give the models a chance to learn the periodicity inherent in a one year period. Due to the long training times for these algorithms, we worked with a sample of 709 individual Irish homes. However, due to the infrequent requirement to train these models, we believe our technique would be suited for the real life application.
-
-Figure \ref{fig:similar_customers} displays four residential customer daily load profiles. It can be seen that whilst Customer 1 and Customer 2 have similar load profiles, Customer 3 and Customer 4 have significantly different load profiles.  This demonstrates that, whilst electricity consumption changes per-person, it is possible to cluster similar customers by their load profiles.
-\begin{figure}[b]
-	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/Webp_net-resizeimage.png}
-	\caption{Figure showing daily load profiles for four different customers on the 22nd July 2009.}
-	\label{fig:similar_customers}
-\end{figure}
-\subsection{Clustering}
-
-We propose that clustering similar customer load profiles and aggregating each cluster's electricity consumption improves the accuracy of the models. This is due to the fact that aggregated clustered loads decrease the stochasticity of the demand of the system, and therefore increase the predictive ability of the models.
-
-The Euclidean distance and wavelet metrics were evaluated using hierarchical clustering~\cite{BIMJ:BIMJ4710240520}. However, \textit{k}-means demonstrated to be the most robust and best-performing algorithm, and thus was chosen for use in this paper \cite{Forgy65}.
-
-To cluster the data, each user's nine month electricity consumption in the training set was reduced to a single averaged 24 hour load profile (48 data points per customer). This was achieved by taking the average electricity consumed for each half hourly point of the day (eg. taking the mean of every 12-12:30pm point in the training set). We did not take into account the difference between weekend and weekdays for clustering. The data was then scaled so that different sized households, but with similar usage profiles were clustered together.
-
-To select the optimum number of clusters (\textit{k}) the test set was used for cross-validation. This allowed us to compare the results of each of the models and select \textit{k} with the highest accuracy exhibited by mean absolute percentage error (MAPE) and mean absolute scaled error (MASE). In this paper \textit{k} was varied between 1 and 7, which was chosen due to the fact that the error did not vary greatly past seven clusters. Multiple models were fit per cluster and used to predict the testing data.
-
-To overcome local minima the \textit{k}-means algorithm was run 1000 times and the most accurate partition chosen \cite{Jain2010}.
-
-\subsection{Aggregating Demand}
-
-Once each customer is assigned to their respective cluster, the total electricity consumed by each cluster is calculated. This is achieved by summing the electricity consumed at every time interval per cluster. This creates a partial system load. A model is trained on each of the different partial system loads, and the resultant forecasts are aggregated to generate the total load forecast. This forecast is then evaluated by calculating the MAPE and MASE for each model. 
-
-\subsection{Feature Selection}
-
-\subsubsection{Calendar Attributes}
-
-Due to the daily, weekly and annual periodicity of the electricity consumption, daily calendar attributes were deemed important to accurately model the problem. The calendar attributes included are: hour of the day, day of the month, day of the week, month, and public holidays.
-
-Public holidays were used as features for the model due to the change in electricity consumption exhibited on these days.
-
-We evaluate the increase in performance due to the modelling of calendar attributes in the results section.
-
-\subsubsection{Time Series Data}
-
-The time-series element was modelled using lagged data inputs. This was achieved using the previous 3 hours, the equivalent 3 hours from the previous day, and the equivalent 3 hours from the previous week.
-
-Long Short-Term Memory neural networks remember values over arbitrary time intervals. And thus can remember short-term memory over a long period of time, for this reason, 5 lagged inputs of the previous two and a half hours were used as features to the Long Short-Term Memory network.
-
-\subsubsection{Data Representation}
-
-Numerical representations were used for the lagged data input. A single binary was used for public holidays. One hot encoding is a method which allows categorical variables to be distinguished from ordinal data. One hot encoding was used to encode day of the week and month of the year. Table \ref{appendix:feature} displays the input data for SVR, Neural Network and Random Forest. 
-
-
-
-\begin{table}
-	\label{appendix:feature}
-	\begin{tabular}{p{1cm}p{3cm}p{8cm}}
-		\toprule
-		Input & Variable      & Detail description \\
-		\midrule
-		1     & Hour          & Single numeric input representing hour of the day                                                                                              \\
-		2     & Day of month  & Single numeric input representing day of the month                                                                                             \\
-		3-9   & Day of week   & Seven binary digits representing calendar information regarding day of the week                                                                                            \\
-		10-21 & Month         & Twelve binary digits representing calendar information regarding month                                                                                         \\
-		22-42 & Lagged inputs & Twenty one numeric inputs representing lagged inputs of previous 3 hours, previous 3 hours of previous day including hour to be predicted, and previous 3 hours of previous week including hour to be predicted \\
-		43    & Holiday       & Single binary digit representing whether the day was a public holiday  \\     \bottomrule                                                           
-	\end{tabular}
-	\caption{List of Input Data for Models}
-\end{table}
-
-\subsection{Experiments}
-
-This section explores the experiments made to design the models. Cross-validation was used on the validation set of each of the models to tune the hyperparameters. Each of the models were then created five times per cluster to explore the variance of the results.
-
-\subsubsection{Support Vector Regression}
-
-The validation set was used to tune the hyperparameters and select the kernel of the SVR model.
-
-The kernels compared were polynomial, radial basis function (RBF) and the linear kernel \cite{Chang2010, theodoridis2009pattern}. They were chosen due to their popularity, support and speed of computation.
-
-The parameter values are shown in Table \ref{tab:kernel}. The linear kernel produced the best results, and therefore chosen as the final model.
-\begin{table}
-\centering
-	\label{tab:kernel}
-	\begin{tabular}{ccl}
-		\toprule
-		Kernel Type& Kernel Parameters & RMSE\\
-		\midrule
-		Linear & No values & 0.02102779\\
-		RBF & C=2, $\gamma=0.016$ & 0.02444950\\
-		Polynomial & C=2, $d=2, r=2$ & 0.03145719 \\
-		\bottomrule
-	\end{tabular}
-\caption{Prediction Accuracy Based on Type of Kernel}
-\end{table}
-\subsubsection{Random Forest}
-The number of variables sampled as candidates at each split was tuned using the validation set.
-
-The optimum number for this was 23. It is proposed that the value 23 was found to be optimum due to the 21 lagged inputs, which are crucial to learn the underlying nature of the time series.
-
-
-\subsubsection{Artificial Neural Network}
-
-The first step when creating an Artificial Neural Network is to design the architecture. In our case, the number of input neurons is set to 43 (see Table \ref{appendix:feature}). Only one output neuron is required, due to the fact that we are only forecasting one step (30 minutes) ahead.
-
-To design the number of hidden layers the Levenberg-Marquardt technique was used. An optimal architecture with three hidden layers was obtained. The first layer contained two neurons, the second contained five, and the third contained four.
-
-\subsubsection{LSTM}
-
-The Levenberg-Marquardt techniques was once again used to select number of layers and number of memory units. Using this technique, the optimum number of layers was found to be 2 with 50 memory units each.
-
-\section{Results}
-\begin{figure}
-	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
-	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
-	\label{fig:results}
-\end{figure}
-To determine the optimal number of clusters a range of values for $k$ were explored, thus, $k$ was varied between one and seven. 28 forecasting models were therefore constructed per type of model. The models were fit five times to explore the variation in the output. The model accuracy was evaluated using both MAPE and MASE.
-
-The results are shown in figure \ref{fig:results}. These show that clustering similar users improves accuracy. The optimum value for \textit{k} for every model was shown to be four. After this, the accuracy diminishes slightly. The error bars shown in Figure \ref{fig:results} display a slight variance in MAPE for \acrshort{svr}s, ANNs and Random Forests. However, the MAPE of the LSTMs seem to vary by up to 11\%. 
-
-The MASE metric also demonstrated that four clusters were optimal for SVR, Neural Networks and Random Forests.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/actual_vs_predicted_enlarged.png}
-	\caption{Real electricity consumption versus predicted electricity consumption between June 16th and June 18th 2010.}
-	\label{fig:act_vs_pred}
-\end{figure}
-
-The impact of using calendar attributes improves prediction accuracy by 6\% for neural networks, 4\% for Random Forests and 1\% for SVR. For these results please see figure \ref{appendix:calendar_attr} in appendix \ref{appendix:results}.
-
-It is proposed that the optimum value for \textit{k} cluster centres was four due to the distinct patterns observed in each of the clusters. At $k=5$ one of the distinct clusters is split, and leads to an increase in stochasticity. At $k=3$ the stochasticity is also increased by the aggregation of load profiles which are dissimilar. % To see a breakdown of the average clusters please refer to figure \ref{appendix:clustercentre} in appendix \ref{appendix:results}.
-
-However, the optimum number of clusters will vary for different datasets. Differing geographies may display varying usage characteristics due to culture, weather or social norms.
-
-The results demonstrate that SVR, Random Forests and the ANN have similar accuracy, and adequately predict electricity consumption. The LSTM shows a similar pattern in increasing accuracy with number of clusters, but performs worse than the other models. The Random Forest seems to outperform each of the other models. This may be due to the internal operation of the Random Forest which undertakes its own cross-validation using out-of-bag samples. 
-
-Figure \ref{fig:act_vs_pred} displays actual electricity consumption versus predicted results. It shows that the LSTM model predicts a similar value in the next time step as the previous time step, which would explain its inferior results to the other models.  
-
-The training times were tested by timing how long the models took to fit for four clusters. The Support Vector Regression took less time than all of the other methods, whereas the LSTM took the longest. The Support Vector Regression model required 3 minutes and 18 seconds to run. The Random Forest required 14 minutes and 58 seconds. The Artificial Neural Network required 17 minutes and 48 seconds, whilst the LSTM took 21 minutes 11 seconds to run.
-
-The time to make a single prediction was recorded at sub microseconds and therefore deemed negligible for our use-case.
-
-\section{Conclusion}
-
-The availability of data produced by smart meters enables network operators to gain greater insights into their customer behaviour and electricity usage. We demonstrated that implementing the \textit{k}-means clustering algorithm to group similar customers improved the accuracy of the models tested. Distinct models were trained for each cluster and the individual forecasts aggregated for the total aggregated forecast. It was found that Random Forests outperformed all other models at each level of clustering. The optimum number of clusters was found to be four. Whilst the dataset used focused on residential data it is expected that applying a similar clustering technique on commercial properties would have a similar effect.
-
-It is considered that monthly retraining of the models would be required to ensure continued accuracy. However, this is not expected to be a problem due to the short time time required for model training. Once trained, the prediction times are negligible.
-
-In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as self-organizing maps (SOM) to obtain better accuracy results. We will also compare a greater variety of forecasting metrics.
-
-% To utilize more of the data and increase the number of models trained these results could be run in parallel in future.
+%\section{Note paper}
+%
+%\section{Introduction}
+%
+%The energy markets have undergone significant changes in recent years. The liberalisation of the energy industry, technological advancements and policy changes have had numerous effects \cite{Viegas2016}. These include a rise in both competition and data \cite{sioshansi_2009, Clastres2011}. %, as well as a requirement to integrate large amounts of intermittent renewable resources \cite{Haben2013a,Kamgarpour2013,Curves2014}.
+%
+%Accurate load forecasting is essential for control and planning of electricity generation in electrical grids as supply must meet demand \cite{Lu1993}. Accurate estimates of demand are required so that the correct amount of electricity is purchased on the wholesale market \cite{Dillon1991}. Failure to accurately forecast electricity demand can lead to financial loss or system-wide blackouts \cite{Hines2008}.
+%
+%The introduction of smart meters in many countries (USA, Europe and South Korea) has led to an influx of high granularity electricity consumption data that can be used for load forecasting \cite{Depuru2011a}. 800 million smart meters are projected to be installed worldwide by 2020 \cite{Telefonica2014}. 
+%
+%This paper explores short-term load-forecasting at an interval of 30 minutes ahead and clusters similar users based on their electricity consumption. A variety of different forecasting techniques were evaluated such as Random Forests \cite{TinKamHo}, Long Short-Term Memory Neural Networks (LSTM) \cite{lstm}, Artificial Neural Networks \cite{book:984557} (ANN) and Support Vector Regression (SVR) \cite{Drucker1997}. 
+%
+%Random Forests are an ensemble-based learning method for classification and regression, and are made up of many decision trees. LSTMs are recurrent Neural Networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which consist of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyse data for regression analysis.
+%
+%To improve forecasting results, \textit{k}-means clustering of smart meter data was evaluated. An average 24-hour electricity load profile per customer was calculated, and the result used for clustering. The clustered sub-system is then aggregated and separate models trained on these aggregates. The yearly, weekly and daily periodicity of electricity load is accounted for by feature vectors. Once forecasts for each cluster are made using the individual models, the results are aggregated for the final predictions. These predictions are compared to the actual results and the accuracy measured using mean absolute percentage error (MAPE) and mean absolute scaled error (MASE).
+%
+%This paper provides researchers and utilities with methods to maximise forecasting accuracy through the selection of machine learning and clustering algorithms.
+%
+%This paper is structured as follows. In Section 2 we explore related work of load forecasting. The experiments and their evaluation are discussed in Section 3. The results are discussed in Section 4. In Section 5 we conclude and consider future directions for this work.
+%
+%\section{Related Work}
+%
+%The forecasting of aggregated and clustered electricity demand has been the focus of a considerable amount of research in recent years. The research can generally be classified into two classes, Artificial Intelligence (AI) techniques \cite{Kim2000, Tiong2008,Quilumba2014} and classical time series approaches \cite{Nazarko2005ARIMAApproach,Huang2003,Nguyen2017}. For the purposes of our paper we have reviewed artificial intelligence techniques. Please refer to appendix \ref{appendix:time_series} to explore the literature related to classical time series approaches.
+%
+%Singh \textit{et al.} produced a review of load forecasting techniques and methodologies and reported that hybrid methods, which combine two or more different techniques, are gaining traction, as well as soft computing approaches (AI) such as genetic algorithms \cite{Singh2012}.
+%
+%\subsection{Artificial Intelligence Techniques}
+%
+%Dillon \textit{et al.} presented a Neural Network for short-term load forecasting. Their Neural Network consisted of three-layers and used adaptive learning for training \cite{Dillon1991}. They proposed the use of weather information to augment their electricity load data. They found better results with the Adaptive Neural Network than with a linear model, or Non-Adaptive Neural Network. In contrast to Dillon our paper focuses on a Non-Adaptive Neural Network and does not take into account weather information.
+%
+%Chen \textit{et al.} used an Artificial Neural Network to predict electricity demand of three substations in Taiwan. They integrated temperature data into the model, and showed a higher degree of accuracy when forecasting demand in residential and commercial substations as opposed to industrial. This was due to the ability to model the high usage of air-conditioners in residential and commercial substations using temperature data \cite{Chen1996}. In contrast to the work by Chen \textit{et al.}, we focus on client-side prediction using smart meter data. We were, therefore, able to cluster the data based on load profile, as opposed to grouping based on geographical location.
+%
+%
+%\subsection{Clustering}
+%
+%Multiple techniques have been proposed for the clustering of electricity load data prior to forecasting. Shu \textit{et al.} and Nagi \textit{et al.} propose a hybrid approach in which self-organizing maps are used to cluster the data, and Support Vector Regression is used for prediction \cite{Shu2006, Tiong2008}. This technique proved robust for different data types. Shu showed that this hybrid approach out-performed a single SVR technique, whilst Nagi showed superior results to a traditional ANN system. In contrast to both Nagi \textit{et al.} and Shu \textit{et al.} our paper utilises \textit{k}-means as the clustering algorithm.
+%
+%Wijaya \textit{et al.} demonstrated that implementing  a certain number of clusters improved load-forecasting accuracy \cite{Wijaya2010}. However, a study by Ili\'c \textit{et al.}, showed that increasing the number of clusters did not improve accuracy \cite{Ilic2013}.
+%
+%\section{Methodology}
+%
+%The work in this paper was run on a MacBook Pro with a quad-core 3.1GHz Intel Core i7 processor with 16 GB 1867 MHz DDR3 of RAM and a 500GB solid state drive (SSD).
+%
+%\subsection{Data Collection}
+%
+%Smart meter data obtained from the Irish Social Science Data Archive (ISSDA) was used in this study \cite{cer_2012}. The Commission for Energy Regulation released a public dataset of anonymised smart meter data from the "\textit{Electricity Smart Metering Customer Behaviour Trials}" \cite{setis}. This dataset is made up of over 5000 Irish homes and businesses and is sampled at 30-minute intervals.
+%
+%The data was recorded between the 14th July 2009 and 31st December 2010. For the purposes of cross-validation this data was split into a training, validation, and testing set. The training set consisted of the first 9 months of data and used to train the models, the validation set consisted of the following 2 months of data and used to tune the hyperparameters, and the test set included the remaining 6 months and used for measuring error. These splits were chosen to balance the training data with the test data and give the models a chance to learn the periodicity inherent in a one year period. Due to the long training times for these algorithms, we worked with a sample of 709 individual Irish homes. However, due to the infrequent requirement to train these models, we believe our technique would be suited for the real life application.
+%
+%Figure \ref{fig:similar_customers} displays four residential customer daily load profiles. It can be seen that whilst Customer 1 and Customer 2 have similar load profiles, Customer 3 and Customer 4 have significantly different load profiles.  This demonstrates that, whilst electricity consumption changes per-person, it is possible to cluster similar customers by their load profiles.
+%\begin{figure}[b]
+%	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/Webp_net-resizeimage.png}
+%	\caption{Figure showing daily load profiles for four different customers on the 22nd July 2009.}
+%	\label{fig:similar_customers}
+%\end{figure}
+%\subsection{Clustering}
+%
+%We propose that clustering similar customer load profiles and aggregating each cluster's electricity consumption improves the accuracy of the models. This is due to the fact that aggregated clustered loads decrease the stochasticity of the demand of the system, and therefore increase the predictive ability of the models.
+%
+%The Euclidean distance and wavelet metrics were evaluated using hierarchical clustering~\cite{BIMJ:BIMJ4710240520}. However, \textit{k}-means demonstrated to be the most robust and best-performing algorithm, and thus was chosen for use in this paper \cite{Forgy65}.
+%
+%To cluster the data, each user's nine month electricity consumption in the training set was reduced to a single averaged 24 hour load profile (48 data points per customer). This was achieved by taking the average electricity consumed for each half hourly point of the day (eg. taking the mean of every 12-12:30pm point in the training set). We did not take into account the difference between weekend and weekdays for clustering. The data was then scaled so that different sized households, but with similar usage profiles were clustered together.
+%
+%To select the optimum number of clusters (\textit{k}) the test set was used for cross-validation. This allowed us to compare the results of each of the models and select \textit{k} with the highest accuracy exhibited by mean absolute percentage error (MAPE) and mean absolute scaled error (MASE). In this paper \textit{k} was varied between 1 and 7, which was chosen due to the fact that the error did not vary greatly past seven clusters. Multiple models were fit per cluster and used to predict the testing data.
+%
+%To overcome local minima the \textit{k}-means algorithm was run 1000 times and the most accurate partition chosen \cite{Jain2010}.
+%
+%\subsection{Aggregating Demand}
+%
+%Once each customer is assigned to their respective cluster, the total electricity consumed by each cluster is calculated. This is achieved by summing the electricity consumed at every time interval per cluster. This creates a partial system load. A model is trained on each of the different partial system loads, and the resultant forecasts are aggregated to generate the total load forecast. This forecast is then evaluated by calculating the MAPE and MASE for each model. 
+%
+%\subsection{Feature Selection}
+%
+%\subsubsection{Calendar Attributes}
+%
+%Due to the daily, weekly and annual periodicity of the electricity consumption, daily calendar attributes were deemed important to accurately model the problem. The calendar attributes included are: hour of the day, day of the month, day of the week, month, and public holidays.
+%
+%Public holidays were used as features for the model due to the change in electricity consumption exhibited on these days.
+%
+%We evaluate the increase in performance due to the modelling of calendar attributes in the results section.
+%
+%\subsubsection{Time Series Data}
+%
+%The time-series element was modelled using lagged data inputs. This was achieved using the previous 3 hours, the equivalent 3 hours from the previous day, and the equivalent 3 hours from the previous week.
+%
+%Long Short-Term Memory neural networks remember values over arbitrary time intervals. And thus can remember short-term memory over a long period of time, for this reason, 5 lagged inputs of the previous two and a half hours were used as features to the Long Short-Term Memory network.
+%
+%\subsubsection{Data Representation}
+%
+%Numerical representations were used for the lagged data input. A single binary was used for public holidays. One hot encoding is a method which allows categorical variables to be distinguished from ordinal data. One hot encoding was used to encode day of the week and month of the year. Table \ref{appendix:feature} displays the input data for SVR, Neural Network and Random Forest. 
+%
+%
+%
+%\begin{table}
+%	\label{appendix:feature}
+%	\begin{tabular}{p{1cm}p{3cm}p{8cm}}
+%		\toprule
+%		Input & Variable      & Detail description \\
+%		\midrule
+%		1     & Hour          & Single numeric input representing hour of the day                                                                                              \\
+%		2     & Day of month  & Single numeric input representing day of the month                                                                                             \\
+%		3-9   & Day of week   & Seven binary digits representing calendar information regarding day of the week                                                                                            \\
+%		10-21 & Month         & Twelve binary digits representing calendar information regarding month                                                                                         \\
+%		22-42 & Lagged inputs & Twenty one numeric inputs representing lagged inputs of previous 3 hours, previous 3 hours of previous day including hour to be predicted, and previous 3 hours of previous week including hour to be predicted \\
+%		43    & Holiday       & Single binary digit representing whether the day was a public holiday  \\     \bottomrule                                                           
+%	\end{tabular}
+%	\caption{List of Input Data for Models}
+%\end{table}
+%
+%\subsection{Experiments}
+%
+%This section explores the experiments made to design the models. Cross-validation was used on the validation set of each of the models to tune the hyperparameters. Each of the models were then created five times per cluster to explore the variance of the results.
+%
+%\subsubsection{Support Vector Regression}
+%
+%The validation set was used to tune the hyperparameters and select the kernel of the SVR model.
+%
+%The kernels compared were polynomial, radial basis function (RBF) and the linear kernel \cite{Chang2010, theodoridis2009pattern}. They were chosen due to their popularity, support and speed of computation.
+%
+%The parameter values are shown in Table \ref{tab:kernel}. The linear kernel produced the best results, and therefore chosen as the final model.
+%\begin{table}
+%\centering
+%	\label{tab:kernel}
+%	\begin{tabular}{ccl}
+%		\toprule
+%		Kernel Type& Kernel Parameters & RMSE\\
+%		\midrule
+%		Linear & No values & 0.02102779\\
+%		RBF & C=2, $\gamma=0.016$ & 0.02444950\\
+%		Polynomial & C=2, $d=2, r=2$ & 0.03145719 \\
+%		\bottomrule
+%	\end{tabular}
+%\caption{Prediction Accuracy Based on Type of Kernel}
+%\end{table}
+%\subsubsection{Random Forest}
+%The number of variables sampled as candidates at each split was tuned using the validation set.
+%
+%The optimum number for this was 23. It is proposed that the value 23 was found to be optimum due to the 21 lagged inputs, which are crucial to learn the underlying nature of the time series.
+%
+%
+%\subsubsection{Artificial Neural Network}
+%
+%The first step when creating an Artificial Neural Network is to design the architecture. In our case, the number of input neurons is set to 43 (see Table \ref{appendix:feature}). Only one output neuron is required, due to the fact that we are only forecasting one step (30 minutes) ahead.
+%
+%To design the number of hidden layers the Levenberg-Marquardt technique was used. An optimal architecture with three hidden layers was obtained. The first layer contained two neurons, the second contained five, and the third contained four.
+%
+%\subsubsection{LSTM}
+%
+%The Levenberg-Marquardt techniques was once again used to select number of layers and number of memory units. Using this technique, the optimum number of layers was found to be 2 with 50 memory units each.
+%
+%\section{Results}
+%\begin{figure}
+%	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
+%	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
+%	\label{fig:results}
+%\end{figure}
+%To determine the optimal number of clusters a range of values for $k$ were explored, thus, $k$ was varied between one and seven. 28 forecasting models were therefore constructed per type of model. The models were fit five times to explore the variation in the output. The model accuracy was evaluated using both MAPE and MASE.
+%
+%The results are shown in figure \ref{fig:results}. These show that clustering similar users improves accuracy. The optimum value for \textit{k} for every model was shown to be four. After this, the accuracy diminishes slightly. The error bars shown in Figure \ref{fig:results} display a slight variance in MAPE for \acrshort{svr}s, ANNs and Random Forests. However, the MAPE of the LSTMs seem to vary by up to 11\%. 
+%
+%The MASE metric also demonstrated that four clusters were optimal for SVR, Neural Networks and Random Forests.
+%
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{Chapter5/figures/short-term-forecasting/actual_vs_predicted_enlarged.png}
+%	\caption{Real electricity consumption versus predicted electricity consumption between June 16th and June 18th 2010.}
+%	\label{fig:act_vs_pred}
+%\end{figure}
+%
+%The impact of using calendar attributes improves prediction accuracy by 6\% for neural networks, 4\% for Random Forests and 1\% for SVR. For these results please see figure \ref{appendix:calendar_attr} in appendix \ref{appendix:results}.
+%
+%It is proposed that the optimum value for \textit{k} cluster centres was four due to the distinct patterns observed in each of the clusters. At $k=5$ one of the distinct clusters is split, and leads to an increase in stochasticity. At $k=3$ the stochasticity is also increased by the aggregation of load profiles which are dissimilar. % To see a breakdown of the average clusters please refer to figure \ref{appendix:clustercentre} in appendix \ref{appendix:results}.
+%
+%However, the optimum number of clusters will vary for different datasets. Differing geographies may display varying usage characteristics due to culture, weather or social norms.
+%
+%The results demonstrate that SVR, Random Forests and the ANN have similar accuracy, and adequately predict electricity consumption. The LSTM shows a similar pattern in increasing accuracy with number of clusters, but performs worse than the other models. The Random Forest seems to outperform each of the other models. This may be due to the internal operation of the Random Forest which undertakes its own cross-validation using out-of-bag samples. 
+%
+%Figure \ref{fig:act_vs_pred} displays actual electricity consumption versus predicted results. It shows that the LSTM model predicts a similar value in the next time step as the previous time step, which would explain its inferior results to the other models.  
+%
+%The training times were tested by timing how long the models took to fit for four clusters. The Support Vector Regression took less time than all of the other methods, whereas the LSTM took the longest. The Support Vector Regression model required 3 minutes and 18 seconds to run. The Random Forest required 14 minutes and 58 seconds. The Artificial Neural Network required 17 minutes and 48 seconds, whilst the LSTM took 21 minutes 11 seconds to run.
+%
+%The time to make a single prediction was recorded at sub microseconds and therefore deemed negligible for our use-case.
+%
+%\section{Conclusion}
+%
+%The availability of data produced by smart meters enables network operators to gain greater insights into their customer behaviour and electricity usage. We demonstrated that implementing the \textit{k}-means clustering algorithm to group similar customers improved the accuracy of the models tested. Distinct models were trained for each cluster and the individual forecasts aggregated for the total aggregated forecast. It was found that Random Forests outperformed all other models at each level of clustering. The optimum number of clusters was found to be four. Whilst the dataset used focused on residential data it is expected that applying a similar clustering technique on commercial properties would have a similar effect.
+%
+%It is considered that monthly retraining of the models would be required to ensure continued accuracy. However, this is not expected to be a problem due to the short time time required for model training. Once trained, the prediction times are negligible.
+%
+%In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as self-organizing maps (SOM) to obtain better accuracy results. We will also compare a greater variety of forecasting metrics.
+%
+%% To utilize more of the data and increase the number of models trained these results could be run in parallel in future.
 
 \section{The impact of online machine-learning methods on long-term investment decisions and generator utilization in electricity markets}
 
@@ -718,67 +820,6 @@ Our results show that we are able to reduce the mean absolute error by 30\% usin
 \section{Introduction}
 \label{sec:intro}
 
-The integration of higher proportions of intermittent renewable energy sources (IRES) in the electricity grid will mean that the forecasting of electricity demand will become increasingly important and challenging. Examples of IRES are solar panels and wind turbines, which fluctuate in terms of power output based on localized wind speed and solar irradiance. However, as supply must meet demand at all times and the fact that IRES are less predictable than dispatchable energy sources such as coal and combined-cycle gas turbines (CCGTs) this means extra attention must be made in predicting future demand if we wish to keep, or better reduce, the current frequency of blackouts \cite{Lu1993}. A dispatchable source is one that can be turned on and off by human control and therefore, able to adjust output just in time, at a moment convenient for the grid.
-
-Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand, that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants, not all dispatchable plants are peaker plants. For example coal, which is a dispatchable plant, is run as a base load plant, due to its inability to deal with the fluctuating conditions required of a peaker plant.
-
-To reduce reliance on peaker plants, it is helpful to know how much electricity demand there will be in the future so that more efficient plants can be used to meet this expected demand. This is so that these more efficient plants can be brought up to speed at a time suitable to match the demand. Forecasting a day into the future is especially useful in decentralized electricity markets which have day-ahead markets. Decentralized electricity markets are ones where electricity is provided by multiple generation companies, as opposed to a centralized source, such as a government. To aid in this prediction, machine learning and statistical techniques have been used to accurately predict demand based on several different factors and data sources \cite{Kell2018a}, such as weather \cite{Hong2014}, day of the week \cite{Al-Musaylh2018} and holidays \cite{Vrablecova2017}. 
-
-%- Why the current approaches / systems don't solve the problem
-
-
-%While various studies have looked at how to predict electricity demand at various time horizons with the highest accuracy \cite{Singh2012,Huang2003,Andersen2013}, the impact that poor forecasting accuracy has on investments and dispatch of electricity technology in electricity markets has been studied to a lesser degree.
-
-Various studies have looked at predicting electricity demand at various horizons \cite{Singh2012,Huang2003,Andersen2013}. However, the impact of poor demand predictions on the long-term electricity mix has been studied to a lesser degree.
-
-In this paper, we compare several machine learning and statistical techniques to predict the energy demand for each hour over the next 24-hour horizon. We chose to predict over the next 24 hours to simulate a day-ahead market, which is often seen in decentralized electricity markets. However, our approach could be utilized for differing time horizons. In addition to this, we use our long-term agent-based model, ElecSim \cite{Kell, Kell2020}, to simulate the impact of different forecasting methods on long-term investments, power plant usage and carbon emissions for the years 2018 through 2035 in the United Kingdom. Our approach, however, is generalizable to any country through parametrization of the ElecSim model.
-
-
-%- What is the innovation in this work
-
-%We compare the impact of 11 offline learning algorithms and five online learning algorithms to predict the electricity demand profile over the next 24 hours.
-
-As part of our work, we utilize online learning methods to improve the accuracy of our predictions. Online learning methods can learn from novel data while maintaining what was learnt from previous data. Online learning is useful for non-stationary datasets, and time-series data where recalculation of a model would take a prohibitive amount of time. Offline learning methods, however, must be retrained every time new data is added. Online approaches are constantly updated and do not require significant pauses while the offline training is being re-run. % By training on data that has already been used for training, the computational load and time required increases.
-
-We trial different algorithms and train different models for different times of the year. Specifically, we train different models for the different seasons. We also split weekdays and train both weekends and holidays together. This is due to the fact that holidays and weekend exhibit similar load profiles due to the reduction in industry electricity use and an increase in domestic. This enables a model to become good at a specific subset of the data which share similar patterns, as opposed to having to generalize to all of the data. Examples of the algorithms used are linear regression, lasso regression, random forests, support vector regression, multilayer perceptron neural network, box-cox transformation linear regression and the passive aggressive model. 
-
-We expect a-priori that online algorithms will outperform the offline approach. This is due to the fact that the demand time-series is non-stationary, and thus changes sufficiently over time. In terms of the models, we presume that the machine learning algorithms, such as neural networks, support vector regression and random forests will outperform the statistical methods such as linear regression, lasso regression and box-cox transformation regression. We expect this due to the fact that machine learning has been shown to be able to learn more complex feature representations than statistical methods \cite{Singh2012}. In addition, our previous work has shown that the random forest was able to outperform neural networks, support vector regression and long short term memory neural networks (LSTM) \cite{Kell2018}. 
-
-However, it should be noted, that such a-priori intuiton, is no substitute for analytical evidence and can (and has) been shown to be wrong in the past, due to imperfect knowledge of the data and understanding of some of the black box models, such as neural networks.
-
-%- A short description of the solution
-
-
-Using online and offline methods, we take the error distributions, or residuals, and fit a variety of distributions to these residuals. We choose the distribution with the lowest sum of squared estimate of errors (SSE). SSE was chosen as the metric to ensure that both positive and negative errors were treated equally, as well as ensuring that large errors were penalized more than smaller errors. We fit over 80 different distributions, which include the Johnson Bounded distribution, the uniform distribution and the gamma distribution. The distribution that best fits the respective residuals is then used and sampled from to adjust the demand in the ElecSim model. We then observe the differences in carbon emissions, and which types of power plants were both invested in and utilized, with each of the different statistical and machine learning methods. To the best of our knowledge, this is the most comprehensive evaluation of online learning techniques to the application of day-ahead load forecasting as well as assessing the impacts of the errors that these models produce on the long-term electricity market dynamics.
-
-
-
-
-%- What are the key take-home messages
-
-We show that online learning has a significant impact on reducing the error for predicting electricity consumption a day ahead when compared to traditional offline learning techniques, such as multilayer perceptron artificial neural networks, linear regression, extra trees regression and support vector regression, which are models used in the literature \cite{Lu1993, Ahmad2017, Chen2004}. For a full list of algorithms used in this work see Table \ref{table:hyperparameter-tuning-offline}.
-
-We show that the forecasting algorithm has a non-negligible impact on carbon emissions and use of coal, onshore, photovoltaics, reciprocal gas engines and CCGT. Specifically, the amount of coal, photovoltaics, and reciprocal gas used from 2018 to 2035 was proportional to the median absolute error, while both onshore and offshore wind are inversely proportional to the median absolute error.
-
-Total investments in coal, offshore and photovoltaics are proportional to the median absolute error, while investments in CCGT, onshore and reciprocal gas engines are inversely proportional.
-
-
-% Contributions of this work
-
-
-The contributions of this work are:
-
-\begin{enumerate}
-  \item The evaluation of different online and offline learning models to forecast the electricity demand profile 24 hours ahead.
-  \item Evaluation of poor predictive ability on the long-term electricity market in the UK through the perturbation of demand in the ElecSim simulation.
-\end{enumerate}
-
-
- 
-
-%- Outline of the rest of the work
-
-In Section \ref{sec:lit-review}, we review the literature, including other uses of online learning algorithms and an application to electricity markets. We introduce the dynamics of the ElecSim simulation as well as the methods used in Section \ref{sec:material}. We demonstrate the methodology undertaken in Section \ref{sec:methods}. In Section \ref{sec:results} we demonstrate our results, followed by a discussion in Section \ref{sec:discussion}. We conclude our work in Section \ref{sec:conclusion}.
 
 \section{Literature Review}
 \label{sec:lit-review}
