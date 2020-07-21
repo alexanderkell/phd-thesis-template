@@ -657,7 +657,7 @@ The data was recorded between the 14th July 2009 and 31st December 2010, providi
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/Rplot01.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Rplot01.png}
 	\caption{Daily load profiles of a single customer over a week between 20th July 2009 and 27th July 2009. }
 	\label{fig:single_user}
 \end{figure}
@@ -796,7 +796,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/rforest_parameter_tuning}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/rforest_parameter_tuning}
 	\caption{RMSE vs Number of variables randomly sampled as candidates at each split in the Random Forest model.}
 	\label{fig:rf_param_tune}
 \end{figure}
@@ -833,14 +833,14 @@ To initialize the LSTM, cross-validation was used to select the number of stacke
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/Cluster_Centres.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Cluster_Centres.png}
 	\caption{Average load profile for each cluster.}
 	\label{fig:clustercentre}
 \end{figure}
@@ -855,7 +855,7 @@ Figure \ref{fig:calendar_attr} demonstrates the impact of using calendar attribu
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/calendar_attr.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/calendar_attr.png}
 	\caption{Comparison of accuracy of models with or without calendar attributes.}
 	\label{fig:calendar_attr}
 \end{figure}
@@ -1006,7 +1006,7 @@ A number of models perform well, with a low mean absolute error. These include t
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/offline_model_mae.eps}
+	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/offline_model_mae.eps}
 	\caption{Offline models mean absolute error comparison, with 95\% confidence interval for 5 runs of each model.}
 	\label{fig:beis_elecsim_historic_comparison}
 \end{figure}
@@ -1023,7 +1023,7 @@ Figure \ref{fig:best_offline_learning_day_distribution} displays the distributio
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/ExtraTreesRegressor_distribution_plot.eps}
+	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/ExtraTreesRegressor_distribution_plot.eps}
 	\caption{Best offline machine learning algorithm (Extra Trees Regressor) distribution.}
 	\label{fig:best_offline_learning_day_distribution}
 \end{figure}
@@ -1114,7 +1114,7 @@ Figure \ref{fig:best_online_learning_day_distribution} displays the best online 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-power-0.1.eps}
+	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-power-0.1.eps}
 	\caption{Best online model (Box-Cox Regressor) distribution.}
 	\label{fig:best_online_learning_day_distribution}
 \end{figure}
@@ -1123,7 +1123,7 @@ Figure \ref{fig:bad_online_learning_day_distribution} displays the residuals for
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-C-0.1-fit_intercept-true-max_iter-1000-shuffle-false-tol-001.eps}
+	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-C-0.1-fit_intercept-true-max_iter-1000-shuffle-false-tol-001.eps}
 	\caption{Online machine learning algorithm distribution. (Passive Aggressive Regressor (C=0.1, fit intercept = true, maximum iterations = 1000, shuffle = false, tolerance = 0.001), chosen as it was the worst result for the passive aggressive model.}
 	\label{fig:bad_online_learning_day_distribution}
 \end{figure}
@@ -1134,7 +1134,7 @@ Figure \ref{fig:both_actual_predicted} displays a comparison between the actual 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/both_actual_predicted.eps}
+	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/both_actual_predicted.eps}
 	\caption{Best offline model compared to the best online model over a one week period.}
 	\label{fig:both_actual_predicted}
 \end{figure}
@@ -1152,14 +1152,14 @@ It is noted that when compared to the offline models, the training time is a goo
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/online_testing_time_vs_mae_all_results_opaque.eps}
+	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_testing_time_vs_mae_all_results_opaque.eps}
 	\caption{Time taken to test the online models versus mean absolute error.}
 	\label{fig:online_test_vs_mae}
 \end{figure}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\columnwidth]{Chapter5/figures/market-forecasting/results/online_training_time_vs_mae_all_results_opaque.eps}
+	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_training_time_vs_mae_all_results_opaque.eps}
 	\caption{Time taken to train the online models versus mean absolute error.}
 	\label{fig:online_train_vs_mae}
 \end{figure}
