@@ -14,7 +14,9 @@
 
 \section{Prologue}
 
-In this Chapter we use several different machine learning and statistical methods to predict electricity demand 30 minutes ahead and a day ahead. The 30 minutes ahead methodology is used in the work on day-ahead work. We utilise the errors from the day ahead predictions to see what the impact of such errors are on the day-ahead market. This work was published in \cite{Kell2018}. The work looks specifically at the difference in electricity mix with prediction error, as well as carbon emitted.
+In this Chapter we use several different machine learning and statistical methods to predict electricity demand 30 minutes ahead as well as a day ahead. The 30 minutes ahead methodology is used in the work on day-ahead work. We utilise the errors from the day ahead predictions to see what the impact of such errors are on the day-ahead market. The work looks specifically at the difference in electricity mix with prediction error, as well as carbon emitted. The work on 30-minute ahead forecasting was published in \cite{Kell2018}. 
+
+We introduce this work in Section \ref{forecast:sec:introduction}. Section \ref{forecast:sec:litreview} provides a literature review on the topic of demand forecasting. We introduce the methods used in Section \ref{forecast:sec:methods}. Sections \ref{forecast:sec:shortterm} and \ref{forecast:sec:longterm} look at 30-minute ahead predictions and day-ahead predictions respectively. Section \ref{forecast:sec:longterm} integrates these day ahead projections into the ElecSim model. 
 
 \section{Introduction}
 \label{forecast:sec:introduction}
@@ -669,7 +671,7 @@ Figure \ref{fig:multiple_users} shows eight different residential customer load 
 
 \begin{figure}
 		\centering
-	\includegraphics[width=0.4\textwidth]{Chapter5/figures/short-term-forecasting/Rplot02.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Rplot02.png}
 	\caption{Daily load profiles of different customers over a single day on the 22nd June 2009.}
 	\label{fig:multiple_users}
 \end{figure}
@@ -793,6 +795,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 \subsubsection{Random Forest}
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/rforest_parameter_tuning}
 	\caption{RMSE vs Number of variables randomly sampled as candidates at each split in the Random Forest model.}
 	\label{fig:rf_param_tune}
@@ -829,12 +832,14 @@ To initialize the LSTM, cross-validation was used to select the number of stacke
 
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
 	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/Cluster_Centres.png}
 	\caption{Average load profile for each cluster.}
 	\label{fig:clustercentre}
@@ -849,6 +854,7 @@ Figure \ref{fig:results} displays the accuracy of the models trained at differen
 Figure \ref{fig:calendar_attr} demonstrates the impact of using calendar attributes such as month, day of the month, and day of the week on prediction accuracy. The results show an increase in prediction accuracy of 6\% for neural networks, 4\% for Random Forests and 1\% for support vector regression when taking into account these variables. It is proposed that the ability for the models to take into account the cyclic yearly, monthly and weekly behaviour improves the results.
 
 \begin{figure}
+	\centering
 	\includegraphics[width=0.5\textwidth]{Chapter5/figures/short-term-forecasting/calendar_attr.png}
 	\caption{Comparison of accuracy of models with or without calendar attributes.}
 	\label{fig:calendar_attr}
@@ -1468,8 +1474,8 @@ In future work, we would like to trial a different selection of algorithms and s
 
 
 
-\section{Conclusion}
-\label{forecast:sec:conclusion}
+%\section{Conclusion}
+%\label{forecast:sec:conclusion}
 
 
 
