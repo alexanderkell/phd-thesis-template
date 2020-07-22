@@ -16,7 +16,7 @@
 
 	% Background
 
-Decentralized electricity markets are often dominated by a small set of generator companies who control the majority of the capacity. In this work, we explore the effect of the total controlled electricity capacity by any single or group of generator companies on the average electricity price. We demonstrate this through ElecSim, a simulation of a country-wide energy market. We develop an agent, representing a power generator which uses a deep deterministic policy reinforcement learning algorithm to bid in a uniform pricing electricity market strategically. A uniform pricing market is one where all players are paid the highest accepted price. ElecSim is parameterized to the United Kingdom for the year 2018. This work can help inform policy on how to best regulate a market to ensure that the price of electricity remains competitive.
+Decentralized electricity markets are often dominated by a small set of generator companies who control the majority of the capacity. In this work, we explore the effect of the total controlled electricity capacity by any single or group of generator companies on the average electricity price. We demonstrate this through ElecSim. We develop an agent, representing a generator company, which uses a deep deterministic policy reinforcement learning algorithm to bid in a uniform pricing electricity market strategically. A uniform pricing market is one where all players are paid the highest accepted price. ElecSim is parameterized to the United Kingdom for the year 2018. This work can help inform policy on how to best regulate a market to ensure that the price of electricity remains competitive.
 
 We find that capacity has an impact on the average electricity price in a single year. If any single generator company, or a collaborating group of generator companies, control more than ${\sim}$11$\%$ of generation capacity, prices begin to increase by ${\sim}$25$\%$. The value of ${\sim}$25\% and ${\sim}$11\% may vary between market structures and countries. For instance, different load profiles may favour a particular type of generator or a different distribution of generation capacity. Once the capacity controlled by a generator company is higher than ${\sim}$35\% of the total capacity, prices increase exponentially. The use of a market cap of approximately double the average market price has the effect of significantly decreasing this effect and maintaining a competitive market.
 % A fair and competitive electricity market provides value to consumers and enables a more competitive economy through the utilisation of electricity by both industry and consumers.
@@ -25,15 +25,16 @@ We find that capacity has an impact on the average electricity price in a single
 
 % Results
 
+In Section \ref{rl:sec:lit-review} we review the literature, and explore other uses of RL in electricity markets. In Section \ref{rl:sec:material} we introduce the agent-based model used and the DDPG algorithm. Section \ref{rl:sec:methodology} explores the methodology taken for our case study. The results are presented in Section \ref{rl:sec:results}. We discuss and conclude our work in Sections \ref{rl:sec:discussion} and \ref{rl:sec:conclusion} respectively. 
 
 
 
 \section{Introduction}
 \label{rl:sec:introduction}
 
-In this work, we use a monte-carlo simulation to model a decentralized electricity market. Decentralized electricity markets have a number of different market structures: day-ahead, balancing market and reserve markets. The day-ahead market settles payments for electricity for the following day. The balancing market is designed to regulate the frequency of the market through matching supply and demand. Whereas, reserve markets provide capacity in case there are fluctuations in supply and demand, and electricity demand can't be matched with supply. Our model simulates a day-ahead market over a single year time period to explore the effects of market power on electricity prices.
+%In this work, we use a monte-carlo simulation to model a decentralized electricity market. Decentralized electricity markets have a number of different market structures: day-ahead, balancing market and reserve markets. The day-ahead market settles payments for electricity for the following day. The balancing market is designed to regulate the frequency of the market through matching supply and demand. Whereas, reserve markets provide capacity in case there are fluctuations in supply and demand, and electricity demand can't be matched with supply. Our model simulates a day-ahead market over a single year time period to explore the effects of market power on electricity prices.
 
-Under perfectly competitive electricity markets, generator companies (GenCos) tend to bid their short-run marginal costs (SRMC) when bidding into the day-ahead electricity market. SRMC is the cost to produce a single MWh of electricity and excludes capital costs. However, electricity markets are often oligopolistic, where a small subset of GenCos provide the majority of the capacity to the market. Under these conditions, it is possible that the assumption that GenCos are price-takers does not hold. That is, large GenCos artificially increase the price of electricity to gain an increased profit using their market power. If they were price-takers, they would have to accept the competitive price set by the market.
+Under perfectly competitive electricity markets, generator companies (GenCos) tend to bid their short-run marginal costs (SRMC) when bidding into the day-ahead electricity market. However, electricity markets are often oligopolistic, where a small subset of GenCos provide the majority of the capacity to the market. Under these conditions, it is possible that the assumption that GenCos are price-takers does not hold. That is, large GenCos artificially increase the price of electricity to gain an increased profit using their market power. If they were price-takers, they would have to accept the competitive price set by the market.
 
 Reduced competition within electricity markets can lead to higher prices to consumers, with no societal benefit. It is, therefore, within the interests of the consumer and that of government to maintain a competitive market. Low energy costs enable innovation in other industries reliant on electricity, and in turn, make for a more productive economy. % Competition within electricity markets can be increased by only allowing single entities to have control over a small amount of electricity generation capacity.
 
@@ -46,7 +47,6 @@ Other works have considered a simplified model of an electricity market by model
 
 Our approach does not require GenCos to formulate any knowledge of the data which informs the market-clearing algorithm or rival GenCo bidding strategies, unlike in game-theoretic approaches \cite{Wang2011}. This enables a more realistic simulation where the strategy of rival GenCos are unknown.
 
-In Section \ref{rl:sec:lit-review} we review the literature, and explore other uses of RL in electricity markets. In Section \ref{rl:sec:material} we introduce the agent-based model used and the DDPG algorithm. Section \ref{rl:sec:methodology} explores the methodology taken for our case study. The results are presented in Section \ref{rl:sec:results}. We discuss and conclude our work in Sections \ref{rl:sec:discussion} and \ref{rl:sec:conclusion} respectively. 
 
 
 
@@ -81,7 +81,7 @@ Wang \textit{et al.} propose an evolutionary imperfect information game approach
 
 \subsection{Reinforcement learning to model intelligence}
 
-Next, we explore reinforcement learning approaches used to make intelligent bidding decisions in electricity markets. RL is a suitable method for analyzing the dynamic behaviour of complex systems with uncertainties. RL can, therefore be used to identify optimal bidding strategies in energy markets \cite{Yang2020}. Simulations are often used to provide an environment for the reinforcement learning algorithm. In the following papers simulations are used as the environment.
+Next, we explore reinforcement learning approaches used to make intelligent bidding decisions in electricity markets. RL is a suitable method for analyzing the dynamic behaviour of complex systems with uncertainties. RL can, therefore, be used to identify optimal bidding strategies in energy markets \cite{Yang2020}. Simulations are often used to provide an environment for the reinforcement learning algorithm. In the following papers simulations are used as the environment.
 
 
 Aliabadi \textit{et al.} utilize an ABM and the Q-learning algorithm to study the impact of learning and risk aversion on GenCos in an oligopolistic electricity market with five GenCos \cite{EsmaeiliAliabadi2017}. They find that some level of risk aversion is beneficial, however excessive risk degrades profits by causing an intense price competition. Our work focuses on the impact of the interaction of many GenCos within the UK electricity market. In addition, we extend the Q-learning algorithm to use the DDPG algorithm, which uses a continuous action space.
@@ -196,7 +196,7 @@ A copy is made of the actor and critic networks, $Q'(s,a|\theta^{Q'})$ and $\mu'
 
 \subsection{Simulation}
 
-We utilized the long-term electricity market agent-based model, ElecSim \cite{Kell,Kell2020}. The model was run using a short term approach by only iterating through a single year (2018), composed of eight representative days, each of 24 time steps.
+We utilized the long-term electricity market agent-based model, ElecSim \cite{Kell,Kell2020} discussed in Chapter \ref{chapter:elecsim}. The model was run using a short term approach by only iterating through a single year (2018), composed of eight representative days, each of 24 time steps.
 
 
 
@@ -241,7 +241,7 @@ By modelling bidding decisions as a RL algorithm, we hoped to observe the abilit
 	\renewcommand{\arraystretch}{1.25}
 	\centering
 	%\begin{tabular}{p{4.3cm}lllp{1.5cm}}
-	\begin{tabular}{llllll}
+	\begin{tabular}{llllp{1.5cm}}
 		\toprule
 		GenCo Groups                                                                                                                  & Capacity (MW) & Num. of Plants \\ \midrule
 		Orsted                                                                                                                       & 2738.7   & 11               \\
