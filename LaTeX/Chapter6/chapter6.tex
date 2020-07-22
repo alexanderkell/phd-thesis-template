@@ -21,41 +21,30 @@
 %Results
 %Conclusions.
 
-Averting the effects of anthropogenic climate change requires a transition from fossil fuels to low-carbon technology. A way to achieve this is to decarbonize the electricity grid. However, further efforts must be made in other fields such as transport and heating for full decarbonization. This would reduce carbon emissions due to electricity generation, and also help to decarbonize other sources such as automotive and heating by enabling a low-carbon alternative. Carbon taxes have been shown to be an efficient way to aid in this transition.
-
-In this work, we demonstrate how to to find optimal carbon tax policies through a genetic algorithm approach, using the electricity market agent-based model ElecSim. To achieve this, we use the NSGA-II genetic algorithm to minimize average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible to find a range of carbon taxes to suit differing objectives. 
+Carbon taxes have been shown to be an efficient way to aid in a transition to a low-carbon electricity grid. In this work, we demonstrate how to find optimal carbon tax policies through a genetic algorithm approach, using the model developed, ElecSim. To achieve this, we use the NSGA-II genetic algorithm to minimize average electricity price and relative carbon intensity of the electricity mix. We demonstrate that it is possible to find a range of carbon taxes to suit differing objectives. 
 
 Our results show that we are able to minimize electricity cost to below \textsterling10/MWh as well as carbon intensity to zero in every case. In terms of the optimal carbon tax strategy, we found that an increasing strategy between 2020 and 2035 was preferable. Each of the Pareto-front optimal tax strategies are at least above \textsterling81/tCO2 for every year. The mean carbon tax strategy was \textsterling240/tCO2.
 
+This Chapter is structured as follows: we introduce our work in Section \ref{carbonoptim:sec:intro}. Section \ref{carbonoptim:sec:litreview} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{carbonoptim:sec:optimisation} details the optimization techniques applied. We present our results in Section \ref{carbonoptim:sec:results}, and conclude in Section \ref{carbonoptim:sec:conclusion}.
 
 \section{Introduction}
 \label{carbonoptim:sec:intro}
-% Computer simulation - why it is required
 
-Computer simulation allows practitioners to model real-world systems using software. These simulations allow for `\textit{what-if} ' analyses which can provide an indication as to how a system may behave under specific policies, environments and assumptions. These simulations become particularly important in real systems which have high costs, impacts or risks associated with them. A `digital twin' is a concept which has emerged in recent years. This is defined as a simulation of a specific instance of a system. This digital twin can then be used to learn of optimization techniques that can be applied to the real system. This foregoes the necessity of experimenting with the real system, avoiding potential adverse side effects.
-
-% Electricity markets
-
-An electricity market is an example of a complex system which can be modelled using a digital twin. Disruptions to electricity supply, a substantial increase in the cost of electricity or unrestrained carbon emissions have the potential to destabilize economies~\cite{Kaseke2013,Masson-Delmotte2018}. It is for reasons such as these that electricity market models are used to test hypotheses, develop strategies and gain an understanding of underlying dynamics to prevent undesirable consequences \cite{Jebaraj2006}. 
 
 In this work, we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
 
 Carbon taxes have been shown to quickly lower emissions and lower the costs to the public \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable~\cite{Wittneben2009}.
 
-In this work, we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) with model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertake various carbon tax policy interventions to see how we could reduce relative carbon density whilst at the same time, reduce the average electricity price.
+In this work, we use the reference scenario projected by the UK Government's Department for Business \& Industrial Strategy (BEIS) with model parameters calibrated by Kell \textit{et al.} \cite{DBEIS2019,Kell2020}. This reference scenario projects energy and emissions until 2035. We undertake various carbon tax policy interventions to see how we can reduce relative carbon density whilst at the same time, reduce the average electricity price.
 
 
-The parameter space we optimize over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches are often inefficient, however, and require an increased number of simulations due to their static nature. Genetic Algorithms, in contrast, use an evolutionary computing approach to find global optimal solutions faster.
-
-%In contrast to grid or random search, genetic algorithms have the ability to converge on an optimal solution by running less simulations \cite{Bergstra2012}.  Grid search is the trialling of parameters at evenly distributed spaces, and random search is where parameters are chosen at random. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
+The parameter space we optimize over is the carbon tax price over a 17 year period from 2018 to 2035. The carbon price is used to influence the objectives of average electricity price and relative carbon intensity in 2035. Grid and random search are approaches which trial parameters at evenly distributed spaces and random spaces respectively. These approaches are often inefficient, however, and require an increased number of simulations due to their static nature. Genetic Algorithms, in contrast, use an evolutionary computing approach to find global optimal solutions faster. This is of particular importance in cases with a large number of parameters or in simulations which require a long compute time, which is the case for ElecSim.
 
 In order to optimize over two potentially competing objectives, i.e. average electricity price and relative carbon intensity, we use the Non-Dominated Sorting Genetic Algorithm II (NSGA-II) \cite{Valkanas2014}. The NSGA-II algorithm can approximate a Pareto frontier ~\cite{Pareto1927, Stadler1979}. A Pareto frontier is a curve in which there is no solution which is better than another along the curve for different sets of parameters. In this context, better means that a solution is closer to the optimal for a particular combination of objectives.
 
 We find that the rewards of average electricity price and relative carbon intensity are not mutually exclusive. That is, it is possible to have both a lower average electricity price and a lower relative carbon price. This is due to the low short-run marginal cost of renewable technology, which has been shown to lower electricity prices \cite{OMahoney2011}.
 
 The main contribution of this work is to explore carbon tax strategies using genetic algorithms for multi-objective optimization. 
-
-The following sections are set out as follows. Section \ref{carbonoptim:sec:litreview} covers examples of optimisations using genetic algorithms and different carbon strategies. Section \ref{carbonoptim:sec:optimisation} details the optimization techniques applied. We present our results in Section \ref{carbonoptim:sec:results}, and conclude in Section \ref{carbonoptim:sec:conclusion}.
 
 
 
@@ -86,7 +75,9 @@ Similar to our work, Ascione  \textit{et al}. use the NSGA-II algorithm to gener
 
 Gorza\l{}czany \textit{et al}. also apply the NSGA-II algorithm. However, they apply it to the credit classification problem \cite{Gorzaczany2016}. The objectives optimized over were accuracy and interpretability when making financial decisions such as credit scoring and bankruptcy prediction. This technique was able to significantly outperform the alternative methods in terms of interpretability while remaining competitive or superior in terms of the accuracy and speed of decision making in comparison with the existing classification methods.
 
-%Ma \textit{et al}. use the multi-objective artificial immune optimization algorithm for land use allocation (MOAIM-LUA model) \cite{Ma2015}. They balance land use supply and demand based on the future dynamic demands from different land-use stakeholders in the region at the macro-level in Anlu County, China. The objectives to optimize were economic and ecological benefits. They found that for this application, they were able to obtain better solution sets than the NSGA-II algorithm.
+Ma \textit{et al}. use the multi-objective artificial immune optimization algorithm for land use allocation (MOAIM-LUA model) \cite{Ma2015}. They balance land use supply and demand based on the future dynamic demands from different land-use stakeholders in the region at the macro-level in Anlu County, China. The objectives to optimize were economic and ecological benefits. They found that for this application, they were able to obtain better solution sets than the NSGA-II algorithm.
+
+In our work we use the NSGA-II algorithm to optimise average overhead and energy consumption of a condor system \cite{Kell2019}. We use the genetic algorithm to trial different parameters of a Q-learning reinforcement learning algorithm, which acted as a job scheduler. We found that we were able to generate a Pareto-front  which would allow stakeholders to select an optimum for their use case. 
 
 
 \subsection{Carbon Tax Strategies}
@@ -104,38 +95,9 @@ Li \textit{et al}. use a hierarchical carbon market scheduling model to reduce c
 \section{Optimization methods}
 \label{carbonoptim:sec:optimisation}
 
-Multi-objective optimization allows practitioners to overcome the problems with optimizing multiple objectives with classical optimization techniques. Multi-objective optimization algorithms are able to generate Pareto-optimal solutions as opposed to converting the multiple objectives into a single-objective problem. A single-objective problem assumes that there is only a single optimum, and that other combinations are inferior. This may not be the case, as different solutions are superior for a different set of circumstances. A Pareto frontier is made up of many Pareto-optimal solutions which can be displayed graphically. A user is then able to choose between various solutions and trade-offs according to their wishes.
+Multi-objective optimization allows practitioners to overcome the problems with optimizing multiple objectives with classical optimization techniques, such as the genetic algorithm used in Chapter \ref{chapter:elecsim}. Multi-objective optimization algorithms are able to generate Pareto-optimal solutions as opposed to converting the multiple objectives into a single-objective problem. A single-objective problem assumes that there is only a single optimum, and that other combinations are inferior. This may not be the case, as different solutions are superior for a different set of circumstances. A Pareto frontier is made up of many Pareto-optimal solutions which can be displayed graphically. A user is then able to choose between various solutions and trade-offs according to their wishes. The NSGA-II algorithm, a multi-objective genetic optimization algorithm, is able to generate a Pareto frontier in a single optimization run. 
 
-The NSGA-II algorithm, a multi-objective genetic optimization algorithm, is able to generate a Pareto frontier in a single optimization run. 
-
-In the following sub-sections, we detail the standard genetic algorithm followed by the NSGA-II algorithm.
-
-\subsection{Genetic Algorithms}
-
-Genetic Algorithms (GAs) ~\cite{Holland1975} are a class of evolutionary algorithm which can be used for optimization. 
-
-As shown by Algorithm \ref{genetic-algorithm}, initially, a population of parameters $P_{0}$ are generated to be trialled in the simulation. $P_{0}$ is then evaluated for fitness, by running an instance of the simulation with the respective parameters as inputs. Where fitness in this case is the reward that is to be optimised. Next, a subset of individuals from $P_{0}$ are chosen for mating, $C_{t+1} \subset P_{t}$. This subset of individuals are selected proportional to their fitness. For mating with the subset $C_{t+1}$, the `fitter' individuals have a higher chance of reproducing to create the offspring group $C'_{t+1}$. The individuals of $C'_{t+1}$ have characteristics dependent on the genetic operators, crossover and mutation \cite{mitchell1998introduction}. These genetic operators are an implementation decision \cite{FogelDavidB2009}. The new population $P_{t+1}$ is then created by merging individuals from $C'_{t+1}$ and $P_{t}$. See Algorithm \ref{genetic-algorithm} for detailed pseudocode.
-%
-\begin{algorithm}[t]
-	\begin{algorithmic}[1]
-		\State $t=0$
-		\State initialize $P_{t}$
-		\State evaluate structures in $P_{t}$
-		\While {termination condition not satisfied}
-		\State $t=t+1$
-		\State select reproduction $C_{t}$ from $P_{t-1}$
-		\State recombine and mutate structures in $C_{t}$
-		
-		forming $C'_{t}$
-		\State evaluate structures in $C'_{t}$
-		\State select each individual for $P_{t}$ from $C'_{t}$ 
-		
-		or $P_{t-1}$
-		\EndWhile
-		\caption{Genetic algorithm \cite{FogelDavidB2009}}
-		\label{genetic-algorithm}
-	\end{algorithmic}
-\end{algorithm}
+In the following sub-sections, we detail NSGA-II algorithm. For an overview of the standard Genetic Algorithm, please refer to Sub-Section \ref{elecsim:ssec:geneticalgorithm}
 
 %%%%%%
 
@@ -251,29 +213,9 @@ The mating steps work by, initially, taking the sets of carbon prices over the 1
 
 
 \subsection{Simulation Environment}
-In order to evaluate the different carbon strategies, we used the model developed by Kell \textit{et al}., ElecSim \cite{Kell,Kell2020}. ElecSim is an agent-based model which mimics the behaviour of decentralized electricity markets. For this work, we parametrized the model to data for the UK in 2018 to act as a digital twin of the UK electricity market. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}. ElecSim is validated by being instantiated by data from 2013 and projected forward to 2018, with a mean absolute scaled error (MASE) below or equal to 0.701 for all generator types \cite{Kell2020}. 
+In order to evaluate the different carbon strategies, we used ElecSim \cite{Kell,Kell2020}. For this work, we parametrized the model to data for the UK in 2018 to act as a digital twin of the UK electricity market. This includes the power plants in operation in 2018, and the funds available to their respective companies \cite{dukes_511, companies_house}. ElecSim is validated by being instantiated by data from 2013 and projected forward to 2018, with a mean absolute scaled error (MASE) below or equal to 0.701 for all generator types \cite{Kell2020}. 
 
-Six fundamental sections make up ElecSim: 1) power plant data; 2) scenario data; 3) the time-steps of the algorithm; 4) the power exchange; 5) the investment algorithm and 6) the generation companies (GenCos) as agents. ElecSim uses a subset of representative days of electricity demand, solar irradiance and wind speed to approximate a full year. In this context, representative days are a subset of days which, when scaled up, can adequately represent a year. Figure \ref{fig:model_details} details how these components interact. 
-
-Specifically, the configuration file details the scenario which can be set by the user. This includes electricity demand, carbon price and fuel prices. The data sources parametrize the digital twin to a particular country, including information such as wind capacity and power plants in operation. Generation Companies own and invest in power plants. These power plants are then matched to electricity demand using a spot market.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.48\textwidth]{Chapter6/figures/setup/System_overview_large.png}
-	\caption{System overview of ElecSim \cite{Kell}.}
-	\label{fig:model_details}
-\end{figure}
-
-The market runs in merit-order dispatch and bids are made by the power plant's short-run marginal cost (SRMC). Investment in power plants are based upon a net present value (NPV) calculation. Decisions are made every year, where new generators enter the market. NPV is able to evaluate and compare investments with cash flows spread over many years. This is shown formally in Equation \ref{eq:npv_eq}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is the total number of years, or lifetime of the power plant, and $R_t$ is the net cash flow of the year $t$:
-\begin{equation} \label{eq:npv_eq}
-NPV(t, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}.
-\end{equation}
-
-$R_t$ takes into account the expected carbon price ten years into the future. Generator companies use a linear regression based on historical data to project the carbon price. With an increasing carbon price, the $R_t$ reduces for high carbon-emitting power plants, therefore making low carbon options more desirable. As demand in ElecSim is exogenous, demand does not change with respect to price and is assumed to be perfectly price inelastic. 
-
-The yearly income for each power plant is estimated for each generation company by running a merit-order dispatch electricity market ten years into the future. However, the expected cost of electricity ten years into the future is uncertain. We, therefore, use the reference scenario projected by BEIS and use the predicted costs of electricity calibrated by Kell \textit{et al} \cite{DBEIS2019, Kell2020}. The agents predict the future carbon price by using a linear regression model.
-
-
+The yearly income for each power plant is estimated for each generation company by running a merit-order dispatch electricity market ten years into the future. However, the expected cost of electricity ten years into the future is uncertain. We, therefore, use the reference scenario projected by BEIS and use the predicted costs of electricity calibrated by our previous work in Chapter \ref{chapter:elecsim} \cite{DBEIS2019, Kell2020}. 
 
 
 \subsection{Optimization}
@@ -349,14 +291,14 @@ Figure \ref{fig:heatmap_of_free_points} displays a general trend, where carbon t
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.72\linewidth]{Chapter6/figures/results/free_points_ga_development}
+	\includegraphics[width=0.6\linewidth]{Chapter6/figures/results/free_points_ga_development}
 	\caption{Development of genetic algorithm rewards for non-parametric carbon tax policy results in 2035.}
 	\label{fig:free_points_ga_development}
-	%\end{figure}
-	%
-	%\begin{figure}
-	%\centering
-	\includegraphics[width=0.71\linewidth]{Chapter6/figures/results/best_heatmap_no_marginals}
+\end{figure}
+	
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{Chapter6/figures/results/best_heatmap_no_marginals}
 	\caption{Density plot of points with an average electricity price <\textsterling5/MWh for non-parametric carbon tax policy results in 2035.}
 	\label{fig:heatmap_of_free_points}
 \end{figure}
@@ -372,7 +314,7 @@ Figure \ref{fig:comparison_of_distributions} compares the distributions of avera
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.70\linewidth]{Chapter6/figures/results/linear_ga_development.pdf}
+	\includegraphics[width=0.5\linewidth]{Chapter6/figures/results/linear_ga_development.pdf}
 	\caption{Development of genetic algorithm rewards in 2035 for linear carbon strategy.}
 	\label{fig:linear_ga_development}
 \end{figure}
