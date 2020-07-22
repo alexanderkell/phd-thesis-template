@@ -1,0 +1,152 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+Review #54A\
+===========================================================================\
+\
+Overall merit\
+-------------\
+3. Weak accept\
+\
+Reviewer expertise\
+------------------\
+4. Expert\
+\
+Paper summary\
+-------------\
+The paper presents an agent-based simulation model that addresses long-term investment decisions and is coupled with a simplified short-term power exchange market. The model is applied to the UK market, and simulation outcomes are compared to actual values (for electricity prices). Some stochastic nature is introduced through different agents\'92 expectation of future fuel prices. The model should facilitate testing different market design in order to guide policy decisions.\
+\
+Reasons to accept the paper (2-3 sentences)\
+-------------------------------------------\
+The state-of-the-art has been carefully reviewed and the model has been set in relation to it. The main inputs are published and the simulation code is made publicly available, so one could replicate the results. Different scenario outcomes are presented and there are some insights from comparing different CO$_2$ price levels and their outcome on the future electricity mix.\
+\
+Main weaknesses of the paper (2-3 sentences)\
+--------------------------------------------\
+The main advantages of the chosen method, i. e. agent-based simulation, has not become clear. It is advocated that agents can be modeled individually and with incomplete information, but it is not presented why this incomplete information offers any additional possibilities beyond what optimization models could also show. As price projections are inherently uncertain, a sensitivity analysis with varying price levels would yield the same \'96 or better \'96 results than having each agent have a somehow different assumption. Also, it was advocated that the model could be used for testing the implications of different policy measures. However, it seems that only the CO$_2$ price can be changed, so the doesn\'92t seem to be much more that the user could play around with in this model. Therefore, it is unclear what benefit the model provides in comparison with established techniques.\
+\
+Detailed comments on the paper\
+------------------------------\
+Besides the general critique mentioned above, the following summarizes some aspects that should be addressed in a revised version:\
+* The paper is too long in relation to the content it provides. It discusses current developments of electricity markets in lengthy fashion, and does not provide much information that the reader does not know. The first sections should be shortened to roughly half their current length.\
+* The authors state that \'93Agent-based simulation for electricity markets has received increasing attention in recent years.\'94 In contrast to that claim, the vast majority of the papers cited for describing agent-based electricity market simulation models are ten years and older. The authors should either discuss why there are less new developments, or cite newer work. \
+* Some of the references are strange. For example, the description of ABM and the claim that they are increasingly used in the context of power markets are backed with an article that provides a tutorial on agent-based simulation and a \'93survey of tools\'94, one from 2007 and the other from 2010. There are some survey-article on agent-based simulation in power markets, e. g. from Weidlich/Veit 2008, Ringler et al. 2016, or Sensfu\'df et al. 2007. These should rather be cited. Also, at last year\'92s e-Energy conference, a similar simulation model as ElecSIM has been presented, which the authors may want to view (entitled Bidding Strategies for Flexible and Inflexible Generation in a Power Market Simulation Model).\
+* There is some discussion on batteries in the beginning, but they are not considered later, so this should be skipped. Besides, what are the rules that make sure that the demand is met at all times, not only on average? Model results for a CO2 price of \'a370 show that the share of onshore wind is nearly 100 % - where does the back-up for such a scenario come from?\
+* Some formal and language revision is necessary, for example in the following cases. \'93Moving from a centralised and homogenous fossil fuelbased system to a distributed system based on renewable energy and batteries.\'94 (no sentence); Fig. 2: why does money flow from suppliers to consumers?!; \'93Electricity energy policy\'94; \'93The lost load is set to be \'a36000\'85\'94; Sec. 3.2.1 without any 3.2.2,\'85\
+\
+\
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+\
+\
+Review #54B\
+===========================================================================\
+\
+Overall merit\
+-------------\
+2. Weak reject\
+\
+Reviewer expertise\
+------------------\
+3. Knowledgeable\
+\
+Paper summary\
+-------------\
+Authors describe a ABM based system that they designed to simulate the effect of policy on long term investment decisions in the electricity sector, in particular a case study on impact of carbon tax is simulated to showcase the tool.\
+\
+Reasons to accept the paper (2-3 sentences)\
+-------------------------------------------\
+- Strong need for such tools, especially for ISOs, regulators/governments, etc. to simulate long-terms impact of policies, prices, taxes, other trends, etc. \
+- Fairly detailed design of the tool and some interesting results from scenarios simulated for a UK case study on the effectiveness of a carbon tax.\
+\
+Main weaknesses of the paper (2-3 sentences)\
+--------------------------------------------\
+- Marginal contribution, relative to several existing ABM simulation tools that exist for multiple domains/sub-domains (EVs, etc.) in the energy sector. \
+- Unclear if the tool implements complex mathematical models to aid the research community or contributes a significantly faster simulation technique, or provides hard to obtain curated data / configuration parameters / algorithms related to market functioning, renewable generation, emission-tax, etc. at varied levels of details and granularity. \
+- Validation of such simulation tools based on historical data would be good. \
+- The contribution seems to be in terms of implementing well known techniques and putting blocks together. Its also unclear how the implemented architecture allows other researchers to plug and play their contributions seamlessly.\
+\
+Detailed comments on the paper\
+------------------------------\
+In addition to above comments, I'd encourage the authors to explain the challenges in designing the tool and how those challenges were overcome using novel ideas contributed by them to build the tool. \
+\
+Another important area is techniques to automatically validate the experimental results with historical data and inferring accurate simulation parameters via such an approach. Lastly, to popularize the tool and showcase its benefits, more case studies and results need to be provided along with validation results.\
+\
+\
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+\
+\
+Review #54C\
+===========================================================================\
+\
+Overall merit\
+-------------\
+2. Weak reject\
+\
+Reviewer expertise\
+------------------\
+2. Some familiarity\
+\
+Paper summary\
+-------------\
+This paper presents a new tool, ElecSIM,\
+which is an open-sourced agent-based modelling framework used\
+to examine the effect of policy on long term investment decisions\
+in the electricity sector. ElecSIM allows non-experts to rapidly\
+prototype new ideas, and is developed around a modular framework\
+\'96 which allows technical experts to add and remove features at will.\
+\
+Reasons to accept the paper (2-3 sentences)\
+-------------------------------------------\
+A good introduction to the design of a useful tool\
+\
+Main weaknesses of the paper (2-3 sentences)\
+--------------------------------------------\
+Limited novelty/technical contributions\
+\
+Detailed comments on the paper\
+------------------------------\
+This paper presents a useful simulation tool for long term electricity pricing planning. It's a useful tool. However, the paper itself is rather like a technical report describing the modules/functions of this tools. It's not a research-style paper that fits ACM e-energy.\
+\
+\
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+\
+\
+Review #54D\
+===========================================================================\
+\
+Overall merit\
+-------------\
+2. Weak reject\
+\
+Reviewer expertise\
+------------------\
+1. No familiarity\
+\
+Paper summary\
+-------------\
+The paper present a tool to simulate the energy market. The proposed tool is quite robust in that it accounts for various entities, parameters, or the electricity market. As a case study the tool is applied to predict the consequences of increasing the carbon tax.\
+\
+Reasons to accept the paper (2-3 sentences)\
+-------------------------------------------\
+The proposed tool is robust and may be helpful for both policy makers and energy market entities.\
+\
+Main weaknesses of the paper (2-3 sentences)\
+--------------------------------------------\
+Unclear prediction accuracy; as such it is not clear the usefulness of the proposed tool is questionable. \
+\
+The writing style is often cumbersome.\
+\
+Detailed comments on the paper\
+------------------------------\
+Is 1 year the unit of time? If so, what is the impact of such a coarse granularity?\
+\
+It is unclear what is really meant by the stochastic vs. non-stochastic cases in Sec. 4.1.\
+\
+\
+Sincerely,\
+Suman and Sebastian (TPC co-chairs)}

@@ -1,0 +1,108 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red9\green79\blue209;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c40784\c85490;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+Review #94A\
+===========================================================================\
+\
+Overall merit\
+-------------\
+3. Weak accept (possibly accepted as Notes for full paper submission)\
+\
+Reviewer expertise\
+------------------\
+3. Knowledgeable (have read or reviewed papers of similar topics recently)\
+\
+Paper summary\
+-------------\
+This paper explores a range of machine learning methods to conduct data-driven forecasting of short-term electricity demand.  K-means clustering is used initially to create individual customer types, and then the different machine learning methods are applied to each type.  Performance is demonstrated on a large dataset of load data collected in Ireland.   Random Forests are shown to outperform neural nets and support vector machines.\
+\
+Comments for author\
+-------------------\
+This paper explores a range of machine learning methods to conduct data-driven forecasting of short-term electricity demand.  K-means clustering is used initially to create individual customer types, and then the different machine learning methods are applied to each type.  Performance is demonstrated on a large dataset of load data collected in Ireland.   Random Forests are shown to outperform neural nets and support vector machines.\
+\
+Load forecasting is becoming an increasingly important tool for network and market operators so the subject matter is certainly relevant.   The approach is systematic and covers a range of different methods on a very large (and real) dataset.  The comparison and outcomes are likely to be helpful for others doing similar work.\
+\
+However, some questions and suggestions:\
+\
+1.  This is now quite a well studied area and the methods used by the authors are not novel.  It is certainly interesting to see the different approaches all compared side by side on the same dataset.  But a comparison to other approaches already in the literature would have been even more powerful.\
+\
+2.  In machine learning there is an important distinction between validation sets and testing sets.  It seems as though you use 6 months (of the 17 available) as a final testing set.  But throughout section 4.5 the "train/test" split is listed as 75-25.  Perhaps this is the cross-validation split?   Consistency in describing validation and training sets would be good.\
+\
+3.  Section 4.2 -- The clustering approach was not 100% clear to me -- how do you get the 48 values representing one customer?  Is this an average 24-hour demand profile, averaged over the whole dataset?  How do you treat weekend vs weekday profiles in that case?  A bit of clarification would help.\
+\
+4.  Why are there no figures showing the forecasts, and how they compare to actuals?  This seems like it should be the most important thing to show in a paper like this!\
+\
+5.  A question on implementation:  once trained, are the models final as they are?  Or do you anticipate that they would need to be periodically retrained?   Customer types might change over time, and so too might typical demand patterns.\
+\
+\
+Minor points:\
+\
+- most readers of machine learning papers would be aware of the basics of neural nets, svms, etc...  the paper actually does a very nice job of succinctly describing these but a reference to a textbook would also have been sufficient and given more space to showcase results\
+\
+- description of Chen et al, "The integrated temperature data and reported that the best results when forecasting ... were during the week due to the influence of weather" ... are you sure you are describing the paper correctly?  Seems like a strange result.\
+\
+- MAPE is a very common and popular forecasting metric, but also a flawed one.   See e.g. {\field{\*\fldinst{HYPERLINK "https://robjhyndman.com/hyndsight/smape/"}}{\fldrslt \cf3 \ul \ulc3 https://robjhyndman.com/hyndsight/smape/}}.  That doesn't mean you shouldn't use it (since everyone else uses it, that's useful for comparison), but it is worth being aware of better metrics like MASE (mean absolute scaled error) for future work.\
+\
+\
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+\
+\
+Review #94B\
+===========================================================================\
+\
+Overall merit\
+-------------\
+3. Weak accept (possibly accepted as Notes for full paper submission)\
+\
+Reviewer expertise\
+------------------\
+2. Some familiarity (have read papers of similar topics before)\
+\
+Paper summary\
+-------------\
+This paper presents a hybrid method using k-means clustering and multiple learning algorithms to forecast energy demands one time slot ahead based on historical data set. They use clustering to improve the accuracy of prediction and compare the performance of different learning algorithms.\
+\
+Comments for author\
+-------------------\
+Strengths:\
+1.Using clustering and multiple learning algorithms to forecast smart-meter data\
+2.Showing that Random Forest achieves a higher accuracy than neural network, support vector regression and LSTM\
+\
+problems:\
+1.Using clustering to deal with training data prior to forecasting to improve accuracy has been proposed in the literature.\
+2.This paper just uses some existing learning algorithms to evaluate how they perform with clustering in the energy demand predicting setting. The technical contribution is limited.\
+\
+\
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+\
+\
+Review #94C\
+===========================================================================\
+\
+Overall merit\
+-------------\
+3. Weak accept (possibly accepted as Notes for full paper submission)\
+\
+Reviewer expertise\
+------------------\
+2. Some familiarity (have read papers of similar topics before)\
+\
+Paper summary\
+-------------\
+This paper considers the problem of forecasting short-term residential energy demand (30 minutes ahead) using a variety of off-the-shelf machine learning techniques. The study first clusters customers into several categories of common demand patterns, then runs a time series forecaster to predict the energy usage 30 minutes in the future.  Random forests were found to produce superior results on a real-world dataset compared to the other algorithms tested.\
+\
+Comments for author\
+-------------------\
+The paper is generally easy to read and the approach is clearly described.  There are also a couple of interesting results e.g. the use of calendar attributes.  My primary concern has to do with the overhead of the algorithms considered. The authors note that a smaller data set was chosen for evaluation due to long training times, and the concrete results reported in Section 5 indicates multiple runtimes in the 10-15 minute range.  This seems problematic for a 30 minute forecast (though the hardware used to produce these times is not reported, which is important for context).  Some more detail would be appropriate here.\
+\
+My other feeling is that a substantial amount of the paper reads like unnecessary background; e.g., much of Sections 2 and 3 are simply basic background on AI/ML techniques that are used off-the-shelf in this work (as opposed to representing part of the actual contribution).  This includes several figures as well (eg Fig 1) that are not central to the paper itself. I believe this work could make a good short paper but perhaps does not justify a full-length paper in the current form.\
+\
+Comment @A1 by Reviewer C\
+---------------------------------------------------------------------------\
+This paper was discussed at the TPC meeting.  The consensus was that while the study is technically sound and addresses an important problem, the novelty is somewhat limited by focusing on off-the-shelf techniques, and a significant amount of the paper is devoted to background discussions of learning techniques that are not part of the core contribution.  As such, the reviewers felt that the authors could reasonably condense their contributions into a Notes submission while retaining the core results.}
