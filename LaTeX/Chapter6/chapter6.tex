@@ -31,7 +31,7 @@ This Chapter is structured as follows: we introduce our work in Section \ref{car
 \label{carbonoptim:sec:intro}
 
 
-In this work, we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. 
+In this work, we use the electricity market agent-based model ElecSim to find an optimum carbon tax policy \cite{Kell}. Specifically, we use a genetic algorithm to find a carbon tax policy to reduce both average electricity price and the relative carbon density by 2035 for the UK electricity market. We compare this optimal strategy to the carbon tax policy of the UK British government.
 
 Carbon taxes have been shown to quickly lower emissions and lower the costs to the public \cite{Wittneben2009}. Carbon taxes are able to send clear price signals, as opposed to a cap-and-trade scheme, such as the EU Emissions Trading System, which has shown to be unstable~\cite{Wittneben2009}.
 
@@ -390,6 +390,38 @@ The `highest' carbon strategy exhibits a higher uptake in nuclear, possibly due 
 \end{figure}
 
 
+\subsection{UK Government Policy}
+
+We compare our optimal carbon tax strategy to a scenario based on the UK Government's policy in this section from 2018 to 2034. Whilst it is not possible to know the future carbon tax strategy over such a long time horizon, we used a naive model approach to project a static carbon tax strategy. That is, the strategy is maintained at the current level of \textsterling18.08 throughout the projected horizon. We ran 40 simulations to capture the variance of the electricity mix. The work in this subsection is additional work to that which was published in \cite{Kell2020a}.
+
+Figure \ref{fig:uk_government_carbon_tax_strategy_scenario} displays the resultant electricity mix of this carbon tax strategy. A significant difference can be seen when compared to the optimal carbon strategy. 50\% of the electricity mix is provided by nuclear energy by 2034. This is almost double that in the optimal carbon tax strategy. 
+
+Solar, the second largest source of electricity, provides 30\% of electricity supply, with CCGT providing ${\sim}$15\%. This is a marked difference to the electricity mix shown by Figure \ref{fig:best_electricity_mixes_facet}, where solar provides over 50\% of electricity supply, followed by nuclear which provides ${\sim}$26\%. 
+
+A larger variance can be seen in this scenario when compared to the optimal carbon tax. This may be because of the less defined differences between generator costs due to the lower carbon price, which does not distinguish so strongly between carbon emitting and non-carbon emitting generators. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\textwidth]{Chapter6/figures/results/uk_scenario_co2_strategy.pdf}
+	\caption{Electricity mixes under UK Government's carbon tax.}
+	\label{fig:uk_government_carbon_tax_strategy_scenario}
+\end{figure}
+
+Table \ref{carbonoptim:table:mix} displays the average electricity price and relative carbon density of this scenario. As is expected, both average electricity price and relative carbon density are above that of the optimal carbon price scenario. This is because of the high short-run marginal cost of nuclear, and the carbon intensity of CCGT. 
+
+\begin{table}[]
+	\centering
+	\label{carbonoptim:table:mix}	
+	\begin{tabular}{@{}ll@{}}
+		\toprule
+		Metric & Value \\ \midrule
+		Average electricity price (\textsterling) & 975.1 \\
+		Relative carbon density                   & 46.6  \\ \bottomrule
+	\end{tabular}
+	\caption{Metrics from UK Government carbon tax policy.}
+\end{table}
+
+These results show the importance of carbon tax in deciding the electricity mix, where a difference is shown between high carbon taxes and low-carbon taxes. However, solar continues to do well without a carbon tax, as does nuclear, due to the high nuclear subsidy provided. 
 
 %lowest_data_mix.pdf
 %flat_data_mix
@@ -409,6 +441,8 @@ We trialled a non-parametric carbon policy by allowing the genetic algorithm to 
 We were able to show that a range of linear carbon taxes were able to achieve both low average electricity price and a relative carbon intensity of zero in 2035. By exploring three different carbon tax policies, we saw that ${\sim}$60\% of electricity consumption in the UK would be provided by solar. The difference between these `optimal' carbon tax policies was largely shown by competition between CCGT, coal and nuclear.
 
 This was largely due to the low short-run marginal cost of solar and nuclear energy, which means that they are often dispatched ahead of the fossil-fuel based generators. CCGT and coal, however, are useful for filling demand when there is low solar irradiance.
+
+Additionally, we ran a carbon tax scenario based on that of the UK Government's. We found that an optimal carbon tax strategy had a much lower average electricity price due to the low short-run marginal cost of renewable energy. We also showed that we were able to achieve a low relative carbon density through a higher carbon tax. The majority of the electricity was provided by nuclear, which, in this scenario, had a high subsidy. Therefore, we believe that a lower carbon density, and lower average electricity price can be obtained without subsidies, but with a higher carbon tax. 
 
 In future work, we would like to try additional scenarios with varying future generation costs and calculate a sensitivity analysis to carbon taxes. In addition to this, we would like to model the uncertain reactions by consumers and generation companies with regards to carbon taxes. The linear carbon tax approach is an introductory approach which can be expanded upon.
 %\section{Acknowledgments}

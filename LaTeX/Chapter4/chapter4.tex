@@ -249,10 +249,6 @@ Hoffman \textit{et al.} also developed a retrospective validation of a predecess
 
 In this section we detail the architecture of how ElecSim has been designed.
 
-
-
-
-
 ElecSim is made up of six parts: the agents, which are split up into demand and GenCos; power plants; a Power Exchange, which controls an electricity spot market; the time-steps ;and the data for parametrisation. A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}.
 
 \begin{figure}
@@ -504,9 +500,9 @@ Similarly to findings of other authors, using a relatively low number of time-st
 To address this problem, whilst maintaining a tractable execution time, we approximated a single year as a subset of proportionally weighted, representative days. This enabled us to reduce computation time. Each representative day consisted of 24 equally separated time-steps, which model hours in a day. Hourly data was chosen, as this was the highest resolution of the dataset available for offshore and  onshore wind and solar irradiance \cite{Pfenninger2016}. A lower resolution would allow us to model more days, however, we would lose accuracy in terms of the variability of the renewable energy sources. 
 
 
-Similarly to Nahmmacher \textit{et al.} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that was closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Distinct to Nahmmacher, however, we used the $k$-means clustering algorithm~\cite{forgy65} as opposed to the Ward's clustering algorithm \cite{doi:10.1080/01621459.1963.10500845}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018}. These days were scaled proportionaly to the number of days within their respective cluster to approximate a total of 365 days.
+Similarly to Nahmmacher \textit{et al.} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that was closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Similarly to Nahmmacher, we used Ward's clustering algorithm and selected the centroid \cite{doi:10.1080/01621459.1963.10500845}. However, we also used the $k$-means clustering algorithm~\cite{forgy65}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018}. These days were scaled proportionally to the number of days within their respective cluster to approximate a total of 365 days.
 
-Equation \ref{elecsim:eq:medoids_series} shows the series for a medoid or centroid, selected by the $k$-means algorithm:
+Equation \ref{elecsim:eq:medoids_series} shows the series for a medoid or centroid, selected by the clustering algorithms:
 
 \begin{equation}
 \label{elecsim:eq:medoids_series}
@@ -790,24 +786,33 @@ Figure \ref{fig:single_dispatched_day} displays the high utilization of low marg
 \subsubsection{Evaluation of representative days}
 \label{ssec:res_repr_days}
 
-Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics versus number of clusters. Both $CE_{av}$ and $NRMSE_{av}$ display similar behaviour, namely the error improves significantly from a single cluster to eight clusters for both centroids and medoids. For the number of clusters greater than eight there are diminishing returns. For $REE_{av}$, however, the error metric is best at a single cluster, and gets worse with the number of clusters. 
+Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics versus number of clusters. Both $CE_{av}$ and $NRMSE_{av}$ display similar behaviour for the $k$-means approach (centroids and medoids), namely the error improves significantly from a single cluster to eight clusters for both centroids and medoids. For the number of clusters greater than eight there are diminishing returns. For $REE_{av}$, however, the error metric is best at a single cluster, and gets worse with the number of clusters. The Wards approach, however, performs significantly worse for all metrics at every number of clusters. 
 
 
 
-We chose eight clusters as a compromise between accuracy of the three error metrics and compute time of the simulation. This is because, eight was the largest number of clusters that gave us the lowest score for $CE_{av}$, $NRMSE_{av}$ and $REE_{av}$ without significantly increasing compute time. Whilst there was little significant difference between centroid and medoid, we chose to use the medoids due to the fact that the extreme high and low values would not be lost due to averaging \cite{Hilbers2019}.
+We chose eight clusters, for centroids and medoids, as a compromise between accuracy of the three error metrics and compute time of the simulation. This is because, eight was the largest number of clusters that gave us the lowest score for $CE_{av}$, $NRMSE_{av}$ and $REE_{av}$ without significantly increasing compute time. Whilst there was little significant difference between centroid and medoid, we chose to use the medoids due to the fact that the extreme high and low values would not be lost due to averaging \cite{Hilbers2019}.
 
+
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
+%	\caption{Number of clusters compared to error metrics.}
+%	\label{fig:error_metrics_vs_cluster_number}
+%\end{figure}
 
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
+	\includegraphics[width=0.9\textwidth]{Chapter4/figures/clusters_compared_wards.pdf}
 	\caption{Number of clusters compared to error metrics.}
 	\label{fig:error_metrics_vs_cluster_number}
 \end{figure}
 
 
 
-\clearpage
+
+
 \section{Validation and performance}
 \label{architecture:sec:validation}
 
@@ -1648,6 +1653,16 @@ A down-payment of 10\% seems to have the lowest carbon emissions. This is due to
 	\caption{Sensitivity analysis where percentage of down payment was varied. Results compare relative carbon emissions in 2035.}
 	\label{elecsim:fig:downpayment_carbon_sensitivity}
 \end{figure}
+
+
+\section{Limitations}
+
+% Requirement of exogeneous price prediction curve
+% Inability to validate on a long-term basis
+% Lack of detailed supply curves (such as maximum wind and solar irradiance)
+% Comparing to other models may not be correct as all models are wrong
+% Future may change dramatically
+% Lack of contracts for difference modelling and other subsidies (apart from nuclear)
 
 
 
