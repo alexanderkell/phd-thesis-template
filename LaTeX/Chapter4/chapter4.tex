@@ -250,7 +250,7 @@ ElecSim is made up of six parts: the agents, which are split up into demand and 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.85\linewidth]{Chapter4/figures/System_overview_large.png}
-	\caption{High level overview.}
+	\caption{High level overview of the ElecSim model.}
 	\label{fig:systemoverview}
 \end{figure}
 
@@ -258,12 +258,12 @@ ElecSim is made up of six parts: the agents, which are split up into demand and 
 
 The configuration file allows for rapid changes to test different hypothesis and scenarios, and points to the different data sources. The configuration file enables one to change the demand growth and shape, future fuel and carbon prices, capital costs, plant availability, investment costs and simulation time.
 
-\paragraph{Demand Agent.} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a load duration curve (LDC). An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. An LDC is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the LDC segments proportionally.
+\paragraph{Demand Agent.} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a \gls{ldc}. An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. An \acrshort{ldc} is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the \acrshort{ldc} segments proportionally.
 
  \begin{figure}
  	\centering
  	\includegraphics[width=0.95\linewidth]{Chapter4/figures/load_duration_curve}
- 	\caption{Example load duration curve in a single year.}
+ 	\caption{Example \acrfull{ldc} for a single year.}
   	\label{fig:loaddurationcurve}
  \end{figure}
 
@@ -272,21 +272,21 @@ The configuration file allows for rapid changes to test different hypothesis and
 
 \paragraph{Generation Company Agents.} The GenCos have two main functions. Investing in power plants and making bids to sell their generation capacity. We will first focus on the buying and selling of electricity, and then cover the investment algorithm.
 
-The power exchange runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their SRMC, to ensure that their generator is being utilised, and reduce the risk of overbidding.
+The power exchange runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their \acrshort{SRMC}, to ensure that their generator is being utilised, and reduce the risk of overbidding.
 
-\paragraph{Investment.} Investment in power plants is made based upon a net present value (NPV) calculation. NPV is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  \vphantom{\color{red}NPV is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is discounted by the discount rate.}
+\paragraph{Investment.} Investment in power plants is made based upon a \Gls{NPV} calculation. \acrshort{npv} is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  \acrshort{npv} is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example, \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is discounted by the discount rate.
 
-Equation \ref{architecture:eq:npv_eq} is the calculation of NPV, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is total number of periods, or lifetime of power plant, and $R_t$ is the net cash flow at time $t$.
+Equation \ref{architecture:eq:npv_eq} is the calculation of \acrshort{npv}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is total number of periods, or lifetime of power plant, and $R_t$ is the net cash flow at time $t$.
 \begin{equation} \label{architecture:eq:npv_eq}
 NPV(t, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}
 \end{equation}
-A discount rate set by a GenCo's weighted average cost of capital (WACC) is often used \cite{KincheloeStephenC1990TWAC}. WACC is the rate that a company is expected to pay on average for its stock and debt. Therefore to achieve a positive NPV, an income larger than the WACC is required. However, a higher WACC is often selected to adjust for varying risk profiles, opportunity costs and rates of return. To account for these differences we sample from a Gaussian distribution, giving us sufficient variance whilst deviating from the expected price.
+A discount rate set by a GenCo's \gls{WACC} is often used \cite{KincheloeStephenC1990TWAC}. WACC is the rate that a company is expected to pay on average for its stock and debt. Therefore to achieve a positive NPV, an income larger than the \acrshort{wacc} is required. However, a higher WACC is often selected to adjust for varying risk profiles, opportunity costs and rates of return. To account for these differences we sample from a Gaussian distribution, giving us sufficient variance whilst deviating from the expected price.
 
 To calculate the NPV, future market conditions must be considered. For this, each GenCo forecasts $N$ years into the future, which we assume is representative of the lifetime of the plant. As in the real world, GenCos have imperfect information, and therefore must forecast expected demand, fuel prices, carbon price and electricity sale price. This is achieved by fitting functions to historical data. Each GenCo is different in that they will use differing historical time periods of data for forecasting.
 
 Fuel and carbon price are forecast using linear regression. Demand, however, is forecast using an exponential function, which considers compounded growth. Linear regression is used if an exponential function is found to be sub-optimal.
 
-The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted PDC using a genetic algorithm. We describe this optimisation in Section \ref{architecture:sec:validation}.
+The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted PDC using a genetic algorithm. We describe this optimisation in Section \ref{elecsim:sec:validation}.
 
 For the simulated market, the forecasted data is used to simulate a market $N$ years into the future using the electricity market algorithm. We simulate a market based on the expected bids -- based on SRMC -- that every operating power plant will make. This includes the removal of plants that will be past their operating period, and the introduction of plants that are in construction or pre-development stages. 
 
@@ -454,19 +454,19 @@ Exogenous variables include fuel and \ce{CO2} prices as well as demand growth. O
 
 
 
-We initialise the United Kingdom with our model with exemplar data from the UK. We model every single power plant in operation in the year 2018, which are owned by their respective generation companies. Individual historical power plant costs are estimated from levelized cost of electricity (LCOE) \cite{Dale2013, IEA2015,IRENA2018}, whereas future and present power plant costs are taken from the department of business and industrial strategy \cite{Department2016}. The variable operation and maintenance cost was defined stochastically to model the varying costs per project. A uniform distribution was chosen to provide sufficient variance between projects.
-
-The demand agent is modelled as a single aggregated demand, split up into 20 segments of a yearly load duration curve (LDC), enabling us to increase speed of computation whilst maintaining accuracy. An LDC is defined as load sorted in order of magnitude. 
-
-We model the influence of outages using availability data for gas, coal, photovoltaic, and wind power generators \cite{Ltd2016, Hunt2015, carroll-j}. Historical availabilities are modelled for old gas, coal and hydro power plants \cite{AlbertaSystemElectricOperator2016}. Capacity factors per geographical location were taken as an average of the UK for solar and wind \cite{Pfenninger2016, Staffell2016}. Where a capacity factor is defined as the ratio of electrical output over a given time period over the maximum possible electrical energy output. 
-
-The generation companies make electricity bids each year for each of their power plants. The market operator then matches demand with supply in order of price, also known as merit-order dispatch. We model a uniform pricing market, where each of the companies are paid the highest accepted bid per load segment.
-
-GenCos have the ability to invest every year in new power plants based on the expected net present value (NPV) of each type of power plant. NPV is a summation of the present value of a series of present and future cash flow. The NPV calculation is dependent on a stochastic representation of GenCos predictions of fuel, carbon and electricity price and demand.
-
-Each GenCo has a separate weighted average cost of capital (WACC), which is the average rate that a company is expected to for its stock and debt. This is used as the discount rate in the NPV calculation \cite{KincheloeStephenC1990TWAC}. The WACC is modelled as a stochastic variable, with a Gaussian distribution, with a $\pm3\%$ standard deviation, with values of 5.9\% for non-nuclear power plants, and 10\% for nuclear power plants \cite{KPMG2017, Paper2012}. 
-
-Stochasticity of fuel price within a year was also modelled, to take into account difference in hedging strategies and chance. An ARIMA model \cite{ARIMA} was fit to historic coal and natural gas prices.
+%We initialise the United Kingdom with our model with exemplar data from the UK. We model every single power plant in operation in the year 2018, which are owned by their respective generation companies. Individual historical power plant costs are estimated from levelized cost of electricity (LCOE) \cite{Dale2013, IEA2015,IRENA2018}, whereas future and present power plant costs are taken from the department of business and industrial strategy \cite{Department2016}. The variable operation and maintenance cost was defined stochastically to model the varying costs per project. A uniform distribution was chosen to provide sufficient variance between projects.
+%
+%The demand agent is modelled as a single aggregated demand, split up into 20 segments of a yearly load duration curve (LDC), enabling us to increase speed of computation whilst maintaining accuracy. An LDC is defined as load sorted in order of magnitude. 
+%
+%We model the influence of outages using availability data for gas, coal, photovoltaic, and wind power generators \cite{Ltd2016, Hunt2015, carroll-j}. Historical availabilities are modelled for old gas, coal and hydro power plants \cite{AlbertaSystemElectricOperator2016}. Capacity factors per geographical location were taken as an average of the UK for solar and wind \cite{Pfenninger2016, Staffell2016}. Where a capacity factor is defined as the ratio of electrical output over a given time period over the maximum possible electrical energy output. 
+%
+%The generation companies make electricity bids each year for each of their power plants. The market operator then matches demand with supply in order of price, also known as merit-order dispatch. We model a uniform pricing market, where each of the companies are paid the highest accepted bid per load segment.
+%
+%GenCos have the ability to invest every year in new power plants based on the expected net present value (NPV) of each type of power plant. NPV is a summation of the present value of a series of present and future cash flow. The NPV calculation is dependent on a stochastic representation of GenCos predictions of fuel, carbon and electricity price and demand.
+%
+%Each GenCo has a separate weighted average cost of capital (WACC), which is the average rate that a company is expected to for its stock and debt. This is used as the discount rate in the NPV calculation \cite{KincheloeStephenC1990TWAC}. The WACC is modelled as a stochastic variable, with a Gaussian distribution, with a $\pm3\%$ standard deviation, with values of 5.9\% for non-nuclear power plants, and 10\% for nuclear power plants \cite{KPMG2017, Paper2012}. 
+%
+%Stochasticity of fuel price within a year was also modelled, to take into account difference in hedging strategies and chance. An ARIMA model \cite{ARIMA} was fit to historic coal and natural gas prices.
 
 
 
@@ -541,7 +541,7 @@ Finally, each of the scaled representative days were concatenated to create the 
 
 
 \begin{equation}
-\label{elecsim:total_scale}
+\label{elecsim:eq:total_scale}
 \sum\limits_{w\in W}\sum\limits_{t=1}^{T=24}\left(w_i t\right)=24\times 365=8760
 \end{equation}
 
@@ -819,7 +819,7 @@ In this section we detail the validation approaches taken in our model. For this
 
 Validation of models is important to ascertain that the output is accurate. However, it should be noted that these long-term simulations are not predictions of the future, rather possible outcomes based upon certain assumptions. Jager posits that a certain outcome or development path, captured by empirical data, might have developed in a completely different direction due to chance. However, the processes that emerge from a model should be realistic and in keeping with expected behaviour \cite{Jager2006a}.
 
-We begin by comparing the price duration curve in the year 2018. Figure \ref{fig:price_duration_curve} shows the N2EX Day Ahead Auction Prices of the UK \cite{nordpool_2019}, the Monte-Carlo simulated electricity prices, and the non Monte-Carlo electricity price throughout the year 2018. Fuel prices varying throughout a year, as does $V_C$ and WACC. WACC is sampled from a Gaussian distribution with a standard deviation of $\pm3$\%. $V_C$ is sampled from a uniform distribution between 30\% and 200\% of the mean $V_C$ price, whilst fuel price is sampled from the residuals of an ARIMA model fit on historical data. The N2EX Day Ahead Market is a day ahead market run by Nord Pool AS. Nord Pool AS runs the largest market for electrical energy in Europe, measured in volume traded and in market share \cite{nordpool_2019}.
+We begin by comparing the price duration curve in the year 2018 for the case with 20 time-steps. Figure \ref{fig:price_duration_curve} shows the N2EX Day Ahead Auction Prices of the UK \cite{nordpool_2019}, the Monte-Carlo simulated electricity prices, and the non Monte-Carlo electricity price throughout the year 2018. Fuel prices varying throughout a year, as does $V_C$ and WACC. WACC is sampled from a Gaussian distribution with a standard deviation of $\pm3$\%. $V_C$ is sampled from a uniform distribution between 30\% and 200\% of the mean $V_C$ price, whilst fuel price is sampled from the residuals of an ARIMA model fit on historical data. The N2EX Day Ahead Market is a day ahead market run by Nord Pool AS. Nord Pool AS runs the largest market for electrical energy in Europe, measured in volume traded and in market share \cite{nordpool_2019}.
 
 
 
@@ -926,7 +926,7 @@ To gain an understanding of expected electricity prices that lead to particular 
 
 
 
-To verify the accuracy of the underlying dynamics of ElecSim, the model was initialised to data available in 2013 and allowed to develop until 2018. We used a genetic algorithm to find the optimum price duration curve predicted ($PPDC$) by the GenCos 10 years ahead of the year of the simulation. This $PPDC$ was used to model expected rate of return of prospective generation types, as shown in Equations \ref{eq:npv_eq} and \ref{eq:revenue_total}. 
+To verify the accuracy of the underlying dynamics of ElecSim, the model was initialised to data available in 2013 and allowed to develop until 2018. We used a genetic algorithm to find the optimum price duration curve predicted ($PPDC$) by the GenCos 10 years ahead of the year of the simulation. This $PPDC$ was used to model expected rate of return of prospective generation types, as shown in Equations \ref{architecture:eq:npv_eq} and \ref{eq:revenue_total}. 
 
 The genetic algorithm's objective was to reduce the error of simulated and observed electricity mix in the year 2018 by finding a suitable $PPDC$ used by each of the GenCos for investment evaluation.
 
@@ -1040,7 +1040,7 @@ We used the DEAP evolutionary computation framework to create our genetic algori
 
 The parameters chosen for the problem explained in Section \ref{sssec:scen-analysis} was a population size of $120$, a crossover probability of $50\%$, a mutation probability of $20\%$ and the parameters, $m$ and $c$, as per Equation \ref{eq:problem_formulation}, were given the bounds of $[0.0, 0.004]$ and $[-30, 100]$ respectively. 
 
-The bounds for $m$ and $c$ were calculated to ensure a positive price duration curve, with a maximum price of \textsterling300 for $50,000$MW. The population size was chosen to ensure a wide range of solutions could be explored, whilst limiting compute time to ${\sim}$1 day per generation to allow for sufficient verification of the results. The crossover and mutation probabilities were chosen due to suggestions from the DEAP evolutionary computation framework \cite{Gagn2012}.
+The bounds for $m$ and $c$ were calculated to ensure a positive price duration curve, with a maximum price of \textsterling300 for 50,000MW. The population size was chosen to ensure a wide range of solutions could be explored, whilst limiting compute time to ${\sim}$1 day per generation to allow for sufficient verification of the results. The crossover and mutation probabilities were chosen due to suggestions from the DEAP evolutionary computation framework \cite{Gagn2012}.
 
 
 \subsubsection{Parameters for Long-Term Scenario Analysis}
@@ -1359,12 +1359,12 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 \begin{figure}
 	\centering
 	\begin{subfigure}{.7\linewidth}
-		\includegraphics[width=0.6\linewidth]{Chapter4/figures/scenarios/demand099-carbon18-datetime.png}
+		\includegraphics[width=1\linewidth]{Chapter4/figures/scenarios/demand099-carbon18-datetime.png}
 		\caption{\textsterling26 to \textsterling150 linearly increasing carbon tax.}
 		\label{fig:demand99carbon18}
 	\end{subfigure}
 	\begin{subfigure}{.7\linewidth}
-		\includegraphics[width=0.6\linewidth]{Chapter4/figures/scenarios/demand099-carbon40-datetime.png}
+		\includegraphics[width=1\linewidth]{Chapter4/figures/scenarios/demand099-carbon40-datetime.png}
 		\caption{{\textsterling40 carbon tax}}
 		\label{fig:demand99carbon40}
 	\end{subfigure}
@@ -1465,7 +1465,7 @@ Agent-based models provide a method of simulating investor behaviour in an elect
 
 \subsection{Scenarios for representative days}
 
-In this section we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{architecture:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. We selected an optimal carbon tax level which would reduce both electricity price and carbon emissions, as shown later in Chapter \ref{chapter:carbon}. The optimal carbon tax strategy found in Chapter \ref{chapter:carbon} is shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Each of the scenarios were run 10 times to display any variability in the results. We chose 10 runs to limit both computation time and cost.
+In this section we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{elecsim:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. We selected an optimal carbon tax level which would reduce both electricity price and carbon emissions, as shown later in Chapter \ref{chapter:carbon}. The optimal carbon tax strategy found in Chapter \ref{chapter:carbon} is shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Each of the scenarios were run 10 times to display any variability in the results. We chose 10 runs to limit both computation time and cost.
 
 
 
@@ -1654,12 +1654,52 @@ A down-payment of 10\% seems to have the lowest carbon emissions. This is due to
 
 \section{Limitations}
 \label{elecsim:sec:limitations}
-% Requirement of exogeneous price prediction curve
-% Inability to validate on a long-term basis
-% Lack of detailed supply curves (such as maximum wind and solar irradiance)
-% Comparing to other models may not be correct as all models are wrong
-% Future may change dramatically
-% Lack of contracts for difference modelling and other subsidies (apart from nuclear)
+
+As with all models, ElecSim features a number of limitations. That is, ElecSim can not model the real world perfectly, and thus should be relied on only with a spectrum of other quantitative and qualitative methods.
+
+A number of limitations exist of ElecSim, which have been listed in this section. This list, however, is not exhaustive, due to the possibility for unknown unknowns.
+
+\begin{enumerate}
+	\item Requirement of exogenous price prediction curve
+	\item Challenges with long-term validation
+	\item National model
+	\item Lack of spatial resolution
+	\item Lack of detailed supply curves (such as maximum wind and solar irradiance)
+	\item Comparing to other models may not be correct as all models are wrong
+	\item Future may change dramatically
+	\item Lack of contracts for difference modelling and other subsidies (apart from nuclear)
+\end{enumerate}
+
+\subsection*{Exogenous price duration curve}
+
+The prediction of electricity prices in the long-term future is difficult to predict with certainty. In ElecSim, we are required to predict electricity prices over the lifetime of a plant. These plants often have lifetimes of 25 years or more. Two methods, which were utilised by the GenCos, were used by ElecSim: Simulating a market 10 years into the future and optimising for predicted price duration curve.
+
+The first method of simulating a market 10 years into the future has two major limitations. Firstly, the investments made 10 years into the future, the costs of fuel, tax all have a large effect. Predictions which may seem perfectly reasonable at the time, may be unreasonable by the time the market occurs in real life. For instance, investments in another country may significantly reduce the cost of renewables in the country where the simulation is being run. Secondly, even if the simulation 10 years into the future is correct, it does not mean that it will be representative of the entire 25 years. However, to fix this problem would require many more simulations, which may not make the model more accurate.
+
+To overcome this limitation, we removed the simulation to generate a predicted price curve and used optimisation to find an optimal predicted price duration curve to generate a scenario. We were then able to check whether the predicted price duration curve had reasonable values. Whilst this enabled us to remove the problem of simulating an uncertain market in the future, it removed the ability to rapidly and quickly trial significantly different scenarios. This is because the predicted price duration curves were optimised for a certain scenario. Whilst it remained possible to change multiple parameters, it became difficult to trial many different carbon prices, as these have a significant impact on the predicted price duration curve.
+
+
+\subsection*{National model}
+
+Due to the high granularity of ElecSim on a technical and temporal level, it becomes difficult to model electricity markets on a global scale. Modelling the United Kingdom can take ${\sim}$16 hours, therefore modelling the rest of the world would take an infeasible amount of time and computing power to function. 
+
+\subsection*{Supply curves}
+
+As ElecSim is a national model, and the UK is a relatively smaller country, we did not take into account the supply-demand curve for resources such as natural gas, coal and other fossil fuels. This is due to the fact that the fossil fuel market is much bigger than solely the United Kingdom. In other words, an increase in demand in the UK would not increase the price on a global scale. 
+
+We did not take into account limits of land usage for solar panels and wind turbines in the model either. This is due to the fact that future technologies may overcome such challenges. For example, currently, offshore wind turbines must be placed in geographies with suitable floors. However, with the advent of floating wind turbines, these limitations could be reduced. Additionally, solar panels may become more effective at being placed offshore.
+
+
+\subsection*{Long-term validation}
+
+Long-term validation, as mentioned in Section \ref{elecsim:sec:validation} is particularly difficult due to the uncertainties involved. We, therefore, do not propose that ElecSim is used as a ground truth. Instead, it should be used as a way to understand possibilities that could arise from scenarios under certain assumptions and conditions. It is only with this knowledge that the model should be used. However, we argue that, whilst limited, quantitative advice has a large role to play in understanding the future, and reducing the uncertainty through understanding complex systems, such as electricity markets. It is only through building and understanding such models, that the uncertainty and complexity involved can be understood. 
+
+Additionally, when modelling the future, many other models compare their outcomes to other models for a specific scenario. Whilst this has the benefit of checking that the underlying dynamics of the models are similar, or the same, it does not test whether the models fit correctly to real-life. It is for this reason that we used cross-validation as well as comparing our model to that of the UK Government, BEIS department.
+
+
+\subsection*{Subsidy modelling}
+
+In this work, we did not model subsidies such as the contracts for difference auction, which is an auction found in the UK, where generators are able to sell their electricity at a stable level, irrespective of the daily price of electricity. This is because we focused on marking ElecSim a generalisable model for different countries. To ensure this, we had to focus on global parameters and reduce complexity. We did, however, model a simple subsidy where an extra price is paid for every MWh for Nuclear. 
 
 
 
@@ -1704,7 +1744,7 @@ Liberalised electricity markets with many heterogeneous players are suited to be
 
 
 
-In this Chapter we have demonstrated that it is possible to use \acrshort{abm} to simulate liberalised electricity markets. Through validation, we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
+In this Chapter we have demonstrated that it is possible to use ABMs to simulate liberalised electricity markets. Through validation, we are able to show that our model, ElecSim, is able to accurately mimic the observed, real-life scenario in the UK between 2013 and 2018. This provides confidence in the underlying dynamics of ElecSim, especially as we are able to model the fundamental transition between coal and natural gas observed between 2013 and 2018 in the UK.
 
 In addition to this, we were able to compare our long-term scenario to that of the UK Government, Department for Business, Energy \& Industrial strategy. We show that we are able to mimic their reference scenario, however, demonstrate a more realistic increase in nuclear power. The parameters that were gained from optimisation show that the BEIS scenario is realistic, however a high nuclear subsidy may be required.
 
@@ -1716,7 +1756,7 @@ To improve the accuracy of our model, we used eight representative days of solar
 
 In addition to this, a method of dealing with the non-validatable nature of electricity markets, as per the definition of Hodges \textit{et al.} is to vary input parameters over many simulations and look for general trends \cite{Hodges}. This could be achieved using ElecSim through the analysis of a reference case, and a limited set of scenarios which include the most important uncertainties in the model structure, parameters, and data, i.e. alternative scenarios which have both high plausibility and major impacts on the outcomes.
 
-Additionally, we showed a number of scenarios, and shows that total demand has an effect on electricity mix. An increasing demand, year-on-year, can lead to an increase in solar to accommodate for this demand. However, if demand reduces, there is a higher investment in nuclear, which contributes to the electricity mix by 2034.
+Additionally, we showed a number of scenarios, and shows that total demand has an effect on electricity mix. An increasing demand, year-on-year, can lead to an increase in solar to accommodate for this demand. However, if demand reduces, there is a higher investment in nuclear, which contributes to the electricity mix by 2035.
 
 We ran a sensitivity analysis of \acrfull{wacc} and down payment required. We showed that these two variables have a large effect on total electricity mix by the year 2035, which in turn effects the total carbon emissions. We therefore show that the input assumptions have an effect on the simulation, which must be considered when analysing model outputs.
 
