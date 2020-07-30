@@ -282,7 +282,7 @@ Examples of online learning algorithms are Passive Aggressive (PA) Regressor \ci
 
 Linear regression is a linear approach to modelling the relationship between a dependent variable and one or more independent variables. Linear regressions can be used for both online and offline learning. In this work, we used them for both online and offline learning. Linear regression models are often fitted using the least squares approach. The least squares approach minimizes the sum of the squares of the residuals. 
 
-Other methods for fitting linear regressions are by minimizing a penalized version of the least squares cost function, such as in ridge and lasso regression \cite{Tibshirani1996a, GeladiPaul1994Mrac}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
+Other methods for fitting linear regressions are by minimizing a penalized version of the least squares cost function, such as in ridge and lasso regression \cite{Tibshirani1996a,GeladiPaul1994Mrac}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
 
 In ridge regression, the OLS loss function is augmented so that we not only minimize the sum of squared residuals but also penalized the size of parameter estimates, in order to shrink them towards zero:
 \begin{equation}
@@ -645,7 +645,7 @@ s.t. \; \; y_i(\boldsymbol{w}\cdot \boldsymbol{x}_t)\geq1.
 \label{forecast:sec:shortterm}
 
 
-In this section we present the work undertaken for short-term demand forecasting. We forecast 30-minutes ahead using smart meter data. 
+In this Section we present the work undertaken for short-term demand forecasting. We forecast 30-minutes ahead using smart meter data. 
 
 \subsection{Methodology}
 \subsubsection{Data Collection}
@@ -697,7 +697,7 @@ To select the optimum number of clusters (\textit{k}) cross-validation was explo
 
 The cross-validation method proposed, worked by trying a different number of clusters per model, and testing for the resulting MAPE. The optimum number of clusters with a low MAPE is then chosen. In this work we varied \textit{k} between 1 and 7, this range was chosen due to the fact that the error did not vary greatly past seven clusters. We fit multiple models per cluster and predicted 6 months of electricity consumption.
 
-With \textit{k}-means clustering, it is possible that with the same initialization number of clusters, different clusters are formed. This is due to the algorithm converging at a local minima. To overcome local minima the \textit{k}-means algorithm is run multiple times and the partition with the smallest squared error is chosen \cite{Jain2010}. In our case, the \textit{k}-means clustering algorithm is run 1000 times to reduce the chance of finding a local minima. 
+With \textit{k}-means clustering, it is possible that with the same initialization number of clusters, different clusters are formed. This is due to the algorithm converging at a local minima. To overcome local minima, the \textit{k}-means algorithm is run multiple times and the partition with the smallest squared error is chosen \cite{Jain2010}. In our case, the \textit{k}-means clustering algorithm is run 1000 times to reduce the chance of finding a local minima. 
 
 The clustering technique utilised in our work was a scaled input approach. The daily load profile was averaged for each customer based on each day of the training data. The data was then scaled so that households of different sizes, but with similar usage profiles were clustered together. This data, which is made up of a \textit{m-by-n} matrix, where \textit{m} is equal to the total number of meters and \textit{n} is equal to 48 (two readings for each hour in the day).
 
@@ -736,7 +736,7 @@ For testing purposes, two sets of models for Random Forests, Multilayer Perceptr
 
 \subsubsection{Time Series Data}
 
-As well as the calendar attributes it is important to consider the historical load demand. This allows the time-series element to be modelled.  
+As well as the calendar attributes, it is important to consider the historical load demand. This allows the time-series element to be modelled.  
 
 To do this, a lagged input of the previous 3 hours, the equivalent three hours from the previous day, and the equivalent 3 hours from the previous week were used. For example, to predict the electricity consumed on the 21st December 2010 at 12:00 pm the electricity between 9:00 pm and 11:30 pm on the 21st of December are used as inputs, as are the times between 9:00 pm and 12:00 pm on the 20th and 14th of December.
 
@@ -774,11 +774,10 @@ To implement a Support Vector Regression model a variety of parameters must be c
 
 To choose the optimum support vector machine kernel cross-validation was also used. Again, with 75\% acting as the training data and 25\% as the test. The kernels compared were polynomial, radial basis function (RBF) and the linear kernel \cite{Chang2010, theodoridis2009pattern}. These were chosen due to their popularity, support and relative speed of computation.
 
-The parameter values selected are shown in Table \ref{tab:kernel}. These parameter values were chosen from the results of cross-validation for each of the different kernels.  From the cross-validation, the linear kernel was found to be the best performing. For this reason, the linear kernel was utilised for prediction of electricity consumption in this work.
+The parameter values selected are shown in Table \ref{forecasting:tab:kernel}. These parameter values were chosen from the results of cross-validation for each of the different kernels.  From the cross-validation, the linear kernel was found to be the best performing. For this reason, the linear kernel was utilised for prediction of electricity consumption in this work.
 
 \begin{table}
 	\centering
-	\label{tab:kernel}
 	\begin{tabular}{ccl}
 		\toprule
 		Kernel Type& Kernel Parameters & RMSE\\
@@ -789,6 +788,7 @@ The parameter values selected are shown in Table \ref{tab:kernel}. These paramet
 		\bottomrule
 	\end{tabular}
 	\caption{Prediction Accuracy Based on Type of Kernel}
+	\label{forecasting:tab:kernel}
 \end{table}
 
 
@@ -808,7 +808,7 @@ Figure \ref{fig:rf_param_tune} shows the results of tuning the parameter of the 
 
 \subsubsection{Multilayer Perceptron}
 
-A feed-forward Multilayer Perceptron is a common neural network architecture used for the prediction of time series data, which has comparable, and occasionally better results than statistical models \cite{Hill1994}. 
+A feed-forward Multilayer Perceptron is a common neural network architecture used for the prediction of time series data, which has comparable, and occasionally better, results than statistical models \cite{Hill1994}. 
 
 The first step when designing a Multilayer Perceptron neural network is to design the architecture. For this case, the number of input neurons is set to 41 (see Table \ref{tab:feature}). Once an input for each neuron is entered, the output layer must be designed. Due to the fact that we are forecasting only one time step ahead (30 minutes ahead) one output neuron is required.
 
