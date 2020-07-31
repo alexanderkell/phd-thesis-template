@@ -13,7 +13,7 @@
 
 \section*{Prologue}
 
-In this chapter we give an introduction to the relevant energy modelling literature. We review the three major types of quantitative models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:equilibrium} introduces equilibrium models and Section \ref{sec:litreview:simulation} introduces simulation models. We present a table in Section \ref{sec:litreview:modelclassification} which displays a high-level overview of the major models in the literature. We conclude this chapter in Section \ref{sec:litreview:conclusion}, where we discuss the limitations and benefits of different types of models.
+In this Chapter, we give an introduction to the relevant energy modelling literature. We review the three major types of quantitative models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:equilibrium} introduces equilibrium models and Section \ref{sec:litreview:simulation} introduces simulation models. We present a table in Section \ref{sec:litreview:modelclassification}, which displays a high-level overview of the major models in the literature. We conclude this Chapter in Section \ref{sec:litreview:conclusion}, where we discuss the limitations and benefits of different types of models.
 
 \section{Energy Modelling}
 \label{sec:litreview:energymodelling}
@@ -27,8 +27,6 @@ Energy modelling is a broad field, and so, there have been multiple reviews whic
 
 \begin{table}[]
 	\footnotesize
-	\caption{Reviews of energy system models}
-	\label{tab:litreview:reviews}
 	\begin{tabular}{p{7.5cm}p{7.5cm}}
 		\toprule
 		Publication                                                                                                                 & Focus                                                                                                        \\ \midrule
@@ -39,6 +37,8 @@ Energy modelling is a broad field, and so, there have been multiple reviews whic
 		A review of energy systems models in the UK: Prevalent usage and categorisation \cite{Hall2016a}                            & Provide a classification schema for energy models.                                                           \\ \midrule
 		A survey of stochastic modelling approaches for liberalised electricity markets \cite{Most2010}                             & Overview and classification of stochastic models dealing with price risks in electricity markets.            \\ \bottomrule
 	\end{tabular}
+	\caption{Different reviews of energy system models}
+	\label{tab:litreview:reviews}
 \end{table}
 
 
@@ -50,7 +50,7 @@ Within these two classifications, there exist four further paradigms of models w
 \begin{description}
 	\item[Energy systems optimisation] These models cover the entire energy system and use optimisation methods. The primary aim of these is to provide scenarios of how the system can involve.
 	\item[Energy system simulation] Models which cover the entire energy system using simulation techniques. These models have a primary purpose of providing forecasts of how the system may evolve.
-	\item[Power system and electricity market] These models are focused exclusively on the electricity system. They have a diverse set of methods and aims. Some can be based on optimisation whilst others are based on simulation.
+	\item[Power system and electricity market] These models are focused exclusively on the electricity system. They have a diverse set of methods and aims. Some can be based on optimisation, whilst others are based on simulation.
 	\item[Economic models] These models focus on long-term growth paths and study the complete economic system.
 \end{description}
 
@@ -59,8 +59,6 @@ In practice, it is possible for models to lie between any of these paradigms and
 
 \begin{table}[]
 	\footnotesize
-	\caption{Four different model types \cite{Pfenninger2014b}}
-	\label{tab:litreview:modeltypes}
 	\begin{tabular}{p{5cm}p{7cm}ll@{}}
 		\toprule
 		Model family                               & Examples                                 & Primary focus                            \\ \midrule
@@ -70,6 +68,8 @@ In practice, it is possible for models to lie between any of these paradigms and
 		Economic models & MARKAL-MACRO, E3MG, POLES   & Operational decisions \\
 		\bottomrule
 	\end{tabular}
+	\caption{Four different energy system model types \cite{Pfenninger2014b}}
+	\label{tab:litreview:modeltypes}
 \end{table}
 
 
@@ -88,7 +88,7 @@ With \acrshort{ires}, such as wind and solar power, the output can vary temporal
 
 Large, detailed bottom-up optimisation models have long been used for energy system modelling. These optimisation models are typically based upon a detailed description of the technical components of the energy system. However, due to this fine granularity, simplifications must often be made to ensure tractability of the model. Often the time-steps are seasonally averaged, the models are limited to nationally aggregated technology builds \cite{Pfenninger2014}.
 
-The ultimate goal of optimisation models is to optimise a given quantity. For example, the minimisation of cost or the maximisation of welfare. In this context, welfare can be designed as the material and physical well-being of people~\cite{Keles2017}. Two examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general-purpose energy systems model~\cite{Pfenninger2014}. Optimisation models are able to provide prescriptive, policy-relevant insight and relate near-term actions to long-term outcomes \cite{DeCarolis2012}.
+The ultimate goal of optimisation models is to optimise a given quantity, for example, the minimisation of cost or the maximisation of welfare. In this context, welfare can be designed as the material and physical well-being of people~\cite{Keles2017}. Two examples of optimisation models are MARKAL/TIMES~\cite{Fishbone1981} and MESSAGE~\cite{Schrattenholzer1981}. MARKAL is possibly the most widely used general-purpose energy systems model~\cite{Pfenninger2014}. Optimisation models are able to provide prescriptive, policy-relevant insight and relate near-term actions to long-term outcomes \cite{DeCarolis2012}.
 
 A linear programming (LP) approach is often used for optimisation. For example, a formulation can be made to minimise the total system cost subject to certain constraints. A constraint could be that of having certain carbon emissions within the model run time, or that supply must meet demand at all times. Mixed-integer linear programming (MILP) approaches force certain variables to be integers. This can be useful when the optimisation of discrete variables is required. For example, the number of power plants or solar panels one should invest in \cite{Ringkjob2018}. It is possible to have non-linear optimisation models. These models use heuristic-based optimisation. Heuristic optimisation differs from traditional optimisation modelling in that they do not necessarily find the global optimum \cite{Banos2011}.  
 
@@ -112,7 +112,7 @@ Equilibrium models take an economic approach. They model the energy sector as a 
 
 POLES is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition, \ce{CO2} emissions are recorded, and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
 
-E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly time-step until 2030, and then every 10 years until 2100. The demand is calculated endogenously using econometrics.
+E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly time-step until 2030, and then every ten years until 2100. The demand is calculated endogenously using econometrics.
 
 MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibrium through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic programming approach as the mathematical underpinning \cite{Hall2016a}.
 
@@ -143,7 +143,7 @@ ELMOD is a bottom-up electricity market model. It considers the engineering and 
 
 In this subsection, we give an outline of current agent-based models available and motivate why the model, ElecSim, is required. Part of the literature review outlined here has been previously published in \cite{Kell}.
 
-Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must therefore, be used to encourage changes to attain a desired outcome. It has been proposed that these complex agents are modelled using ABMs due to their non-deterministic nature \cite{Kell}. 
+Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must, therefore, be used to encourage changes to attain a desired outcome. It has been proposed that these complex agents are modelled using ABMs due to their non-deterministic nature \cite{Kell}. 
 
 A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:litreview:abm_comparison} shows, however, that these do not suit the needs of an open source, long-term market model. 
 
