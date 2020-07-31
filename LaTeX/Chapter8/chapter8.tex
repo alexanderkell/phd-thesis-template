@@ -14,18 +14,37 @@
 
 \section{Thesis summary}
 
-% Presented an open-sourced agent based model called ElecSim
-% Validated the model using cross-validation from 2013-2018 and comparing to the BEIS model to 2035
-% Use of 30-minute ahead and day ahead forecasting to see the impact of these forecasts on the long term electricity market
-% Application of optimising carbon tax using ElecSim
-% Reinforcement learning applied to bidding behaviour 
+In this thesis, we presented an open-sourced, long-term agent-based model for electricity markets. We were able to validate the model through two methods: cross-validation using historic data from 2013 and projecting forward, and comparing our scenario to that of the UK Government to 2035. We found positive results in both: we were able to accurately model the transition from coal to gas between 2013 and 2018, and closely match the scenario of the UK Government. 
+
+For this validation, we used optimisation to find realistic parameters that would generate the desired scenarios. The primary parameter that was optimised was the predicted price duration curve. We found a predicted price duration curve which closely matched the price found in 2018 for the cross-validation using historic data. For the UK government forward scenario, we found a variety of predicted price duration curves, with a few boom and bust cycles in the price of electricity. 
+
+In addition to designing and developing ElecSim, we used the forward scenario generated to optimise a carbon tax strategy. That is, to reduce both carbon emissions and electricity price from 2018 to 2035. To achieve this we used a multi-objective genetic algorithm. We found that we were able to reduce both electricity price and carbon emissions through a combined use of solar, nuclear and onshore energy.
+
+Further, we predicted electricity demand consumption on two time scales: 30-minutes ahead and a day-ahead. We found that we were able to predict electricity demand at these time scales well. Through the use of an online learning method, we were able to reduce the required reserve capacity of the national grid in the UK. We also looked at the long-term impact of poor forecasting errors on the long-term market, and found that poor forecasts led to a high carbon density of electricity grid over the long-term.
+
+Our final Chapter focuses on the use of deep reinforcement learning to model a bidding strategy of a single generation company or group of generation company. The rest of the generation companies bid based upon the respective generator's short run marginal cost. We found that after a capacity controlled by a generation company of 10,000MW, the generation company with the reinforcement learning bidding strategy was able to influence electricity prices in their favour; effectively demonstrating market power within the electricity market. After a controlled capacity of 30,000MW the average electricity price triples from the equilibrium price. 
+
+We utilised agent-based models in this work for several reasons:
+\begin{enumerate}
+	\item Ability to model scenarios in a way that emerges from the generator companies.
+	\item The process which emerge a not a black box, unlike in equilibrium models.
+	\item Optimisation based methods should be interpreted in a normative manner, for example, how policy choices should be carried out. Whereas agent-based models make no assumption on outcomes of scenarios.
+	\item Ability to model decentralised agents with different desires.
+	\item Ability to model outcomes which are not in equilibrium, for example boom and bust cycles.
+\end{enumerate}
+
+An additional reason was for the limited availability of an open-sourced agent-based model, and to ensure that this model is available to the community. Open-sourced models allow for transparency, and to garner greater acceptance and understanding within the wider community. 
+
 
 \section{Future research direction}
 
-% Integrating a higher spatial component
-% Improving on predicting price duration curve (More simulations)
-% Further comparisons to other models
-% Reinforcement learning investment
-% Fuel supply-demand curves
-% Integrate further countries for a coupled model
-% Make speed improvements
+There remains a significant research direction that can be undertaken as part of this work that we would like to carry out in the future. A major aspect of intermittent renewable energy sources such as wind and solar is their distributed nature. On a geographic scale as large as the UK, weather conditions change. Therefore, at any one time, capacity factors may change across the country. It would, therefore, be beneficial to model this, by integrating a higher temporal resolution into the model. This would increase the complexity of the model, and therefore compute time, however, the optimal placement of intermittent renewable energy sources could be modelled to ensure the maximum supply at times when it was required from such sources.
+
+Additionally, the integration of a larger amount of countries could be carried out. For instance, coupling the UK market with that of Ireland, or with the EU. Whilst this would increase the compute time, the results would be more inclusive of other markets and enable for a larger temporal resolution still. Another area of interest is predicting the price of electricity in the future. Scenarios could be run to predict this price and integrate it into the model. Whilst increasing compute time, this would allow us to explore a wider range of scenarios. 
+
+Another aspect is the comparison to further models. The traditional approach of optimisation models offer a variety of ``gold-standard'' scenarios that we could explore. These comparisons could be undertaken to find weaknesses in both our model as well as other models. 
+
+An interesting area of research is the area of investment using optimisation or control algorithms such as reinforcement learning. Reinforcement learning suffers from a requirement to have multiple training epochs, and therefore we found this a difficult task to achieve in this work. However, through either speed improvements or use of another algorithm, this could be integrated into our work. 
+
+Finally, the integration of fuel supply-demand curves could help us in better modelling electricity markets on both a local and global scale. Firstly, land is a limited resource, especially in the United Kingdom, and therefore limits to the amount of solar or wind that can be produced a real. Secondly, on a global scale, as demand for gas or coal reduces there are large effects on price. Firstly this may reduce due to the supply and demand relationship. However, if demand reduces sufficiently, the price may increase, due to the expense of extraction. This may turn out to be a large inflection point, where gas and coal are used much less. 
+

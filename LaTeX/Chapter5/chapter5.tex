@@ -658,7 +658,7 @@ The data was recorded between the 14th July 2009 and 31st December 2010, providi
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Rplot01.png}
-	\caption{Daily load profiles of a single customer over a week between 20th July 2009 and 27th July 2009. }
+	\caption{Daily smart meter data load profiles of a single customer over a week between 20th July 2009 and 27th July 2009. }
 	\label{fig:single_user}
 \end{figure}
 
@@ -672,7 +672,7 @@ Figure \ref{fig:multiple_users} shows eight different residential customer load 
 \begin{figure}
 		\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Rplot02.png}
-	\caption{Daily load profiles of different customers over a single day on the 22nd June 2009.}
+	\caption{Daily smart meter data load profiles of different customers over a single day on the 22nd June 2009.}
 	\label{fig:multiple_users}
 \end{figure}
 
@@ -687,7 +687,7 @@ Figure \ref{fig:similar_customers} displays four different customers with simila
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/similar_cust.png}
-	\caption{Figure showing similar load profiles for four different customers on the 22nd July 2009.}
+	\caption{Figure showing similar smart meter data load profiles for four different customers on the 22nd July 2009.}
 	\label{fig:similar_customers}
 \end{figure}
 
@@ -748,8 +748,6 @@ Once useful information is selected we must encode the data for input into the m
 
 
 \begin{table}
-	\caption{List of Input Data for Models}
-	\label{tab:feature}
 	\begin{tabular}{p{3cm}p{3cm}p{8cm}}
 		\toprule
 		Input & Variable      & Detail description \\
@@ -761,6 +759,8 @@ Once useful information is selected we must encode the data for input into the m
 		22-42 & Lagged inputs & Twenty numeric inputs representing lagged inputs of previous 3 hours, previous 3 hours of previous day including hour to be predicted, and previous 3 hours of previous week including hour to be predicted \\
 		43    & Holiday       & One binary digit representing whether the day was a public holiday  \\     \bottomrule                                                           
 	\end{tabular}
+	\caption{List of Input Data for Models}
+	\label{tab:feature}
 \end{table}
 
 
@@ -834,14 +834,14 @@ To initialize the LSTM, cross-validation was used to select the number of stacke
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
-	\caption{Comparison of accuracy of models forecasting electricity with varying number of clusters.}
+	\caption{Comparison of accuracy of models 30-minute ahead forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/Cluster_Centres.png}
-	\caption{Average load profile for each cluster.}
+	\caption{Average load profile for each cluster of the smart meter data.}
 	\label{fig:clustercentre}
 \end{figure}
 
@@ -856,7 +856,7 @@ Figure \ref{fig:calendar_attr} demonstrates the impact of using calendar attribu
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/calendar_attr.png}
-	\caption{Comparison of accuracy of models with or without calendar attributes.}
+	\caption{Comparison of accuracy of models with or without calendar attributes for 30-minute ahead forecasting.}
 	\label{fig:calendar_attr}
 \end{figure}
 
@@ -1007,7 +1007,7 @@ A number of models perform well, with a low mean absolute error. These include t
 \begin{figure}
 	\centering
 	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/offline_model_mae.eps}
-	\caption{Offline models mean absolute error comparison, with 95\% confidence interval for 5 runs of each model.}
+	\caption{Offline models mean absolute error comparison, with 95\% confidence interval for 5 runs of each model. Forecasting day-ahead.}
 	\label{fig:beis_elecsim_historic_comparison}
 \end{figure}
 
@@ -1024,7 +1024,7 @@ Figure \ref{fig:best_offline_learning_day_distribution} displays the distributio
 \begin{figure}
 	\centering
 	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/ExtraTreesRegressor_distribution_plot.eps}
-	\caption{Best offline machine learning algorithm (Extra Trees Regressor) distribution.}
+	\caption{Best offline machine learning algorithm (Extra Trees Regressor) distribution for day-ahead forecasting.}
 	\label{fig:best_offline_learning_day_distribution}
 \end{figure}
 
@@ -1064,7 +1064,7 @@ For a small deterioration in MAE it is possible to decrease the time it takes to
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/offline_fit_time_vs_mae_all_results_opaque.eps}
-	\caption{Time taken to train the offline models versus mean absolute error. Error bars display standard deviation between points.}
+	\caption{Time taken to train the offline models for day-ahead forecasting versus mean absolute error. Error bars display standard deviation between points.}
 	\label{fig:offline_fit_time_vs_mae}
 \end{figure}
 
@@ -1093,7 +1093,7 @@ The scoring time, displayed in Figure \ref{fig:offline_score_time_vs_mae}, also 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.65\columnwidth]{Chapter5/figures/market-forecasting/results/online_model_mae_barplot.eps}
-	\caption{Comparison of mean absolute errors (MAE) for different online regressor models. MLP results for all parameters are shown in a single barchart due to the very similar MAEs for the differing hyperparameters.}
+	\caption{Comparison of mean absolute errors (MAE) for different online regressor models for day-ahead forecasting. MLP results for all parameters are shown in a single barchart due to the very similar MAEs for the differing hyperparameters.}
 	\label{fig:online_model_mae_barplot}
 \end{figure}
 
@@ -1115,7 +1115,7 @@ Figure \ref{fig:best_online_learning_day_distribution} displays the best online 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-power-0.1.eps}
-	\caption{Best online model (Box-Cox Regressor) distribution.}
+	\caption{Best online model (Box-Cox Regressor) distribution for day-ahead forecasting.}
 	\label{fig:best_online_learning_day_distribution}
 \end{figure}
 
@@ -1124,7 +1124,7 @@ Figure \ref{fig:bad_online_learning_day_distribution} displays the residuals for
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_learning_dists-C-0.1-fit_intercept-true-max_iter-1000-shuffle-false-tol-001.eps}
-	\caption{Online machine learning algorithm distribution. (Passive Aggressive Regressor (C=0.1, fit intercept = true, maximum iterations = 1000, shuffle = false, tolerance = 0.001), chosen as it was the worst result for the passive aggressive model.}
+	\caption{Online machine learning algorithm distribution. (Passive Aggressive Regressor (C=0.1, fit intercept = true, maximum iterations = 1000, shuffle = false, tolerance = 0.001), chosen as it was the worst result for the passive aggressive model for day-ahead forecasting.}
 	\label{fig:bad_online_learning_day_distribution}
 \end{figure}
 
@@ -1135,7 +1135,7 @@ Figure \ref{fig:both_actual_predicted} displays a comparison between the actual 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/both_actual_predicted.eps}
-	\caption{Best offline model compared to the best online model over a one week period.}
+	\caption{Best offline model compared to the best online model over a one week period for day-ahead forecasting.}
 	\label{fig:both_actual_predicted}
 \end{figure}
 
@@ -1153,14 +1153,14 @@ It is noted that when compared to the offline models, the training time is a goo
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_testing_time_vs_mae_all_results_opaque.eps}
-	\caption{Time taken to test the online models versus mean absolute error.}
+	\caption{Time taken to test the online models versus mean absolute error for day-ahead forecasting.}
 	\label{fig:online_test_vs_mae}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.6\columnwidth]{Chapter5/figures/market-forecasting/results/online_training_time_vs_mae_all_results_opaque.eps}
-	\caption{Time taken to train the online models versus mean absolute error.}
+	\caption{Time taken to train the online models versus mean absolute error for day-ahead forecasting.}
 	\label{fig:online_train_vs_mae}
 \end{figure}
 
