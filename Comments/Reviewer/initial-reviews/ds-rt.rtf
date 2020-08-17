@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 The authors of the paper propose an agent based deep learning technique used in combination with a well known simulator (ElecSim) to verify how a single GenCos or a group of aggregate GenCos can influence the bidding price if they control a remarkable share of the generation capacity. In my opinion the approach of using this method to demonstrate the effect of powerful stakeholders on the bidding price is quite interesting and the use of a reinforced learning technique is quite appropriate. While the RL technique is well explained in a mathematically way and all the semplifications of the models are well detailed the paper, for obvious reasons, is missing an effective comparison of the results to measure the effective goodnes of the solution. Some parts are difficult to understand due to complex and too long sentences and I think that a reference is missing relative to the Deep Deterministic Gradient Policy. I also suggest to better explain the results shown in fig.6 and fig 7\
+\
+\
+\
+\
+Summary\
+The paper proposes an approach based on the Deep Deterministic Policy Gradient (DDPG) Reinforcement Learning (RL) to define strategic bids within an electricity market. The agent-based model ElecSim was used to simulate the UK electricity market and for training the RL algorithm. Some different scenarios were considered for a certain subset of agents, ranging from small individual generation companies (GenCos) to large groups of GenCos. The proposed approach makes it possible to explore the ability for GenCos to artificially increase the price in the electricity market within the UK in the case if they are in control of sufficiently large generation capacity.\
+\
+Evaluation\
+The paper is clear, well written and well structured. It provides also enough background information. The approach seems valuable and effective. Experimental results are adequately described.\
+Please check the initial part of the introduction that talks about Monte-Carlo simulation.  Check \'93deep deterministic policy reinforcement learning algorithm\'94 in the abstract (\'93gradient\'94 is missed). A \'93?\'94 appear in a reference on page 3, second column.\
+\
+\
+\
+\
+\
+In this presented manuscript, the authors tried to design a Reinforcement Learning-based intelligent bidding method. The topic is interesting. However, in this presented work, the reviewer cannot find any new ideas. The core of this work, Deep Deterministic Gradient Policy algorithm, was directly adopted from reference [4] without significant improvement/modification. Therefore, the contribution of this work is quite limited and the novelty is inexplicit.\
+\
+Major issues:\
+\
+1. As well-known, trial-and-error search and delayed reward are the two most important distinguishing features of reinforcement learning. Accordingly, designing an appropriate reward function to fit the design objectives and a reasonable policy selection method to balance the exploration and exploitation in choosing actions are two essential parts for implementing a reinforcement learning method. In Section III.A and III.B, the authors just provided a general introduction to the background of RL. However, the authors did not provide a clear introduction about how they adopted the RL technique for solving the targeted problem. \
+2. As mentioned above, the "state, action" pair is essential for implementing the reinforcement learning method. Therefore, the authors need to provide detailed information about the action definition. \
+\
+Minor issues:\
+There are some typos and editing errors. For example, on Page 3, Section III.C, the reference for "nontrivial action spaces [?]" is missing.The authors need to proofread their work carefully for fixing such errors.\
+\
+The authors shown in the manuscript is different from the authors shown in the EDAS system. The authors need to check and fix this issue.}
