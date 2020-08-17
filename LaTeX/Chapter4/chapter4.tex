@@ -496,7 +496,7 @@ Similarly to findings of other authors, using a relatively low number of time-st
 To address this problem, whilst maintaining a tractable execution time, we approximated a single year as a subset of proportionally weighted, representative days. This enabled us to reduce computation time. Each representative day consisted of 24 equally separated time-steps, which model hours in a day. Hourly data was chosen, as this was the highest resolution of the dataset available for offshore and onshore wind and solar irradiance \cite{Pfenninger2016}. A lower resolution would allow us to model more days; however, we would lose accuracy in terms of the variability of the renewable energy sources. 
 
 
-Similarly to Nahmmacher \textit{et al.} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that was closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Similarly to Nahmmacher, we used Ward's clustering algorithm and selected the centroid \cite{doi:10.1080/01621459.1963.10500845}. However, we also used the $k$-means clustering algorithm~\cite{forgy65}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018}. These days were scaled proportionally to the number of days within their respective cluster to approximate a total of 365 days. The Ward's clustering algorithm is an extension of the work published in \cite{Kell2020}
+Similarly to Nahmmacher \textit{et al.} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that was closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Similarly to Nahmmacher, we used Ward's clustering algorithm and selected the centroid \cite{doi:10.1080/01621459.1963.10500845}. However, we also used the $k$-means clustering algorithm~\cite{forgy65}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018a}. These days were scaled proportionally to the number of days within their respective cluster to approximate a total of 365 days. The Ward's clustering algorithm is an extension of the work published in \cite{Kell2020}
 
 Equation \ref{elecsim:eq:medoids_series} shows the series for a medoid or centroid, selected by the clustering algorithms:
 
@@ -914,18 +914,6 @@ To gain an understanding of expected electricity prices that lead to particular 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 To verify the accuracy of the underlying dynamics of ElecSim, the model was initialised to data available in 2013 and allowed to develop until 2018. We used a genetic algorithm to find the optimum price duration curve predicted ($PPDC$) by the GenCos ten years ahead of the year of the simulation. This $PPDC$ was used to model expected rate of return of prospective generation types, as shown in Equations \ref{architecture:eq:npv_eq} and \ref{eq:revenue_total}. 
 
 The genetic algorithm's objective was to reduce the error of simulated and observed electricity mix in the year 2018 by finding a suitable $PPDC$ used by each of the GenCos for investment evaluation.
@@ -936,7 +924,7 @@ For this experiment, we initialised ElecSim with parameters known in 2013 for th
 
 To ensure that the development of the electricity market from 2013 to 2018 was representative of the actual scenario between these years, we set the exogenous variables, such as carbon and fuel prices, to those that were observed during this time period. In other words, the scenario modelled equated to the observed scenario. 
 
-The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from \cite{eu-ets}. Fuel prices for each of the fuels were taken from \cite{beis_fuel_price}. The electricity load data was modelled using data from \cite{gbnationalgridstatus_2019}, offshore, and onshore wind and solar irradiance data was taken from \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
+The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from \cite{eu-ets}. Fuel prices for each of the fuels were taken from \cite{beis_fuel_price}. The electricity load data was modelled using data from \cite{gbnationalgridstatus2019}, offshore, and onshore wind and solar irradiance data was taken from \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
 
 
 
