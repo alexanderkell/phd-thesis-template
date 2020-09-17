@@ -134,11 +134,11 @@ During the course of my PhD I have contributed to the following peer-reviewed pu
 	
 	In this work, we use various machine learning and deep learning techniques to predict electricity demand 30 minutes ahead using \gls{smartmeter} data. We cluster various households using a \textit{k}-means clustering technique to further improve our accuracy. This paper forms the basis for Chapter \ref{chapter:demand}.
 	
-	\item[\textbf{\cite{Kell2020c}}] \textbf{Kell, A. J. M., McGough, A. S., & Forshaw, M. (2020). The impact of online machine-learning methods on long-term investment decisions and generator utilization in electricity markets. 11th International Green and Sustainable Computing Conference, IGSC 2020.}
+	\item[\textbf{\cite{Kell2020c}}] \textbf{Kell, A. J. M., McGough, A. S., \& Forshaw, M. (2020). The impact of online machine-learning methods on long-term investment decisions and generator utilization in electricity markets. 11th International Green and Sustainable Computing Conference, IGSC 2020.}
 	
 	This paper expands on the work carried out in \cite{Kell2018a}. However, instead of predicting 30 minutes ahead, we predict electricity demand the next day, over a 24-hour horizon. To improve results we use online learning, which is able to update the parameters of the models as new data points become available. We show that we are able to significantly improve results by using this approach. Finally, we take the errors of these predictions and show what the long-term effects of these are on the electricity market using the ElecSim models, both in terms of generator utilisation and long-term investment decisions.
 	
-	\item[\textbf{\cite{Kell2019}}] \textbf{Kell, A. J. M., Forshaw, M., \& Stephen McGough, A. (2019). Optimising energy and overhead for large parameter space simulations. 2019 10th International Green and Sustainable Computing Conference, IGSC 2019. }
+	\item[\textbf{\cite{Kell2019}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S., (2019). Optimising energy and overhead for large parameter space simulations. 2019 10th International Green and Sustainable Computing Conference, IGSC 2019. }
 	
 	In this work, we use a multi-objective genetic algorithm to reduce both overhead and energy consumption of a cluster of computers at Newcastle University. We achieve this by varying different parameters of a reinforcement learning algorithm. The methods used in this paper influence much of the work presented in Chapters \ref{chapter:elecsim}, \ref{chapter:demand} and \ref{chapter:reinforcement}.
 	
@@ -147,9 +147,20 @@ During the course of my PhD I have contributed to the following peer-reviewed pu
 	In this paper, we trial different carbon tax strategies using a multi-objective genetic algorithm. We aim to minimise both the electricity price and carbon emissions. We find that we are able to achieve both of these goals through different carbon tax strategies. This work builds on \cite{Kell2019} by using a similar multi-objective genetic algorithm optimisation approach. 
 	
 	
-	
-	
 \end{itemize}
 
 
+\subsection*{Under review publications}
+
+\begin{itemize}
+	
+	\item[\textbf{\cite{Kell2020d}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S. (2020). Exploring market power using deep reinforcement learning for intelligent bidding strategies. IEEE Big Data.}
+
+	This paper uses reinforcement learning to control the bidding behaviour of a single GenCo, or a group of colluding GenCos in the day-ahead market. We find that if the other agents bid using their short run marginal costs, the GenCos which use the reinforcement learning algorithm are able to artificially inflate the market price using their market power. The work in this paper forms the work done in Chapter \ref{chapter:reinforcement}.
+
+	\item[\textbf{\cite{KellA.J.M.McGoughA.S.ForshawM.MercureJ.F.Salas2020}}] \textbf{Kell, A. J. M., McGough A. S., Forshaw, M., Mercure, J. F., Salas, P. (2020). Deep Reinforcement Learning to Minimize Long-Term Carbon Emissions and Cost in the Investment of Electricity Generation. 34th NeurIPS 2020, Workshop on Tackling Climate Change with Machine Learning.}
+	
+	This paper modifies the FTT:Power model by using reinforcement learning as the electricity generator investment algorithm \cite{Mercure2012}. FTT:Power is a global power model which uses logistic differential equations to simulate competition between different electricity generating technologies. We replace these logistic differential equations with the deep deterministic policy gradient reinforcement learning method. We find that, if the goal is to reduce both carbon emissions and electricity price, a transition to renewables occurs.
+
+\end{itemize}
 
