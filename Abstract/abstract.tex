@@ -10,24 +10,21 @@
 \subsection*{Alexander J. M. Kell}
 \end{center}
 
-A transition to a low-carbon electricity supply is crucial to limit the effects of climate change. Reducing carbon emissions could help prevent the world from reaching a tipping point where runaway emissions are likely. Runaway emissions could lead to hot extremes in most inhabited regions, with the possibility for drought in some regions and heavy precipitation in others.
-
+A transition to a low-carbon electricity supply is crucial to limit the impacts of climate change. Reducing carbon emissions could help prevent the world from reaching a tipping point, where runaway emissions are likely. Runaway emissions could lead to extremes in weather conditions around the world - especially in problematic regions unable to cope with these conditions. 
 
 
 %A low-carbon transition in the electricity supply would enable sectors such as the automotive industry, indoor temperature regulation and manufacturing to decarbonise. 
 
-However, the movement to a low-carbon energy supply can not happen instantaneously due to the existing fossil-fuel infrastructure, and the requirement to maintain an energy supply. Therefore, a low-carbon transition is required. However, the decisions various stakeholders should make over the coming decades to reduce these carbon emissions are not obvious. This is due to many long-term uncertainties, such as electricity, fuel and generation costs, human behaviour and the size of electricity demand. In addition, the electricity generators invested in are controlled by many heterogeneous actors in many markets around the world. These markets are known as decentralised electricity markets. Decentralised electricity markets stand in contrast to centralised control markets, where a central actor, such as a government, invest and control the market. Therefore a well choreographed low-carbon transition is required.
+However, the movement to a low-carbon energy supply can not happen instantaneously due to the existing fossil-fuel infrastructure and the requirement to maintain a reliable energy supply. Therefore, a low-carbon transition is required. Though, the decisions various stakeholders should make over the coming decades to reduce these carbon emissions are not obvious. This is due to many long-term uncertainties, such as electricity, fuel and generation costs, human behaviour and the size of electricity demand. In addition, the electricity generators invested in by generation companies are controlled by many heterogeneous actors in many markets around the world. These markets are known as decentralised electricity markets. Decentralised electricity markets stand in contrast to centralised control markets, where a central actor, such as a government, invest and control the market. A well choreographed low-carbon transition is, therefore, required between all of the heterogenous actors in the system, as opposed to changing the behaviour of a single, centralised actor.
 
-To account for these long-term uncertainties in decentralised electricity markets, energy modelling can be used to aid stakeholders better understand the energy system This allows for decisions to be made with more information. Energy models enable a quantitative analysis of how an electricity system may develop over the long term. Simulations are powerful tools to deal with the complexity of these models.
-
-
+To account for these long-term uncertainties in decentralised electricity markets, energy modelling can be used to aid stakeholders better understand the energy system. This allows for decisions to be made with more information. Energy models enable a quantitative analysis of how an electricity system may develop over the long term, and often use scenario analysis to investigate different decisions stakeholders could make. Simulations are powerful tools which can be used to generate insight, and are based upon the complexity of these models. Simulations are computer programs which have been designed to mimic a real-life system, to allow users to gain a better understanding of said system.
 
 
-In this thesis, a novel agent-based simulation model, ElecSim, is created. ElecSim adopts an agent-based approach to simulation where each generation company within the system is modelled with its behaviour. This allows for fine-grained control and modelling of these generation companies. Thus allowing ElecSim to be used to investigate the following significant challenges in moving towards a low-carbon future:
+In this thesis, a novel agent-based simulation model, ElecSim, is created and used. ElecSim adopts an agent-based approach to simulation where each generation company within the system is modelled with its behaviour. This allows for fine-grained control and modelling of these generation companies. Thus allowing ElecSim to be used to investigate the following significant challenges in moving towards a low-carbon future:
 \begin{enumerate}
+	\item Predictions must be made to predict electricity demand at various time intervals in the future. We modelled the impact of poor predictions on generator investments and utilisation over the long-term.
 	\item Devising a carbon tax can be challenging due to multiple competing objectives, and the inability for an iterative learning approach. In this work, we used ElecSim to model multiple different carbon tax policies using a genetic algorithm.
 	\item Many decentralised electricity markets have become oligopolies, where a few generation companies own a majority of the electricity supply. In this thesis, we used reinforcement learning and ElecSim to find ways to ensure healthy competition.
-	\item Predicting short-term electricity demand is a core challenge for electricity markets. This is so that electricity supply can be matched with demand. In this work, various methodologies were used to predict demand 30 minutes and a day ahead. In addition, an exploration of the impact of poor predictions on the long-term electricity market was carried out.
 \end{enumerate}
 
 %What the problem is and how ElecSim helps.
@@ -40,6 +37,7 @@ This requires a number of core challenges to be addressed to ensure ElecSim is f
 	\item The complexity of a model increases with the replication of increasing market features. Therefore, optimisation of the code was required to maintain computational tractability, to allow for multiple scenario runs. 
 	\item Once the model has been developed, its long-term behaviour must be verified to ensure accuracy. In this work, cross-validation was used to validate ElecSim.
 	\item To ensure that the salient parameters are found, a sensitivity analysis was run. In addition, various example scenarios were generated to show the behaviour of the model.
+	\item Predicting short-term electricity demand is a core challenge for electricity markets. This is so that electricity supply can be matched with demand. In this work, various methodologies were used to predict demand 30 minutes and a day ahead. 
 %	\item The validation of this model through the use of cross-validation.
 %	\item Predicting electricity demand 30-minutes and a day-ahead, and observing the effects poor predictions have on the long-term electricity market.
 %	\item Finding an optimal carbon tax to reduce both price and carbon emissions using this model.

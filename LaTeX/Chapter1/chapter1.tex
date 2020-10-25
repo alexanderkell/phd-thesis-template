@@ -19,23 +19,23 @@
 
 % Grand vision/plan - How did we deal with it?
 
-The impacts of global warming on the earth may have profound effects on land and ocean ecosystems \cite{IPCC2018}. The release of carbon emissions into the atmosphere increases the likelihood of the most severe impacts and increases the likelihood that tipping points are reached, where runaway carbon emissions and average temperature rises are likely. Examples of these tipping points include the irreversible melting of Greenland, and Antarctic ice sheets, which could happen with a rise of 1.5\degree C or 2\degree C. A tipping point is an irreversible change in the climate system.
+The impacts of global warming on the earth may have profound effects on land and ocean ecosystems \cite{IPCC2018}. The release of carbon emissions into the atmosphere increases the likelihood of the most severe impacts and increases the likelihood that tipping points are reached, where runaway carbon emissions and average temperature rises are likely. Examples of these tipping points include the irreversible melting of Greenland, and Antarctic ice sheets, which could happen with a rise of 1.5\degree C or 2\degree C \cite{IPCC2018}. A tipping point is an irreversible change in the climate system \cite{IPCC2018}.
 
-Some of the consequences of climate change include increases in mean temperature in most land and ocean regions, hot extremes in most inhabited regions, heavy precipitation in several regions and the probability of drought in some regions \cite{IPCC2018}. Sea level rise will continue beyond 2100 even if global warming is limited to 1.5\degree C. Land-based impacts on biodiversity and ecosystems include species loss and extinction. These are projected to be lower at 1.5\degree C of global warming compare to 2\degree C. Limiting global warming to 1.5\degree C compared to 2\degree C is projected to lower the impacts on terrestrial, freshwater and coastal ecosystems and enable that more of their services are available to humans \cite{IPCC2018}.
+Some of the consequences of climate change include increases in mean temperature in most land and ocean regions, hot extremes in most inhabited regions, heavy precipitation in several regions and the possibility of drought in some regions \cite{IPCC2018}. Sea level rise will continue beyond 2100 even if global warming is limited to 1.5\degree C \cite{IPCC2018}. Land-based impacts on biodiversity and ecosystems include species loss and extinction \cite{IPCC2018}. These are projected to be lower at 1.5\degree C of global warming compare to 2\degree C \cite{IPCC2018}. Limiting global warming to 1.5\degree C compared to 2\degree C is projected to lower the impacts on terrestrial, freshwater and coastal ecosystems and enable that more of their services are available to humans \cite{IPCC2018}.
 
 A study by Cook \textit{et al.} demonstrated that 97\% of scientific literature concurred that recent global warming was anthropogenic \cite{Cook2013}. Limiting global warming requires limiting the total cumulative global anthropogenic emissions of \ce{CO2} \cite{Masson-Delmotte2018}. 
 
-Global carbon emissions from fossil fuels, however, have significantly increased since 1900 \cite{boden2017global}.    Fossil-fuel based electricity generation sources such as coal and natural gas currently provide 65\% of global electricity. Low-carbon sources such as solar, wind, hydro and nuclear provide 35\% \cite{BP2018}. 
+Global carbon emissions from fossil fuels, however, have significantly increased since 1900 \cite{boden2017global}.    Fossil-fuel based electricity generation sources such as coal and natural gas currently provide 65\% of global electricity \cite{BP2018}. Low-carbon sources such as solar, wind, hydro and nuclear provide 35\% \cite{BP2018}. 
 
-Global energy consumption, however, has an even higher proportion of fossil-fuel-based electricity generation. Oil accounts for 34\% of global energy consumption, coal accounts for 27\%, natural gas accounts for 24\%, hydro and nuclear account for 7\% and 4\% respectively, with renewables slightly behind at 4\% \cite{BP2018}. 
+Global energy consumption, however, has an even higher proportion of fossil-fuel-based electricity generation \cite{BPReview}. Oil accounts for 34\% of global energy consumption, coal accounts for 27\%, natural gas accounts for 24\%, hydro and nuclear account for 7\% and 4\% respectively, with renewables slightly behind at 4\% \cite{BP2018}. 
 
-It can be seen, therefore, that a transition to a low-carbon electricity supply is not enough. A transition from fossil-fuel-powered transport and heating to electricity must occur to halt the emissions of \ce{CO2}. This would require a significant increase in electricity demand, a move towards \gls{ires}, such as wind and solar, and storage to fill the gaps in supply when the wind is not blowing or the sun is hidden by clouds. 
+It can be seen, therefore, that a transition to a low-carbon electricity supply is not enough to prevent the impacts of climate change. A low-carbon electricity supply is one which releases a lower amount of carbon dioxide over its lifetime than the current, fossil-fuel based system. A transition from fossil-fuel-powered transport and heating to electricity must also occur to halt the emissions of \ce{CO2}. This would lead to a significant increase in electricity demand, a move towards \gls{ires}, such as wind and solar, and storage to fill the gaps in supply when the wind is not blowing or at night, when solar irradiance is too low. 
 
 However, such a transition needs to be performed in a gradual and non-disruptive manner. This ensures that there are no electricity shortages or power cuts that would cause damage to businesses, consumers and the economy. Due to the large uncertainties and difficult choices related to energy and environment policy, as well as energy technology investment, quantitative analysis can be used in the form of models \cite{DeCarolis2012}. These models can provide an intuition and outlook on the consequences of certain decisions on the energy market.
 
 These models can be used to assess scenarios under different variants of government policy, future electricity generation costs and energy demand. These energy modelling tools aim to mimic the behaviour of energy systems through different sets of equations and data sets to determine the energy interactions between different actors and the economy \cite{Machado2019}.
 
-With the increase in decentralised energy markets and renewable energy, a paradigm shift is required from large centralised models with yearly time-steps to models based upon many actors and high-resolution time steps \cite{Ringkjob2018, Pfenninger2014b}. For this purpose, in this PhD, we have developed a generalisable long-term agent-based simulation of decentralised electricity markets with hourly time steps. Using this \gls{ABM}, we have used various machine learning and statistical models to assess what may happen in the future, what the optimal carbon tax strategies could be, and how to prevent market power within a decentralised electricity market. In addition, we have explored the impact of poor forecasting models on the utilisation and investment of the electricity mix. 
+With the increase in decentralised energy markets and renewable energy, a paradigm shift is required from large centralised models with yearly time-steps to models based upon many actors and high-resolution time steps \cite{Pfenninger2014b, Ringkjob2018}. For this purpose, in this PhD, we have developed a generalisable long-term agent-based simulation of decentralised electricity markets with hourly time steps. Using this \gls{ABM}, we have used various machine learning and statistical models to assess what may happen in the future, what the optimal carbon tax strategies could be, and how to prevent market power within a decentralised electricity market. In addition, we have explored the impact of poor forecasting models on the utilisation and investment of the electricity mix. 
 
 Much of the work of this PhD focuses on the electricity market in the United Kingdom. However, the techniques extend to decentralised electricity markets around the world with similar characteristics. 
 
@@ -55,18 +55,18 @@ In order to understand how the transition to a low-carbon energy supply can be o
 \begin{itemize}
 	
 	
-	\item \textbf{Electricity market modelling} Traditional electricity market models model centralised actors with perfect foresight and information. Other models which model actors as having imperfect foresight and information lack the ability to model multiple time-steps over a long time horizon. In addition, the generalisability of such a model is critical, to enable policymakers from around the world to utilise a common model and approach.
+	\item \textbf{Electricity market modelling.} Traditional electricity market models mimic the behaviour of centralised actors with perfect foresight and information. Other models which model actors as having imperfect foresight and information lack the ability to model multiple time-steps over a long time horizon. In addition, the generalisability of such a model is critical, to enable policymakers from around the world to utilise a common model and approach.
 	
-	\item \textbf{Modelling the variability of intermittent renewable energy supplies} Intermittent renewable energy can produce electricity at both maximum capacity and at a capacity of zero within the same hour period. It, therefore, becomes important to model these variations in power output over a long-term horizon. Otherwise, the model may overestimate the production of energy from renewables and underestimate the variability of such technologies.
+	\item \textbf{Modelling the variability of intermittent renewable energy supplies.} Intermittent renewable energy can produce electricity at both maximum capacity and at zero capacity within the same hour period. It, therefore, becomes important to model these variations in power output over a long-term horizon. Otherwise, the model may overestimate the production of energy from renewables and underestimate the variability of such technologies.
 	
-	\item \textbf{Validating the accuracy of electricity market models} Whilst long-term energy models can provide quantitative advice to experts, policymakers and stakeholders, the veracity of these models are rarely validated. The validation of long-term electricity models can highlight problems with the dynamics of the model, important components, and provide confidence in the outputs. 
+	\item \textbf{Validating the accuracy of electricity market models.} Whilst long-term energy models can provide quantitative advice to experts, policymakers and stakeholders, the veracity of these models are rarely validated. The validation of long-term electricity models can highlight problems with the dynamics of the model, important components, and provide confidence in the outputs. 
 	
 	
-	\item \textbf{Understanding the long-term impact of poor forecasts on electricity markets} Forecasting of electricity demand within electricity markets is critical. The settlement of markets occurs prior to the time in which the demand must be supplied. However, the long-term effect on the markets of poor forecasts has not been investigated.
+	\item \textbf{Understanding the long-term impact of poor forecasts on electricity markets.} Forecasting of electricity demand within electricity markets is critical. The settlement of markets occurs prior to the time in which the demand must be supplied. However, the long-term effect on the markets of poor forecasts has not been investigated.
 	
-	\item \textbf{Finding optimal strategies for decision makers} Setting carbon taxes has been proposed as a solution to reduce our reliance on fossil fuels. However, the impact of such carbon taxes are unknown, as are the optimal strategies. Such a problem can be solved using optimisation based techniques.
+	\item \textbf{Finding optimal strategies for decision makers.} Setting carbon taxes has been proposed as a solution to reduce our reliance on fossil fuels. However, the impact of such carbon taxes are unknown, as are the optimal strategies. Such a problem can be solved using optimisation based techniques.
 	
-	\item \textbf{Limiting the impact of collusion and market power} It is known that oligopolies have a negative effect on markets for consumers. However, what has been explored to a lesser degree, is the proportion of capacity that \gls{GenCo} must own before they have market power. In addition, what would the effect be of a market cap on such electricity markets? Would a market cap reduce the ability for \acrfull{gencos} to inflate electricity prices artificially?
+	\item \textbf{Limiting the impact of collusion and market power.} It is known that oligopolies have a negative effect on markets for consumers. However, what has been explored to a lesser degree, is the proportion of capacity that \gls{GenCo} must own before they have market power. In addition, what would the effect be of a market cap on such electricity markets? Would a market cap reduce the ability for \acrfull{gencos} to inflate electricity prices artificially?
 	
 \end{itemize}
 
@@ -74,7 +74,7 @@ In order to understand how the transition to a low-carbon energy supply can be o
 
 Primarily, in this work, simulation is used as a tool to better understand and make projections for electricity markets. Specifically, in this thesis, the agent-based modelling paradigm is used. This enables us to model generator companies as individual agents, with heterogeneous strategies and characteristics. These agents have access to imperfect information and imperfect foresight. This methodology differentiates us from the traditional centralised optimisation approach.
 
-Machine learning and statistical techniques are used to make short-term forecasts of electricity demand. We use both deep learning and \gls{onlinelearning} to further improve our methods. Online learning is a machine learning approach which utilises new data to update model weights, and does not require the model to be completely retrained. In comparison, deep learning utilises neural networks with many different layers.
+Machine learning and statistical techniques are used to make short-term forecasts of electricity demand. We use both deep learning, offline learning and \gls{onlinelearning} to further improve our methods. Online learning is a machine learning approach which utilises new data to update model weights, and does not require the model to be completely retrained, which is the case for offline learning. In comparison, deep learning utilises neural networks with many different layers. 
 
 Once our simulation model is built, we are able to answer different questions using several approaches. For example, we perturb the exogenous electricity demand by the error distribution generated by the aforementioned electricity demand forecasting methods. This provides an insight into how small errors can have large impacts on the long-term electricity markets in terms of both investments made and generator utilisation.
 
@@ -88,8 +88,8 @@ The work in this thesis makes a number of key contributions:
 
 \begin{enumerate}
 	\item Development of the open-source, generalised long-term agent-based model for decentralised electricity markets, ElecSim \cite{Kell}.
-	\item validation of the aforementioned model through the use of cross-validation through five years and comparison with the established UK Government model until 2035 \cite{Kell2020}.
-	\item optimisation of a carbon tax policy for the UK electricity market using multi-objective genetic algorithm \cite{Kell2020a}.
+	\item Validation of the aforementioned model through the use of cross-validation through five years and comparison with the established UK Government model until 2035 \cite{Kell2020}.
+	\item Optimisation of a carbon tax policy for the UK electricity market using multi-objective genetic algorithm \cite{Kell2020a}.
 	\item Forecasting of electricity demand using machine learning models and exploration of the impact of these errors on the long-term electricity market \cite{Kell2018a}.
 	\item Exploration of the long-term impact of strategic bidding and collusion on decentralised electricity markets.
 \end{enumerate}
@@ -100,12 +100,12 @@ The work in this thesis makes a number of key contributions:
 \begin{itemize}[itemindent=3em]
 	\item[\textbf{Chapter \ref{chapter:intro}}] describes the motivations behind this thesis and highlights the main contributions of the research. Finally, we state the peer-reviewed publications produced during this PhD. 
 	\item[\textbf{Chapter \ref{chapter:background}}] describes the technical background material that relates to the rest of this work.
-	\item[\textbf{Chapter \ref{chapter:litreview}}] investigates the different types of solutions that have been used in the current literature and differentiates our work. 
-	\item[\textbf{Chapter \ref{chapter:elecsim}}] introduces the simulation developed within this work. This includes the technical details of the simulation tool, how we validated this model, and the difficulties of validating such models. Finally, we display a sensitivity analysis to show the impact of various variables, and produce some example future scenarios.
+	\item[\textbf{Chapter \ref{chapter:litreview}}] investigates the different types of solutions that have been used in the current literature and differentiate this from this work. 
+	\item[\textbf{Chapter \ref{chapter:elecsim}}] introduces the simulation framework developed within this work. This includes the technical details of the simulation tool, how we validated this model, and the difficulties of validating such models. Finally, we display a sensitivity analysis to show the impact of various variables, and produce some example future scenarios.
 	\item[\textbf{Chapter \ref{chapter:demand}}] explores the literature on electricity demand forecasting, how this can be improved with online learning, and what the long-term impact of errors are on decentralised electricity markets.
-	\item[\textbf{Chapter \ref{chapter:carbon}}] demonstrates the ability for the model to come up with optimal strategies and scenarios through the use f machine learning techniques. Specifically, we optimise a carbon tax strategy between 2018 and 2035 to reduce both electricity cost and carbon emissions.
-	\item[\textbf{Chapter \ref{chapter:reinforcement}}] demonstrates the ability for large or colluding generator companies to influence the price of electricity in their favour using deep reinforcement learning.
-	\item[\textbf{Chapter \ref{chapter:conclusion}}] summarises the conclusion of the work and motivates future directions for work in this area.
+	\item[\textbf{Chapter \ref{chapter:carbon}}] demonstrates the ability for the model to come up with optimal strategies and scenarios through the use of machine learning techniques. Specifically, we optimise a carbon tax strategy between 2018 and 2035 to reduce both electricity cost and carbon emissions.
+	\item[\textbf{Chapter \ref{chapter:reinforcement}}] demonstrates the ability for large or colluding generator companies to influence the price of electricity in their favour using deep reinforcement learning, as well as an approach to prevent this from occurring through the use of price caps.
+	\item[\textbf{Chapter \ref{chapter:conclusion}}] summarises the conclusions of the work and motivates future directions for work in this area.
 \end{itemize}
 
 
@@ -113,38 +113,35 @@ The work in this thesis makes a number of key contributions:
 
 \section{Related publications}
 
-During the course of my PhD I have contributed to the following peer-reviewed publications:	
+During the course of my PhD I have authored the following peer-reviewed publications:	
 
 \begin{itemize}
 	
 	\item[\textbf{\cite{Kell}}] \textbf{Kell, A., Forshaw, M., \& McGough, A. S. (2019). ElecSim : Monte-Carlo Open-Source Agent-Based Model to Inform Policy for Long-Term Electricity Planning. The Tenth ACM International Conference on Future Energy Systems (ACM e-Energy), 556–565.}
 	
-	In this work, we introduce the agent-based model, ElecSim. We review the current state-of-the-art of agent-based models, and detail the technical foundations of how ElecSim works. We use an initial validation method of comparing the price duration curve of our model to that observed in real life. Finally, we present some example scenarios. This work forms the basis for Chapter \ref{chapter:elecsim}.
+	This work introduces the agent-based model, ElecSim. The current state-of-the-art of agent-based models is reviewed, and the technical foundations of how ElecSim works is detailed. An initial validation method of comparing the price duration curve of the model to that observed in real life is displayed. Finally, some example scenarios are presented. This work forms the basis for Chapter \ref{chapter:elecsim}.
 	
 	\item[\textbf{\cite{Kell2019a}}] \textbf{Kell, A., Forshaw, M., \& McGough, A. S. (2019). Modelling carbon tax in the UK electricity market using an agent-based model. E-Energy 2019 - Proceedings of the 10th ACM International Conference on Future Energy Systems, Ldc, 425–427. }
 	
-	In this paper, we explore further scenarios with varying the carbon tax level. We demonstrate the effect of carbon tax on investments in the electricity market. This work augments the work done in Chapter \ref{chapter:elecsim}.
+	In this paper, further scenarios are explored by varying the carbon tax level. The effect of carbon tax on investments is demonstrated in the electricity market. This work augments the work done in Chapter \ref{chapter:elecsim}.
 	
 	
 	\item[\textbf{\cite{Kell2020}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S. (2020). Long-Term Electricity Market Agent Based Model Validation using Genetic Algorithm based Optimisation. The Eleventh ACM International Conference on Future Energy Systems (e-Energy’20).}
 	
-	In this paper, we make further modifications to further improve our simulation. Through the addition of representative days, we are able to validate our model between 2013 through 2018 by optimising for long-term predicted electricity price. We compare our results to those of the UK Government, for both a long-term and short-term validation. Our results are comparable to those of the UK Government. This work further extends Chapter \ref{chapter:elecsim}.
+	In this paper, further improvements are made to the ElecSim model. Through the addition of representative days, the model is validated between 2013 through 2018 by optimising for long-term predicted electricity price. The results are compared to those of the UK Government, for both a long-term and short-term validation. The results are comparable to those of the UK Government. This work further extends Chapter \ref{chapter:elecsim}.
 	
 	\item[\textbf{\cite{Kell2018a}}] \textbf{Kell, A., McGough, A. S., \& Forshaw, M. (2018). Segmenting residential smart meter data for short-Term load forecasting. e-Energy 2018 - Proceedings of the 9th ACM International Conference on Future Energy Systems.}
 	
-	In this work, we use various machine learning and deep learning techniques to predict electricity demand 30 minutes ahead using \gls{smartmeter} data. We cluster various households using a \textit{k}-means clustering technique to further improve our accuracy. This paper forms the basis for Chapter \ref{chapter:demand}.
+	In this work, various machine learning and deep learning techniques are used to predict electricity demand 30 minutes ahead using \gls{smartmeter} data. Various households are clustered using a \textit{k}-means clustering technique to further improve the accuracy. This paper forms the basis for Chapter \ref{chapter:demand}.
 	
 	\item[\textbf{\cite{Kell2020c}}] \textbf{Kell, A. J. M., McGough, A. S., \& Forshaw, M. (2020). The impact of online machine-learning methods on long-term investment decisions and generator utilization in electricity markets. 11th International Green and Sustainable Computing Conference, IGSC 2020.}
 	
-	This paper expands on the work carried out in \cite{Kell2018a}. However, instead of predicting 30 minutes ahead, we predict electricity demand the next day, over a 24-hour horizon. To improve results we use online learning, which is able to update the parameters of the models as new data points become available. We show that we are able to significantly improve results by using this approach. Finally, we take the errors of these predictions and show what the long-term effects of these are on the electricity market using the ElecSim models, both in terms of generator utilisation and long-term investment decisions.
-	
-	\item[\textbf{\cite{Kell2019}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S., (2019). Optimising energy and overhead for large parameter space simulations. 2019 10th International Green and Sustainable Computing Conference, IGSC 2019. }
-	
-	In this work, we use a multi-objective genetic algorithm to reduce both overhead and energy consumption of a cluster of computers at Newcastle University. We achieve this by varying different parameters of a reinforcement learning algorithm. The methods used in this paper influence much of the work presented in Chapters \ref{chapter:elecsim}, \ref{chapter:demand} and \ref{chapter:reinforcement}.
+	This paper expands on the work carried out in \cite{Kell2018a}. However, instead of predicting 30 minutes ahead, electricity demand over the next day is predicted, over a 24-hour horizon. To improve results, online learning is used, which is able to update the parameters of the models as new data points become available. The results are significantly improved using this method. Finally, the errors of these predictions are taken and the long-term effects of these are shown on the electricity market using the ElecSim models, both in terms of generator utilisation and long-term investment decisions.
+
 	
 	\item[\textbf{\cite{Kell2020a}}] \textbf{Kell, A. J. M., McGough, A. S., \& Forshaw, M. (2020). Optimising carbon tax for decentralised electricity markets using an agent-based model. The Eleventh ACM International Conference on Future Energy Systems (e-Energy’20), 454–460.}
 	
-	In this paper, we trial different carbon tax strategies using a multi-objective genetic algorithm. We aim to minimise both the electricity price and carbon emissions. We find that we are able to achieve both of these goals through different carbon tax strategies. This work builds on \cite{Kell2019} by using a similar multi-objective genetic algorithm optimisation approach. 
+	In this paper, different carbon tax strategies are trialled using a multi-objective genetic algorithm. With the aim to minimise both the electricity price and carbon emissions. It is found that it is possible to achieve both of these goals through different carbon tax strategies. This work builds on \cite{Kell2019} by using a similar multi-objective genetic algorithm optimisation approach. 
 	
 	
 \end{itemize}
@@ -158,9 +155,17 @@ During the course of my PhD I have contributed to the following peer-reviewed pu
 
 	This paper uses reinforcement learning to control the bidding behaviour of a single GenCo, or a group of colluding GenCos in the day-ahead market. We find that if the other agents bid using their short run marginal costs, the GenCos which use the reinforcement learning algorithm are able to artificially inflate the market price using their market power. The work in this paper forms the work done in Chapter \ref{chapter:reinforcement}.
 
+\end{itemize}
+
+
+\subsection*{Paper not forming part of the thesis}
+
+\begin{itemize}
+	\item[\textbf{\cite{Kell2019}}] \textbf{Kell, A. J. M., Forshaw, M., \& McGough, A. S., (2019). Optimising energy and overhead for large parameter space simulations. 2019 10th International Green and Sustainable Computing Conference, IGSC 2019. }
+	
+	In this work, a multi-objective genetic algorithm is used to reduce both overhead and energy consumption of a cluster of computers at Newcastle University. This is achieved by varying different parameters of a reinforcement learning algorithm. The methods used in this paper influence much of the work presented in Chapters \ref{chapter:elecsim}, \ref{chapter:demand} and \ref{chapter:reinforcement}.
+	
 	\item[\textbf{\cite{KellA.J.M.McGoughA.S.ForshawM.MercureJ.F.Salas2020}}] \textbf{Kell, A. J. M., McGough A. S., Forshaw, M., Mercure, J. F., Salas, P. (2020). Deep Reinforcement Learning to Minimize Long-Term Carbon Emissions and Cost in the Investment of Electricity Generation. 34th NeurIPS 2020, Workshop on Tackling Climate Change with Machine Learning.}
 	
 	This paper modifies the FTT:Power model by using reinforcement learning as the electricity generator investment algorithm \cite{Mercure2012}. FTT:Power is a global power model which uses logistic differential equations to simulate competition between different electricity generating technologies. We replace these logistic differential equations with the deep deterministic policy gradient reinforcement learning method. We find that, if the goal is to reduce both carbon emissions and electricity price, a transition to renewables occurs.
-
 \end{itemize}
-
