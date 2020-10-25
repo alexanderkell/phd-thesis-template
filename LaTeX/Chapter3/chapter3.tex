@@ -13,16 +13,16 @@
 
 \section*{Prologue}
 
-In this Chapter, we give an introduction to the relevant energy modelling literature. We review the three major types of quantitative models: (1) optimisation models, (2) simulation models, and (3) equilibrium models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:equilibrium} introduces equilibrium models and Section \ref{sec:litreview:simulation} introduces simulation models. We present a table in Section \ref{sec:litreview:modelclassification}, which displays a high-level overview of the major models in the literature. We conclude this Chapter in Section \ref{sec:litreview:conclusion}, where we discuss the limitations and benefits of different types of models.
+In this Chapter, we give an introduction to the relevant energy modelling literature. We review the three major types of quantitative models: (1) optimisation models, (2) equilibrium models, and (3) simulation models. Section \ref{sec:litreview:energymodelling} gives an introduction to the field of energy modelling. In Section \ref{sec:litreview:optimisation} we introduce optimisation based models. Section \ref{sec:litreview:equilibrium} introduces equilibrium models and Section \ref{sec:litreview:simulation} introduces simulation models. We present a table in Section \ref{sec:litreview:modelclassification}, which displays a high-level overview of the major models in the literature. We conclude this chapter in Section \ref{sec:litreview:conclusion}, where we discuss the limitations and benefits of different types of models.
 
 \section{Energy Modelling}
 \label{sec:litreview:energymodelling}
 
 
-In this thesis, we define energy systems as the entire energy system; from the extraction of primary energy to the final use of energy to produce and supply services and goods \cite{Pfenninger2014b}. Energy systems models can often be modelled by different submodules. These submodules can model technical, environmental and social elements.
+In this thesis, we define energy systems as the entire energy system; from the extraction of primary energy to the final use of energy to produce and supply services and goods \cite{Pfenninger2014b}. An Energy system models can often be modelled by different submodules. These submodules can model technical, environmental and social elements.
 
 
-Energy modelling is a broad field, and so, there have been multiple reviews which attempt to separate these models into different classifications. Examples of the metrics for classification are the mathematical underpinning, the underlying methodology, analytical approach or data requirements. Table \ref{tab:litreview:reviews} shows the various reviews that were used to inform part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
+Energy modelling is a broad field, and so, there have been multiple reviews which attempt to separate these models into different classifications \cite{Savvidis2019a, Sensfub2007,Ringkjob2018}. Examples of the metrics for classification are the mathematical underpinning, the underlying methodology, analytical approach or data requirements. Table \ref{tab:litreview:reviews} shows the various reviews that were used to inform part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
 
 
 \begin{table}[]
@@ -48,7 +48,7 @@ Energy models can typically be classified as top-down macro-economic models or b
 Within these two classifications, there exist four further paradigms of models within the literature: (1) energy systems optimisation models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014b}. These four paradigms can be described as follows:
 
 \begin{description}
-	\item[Energy systems optimisation] These models cover the entire energy system and use optimisation methods. The primary aim of these is to provide scenarios of how the system can involve.
+	\item[Energy systems optimisation] These models cover the entire energy system and use optimisation methods. The primary aim of these is to provide scenarios of how the system can evolve.
 	\item[Energy system simulation] Models which cover the entire energy system using simulation techniques. These models have a primary purpose of providing forecasts of how the system may evolve.
 	\item[Power system and electricity market] These models are focused exclusively on the electricity system. They have a diverse set of methods and aims. Some can be based on optimisation, whilst others are based on simulation.
 	\item[Economic models] These models focus on long-term growth paths and study the complete economic system.
@@ -122,7 +122,7 @@ MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down.
 
 Simulation models simulate an energy system based upon specified equations, characteristics and rules. These are often bottom-up models, and are designed with a high level of technological description \cite{Ringkjob2018}. Agent-based models are a specific case of simulation models, where actors are modelled explicitly as agents with heterogeneous strategies and behaviours.
 
-Whilst energy optimisation models are built open mathematical formulations; simulation models can be built modularly and incorporate a range of methods. These simulation methods can also incorporate optimisation based methods as submodules. Examples of these models are NEMS and PRIMES. NEMS is the US Energy Information Administration's National Energy Modelling System, whereas PRIMES covers the EU. These models have been used since the 1990s.
+Whilst energy optimisation models are built on open mathematical formulations; simulation models can be built modularly and incorporate a range of methods. These simulation methods can also incorporate optimisation based methods as submodules. Examples of these models are NEMS and PRIMES. NEMS is the US Energy Information Administration's National Energy Modelling System, whereas PRIMES covers the EU. These models have been used since the 1990s.
 
 The Annual Energy Outlook is produced by NEMS and is used to inform policy decisions by the US Government. NEMS is made up of a number of submodules that are iteratively solved \cite{Gabriel2001}. Whilst each of the submodules can be implemented in different ways; the model can become complex, and therefore difficult to understand. 
 
@@ -143,11 +143,11 @@ ELMOD is a bottom-up electricity market model. It considers the engineering and 
 
 In this subsection, we give an outline of current agent-based models available and motivate why the model, ElecSim, is required. Part of the literature review outlined here has been previously published in \cite{Kell}.
 
-Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must, therefore, be used to encourage changes to attain a desired outcome. It has been proposed that these complex agents are modelled using ABMs due to their non-deterministic nature \cite{Kell}. 
+Electricity market liberalisation in many western democracies has changed the framework conditions. Centralised, monopolistic, decision making entities have given way to multiple heterogeneous agents acting for their own best interest~\cite{Most2010}. Policy options must, therefore, be used to encourage changes to attain a desired outcome. It has been proposed that these complex agents are modelled using agent-based models (ABMs) due to their non-deterministic nature \cite{Kell}. 
 
 A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:litreview:abm_comparison} shows, however, that these do not suit the needs of an open source, long-term market model. 
 
-There have been a number of recent studies using ABMs which focus on electricity markets. However, they often utilise ad-hoc tools which are designed for a particular application \cite{Saxena2019, hadar2019, Kunzel2018}. In our work, we develop the model ElecSim, which has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address by being open source.
+There have been a number of recent studies using ABMs which focus on electricity markets. However, they often utilise ad-hoc tools which are designed for a particular application \cite{hadar2019, Kunzel2018, Saxena2019}. In our work, we develop the model ElecSim, which has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address by being open source and releasing parameters.
 
 Table \ref{table:litreview:abm_comparison} contains six columns: tool name, whether the tool is open source or not, whether they model long-term investment in electricity infrastructure and the markets they model. We determine how the stochasticity of real life is modelled and determine whether the model is generalisable to different countries. 
 
@@ -237,7 +237,7 @@ The need for a new paradigm in which decentralised agents act within an environm
 
 It is for these reasons that in this thesis, we focus on agent-based models, which move away from the traditional optimisation approach, and allow for a more dynamic solution without rigid mathematical expressions.
 
-Additionally, we found that there was a gap in the literature for an open-source agent-based model that could model long-term investments, was generalisable to many countries ad modelled stochastic inputs. It is for this reason that we developed the model ElecSim.
+Additionally, we found that there was a gap in the literature for an open-source agent-based model that could model long-term investments, was generalisable to many countries and modelled stochastic inputs. It is for this reason that we developed the model ElecSim.
 
 
 
