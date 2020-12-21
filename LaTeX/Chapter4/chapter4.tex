@@ -14,9 +14,9 @@
 
 \section*{Prologue}
 
-In this chapter, we motivate and introduce the agent-based model, ElecSim. The majority of the work presented here was published in \cite{Kell} and \cite{Kell2020}.The contribution of this Chapter is a new open-source framework for the long-term modelling of electricity markets. We provide curated data, improve realism with Monte Carlo sampling, and validate our model using genetic algorithm-based optimisation. We validate our model between 2013 and 2018, and compare our model to the UK Government's baseline scenario. We also provide a sensitivity analysis of important variables. For example the \acrfull{WACC} as well as the percentage of down payment required for a particular investment. The sensitivity analysis, as well as additional scenarios were previously unpublished in \cite{Kell} and \cite{Kell2020}.
+In this chapter, we motivate and introduce the agent-based model, ElecSim. The majority of the work presented here was published in \cite{Kell} and \cite{Kell2020}.The contribution of this Chapter is a new open-source framework for the long-term modelling of electricity markets. We provide curated data for the simulation, to improve realism with Monte Carlo sampling, and validate our model using genetic algorithm-based optimisation. We validate our model using observed data between 2013 and 2018, as well as compare our model to the UK Government's baseline scenario up until 2035. We also provide a sensitivity analysis of important variables. For example the weighted average cost of capital (WACC) as well as the percentage of down payment required for a particular investment. The sensitivity analysis, as well as additional scenarios shown in Section \ref{elecsim:sec:sensitivity} and Subsection \ref{elecsim:sec:representative-days-scenarios} were previously unpublished in \cite{Kell} and \cite{Kell2020}.
 
-We introduce our work in Section \ref{elecsim:sec:intro}, including why a simulation model is required to aid in a low carbon transition. We provide a literature review of work done to validate energy models in Section \ref{elecsim:sec:litreview}. The architecture of the model is presented in \ref{elecsim:sec:architecture}. The model is validated in Section \ref{elecsim:sec:validation}. Various scenarios are presented in Section \ref{elecsim:sec:scenarios}, where we vary demand until 2035. A sensitivity analysis is provided in \ref{elecsim:sec:sensitivity}, where we vary the weighted average cost of capital, as well as the down payment required for investments. Finally, we present the limitations of our model in Section \ref{elecsim:sec:limitations} and conclude our work in Section \ref{elecsim:sec:conclusions}.
+We introduce our work in Section \ref{elecsim:sec:intro}, including why a simulation model is required to aid in a low carbon transition. In addition to the literature review on energy-based simulations presented in Chapter \ref{chapter:litreview}, we provide a literature review of work done to validate energy models in Section \ref{elecsim:sec:litreview}. The architecture of the model is presented in Section \ref{elecsim:sec:architecture}. The model is validated in Section \ref{elecsim:sec:validation}. Various scenarios are presented in Section \ref{elecsim:sec:scenarios}, where we vary demand until 2035. A sensitivity analysis is provided in Section \ref{elecsim:sec:sensitivity}, where we vary the weighted average cost of capital, as well as the down payment required for investments. Finally, we present the limitations of our model in Section \ref{elecsim:sec:limitations} and conclude our work in Section \ref{elecsim:sec:conclusions}.
 
 
 
@@ -58,16 +58,16 @@ We introduce our work in Section \ref{elecsim:sec:intro}, including why a simula
 
 \subsection{Transition to a low-carbon energy supply}
 
-Global carbon emissions from fossil fuels have significantly increased since 1900 \cite{boden2017global}.    Fossil-fuel based electricity generation sources such as coal and natural gas currently provide 65\% of global electricity. Low-carbon sources such as solar, wind, hydro and nuclear provide 35\% \cite{BP2018}. To halt this increase in \ce{CO2} emissions, a transition of the energy system towards a renewable energy system is required. 
+Global carbon emissions from fossil fuels have significantly increased since 1900 \cite{boden2017global}.    Fossil-fuel based electricity generation sources such as coal and natural gas currently provide 65\% of global electricity \cite{BP2018}. Low-carbon sources such as solar, wind, hydro and nuclear provide 35\% . To halt this increase in \ce{CO2} emissions, a transition of the energy system towards a renewable energy system is required. 
 
 % To achieve a low carbon energy infrastructure, and limit the effects of global warming, a transition in the electricity mix is required. Moving from a centralised and homogenous fossil fuel-based system to a distributed system based on renewable energy and batteries. % Batteries are required due to the fact that most renewable sources are effected by conditions outside the control of the owners (e.g. time of day, wind speed and cloud cover). This leads to a need for electricity to be stored at times when renewable production exceeds renewable energy supply, and for the batteries to be discharged at times of high electrical demand and low renewable energy supply. 
 
 
 
 
-Such a transition needs to be performed in a safe and non-disruptive manner -- it may be possible to close down all fossil fuel plants in the next year, though if this leads to electricity shortages and power cuts then this is likely to cause significant problems both for industry and consumers. Therefore a stepped approach which allows seamless transfer is desirable. This may seem a simple process to achieve -- slowly phase out existing fossil fuel generators and replace these by renewable sources -- however, there are many risks and uncertainties in this process. Existing power plants have an expected lifetime and their owners wish to maximise this and the profits which can be made from them, renewable sources are still developing -- meaning that their efficiency and reliability will change in years to come.
+It would seem that such a transition needs to be performed in a safe and non-disruptive manner -- it may be possible to close down all fossil fuel plants in the next year, though if this leads to electricity shortages and power cuts then this is likely to cause significant problems both for industry and consumers. Therefore a stepped approach which allows seamless transfer is desirable. This may seem a simple process to achieve -- slowly phase out existing fossil fuel generators and replace these by renewable sources -- however, there are many risks and uncertainties in this process. Existing power plants have an expected lifetime and their owners wish to maximise this and the profits which can be made from them, renewable sources are still developing -- meaning that their efficiency and reliability will change in years to come.
 
-Due to the long construction times, operating periods and high costs of power plants, investment decisions can have long term impacts on future electricity supply \cite{Chappin2017}. Governments and society, therefore, have a role in ensuring that the negative externalities of emissions are priced into electricity generation. This is most likely to be achieved via a carbon tax and regulation to influence electricity market players such as \acrfull{gencos}.
+Due to the long construction times, operating periods and high costs of power plants, investment decisions can have long term impacts on future electricity supply \cite{Chappin2017}. Governments, therefore, have a role in ensuring that the negative externalities of emissions are priced into electricity generation. This is most likely to be achieved via a carbon tax and regulation to influence electricity market players such as \acrfull{gencos}.
 
 
 Decisions made in electricity markets may have unintended consequences due to their complexity. A method to test hypothesise before they are implemented would, therefore, be useful.
@@ -83,7 +83,7 @@ To aid in such a transition, energy modelling can be used by governments, indust
 
 
 
-Live experimentation of physical processes is not often practical. The costs of real-life experimentation can be prohibitively high, and can require a significant amount of time in order to fully ascertain the long-term trends. There is also a risk that changes can have detrimental impacts and lead to risk-averse behaviour. These factors are true for electricity markets, where decisions can have long term impacts. Simulation, however, can be used for rapidly prototyping ideas. The simulation is parametrised by real-world data and phenomena. Through simulation, the user is able to assess the likelihoods of outcomes under certain scenarios and parameters \cite{Law:603360}.
+Live experimentation of physical processes is not often practical. The costs of real-life experimentation can be prohibitively high, and can require a significant amount of time in order to fully ascertain the long-term trends. There is also a risk that changes can have detrimental impacts and lead to risk-averse behaviour. These factors are true for electricity markets, where decisions can have long term impacts. For instance, by investing in a coal power plant today, will lock in the carbon emissions emitted by the coal power plant for the next 25+ years. Simulation, however, can be used for rapidly prototyping ideas. The simulation is parametrised by real-world data and phenomena. Through simulation, the user is able to assess the likelihoods of outcomes under certain scenarios and parameters \cite{Law:603360}.
 
 
 
@@ -91,19 +91,19 @@ Live experimentation of physical processes is not often practical. The costs of 
 
 Simulation is often used to increase understanding as well as to reduce risk and reduce uncertainty. Simulation allows practitioners to realise a physical system in a virtual model. In this context, a model is defined as an approximation of a system through the use of mathematical formulas and algorithms. Through simulation, it is possible to test a system where real-life experimentation would not be practical due to reasons such as prohibitively high costs, time constraints or risk of detrimental impacts. This has the dual benefit of minimising the risk of real decisions in the physical system, as well as allowing practitioners to test less risk-averse strategies.
 
-\acrfull{abms} are a class of computational simulation models composed of autonomous, interacting agents and model the dynamics of a system. Due to the numerous and diverse actors involved in electricity markets, \acrshort{abms} have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}. 
+\acrfull{abms} are a class of computational simulation models composed of autonomous, interacting agents. These can be built to model systems with many heterogeneous agents. Due to the numerous and diverse actors involved in electricity markets, \acrshort{abms} have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}. 
 
 The work presented in this Chapter develops ElecSim, an open-source \acrshort{abm} that simulates GenCos in a wholesale electricity market. ElecSim models each GenCo as an independent agent and electricity demand. An electricity market facilitates trades between the two. 
 
 GenCos make bids for each of their power plants. Their bids are based on the generators \gls{SRMC} \cite{Perloff2012}, which excludes capital and fixed costs. The electricity market accepts bids in cost order, also known as merit-order dispatch. GenCos invest in power plants based on expected profitability.	
 
-ElecSim is designed to provide quantitative advice to policymakers, allowing them to test policy outcomes under different scenarios. They are able to modify a scenario file to realise a scenario of their choice. It can also be used by energy market developers who can test new electricity sources or policy types, enabling the modelling of changing market conditions.
+ElecSim is designed to provide quantitative advice to policymakers, allowing them to test policy outcomes under different scenarios. A scenario is a single future which could occur under different circumstances. To achieve this, policymakers are able to modify a file to realise a scenario of their choice. For example, by changing anticipated future energy costs, carbon taxes or electricity demand. It can also be used by energy market developers who can test new electricity sources or policies, enabling the modelling of changing market conditions.
 
 This model can be used by the following players:
 
 \begin{itemize}
 	\item {\bf Policy experts} to test policy outcomes under different scenarios and provide quantitative advice to policymakers. They can provide a simple script defining the policies they wish to use along with the parameters for these policies.
-	\item {\bf Energy market developers} who can use the extensible framework to add such things as new energy sources, policy types, consumer profiles and storage types. Thus allowing ElecSim to adapt to a changing ecosystem.
+	\item {\bf Energy market developers} who can use the extensible framework to add elements such as new energy sources, policies, consumer profiles and storage types. Thus allowing ElecSim to adapt to a changing ecosystem.
 \end{itemize}
 
 
@@ -120,16 +120,20 @@ This model can be used by the following players:
 %%%%%%%%%%%%%%%%%%%%%%%%      Paper 2    %%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsubsection{Current approaches}
+
 Optimisation based solutions are the dominant approach for analysing energy policy \cite{Chappin2017}. However, the results of these models should be interpreted in a normative manner. For example, how investment and policy choices should be carried out, under certain assumptions and scenarios. The processes which emerge from an equilibrium model remain a black-box, making it difficult to fully understand the underlying dynamics of the model \cite{Chappin2017}. 
 
 
 
 In addition to this, optimisation models do not allow for endogenous behaviour to emerge from typical market movements, such as investment cycles \cite{Chappin2017, Gross2007}. By modelling these naturally occurring behaviours, policy can be designed that is robust against movements away from the optimum/equilibrium. Thus, helping policy to become more effective in the real world. 
 
-Agent-based models differ from optimisation models by the fact that they are able to explore `\textit{what-if}' questions regarding how a sector could develop under different prospective policies, as opposed to determining optimal trajectories. \acrshort{abm}s are particularly pertinent in decentralised electricity markets, where a centralised actor does not dictate investments made within the electricity sector. \acrshort{abm}s have the ability to closely mimic the real world by, for example, modelling irrational agents, in this case, Generation Companies (GenCos) with incomplete information in uncertain situations \cite{Ghorbani2014}. 
+Agent-based models differ from optimisation models by the fact that they are able to explore `\textit{what-if}' questions regarding how a sector could develop under different prospective policies, as opposed to determining optimal trajectories. \acrshort{abm}s are particularly pertinent in decentralised electricity markets, where a decentralised actors dictate investments made within the electricity sector. \acrshort{abm}s have the ability to closely mimic the real world by, for example, modelling irrational agents, in this case, Generation Companies (GenCos) with incomplete information in uncertain situations \cite{Ghorbani2014}. 
 
 
-To further enhance the performance of ElecSim, we use representative days to model a year time period. Similarly to Nahmmacher \textit{et al.} we demonstrate how clustering of multiple relevant time series such as electricity demand, solar irradiance and wind speed can reduce computational time by selecting representative days ~\cite{Nahmmacher2016}. In this context, representative days are a subset of days that have been chosen due to their ability to approximate the weather and electricity demand in an entire year. Similarly to Nahmacher \textit{et al.} we use a Ward hierarchical clustering algorithm  \cite{doi:10.1080/01621459.1963.10500845}, However, we also try a $k$-means clustering approach \cite{forgy65}. We chose the $k$-means clustering approach due to the previous success of this technique in clustering time series \cite{Kell2018a}. 
+By undertaking calculations for each day of the simulation in ElecSim, we would potentially gain accuracy. For instance, by modelling the variations within days of solar irradiance and wind speed. However, this would have the effect of slowing the simulation down significantly. Therefore, as a compromise between speed and accuracy, we use representative days to model a year time period. 
+
+Similar to Nahmmacher \textit{et al.} we demonstrate how clustering of multiple relevant time series such as electricity demand, solar irradiance and wind speed can reduce computational time by selecting representative days ~\cite{Nahmmacher2016}. In this context, representative days are a subset of days that have been chosen due to their ability to approximate the weather and electricity demand in an entire year. Similar to Nahmacher \textit{et al.} we use a Ward hierarchical clustering algorithm  \cite{doi:10.1080/01621459.1963.10500845}, However, we also try a $k$-means clustering approach \cite{forgy65}. We chose the $k$-means clustering approach due to the previous success of this technique in clustering time series \cite{Kell2018a}. 
 
 
 
@@ -137,7 +141,7 @@ To further enhance the performance of ElecSim, we use representative days to mod
 
 There is a desire to validate the ability of energy-models to make long-term predictions. Validation increases confidence in the outputs of a model and leads to an increase in trust amongst the public and policymakers. Energy models, however, are frequently criticised for being insufficiently validated, with the performance of models rarely checked against historical outcomes \cite{Beckman2011}.
 
-In answer to this, we postulate that \acrshort{abm}s can provide accurate information to decision-makers in the context of electricity markets. We increase the temporal granularity of the work by Kell \textit{et al.} \cite{Kell} and use genetic algorithms to tune the model to observed data enabling us to perform validation. This enables us to understand the parameters required to observe certain phenomena, as well as use these fitted parameters to make inferences about the future. 
+In answer to this, we postulate that \acrshort{abm}s can provide accurate information to decision-makers in the context of electricity markets by using cross-validation of observed electricity mix compared to simulated electricity mix. We increase the temporal granularity of the work by Kell \textit{et al.} \cite{Kell} and use genetic algorithms to tune the model to observed data enabling us to perform validation. This enables us to understand the parameters required to observe certain phenomena, as well as use these fitted parameters to make inferences about the future. 
 
 
 %- A short description of the solution
@@ -150,7 +154,7 @@ We measure the accuracy of projections for our improved \acrshort{abm} with thos
 
 
 
-\subsection{Results}
+\subsection{Model outputs}
 \label{elecsim:sec:results}
 
 Through this validation process, we are able to adequately model the transitional dynamics of the electricity mix in the United Kingdom between 2013 and 2018. During this time there was an ${\sim}88\%$ drop in coal use, ${\sim}44\%$ increase in Combined Cycle Gas Turbines (CCGT), ${\sim}111\% $ increase in wind energy and increase in solar from near zero to ${\sim}1250$MW. We are therefore able to test our model in a transition of sufficient magnitude.
@@ -167,9 +171,9 @@ This allows us to verify the scenarios of other models, in this case, BEIS' refe
 \subsection{Contributions of this Chapter}
 %- What are the key contributions
 
-As part of this work, we contribute a validated open-source agent-based model called ElecSim. Whilst we have used the United Kingdom as a use-case for this thesis, ElecSim is able to model decentralised markets of various sizes. 
+As part of this work, we contribute a validated open-source agent-based model called ElecSim. Whilst we have used the United Kingdom as a use-case for this thesis, ElecSim is able to model decentralised markets of various sizes, and can therefore by used to model other countries. 
 
-To improve our results, we increased the temporal granularity of the model using a $k$-means clustering approach to select a subset of representative days for wind speed, solar irradiance and electricity demand. This subset of representative days enabled us to approximate an entire year and only required a fraction of the total time-steps that would be necessary to model each day of a year independently. This enabled us to decrease the execution time. We show that we are able to provide an accurate framework, through this addition, to allow policymakers, decision-makers and the public to explore the effects of policy on investment in electricity generators. 
+To improve our results as well as making the execution time tractable, we increased the temporal granularity of the model using a $k$-means clustering approach to select a subset of representative days for wind speed, solar irradiance and electricity demand. This subset of representative days enabled us to approximate an entire year and only required a fraction of the total time-steps that would be necessary to model each day of a year independently. We show that we are able to provide an accurate framework, through this addition, to allow policymakers, decision-makers and the public to explore the effects of policy on investment in electricity generators. 
 
 We demonstrate that with a genetic algorithm approach, we are able to optimise parameters to improve the accuracy of our model. Namely, we optimise the predicted electricity price, the uncertainty of this electricity price and nuclear subsidy. We validate our model using the observed electricity mix between 2013-2018.
 
@@ -1452,6 +1456,7 @@ Agent-based models provide a method of simulating investor behaviour in an elect
 
 
 \subsection{Scenarios for representative days}
+\label{elecsim:sec:representative-days-scenarios}
 
 In this Section, we discuss various scenarios under the model which uses representative days as time-steps. This work builds upon the work in Section \ref{elecsim:sec:validation}; we used the same predicted price duration curves as modelled on BEIS' scenario. We selected an optimal carbon tax level which would reduce both electricity price and carbon emissions, as shown later in Chapter \ref{chapter:carbon}. The optimal carbon tax strategy found in Chapter \ref{chapter:carbon} is shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Each of the scenarios were run ten times to display any variability in the results. We chose ten runs to limit both computation time and cost.
 
