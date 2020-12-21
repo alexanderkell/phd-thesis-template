@@ -212,11 +212,11 @@ In addition to this short-term cross-validation, we compare our long-term projec
 
 In this Section, we explore a variety of approaches used in the literature for energy model validation.
 
-The model OSeMOSYS \cite{Howells2011} is validated against the similar model MARKAL\slash TIMES through the use of a case study named UTOPIA. UTOPIA is a simple test energy system bundled with ANSWER, a graphical user interface packaged with the MARKAL model generator \cite{Hunter2013, Noble2004}. Hunter \textit{et al.} use the same case study to validate their model Temoa \cite{Hunter2013}. In these cases, MARKAL\slash TIMES is seen as the "gold standard". In this paper, however, we argue that the ultimate gold standard should be real-world observations, as opposed to a hypothetical scenario.
+The model OSeMOSYS \cite{Howells2011} is validated against the similar model MARKAL\slash TIMES through the use of a case study named UTOPIA. UTOPIA is a simple test energy system bundled with ANSWER \cite{Hunter2013}, a graphical user interface packaged with the MARKAL model generator \cite{Noble2004}. Hunter \textit{et al.} use the same case study to validate their model Temoa \cite{Hunter2013}. In these cases, MARKAL\slash TIMES is seen as the "gold standard". In this paper, however, we argue that the ultimate gold standard should be real-world observations, as opposed to a hypothetical scenario.
 
 The model PowerACE demonstrates that realistic prices are achieved by their modelling approach. However, they do not indicate success in modelling GenCo investment over a prolonged time period \cite{Ringler2012}.
 
-Barazza \textit{et al}. validate their model, BRAIN-Energy, by comparing their results with a few years of historical data; however, they do not compare the simulated and observed electricity mix \cite{Barazza2020}.
+Barazza \textit{et al}. validate their model, BRAIN-Energy, by comparing their results with a few years of historical data; however, they do not compare the simulated and observed electricity mix \cite{Barazza2020}. This reduces the confidence that one may have in the results of the produced electricity mix.
 
 Work by Koomey \textit{et al.} expresses the importance of conducting retrospective studies to help improve models \cite{Koomey2003}. In this case, a model can be rerun using historical data in order to determine how much of the error in the original forecast resulted from structural problems in the model itself, or how much of the error was due to incorrect specification of the fundamental drivers of the forecast \cite{Koomey2003}.
 
@@ -247,9 +247,17 @@ Hoffman \textit{et al.} also developed a retrospective validation of a predecess
 \section{Architecture}
 \label{elecsim:sec:architecture}
 
-In this Section, we detail the architecture of how ElecSim has been designed.
+In this Section, we detail how the architecture of ElecSim has been designed. ElecSim is made up of six parts: 
+\begin{itemize}
+	\item \textbf{GenCos} which are made up of agents.
+	\item \textbf{Demand}
+	\item \textbf{Power plants}.
+	\item A \textbf{power exchange}, which controls an electricity spot market.
+	\item The time-steps.
+	\item The \textbf{data} for parametrisation. This includes both the \textbf{configuration file} and \textbf{data sources}.
+\end{itemize}
 
-ElecSim is made up of six parts: the agents, which are split up into demand and GenCos; power plants; a Power Exchange, which controls an electricity spot market; the time-steps; and the data for parametrisation. A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}.
+A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}. We have placed the items in bold which relate to each part of the figure. Next, we will describe each of the elements described in Figure \ref{fig:systemoverview} in further detail.
 
 \begin{figure}
 	\centering
@@ -262,7 +270,7 @@ ElecSim is made up of six parts: the agents, which are split up into demand and 
 
 The configuration file allows for rapid changes to test different hypothesis and scenarios, and points to the different data sources. The configuration file enables one to change the demand growth and shape, future fuel and carbon prices, capital costs, plant availability, investment costs and simulation time.
 
-\paragraph{Demand Agent.} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a \gls{ldc}. An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. An \acrshort{ldc} is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the \acrshort{ldc} segments proportionally.
+\paragraph{Demand Agent.} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a \gls{ldc}. An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. This Figure effectively shows the baseload level at 460 hours, and the peak load at 2400 hours and above, with the profile displayed between these points. An \acrshort{ldc} is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the \acrshort{ldc} segments proportionally, by multiplying each of the levels by the factor to increase or decrease these load levels. In other words, whilst the magnitude of the LDC may change, the profile does not.
 
 \begin{figure}
 	\centering
@@ -276,7 +284,7 @@ The configuration file allows for rapid changes to test different hypothesis and
 
 \paragraph{Generation Company Agents.} The GenCos have two main functions. Investing in power plants and making bids to sell their generation capacity. We will first focus on the buying and selling of electricity, and then cover the investment algorithm.
 
-The power exchange runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their \acrshort{SRMC}, to ensure that their generator is being utilised, and reduce the risk of overbidding.
+The power exchange (or spot market) runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their SRMC, to ensure that their generator is being utilised, and reduce the risk of overbidding.
 
 \paragraph{Investment.} Investment in power plants is made based upon a \Gls{NPV} calculation. \acrshort{npv} is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  \acrshort{npv} is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example, \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is discounted by the discount rate.
 
