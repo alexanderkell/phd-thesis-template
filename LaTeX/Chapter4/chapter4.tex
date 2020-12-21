@@ -543,12 +543,12 @@ The next step was to scale up the representative days to represent the duration 
 
 %The total time series for series $x$ is shown by Equation \ref{eq:total_time_series}
 
-Finally, each of the scaled representative days were concatenated to create the series used for the calculations which required the capacity factors and the respective number of hours that each capacity factor contributed to the year. Equation \ref{elecsim:eq:total_time_series} displays the total time series for series $x$, where each scaled medoid is concatenated to produce an approximated time series, $\widetilde{P}^x$:
+Finally, each of the scaled representative days were concatenated to create a single series used for the calculations in the simulation. This concatenated number contains information of the required capacity factors and the respective duration curve. Equation \ref{elecsim:eq:total_time_series} displays the total time series of a series $x$, where each scaled medoid is concatenated to produce an approximated time series, $\widetilde{P}^x$:
 
 
 \begin{equation}
 \label{elecsim:eq:total_time_series}
-\widetilde{P}^x=\left(\widetilde{P}^{x,1}_{h},\widetilde{P}^{x,2}_{h},\ldots, \widetilde{P}^{x,||N||}_{h}\right)
+\widetilde{P}^x=\left(\widetilde{P}^{x,1}_{h},\widetilde{P}^{x,2}_{h},\ldots, \widetilde{P}^{x,||N||}_{h}\right),
 \end{equation}
 
 \noindent the total number of hours in the approximated time series, $\widetilde{P}^x$, is equal to the number of hours in a day multiplied by the number of days in a year, which gives the total number of hours in a year ($24\times 365=8760$), as shown by Equation \ref{elecsim:eq:total_scale}:
@@ -556,10 +556,10 @@ Finally, each of the scaled representative days were concatenated to create the 
 
 \begin{equation}
 \label{elecsim:eq:total_scale}
-\sum\limits_{w\in W}\sum\limits_{t=1}^{T=24}\left(w_i t\right)=24\times 365=8760
+\sum\limits_{w\in W}\sum\limits_{t=1}^{T=24}\left(w_i t\right)=24\times 365=8760,
 \end{equation}
 
-\noindent where $w\in W$ is the set of clusters.
+\noindent where $w\in W$ the Set of clusters.
 
 \subsection{Error Metrics}
 
@@ -577,12 +577,10 @@ REE_{av}=\frac
 	{\sum\limits_{t\in T}DC_{P^x_t}}
 	\right|\right)
 }
-{\left|\left|P\right|\right|}
+{\left|\left|P\right|\right|},
 \end{equation}
 
-\noindent where $DC_{P^x_t}$ is the duration curve for $P^x$ and $DC_{\widetilde{P}^x_t}$ is the duration curve for $\widetilde{P}^x$. In this context, the duration curve can be constructed by sorting the capacity factor and electrical load data from high to low. The $x-$axis for the DC exhibits the proportion of time that each capacity factor represents. The approximation of the duration curve is represented in this text as $\widetilde{DC}_{\widetilde{p}^x}$.
-
-$t\in T$ refers to a specific time step of the original time series. $\widetilde{DC}$ refers to the approximated duration curve for $\widetilde{P}^x$. Note that in this text $\left|\cdot\right|$ refers to the absolute value, and $\left|\left|\cdot\right|\right|$ refers to the cardinality of a set and $\left|\left|P\right|\right|$ refers to the total number of of considered time series.
+\noindent where $DC_{P^x_t}$ is the duration curve for $P^x$ and $\widetilde{DC}_{\widetilde{P}^x_t}$ is the duration curve for $\widetilde{P}^x$. In this context, the duration curve can be constructed by sorting the capacity factor and electrical load data from high to low. The $x-$axis for the duration curve exhibits the proportion of time that each capacity factor represents, similar to the load duration curve shown in Figure \ref{fig:loaddurationcurve}. The approximation of the duration curve is represented in this text as $\widetilde{DC}_{\widetilde{p}^x}$. $t\in T$ refers to a specific time step of the original time series. $\widetilde{DC}$ refers to the approximated duration curve for $\widetilde{P}^x$. Note that in this text $\left|\cdot\right|$ refers to the absolute value, and $\left|\left|\cdot\right|\right|$ refers to the cardinality of a set and $\left|\left|P\right|\right|$ refers to the total number of of considered time series.
 
 Specifically, the sum of the observed values, $P^x$, and approximated values, $\widetilde P^x$, for all of the time series are summed. The proportional difference is found, which is summed for each of the different series, $x$, and divided by the number of series, to give $REE_{av}$.
 
@@ -627,10 +625,10 @@ CE_{av}=\frac{2}{\left|\left|P\right|\right|\cdot(\left|\left|P\right|\right|-1)
 \left|
 corr_{p_i,p_j}-\widetilde{corr}_{p_i,p_j}
 \right|
-\right)
+\right),
 \end{equation}
 
-\noindent where $corr_{p1,p2}$ is the Pearson correlation coefficient between two time series $p_1,p_2\in P$, shown by Equation \ref{eq:corr}. Here, $V_{p1,t}$ represents the value of time series $p_1$ at time step t:
+\noindent where $corr_{p1,p2}$ is the Pearson correlation coefficient between two time series $p_1,p_2\in P$, shown by Equation \ref{eq:corr}. Here, $V_{p_1,t}$ represents the value of time series $p_1$ at time step t, and $\hat{V}_{p_1,t}$ refers to the mean of the values of the time series $p_1$ at time $t$:
 
 \begin{equation}
 \label{eq:corr}
@@ -769,21 +767,9 @@ corr_{p1,p2}=\frac
 
 \subsubsection{Integrating higher temporal granularity}
 
-To integrate the additional temporal granularity of the model, extra time-steps were taken per year. The higher temporal granularity of the model enabled us to accurately model the hourly fluctuations in solar and wind which leads to more accurate expectations of the investment opportunities of these technologies ~\cite{Ludig2011,Haydt2011}.
+To integrate the additional temporal granularity of the model, extra time-steps were taken per year. The higher temporal granularity of the model enabled us to accurately model the hourly fluctuations in solar and wind which leads to more accurate expectations of the investment opportunities of these technologies ~\cite{Haydt2011,Ludig2011}.
 
-GenCos make bids at the beginning of every time-step, and the Power Exchange matches demand with supply in merit-order dispatch using a uniform pricing market. An example of the electricity mix in a single representative day is shown in Figure \ref{fig:single_dispatched_day}. 
-
-%
-%\begin{equation}
-%\label{eq:merit-order-dispatch}
-%	\min_{b}
-%	\sum\limits_{n=0}^{||b||}
-%	\left(
-%	b
-%	\right)
-%\end{equation}
-
-Figure \ref{fig:single_dispatched_day} displays the high utilisation of low marginal-cost generators such as nuclear, wind and photovoltaics. At hour 19, an increase in offshore wind leads to a direct decrease in CCGT. In contrast to this, a decrease in offshore and onshore between the hours of 8 and 12 lead to an increase in dispatch of coal and CCGT. One would expect this behaviour to prevent blackouts and meet demand at all times. This process has enabled us to more closely match fluctuations in IRES.
+GenCos make bids at the beginning of every time-step, and the Power Exchange matches demand with supply in merit-order dispatch using a uniform pricing market. An example of the electricity mix in a single representative day is shown in Figure \ref{fig:single_dispatched_day}. Figure \ref{fig:single_dispatched_day} displays the high utilisation of low marginal-cost generators such as nuclear, wind and photovoltaics. At hour 19, an increase in offshore wind leads to a direct decrease in CCGT. In contrast to this, a decrease in offshore and onshore between the hours of 8 and 12 lead to an increase in dispatch of coal and CCGT. One would expect this behaviour to prevent blackouts and meet demand at all times. This process has enabled us to more closely match fluctuations in IRES.
 
 \begin{figure}
 	\centering
@@ -916,19 +902,19 @@ R_t =
 m_{h,t}(PPDC_{h,t}
 -
 C_{var_{h,t}})\right)
-- C_c
+- C_c,
 \end{equation}
 
 \noindent where $m_{h,t}$ is the expected quantity of megawatts sold in hour $h$ of year $t$. $PPDC_{h,t}$ is the predicted price duration curve at year $t$ and hour $h$. $C_{var_{h,t}}$ is the variable cost of the power plant, which is dependent on expected megawatts of electricity produced, $C_c$ is the capital cost.
 
-The predicted price duration curve ($PPDC_{h,t}$) is an expectation of future electricity prices over the lifetime of the plant. The $PPDC_{h,t}$ is a function of supply and demand. However, with renewable electricity generator costs falling, future prices are uncertain and largely dependent upon long-term scenarios of electricity generator costs, fuel prices, carbon taxes and investment decisions. \cite{IRENA2014}. Due to the uncertainty of future electricity prices over the horizon of the lifetime of a power plant, we have set future electricity prices as an exogenous variable that can be set by the user in ElecSim. 
+The predicted price duration curve ($PPDC_{h,t}$) is an expectation of future electricity prices over the lifetime of the plant. The $PPDC_{h,t}$ is a function of supply and demand. However, with renewable electricity generator costs falling  \cite{IRENA2014}, future prices are uncertain and largely dependent upon long-term scenarios of electricity generator costs, fuel prices, carbon taxes and investment decisions \cite{IRENA2014}. Due to the uncertainty of future electricity prices over the horizon of the lifetime of a power plant, we have set future electricity prices as an exogenous variable that can be set by the user in ElecSim. 
 
 
 To gain an understanding of expected electricity prices that lead to particular scenarios, we use a genetic algorithm optimisation approach. This enables us to understand the range of future electricity prices that lead to certain scenarios developing. In addition, it allows us to understand whether the parameters required for certain scenarios to develop are realistic. This enables us to check the assumptions of our model and the likelihood of scenarios. Further, using these optimised parameters, we are better able to further explore `\textit{what-if}' scenarios.
 
 
 
-To verify the accuracy of the underlying dynamics of ElecSim, the model was initialised to data available in 2013 and allowed to develop until 2018. We used a genetic algorithm to find the optimum price duration curve predicted ($PPDC$) by the GenCos ten years ahead of the year of the simulation. This $PPDC$ was used to model expected rate of return of prospective generation types, as shown in Equations \ref{architecture:eq:npv_eq} and \ref{eq:revenue_total}. 
+To verify the accuracy of the underlying dynamics of ElecSim, the model was initialised with data available in 2013 and allowed to develop until 2018. We used a genetic algorithm to find the optimum price duration curve predicted ($PPDC$) by the GenCos ten years ahead of the year of the simulation. This $PPDC$ was used to model expected rate of return of prospective generation types, as shown in Equations \ref{architecture:eq:npv_eq} and \ref{eq:revenue_total}. 
 
 The genetic algorithm's objective was to reduce the error of simulated and observed electricity mix in the year 2018 by finding a suitable $PPDC$ used by each of the GenCos for investment evaluation.
 
@@ -938,7 +924,7 @@ For this experiment, we initialised ElecSim with parameters known in 2013 for th
 
 To ensure that the development of the electricity market from 2013 to 2018 was representative of the actual scenario between these years, we set the exogenous variables, such as carbon and fuel prices, to those that were observed during this time period. In other words, the scenario modelled equated to the observed scenario. 
 
-The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from \cite{eu-ets}. Fuel prices for each of the fuels were taken from \cite{beis_fuel_price}. The electricity load data was modelled using data from \cite{gbnationalgridstatus2019}, offshore, and onshore wind and solar irradiance data was taken from \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
+The data for the observed EU Emission Trading Scheme (ETS) price between 2013 and 2018 was taken from Ember Climate\cite{eu-ets}. Fuel prices for each of the fuels were taken from the department for business, energy and industrial strategy \cite{beis_fuel_price}. The electricity load data was modelled using data from Elexon portal ad Sheffield University \cite{gbnationalgridstatus2019}, offshore, and onshore wind and solar irradiance data was taken from Pfenninger \textit{et al.} \cite{Pfenninger2016}. There were three known significant coal plant retirements in 2016. These were removed from the simulation at the beginning of 2016.
 
 
 
@@ -954,7 +940,7 @@ Equation \ref{eq:problem_formulation} details the optimisation problem formally:
 \min_{m,c} \sum\limits_{o\in O}\left(
 \frac{\left|A_o-f_o(m,c)\right|}
 {\left|\left|O\right|\right|}
-\right)
+\right),
 \end{equation}
 
 \noindent where $o\in O$ refers to the average percentage electricity mix during 2018 for wind (both offshore and onshore generation), nuclear, solar, CCGT, and coal, where $O$ refers to the set of these values. $A_o$ refers to observed electricity mix percentage for the respective generation type in 2018. $f_o(m,c)$ refers to the simulated electricity mix percentage for the respective generation type, also in 2018. The input parameters to the simulation are $m$ and $c$ from the linear $PPDC$, previously discussed, ie. $y=mx+c$. $\left|\left|O\right|\right|$ refers to the cardinality of the set.
@@ -969,10 +955,10 @@ In addition to verifying the ability for ElecSim to mimic observed investment be
 \subsubsection{Scenario}
 \label{sssec:scenario-details}
 
-We initialised the model to 2018 based on \cite{Kell}. The scenario for the development of fuel prices and carbon prices were matched to that of the BEIS reference scenario \cite{DBEIS2019}.
+We initialised the model to 2018 based on our previous work \cite{Kell}. The scenario for the development of fuel prices and carbon prices were matched to that of the BEIS reference scenario \cite{DBEIS2019}.
 
 
-\subsubsection{Optimisation problem} The optimisation approach taken was a similar process to that discussed in Sub-Section \ref{ssec:optimisation-problem}, namely using a genetic algorithm to find the optimum expected price duration curve. However, instead of using a single expected price duration curve for each of the agents for the entire simulation, we used a different expected price duration curve for each year, leading to 17 different curves. This enabled us to model the non-static dynamics of the electricity market over this extended time period. 
+\subsubsection{Optimisation problem} The optimisation approach taken was a similar process to that discussed in subsection \ref{ssec:optimisation-problem}, namely using a genetic algorithm to find the optimum expected price duration curve. However, instead of using a single expected price duration curve for each of the agents for the entire simulation, we used a different expected price duration curve for each year, leading to 17 different curves. This enabled us to model the non-static dynamics of the electricity market over this extended time period. 
 
 In addition to optimising for multiple expected price duration curves, we optimised for a nuclear subsidy, $S_n$. Further, we optimised for the uncertainty in the expected price parameters $m$ and $c$, named $\sigma_m$ and $\sigma_c$ respectively, where $\sigma$ is the standard deviation in a normal distribution. $m$ and $c$ are the parameters for the predicted price duration curve, as previously defined, of the form $y=mx+c$.  
 
@@ -988,7 +974,7 @@ A modification was made to the reward algorithm for the long-term scenario case.
 \sum\limits_{o\in O}\left(
 \frac{\left|A_{y_o}-f_{y_o}(m_y,c_y)\right|}
 {\left|\left|O\right|\right|}
-\right)
+\right),
 \end{equation}
 
 \noindent where $M$ and $C$ are the sets of the 17 parameters of $m_y$ and $c_y$ respectively for each year, $y$. $y\in Y$ refers to each year between 2018 and 2035. $m_y$ and $c_y$ refer to the parameters for the predicted price duration curve, of the form $y=mx+c$ for the year $y$. $A_{y_o}$ refers to the actual electricity mix percentage for the year $y$ and generation type $o$. Finally, $f_{y_o}(m_y,c_y)$ refers to the simulated electricity mix percentage with the input parameters to the simulation of $m$ and $c$ for the year $y$.
@@ -1152,7 +1138,7 @@ Figure \ref{fig:best_price_curve} displays the optimal predicted price duration 
 	\label{fig:best_price_curve}
 \end{figure}
 
-The yellow points show the simulated price duration curve for the first year of the simulation (2018). The red line (Simulated Fit (2018)) is a linear regression that approximates the simulated price duration curve (PDC (2018)). The blue line shows the price duration curve predicted ($PPDC$) by the GenCos to be representative of the expected prices over the lifetime of the plant.
+The orange points show the simulated price duration curve for the first year of the simulation (2018). The red line (Simulated Fit (2018)) is a linear regression that approximates the simulated price duration curve (PDC (2018)). The blue line shows the price duration curve predicted ($PPDC$) by the GenCos to be representative of the expected prices over the lifetime of the plant.
 
 %The blue line is the price duration curve simulated in 2018, and the red line is the optimal predicted electricity mix. 
 
@@ -1191,20 +1177,12 @@ ElecSim was able to model the increase in renewables and stability of nuclear en
 
 In this Section, we discuss the results of the analysis of the BEIS reference scenario explained in Section \ref{sssec:scen-analysis}. Specifically, we created a scenario that mimicked that of BEIS in ElecSim and optimised a number of parameters using a genetic algorithm to match this scenario. Through this, we are able to gain confidence in the underlying dynamics of ElecSim to simulate long-term behaviours. Further, this enables us to verify the likelihood of the scenario by analysing whether the parameters required to make such a scenario are realistic.
 
-Figure \ref{fig:forward_scenario_beis_elecsim} displays the electricity mix projected by both ElecSim and BEIS. To generate this image, we ran 60 scenarios under the optimal collection of predicted price duration curves, nuclear subsidy and uncertainty in predicted price duration curves. 
-
-The optimal parameters were chosen by choosing the parameter set with the lowest mean error per electricity generation type and per year throughout the simulation, as shown by Equation \ref{eq:long-term-reward}.
+Figure \ref{fig:forward_scenario_beis_elecsim} displays the electricity mix projected by both ElecSim and BEIS. To generate this image, we ran 60 scenarios under the optimal collection of predicted price duration curves, nuclear subsidy and uncertainty in predicted price duration curves. The optimal parameters were chosen by choosing the parameter set with the lowest mean error per electricity generation type and per year throughout the simulation, as shown by Equation \ref{eq:long-term-reward}.
 
 
 Figure \ref{fig:forward_scenario_best_pdcs} displays the optimal predicted price duration curves ($PPDC$s) per year of the simulation, shown in blue. These are compared to the price duration curve simulated in 2018, as per Figure \ref{fig:best_price_curve}. The optimal nuclear subsidy, $S_n$, was found to be ${\sim}$\textsterling $120$, the optimal $\sigma_m$ and $\sigma_c$ were found to be $0$ and ${\sim}0.0006$ respectively.
 
-The BEIS scenario demonstrates a progressive increase in nuclear energy from 2025 to 2035, a consistent decrease in electricity produced by natural gas, an increase in renewables and decrease to almost 0\% by 2026 of coal.
-
-ElecSim is largely able to mimic the scenario by BEIS. A large increase in renewables is projected, followed by a decrease in natural gas. 
-
-A significant difference, however, is the step-change in nuclear power in 2033. This led to an almost equal reduction in natural gas during the same year. In contrast, BEIS project a continuously increasing share of nuclear. 
-
-We argue that the ElecSim projection of nuclear power is more realistic than that of BEIS due to the instantaneous nature of large nuclear power plants coming on-line.
+The BEIS scenario demonstrates a progressive increase in nuclear energy from 2025 to 2035, a consistent decrease in electricity produced by natural gas, an increase in renewables and decrease to almost 0\% by 2026 of coal. ElecSim is largely able to mimic the scenario by BEIS. A large increase in renewables is projected, followed by a decrease in natural gas. A significant difference, however, is the step-change in nuclear power in 2033. This led to an almost equal reduction in natural gas during the same year. In contrast, BEIS project a continuously increasing share of nuclear. We argue that the ElecSim projection of nuclear power is more realistic than that of BEIS due to the instantaneous nature of large nuclear power plants coming on-line.
 
 Figure \ref{fig:forward_scenario_best_pdcs} exhibits the price curves required to generate the scenario shown in Figure \ref{fig:forward_scenario_beis_elecsim}. The majority of the price curves are similar to the simulated price duration curve of 2018 (Simulated Fit (2018)). However, there are some price curves which are significantly higher and significantly lower than the predicted price curve of 2018. These cycles in predicted price duration curves may be explained by investment cycles typically exhibited in electricity markets \cite{Gross2007}. 
 
@@ -1213,9 +1191,7 @@ In this context, investment cycles reflect a boom and bust cycle over long times
 As plants retire or demand increases, the market becomes tighter until average prices increase to a level above the threshold for investment in new power generators. At this point, investors may race to bring new plants on-line to make the most out of the higher prices. Once adequate investments have been made, the market returns to a period of low prices and low investment until the next price spike \cite{Gross2007}. 
 
 
-The nuclear subsidy, $S_n$, of ${\sim}$\textsterling $120$ in 2018 prices is high compared to similar subsidies, but this may reflect the difficulty of nuclear competing with renewable technology with a short-run marginal cost that tends to \textsterling $0$.
-
-The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of prices does not necessarily have to differ significantly between GenCos. This may be due to the fact that GenCos have access to the same market information.
+The nuclear subsidy, $S_n$, of ${\sim}$\textsterling $120$ in 2018 prices is high compared to similar subsidies, but this may reflect the difficulty of nuclear competing with renewable technology with a short-run marginal cost that tends to \textsterling $0$. The low values of $\sigma_m$ and $\sigma_c$ demonstrates that the expectation of prices does not necessarily have to differ significantly between GenCos. This may be due to the fact that GenCos have access to the same market information.
 
 
 \begin{figure}
@@ -1253,7 +1229,7 @@ In this Section we display scenario runs of ElecSim using 20 time-steps per year
 
 \subsection{Scenarios for 20 time-steps}
 
-In this Section, we present example scenario runs using ElecSim with 20 time-steps. We vary the carbon tax and grow or reduce total electricity demand. This enables us to observe the effects of a carbon tax on investment. In this paper, we have presented scenarios where electricity demand decreases 1\% per year, due to the recent trend in the UK.
+In this Section, we vary the carbon tax and grow or reduce total electricity demand. This enables us to observe the effects of a carbon tax on investment. In this paper, we have presented scenarios where electricity demand decreases 1\% per year, due to the recent trend in the UK.
 
 %ElecSim was built using python, this enabled us to lower barriers to entry and allow for users to integrate state-of-the-art machine learning and statistical packages in future work. We used project mesa as an open source agent based modelling framework for its ease of use \cite{Masad2015}.
 
@@ -1271,7 +1247,7 @@ For the first scenario run displayed, we have approximated the predictions by th
 
 Figure \ref{fig:demand99carbon40} displays a run with a \textsterling40 carbon tax. This run demonstrates a higher share of onshore wind than in the previous scenario. 
 
-We experimented with the following levels of carbon tax: \textsterling10 (\$13), \textsterling20 (\$26) and \textsterling70 (\$90) with demand decreasing 1\% per year. This was chosen due to the increasing efficiency of homes, industry and technology, and due to the recent trend in the UK. We run each scenario eight times to capture the stochastic nature of the process. Via the observation of the emergent investment behaviour until 2050, an understanding of how real-life investors may behave emerges.
+We experimented with the following levels of carbon tax: \textsterling10 (\$13), \textsterling20 (\$26) and \textsterling70 (\$90) with demand decreasing 1\% per year. This was chosen due to the increasing efficiency of homes, industry and technology, as this was the recent trend in the UK. We run each scenario eight times to capture the stochastic nature of the process. Via the observation of the emergent investment behaviour until 2050, an understanding of how real-life investors may behave emerges.
 
 
 Figure \ref{fig:demand99carbon10} shows that with a carbon tax of \textsterling10, whilst renewable technology does grow, gas power plants provide the majority of supply in each year. However, at a level of \textsterling20 the increase in wind turbines is enough to match gas turbines. A carbon tax of \textsterling70, however, shows a near 100\% uptake of wind turbines.
@@ -1457,7 +1433,7 @@ These runs demonstrate that a consistent, but relatively low carbon tax can have
 
 
 
-\subsection{Conclusion}
+\subsection{Discussion}
 
 
 Agent-based models provide a method of simulating investor behaviour in an electricity market. We observed that an increase in carbon tax had a significant impact on investment. These findings enable policymakers to better understand the impact that their decisions may have. For a high uptake of renewable energy technology, rapid results can be seen after ten years with a carbon tax of \textsterling70 (\$90).
@@ -1658,7 +1634,7 @@ A down-payment of 10\% seems to have the lowest carbon emissions. This is due to
 \section{Limitations}
 \label{elecsim:sec:limitations}
 
-As with all models, ElecSim features a number of limitations. That is, ElecSim can not model the real world perfectly, and thus should be relied on only with a spectrum of other quantitative and qualitative methods.
+As with all models, ElecSim features a number of limitations. That is, ElecSim can not model the real world perfectly, and thus should be relied on only with a spectrum of other quantitative and qualitative methods. 
 
 A number of limitations exist of ElecSim, which have been listed in this Section. This list, however, is not exhaustive, due to the possibility for unknown unknowns.
 
@@ -1684,7 +1660,7 @@ To overcome this limitation, we removed the simulation to generate a predicted p
 
 \subsection*{National model}
 
-Due to the high granularity of ElecSim on a technical and temporal level, it becomes difficult to model electricity markets on a global scale. Modelling the United Kingdom can take ${\sim}$16 hours, therefore modelling the rest of the world would take an infeasible amount of time and computing power to function. 
+Due to the high granularity of ElecSim on a technical and temporal level, it becomes difficult to model electricity markets on a global scale. Modelling a single run of the United Kingdom can take ${\sim}$16 hours, therefore modelling the rest of the world would take an infeasible amount of time and computing power to function. 
 
 \subsection*{Supply curves}
 
