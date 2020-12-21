@@ -286,38 +286,39 @@ The configuration file allows for rapid changes to test different hypothesis and
 
 The power exchange (or spot market) runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their SRMC, to ensure that their generator is being utilised, and reduce the risk of overbidding.
 
-\paragraph{Investment.} Investment in power plants is made based upon a \Gls{NPV} calculation. \acrshort{npv} is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it suited for evaluating power plants which have a long lifetime.  \acrshort{npv} is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example, \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is discounted by the discount rate.
+\paragraph{Investment.} Investment in power plants is made based upon a \Gls{NPV} calculation. \acrshort{npv} is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it well suited for evaluating power plants which have a long lifetime.  \acrshort{npv} is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example, \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is denoted by the discount rate.
 
-Equation \ref{architecture:eq:npv_eq} is the calculation of \acrshort{npv}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is total number of periods, or lifetime of power plant, and $R_t$ is the net cash flow at time $t$.
+Equation \ref{architecture:eq:npv_eq} is the calculation of \acrshort{npv}, where $t$ is the year of the cash flow, $i$ is the discount rate, $N$ is total number of periods, or lifetime of power plant, and $R_t$ is the net cash flow at time $t$ \cite{nagalingam2020cim}.
+
 \begin{equation} \label{architecture:eq:npv_eq}
-NPV(t, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}
+NPV(t, N) = \sum_{t=0}^{N}\frac{R_t}{(1+t)^t}.
 \end{equation}
-A discount rate set by a GenCo's \gls{WACC} is often used \cite{KincheloeStephenC1990TWAC}. WACC is the rate that a company is expected to pay on average for its stock and debt. Therefore to achieve a positive NPV, an income larger than the \acrshort{wacc} is required. However, a higher WACC is often selected to adjust for varying risk profiles, opportunity costs and rates of return. To account for these differences we sample from a Gaussian distribution, giving us sufficient variance whilst deviating from the expected price.
+A discount rate set by a GenCo's weighted average cost of capital (WACC) is often used \cite{KincheloeStephenC1990TWAC}. WACC is the rate that a company is expected to pay on average for its stock and debt. Therefore to achieve a positive NPV, an income larger than the \acrshort{wacc} is required. However, a higher WACC is often selected to adjust for varying risk profiles, opportunity costs and rates of return \cite{KincheloeStephenC1990TWAC}. To account for these differences we sample from a Gaussian distribution, giving us sufficient variance whilst deviating from the expected price. Gaussians are often observed within real-life distributions, and therefore chosen for this work.
 
 To calculate the NPV, future market conditions must be considered. For this, each GenCo forecasts $N$ years into the future, which we assume is representative of the lifetime of the plant. As in the real world, GenCos have imperfect information, and therefore must forecast expected demand, fuel prices, carbon price and electricity sale price. This is achieved by fitting functions to historical data. Each GenCo is different in that they will use differing historical time periods of data for forecasting.
 
-Fuel and carbon price are forecast using linear regression. Demand, however, is forecast using an exponential function, which considers compounded growth. Linear regression is used if an exponential function is found to be sub-optimal.
+This is a notoriously difficult task, and there are multiple different ways in which this can be achieved \cite{Tao2021}. However for this work, we forecast fuel and carbon price using two different linear regression functions. Linear regression was chosen due to the simplicity of the function, and the absence of unrealistic growth seen in other functions. Demand, however, is forecast using an exponential function, which considers compounded growth, as seen in the real-world. Linear regression is used if an exponential function is found to be sub-optimal. We define sub-optimal as the case that a solution can not be found. We use the linear regression for this, due to its characteristics of reducing unrealistic growth.
 
-The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted PDC using a genetic algorithm. We describe this optimisation in Section \ref{elecsim:sec:validation}.
+The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted price duration curve (PDC ) using a genetic algorithm. We describe this optimisation in Section \ref{elecsim:sec:validation}.
 
-For the simulated market, the forecasted data is used to simulate a market $N$ years into the future using the electricity market algorithm. We simulate a market based on the expected bids -- based on SRMC -- that every operating power plant will make. This includes the removal of plants that will be past their operating period, and the introduction of plants that are in construction or pre-development stages. 
+For the simulated market, the forecasted data is used to simulate a market $N$ years into the future using the electricity market algorithm. We simulate a market based on the expected bids -- based on short run marginal cost (SRMC) -- that every operating power plant will make. SRMC is the cost for a power plant to produce one unit of electricity, excluding fixed and capital costs. We include the removal of plants that will be past their operating period, and the introduction of plants that are in construction or pre-development stages. This effectively runs a simulation within a simulation here. Where the GenCos must use a simulation technique to understand future market conditions.
 
 There may be scenarios where demand is forecast to grow significantly, and limited investments have yet been made to meet that demand. The expected price would be that of lost load. Lost load is defined as the price customers would be willing to pay to avoid disruption in their electricity supply. To avoid GenCos from estimating large profits, and under the assumption that further power plant investments will be made, the lost load price is replaced with a predicted electricity price using linear regression based on prices at lower points of the demand curve. If zero segments of demand are met, then the lost load price is used to encourage investment. 
 
 Once this data has been forecasted, the NPV can be calculated. GenCos must typically provide a certain percentage of upfront capital, with the rest coming from investors in the form of stock and shares or debt (WACC). The percentage of upfront capital can be customised by the user in the configuration file. The GenCos then invest in the power plants with the highest NPV. 
 
 
-\paragraph{Time-steps} For the time-steps, two approaches were taken. For the first approach, as per Chappin \textit{et al.} \cite{Chappin2017}, we modelled the LDC of electricity demand with twenty segments. Twenty segments enabled us to capture the variation in demand throughout the year to a high degree of accuracy, whilst reducing computational complexity. However, as we show later in Section \ref{elecsim:sec:scenarios}, this led to an overestimation of the supply of \acrshort{ires}. 
+\paragraph{Time-steps} Time-steps are the steps made in a simulation which simulate time. Each time-step moves the simulation forward a single iteration, and mimics time in our case. For the time-steps, two approaches were taken. For the first approach, as per Chappin \textit{et al.} \cite{Chappin2017}, we modelled the LDC of electricity demand with twenty segments. Twenty segments enabled us to capture the variation in demand throughout the year to a high degree of accuracy, whilst reducing computational complexity. However, as we show later in Section \ref{elecsim:sec:scenarios}, this led to an overestimation of the supply of \acrshort{ires}. 
 
 For the second approach, we used representative days to model a year. Representative days in this context are a subset of days which have characteristics, that when scaled proportionally can accurately model an entire year. To select these representative days, we used a $k$-means approach. We describe this in full detail in Section \ref{elecsim:sec:representative}
 
 
 
-\paragraph{Power Plant Parameters.}\label{elecsim:ssssec:powerplantparameters} Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
+\paragraph{Power Plant Parameters.}\label{elecsim:ssssec:powerplantparameters} Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce, and when available is presented in different formats. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
 
-Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the levelised cost of electricity (LCOE).
+Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the levelised cost of electricity (LCOE). They do this within the data sources file.
 
-The parameters used to initialise the power plants are detailed in this Section. Periods have units of years and costs in \textsterling/MW unless otherwise stated: Efficiency ($\eta$) is defined as the percentage of energy from fuel that is converted into electrical energy (\%). Operating period ($OP$) is the total period in which a power plant is in operation. Pre-development period ($P_D$) and pre-development costs ($P_C$) include the time and costs for pre-licensing, technical and design, as well as costs incurred due to regulatory, licensing and public enquiry. The construction period ($C_D$) and construction costs ($C_C$) are incurred during the development of the plant, excluding network connections. The infrastructure costs ($I_C$) are the costs incurred by the developer in connecting the plant to the electricity or gas grid (\textsterling). Fixed operation \& maintenance costs ($F_C$) are costs incurred in operating the plant that do not vary based on output. Variable operation \& maintenance ($V_C$) costs are incurred in operating the plant that depends on generator output \cite{Ltd2016}.
+The parameters used to initialise the power plants are detailed in this Section. Periods have units of years and costs in unit of currency per MW unless otherwise stated: Efficiency ($\eta$) is defined as the percentage of energy from fuel that is converted into electrical energy (\%). Operating period ($OP$) is the total period in which a power plant is in operation. Pre-development period ($P_D$) and pre-development costs ($P_C$) include the time and costs for pre-licensing, technical and design, as well as costs incurred due to regulatory, licensing and public enquiry. The construction period ($C_D$) and construction costs ($C_C$) are incurred during the development of the plant, excluding network connections. The infrastructure costs ($I_C$) are the costs incurred by the developer in connecting the plant to the electricity or gas grid (\textsterling). Fixed operation \& maintenance costs ($F_C$) are costs incurred in operating the plant that do not vary based on output. Variable operation \& maintenance ($V_C$) costs are incurred in operating the plant that depends on generator output \cite{Ltd2016}.
 
 
 
@@ -329,7 +330,7 @@ The parameters used to initialise the power plants are detailed in this Section.
 %\end{table}
 %\addtolength{\textfloatsep}{-0.2in}
 
-Precise data is not available for every plant size. Linear interpolation is used to estimate individual prices between known points. When the plant to be estimated falls outside of the range of known data points, the closest power plant is used. We experimented with extrapolation but this would often lead to unrealistic costs. %{\color{red}For example, the parameters of a 1,500MW combined cycle gas plant (CCGT) are estimated to be the same as a 1,200MW CCGT plant if the 1,200MW plant was the largest available data point. }
+%Precise data is not available for every plant size. Linear interpolation is used to estimate individual prices between known points. When the plant to be estimated falls outside of the range of known data points, the closest power plant is used. We experimented with extrapolation but this would often lead to unrealistic costs. %{\color{red}For example, the parameters of a 1,500MW combined cycle gas plant (CCGT) are estimated to be the same as a 1,200MW CCGT plant if the 1,200MW plant was the largest available data point. }
 
 If specific parameters are not known, the LCOE can be used for parameter estimation, through the use of linear optimisation. Constraints can be set by the user, enabling, for example, varying operation and maintenance costs per country as a fraction of LCOE.
 
@@ -357,7 +358,7 @@ Figure \ref{fig:lowlevelsystem} demonstrates the simulation and how it co-ordina
 	\end{figure*}
 \end{landscape}
 
-Exogenous variables include fuel and \ce{CO2} prices as well as demand growth. Once the data is initialised, the world calls on the Power Exchange to operate the yearly electricity spot market. The world also settles the accounts of the GenCos, by paying bids, and removing operating and capital costs as well as loans and dividends.
+Exogenous variables include fuel and \ce{CO2} prices as well as demand growth. Once the data is initialised, the model calls on the Power Exchange to operate the yearly electricity spot market. The world also settles the accounts of the GenCos, by paying bids, and removing operating and capital costs as well as loans and dividends.
 
 %The world contains the functionality to dismantle old plants once they have reached the end of their lifetime. Power plants are taken out of service if they have not sold any electricity in the past seven years, which is configurable in the configuration file. We decided upon this due to the fact that power generators have high, sunk capital costs, which often have high demolition costs. We assume, therefore, that generator companies are willing to wait circa $\frac{1}{4}$ of their lives to see if a pay-out occurs due to the breakdown of competing power plants, increasing demand, or governmental support in the form of a carbon tax increase or reduction.
 
@@ -502,41 +503,42 @@ In this paper, we initialised the model to a scenario of the United Kingdom as a
 
 
 
-Similarly to findings of other authors, using a relatively low number of time-steps leads to an overestimation of the uptake of intermittent renewable energy resources (IRES) and an underestimation of flexible technologies~\cite{Ludig2011,Haydt2011}. This is due to the fact that the full intermittent nature of renewable energy could not be accurately modelled in such a small number of time-steps. 
+Similar to findings of other authors, using a relatively low number of time-steps leads to an overestimation of the uptake of intermittent renewable energy resources (IRES) and an underestimation of flexible technologies~\cite{Haydt2011,Ludig2011}. This is due to the fact that the full intermittent nature of renewable energy could not be accurately modelled in such a small number of time-steps. 
 
 
-To address this problem, whilst maintaining a tractable execution time, we approximated a single year as a subset of proportionally weighted, representative days. This enabled us to reduce computation time. Each representative day consisted of 24 equally separated time-steps, which model hours in a day. Hourly data was chosen, as this was the highest resolution of the dataset available for offshore and onshore wind and solar irradiance \cite{Pfenninger2016}. A lower resolution would allow us to model more days; however, we would lose accuracy in terms of the variability of the renewable energy sources. 
+To address this problem, whilst maintaining a tractable execution time, we approximated a single year as a subset of proportionally weighted, representative days. This enabled us to reduce computation time whilst maintaining accuracy. Each representative day consisted of 24 equally separated time-steps, which model hours in a day. Hourly data was chosen, as this was the highest resolution of the dataset available for offshore and onshore wind and solar irradiance \cite{Pfenninger2016}. A lower resolution would allow us to model more days; however, we would lose accuracy in terms of the variability of the renewable energy sources. 
 
 
-Similarly to Nahmmacher \textit{et al.} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that was closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Similarly to Nahmmacher, we used Ward's clustering algorithm and selected the centroid \cite{doi:10.1080/01621459.1963.10500845}. However, we also used the $k$-means clustering algorithm~\cite{forgy65}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018a}. These days were scaled proportionally to the number of days within their respective cluster to approximate a total of 365 days. The Ward's clustering algorithm is an extension of the work published in \cite{Kell2020}
+Similar to Nahmmacher \textit{et al.} \cite{Nahmmacher2016} we used a clustering technique to split similar days of weather and electricity demand into separate groups. We then selected the historic day that were closest to the centre of the cluster, known as the medoid, as well as the average of the centre, known as the centroid ~\cite{Nahmmacher2016}. Similar to Nahmmacher, we used Ward's clustering algorithm and selected the centroid \cite{doi:10.1080/01621459.1963.10500845}. However, we also used the $k$-means clustering algorithm~\cite{forgy65}. This was due to the ability for the $k$-means algorithm to cluster time-series into relevant groups \cite{Kell2018a}. These days were scaled proportionally to the number of days within their respective cluster to approximate a total of 365 days. A representative day is one where solar and wind are chosen on the same day. This is because on a particular day, wind and solar are correlated. The Ward's clustering algorithm is an extension of the work published in \cite{Kell2020}.
 
 Equation \ref{elecsim:eq:medoids_series} shows the series for a medoid or centroid, selected by the clustering algorithms:
 
 \begin{equation}
 \label{elecsim:eq:medoids_series}
-P^{x,i}_{h}=\{P_1, P_2, \ldots, P_{24}\}
+P^{x,i}_{h}=\{P_1, P_2, \ldots, P_{24}\},
 \end{equation}
 
-\noindent where $P^{x,i}_{h}$ is the medoid for series $x$, where $x\in X$ refers to offshore wind capacity factor, onshore wind capacity factor, solar capacity factor and electricity demand, $h$ is the hour of the day and $i$ is the respective cluster. $\{P_1, P_2, \ldots , P_{24}\}$ refers to the capacity values at each hour of the representative day.
+\noindent where $P^{x,i}_{h}$ is the medoid for series $x$, where $x\in X$ refers to offshore wind capacity factor, onshore wind capacity factor, solar capacity factor and electricity demand, $h$ is the hour of the day and $i$ is the respective cluster. $\{P_1, P_2, \ldots , P_{24}\}$ refers to the capacity values at each hour of the representative day. In other words, $x$ is a set of offshore wind capacity factor, onshore wind capacity factor, solar capacity fator and electricity demand.
 
 We then calculated the weight of each cluster. This gave us a method of assigning the relative importance of each representative day when scaling the representative days up to a year. The weight is calculated by the proportion of days in each cluster. This gives us a method of determining how many days within a year are similar to the selected medoid or centroid. The calculation for the weight of each cluster is shown by Equation \ref{elecsim:eq:cluster_weight}:
 
 \begin{equation}
 \label{elecsim:eq:cluster_weight}
-w_i = \frac{n_i}{||N||} 
+w_i = \frac{n_i}{||N||},
 \end{equation} 
 
-\noindent where $w_i$ is the weight of cluster $i$, $n_i$ is the number of days in cluster $i$, and $||N||$ is the total number of days that have been used for clustering. 
+\noindent where $w_i$ is the weight of cluster $i$, $n_i$ is the number of days in cluster $i$, and $||N||$ is the set of days that have been used for clustering. 
 
 
-The next step was to scale up the representative days to represent the duration curve of a full year. We achieved this by using the weight of each cluster, $w_i$, to increase the number of hours that each capacity factor contributed in a full year. Equation \ref{elecsim:eq:scaled-medoid} details the scaling process to turn the medoid or centroid, shown in Equation \ref{elecsim:eq:medoids_series}, into a scaled day. Where $\widetilde{P}^{x,i}_{h}$ is the scaled day:
+The next step was to scale up the representative days to represent the duration curve of a full year. A duration curve is similar to the load duration curve shown in Figure \ref{fig:loaddurationcurve}, however can be defined for other processes such as wind speed and solar irradiance. We achieved this by using the weight of each cluster, $w_i$, to increase the number of hours that each capacity factor contributed in a full year. Equation \ref{elecsim:eq:scaled-medoid} details the scaling process to turn the medoid or centroid, shown in Equation \ref{elecsim:eq:medoids_series}, into a scaled day. Where $\widetilde{P}^{x,i}_{h}$ is the scaled day:
 
 \begin{equation}
 \label{elecsim:eq:scaled-medoid}
-\widetilde{P}^{x,i}_{h} =  \{P_{1w_i}, P_{2w_i}, \ldots, P_{24w_i}\}
+%\widetilde{P}^{x,i}_{h} =  \{P_{1w_i}, P_{2w_i}, \ldots, P_{24w_i}\}.
+\widetilde{P}^{x,i}_{h} = P_h^{x,i}\cdot W.
 \end{equation} 
 
-\noindent Equation \ref{elecsim:eq:scaled-medoid} effectively extends the length of the day, proportional to the amount of days in the respective cluster.
+\noindent where $W=\{w_1,w_2,\ldots,w_i\}$. $W$ is the set of weights, $w_1$ is the weight for the first day, $w_2$ the weight for the second day, and $w_i$ the $i^{th}$ day. Equation \ref{elecsim:eq:scaled-medoid} effectively extends the length of the day, proportional to the amount of days in the respective cluster.
 
 
 %The total time series for series $x$ is shown by Equation \ref{eq:total_time_series}
