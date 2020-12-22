@@ -93,7 +93,15 @@ Simulation is often used to increase understanding as well as to reduce risk and
 
 \acrfull{abms} are a class of computational simulation models composed of autonomous, interacting agents. These can be built to model systems with many heterogeneous agents. Due to the numerous and diverse actors involved in electricity markets, \acrshort{abms} have been utilised in this field to address phenomena such as market power \cite{Ringler2016a}. 
 
-The work presented in this Chapter develops ElecSim, an open-source \acrshort{abm} that simulates GenCos in a wholesale electricity market. ElecSim models each GenCo as an independent agent and electricity demand. An electricity market facilitates trades between the two. 
+The work presented in this Chapter develops ElecSim, an open-source \acrshort{abm} that simulates GenCos in a wholesale electricity market. ElecSim models each GenCo as an independent agent and electricity demand. An electricity market facilitates trades between the two. Figure \ref{fig:elec_market_overview} displays an overview of a wholesale electricity market. The GenCos invest in power generation facilities, such as coal power plants, renewables or gas turbines which produce electricity. Typically, a reseller will purchase the produced electricity through bilateral contracts, or on the day-ahead market who then sell the electricity to end-users. Where end-users could be residential users, industry or the automotive sector.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.85\linewidth]{Chapter4/figures/omnigraffle/market_structure.pdf}
+	\caption{Overview of a wholesale electricity market.}
+	\label{fig:elec_market_overview}
+\end{figure}
+
 
 GenCos make bids for each of their power plants. Their bids are based on the generators \gls{SRMC} \cite{Perloff2012}, which excludes capital and fixed costs. The electricity market accepts bids in cost order, also known as merit-order dispatch. GenCos invest in power plants based on expected profitability.	
 
@@ -266,11 +274,11 @@ A schematic of ElecSim is displayed in Figure \ref{fig:systemoverview}. We have 
 	\label{fig:systemoverview}
 \end{figure}
 
-\paragraph{Data parametrisation.} ElecSim contains a configuration file and a collection of data sources for parametrisation. These data sources contain information such as historical fuel prices, historical plant availability, wind and solar capacity.
+\subsubsection{Data parametrisation} ElecSim contains a configuration file and a collection of data sources for parametrisation. These data sources contain information such as historical fuel prices, historical plant availability, wind and solar capacity.
 
 The configuration file allows for rapid changes to test different hypothesis and scenarios, and points to the different data sources. The configuration file enables one to change the demand growth and shape, future fuel and carbon prices, capital costs, plant availability, investment costs and simulation time.
 
-\paragraph{Demand Agent.} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a \gls{ldc}. An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. This Figure effectively shows the baseload level at 460 hours, and the peak load at 2400 hours and above, with the profile displayed between these points. An \acrshort{ldc} is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the \acrshort{ldc} segments proportionally, by multiplying each of the levels by the factor to increase or decrease these load levels. In other words, whilst the magnitude of the LDC may change, the profile does not.
+\subsubsection{Demand Agent} The demand agent is a simplified representation of aggregated demand in a country. The demand is represented as a \gls{ldc}. An example load duration curve for a year is demonstrated in Figure \ref{fig:loaddurationcurve}. This Figure effectively shows the baseload level at 460 hours, and the peak load at 2400 hours and above, with the profile displayed between these points. An \acrshort{ldc} is an arrangement of all load levels in descending order of magnitude. where the lowest segment demand demonstrates baseload, and the highest segment represents peak demand. Each year, the demand agent changes each of the \acrshort{ldc} segments proportionally, by multiplying each of the levels by the factor to increase or decrease these load levels. In other words, whilst the magnitude of the LDC may change, the profile does not.
 
 \begin{figure}
 	\centering
@@ -282,9 +290,71 @@ The configuration file allows for rapid changes to test different hypothesis and
 %As per Chappin \textit{et al.} \cite{Chappin2017}, we modelled the LDC of electricity demand with twenty segments. Twenty segments enabled us to capture the variation in demand throughout the year to a high degree of accuracy, whilst reducing computational complexity. 
 
 
-\paragraph{Generation Company Agents.} The GenCos have two main functions. Investing in power plants and making bids to sell their generation capacity. We will first focus on the buying and selling of electricity, and then cover the investment algorithm.
+\subsubsection{Generation Company Agents} The GenCos have two main functions. Investing in power plants and making bids to sell their generation capacity. We will first focus on the buying and selling of electricity, and then cover the investment algorithm.
 
 The power exchange (or spot market) runs every year, accepting the lowest bids until supply meets demand. Once this condition is met, the spot price or system marginal price (SMP) is paid to all generators regardless of their initial bid. Generators are motivated to bid their SRMC, to ensure that their generator is being utilised, and reduce the risk of overbidding.
+
+\paragraph{Power Plants}\label{elecsim:ssssec:powerplantparameters} 
+
+Power plants are made up of various parameters which dictate their behaviour within the electricity market. For example, cheaper power plants will undercut the costs of more expensive power plants, or solar will displace fossil-fuel based plants at times of high solar irradiance.
+
+Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce, and when available is presented in different formats. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
+
+Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the levelised cost of electricity (LCOE). They do this within the data sources file.
+
+The parameters used to initialise the power plants are detailed in Table \ref{table:cost_parameters}. Periods have units of years and costs in unit of currency per MW unless otherwise stated.
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+	\begin{tabular}{p{5cm}p{10cm}}
+		\toprule
+		Parameter                                    & Definition                                                                                                                            \\ \midrule
+		Efficiency ($\eta$)                          & Percentage of energy from fuel that is converted into electrical energy (\%)                                                          \\
+		Operating period ($OP$)                      & The total period in which a power plant is in operation.                                                                              \\
+		Pre-development period ($P_D$)               & Include the time for pre-licensing, technical and design, as well as time for regulatory, licensing and public enquiry.               \\
+		Pre-development costs ($P_C$)                & Include the costs for pre-licensing, technical and design, as well as costs incurred due to regulatory, licensing and public enquiry. \\
+		Construction period ($C_D$)                  & Time for development of the plant, excluding network connections.                                                                     \\
+		Construction costs ($C_C$)                   & Costs incurred during the development of the plant, excluding network connections.                                                    \\
+		Infrastructure costs ($I_C$)                 & The costs incurred by the developer in connecting the plant to the electricity or gas grid (\textsterling).                           \\
+		Fixed operation \& maintenance costs ($F_C$) & Costs incurred in operating the plant that do not vary based on output.                                                               \\
+		Variable operation \& maintenance ($V_C$)    & Costs incurred in operating the plant that depends on generator output                                                                \\ \bottomrule
+	\end{tabular}
+	\caption{Power plant parameters.}
+	\label{table:cost_parameters}
+\end{table}
+
+
+
+
+%\begin{table}[h]
+%	\centering
+%	\csvautobooktabular{tables/notation_formated.csv}
+%	\caption{Parameter notation. (Whilst the unit of currency displayed is \textsterling, this can be modified to other currencies eg. \$, \texteuro)}
+%	\label{table:parameter_notation}
+%\end{table}
+%\addtolength{\textfloatsep}{-0.2in}
+
+%Precise data is not available for every plant size. Linear interpolation is used to estimate individual prices between known points. When the plant to be estimated falls outside of the range of known data points, the closest power plant is used. We experimented with extrapolation but this would often lead to unrealistic costs. %{\color{red}For example, the parameters of a 1,500MW combined cycle gas plant (CCGT) are estimated to be the same as a 1,200MW CCGT plant if the 1,200MW plant was the largest available data point. }
+
+If specific parameters are not known, the LCOE can be used for parameter estimation, through the use of linear optimisation. Constraints can be set by the user, enabling, for example, varying operation and maintenance costs per country as a fraction of LCOE.
+
+To fully parametrise power plants, availability and capacity factors are required. Availability is the percentage of time that a power plant can produce electricity. This can be reduced by forced or planned outages. We integrate historical data to model improvements in reliability over time.
+
+The capacity factor is the actual electrical energy produced over a given time period divided by the maximum possible electrical energy it could have produced. The capacity factor can be impacted by regulatory constraints, market forces and resource availability. For example, higher capacity factors are common for photovoltaics in the summer and lower in winter. 
+
+To model the intermittency of wind and solar power, we allow them to contribute only a certain percentage of their total capacity (nameplate capacity) for each load segment. This percentage is based upon empirical wind and solar capacity factors. In this calculation, we consider the correlation between demand and renewable resources. 
+
+When initialised, $V_C$ is selected from a uniform distribution, with the ability for the user to set a maximum percentage increase or decrease. A uniform distribution was chosen to capture the large deviations that can occur in $V_C$, especially over a long time period. \vphantom{By doing this, the variance in costs between individual power plants for processes such as preventative and corrective maintenance, labour costs and skill, health and safety and chance are different per plant instant.}
+
+Fuel price is controlled by the user; however, there is inherent volatility in fuel price. To take into account this variability, an ARIMA \cite{ARIMA} model was fit to historical gas and coal price data. The standard deviation of the residuals was used to model the variance in price that a GenCo will buy fuel in a given year. This considers differences in chance and hedging strategies.
+
+
+
+\subsubsection{Spot market} The spot market is run by a power exchange. The power exchange effectively ranks all power plant bids on the market from lowest to highest for each demand segment, as shown by Figure \ref{fig:loaddurationcurve}. All bids are accepted until supply meets demand. This dispatch method is known as merit order dispatch. 
+
+This method effectively ranks ensures that power plants with the lowest marginal cost are brought online first, and those with the highest marginal cost brought on last. For example, expensive peaker plants will only be used at peak times, where all cheaper electricity generation supply is being used. 
 
 \paragraph{Investment.} Investment in power plants is made based upon a \Gls{NPV} calculation. \acrshort{npv} is a summation of the present value of a series of present and future cash flow. NPV provides a method for evaluating and comparing investments with cash flows spread over many years, making it well suited for evaluating power plants which have a long lifetime.  \acrshort{npv} is based upon the fact that current cash flow is worth more than future cash flow. This is due to the fact that money today can be invested and have a rate of return. This means that, for example, \$50,000 today is worth more than \$50,000 in 10 years time. The value in which future cash flow is worth less than present cash flow is denoted by the discount rate.
 
@@ -314,40 +384,16 @@ For the second approach, we used representative days to model a year. Representa
 
 
 
-\paragraph{Power Plant Parameters.}\label{elecsim:ssssec:powerplantparameters} Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce, and when available is presented in different formats. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
-
-Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the levelised cost of electricity (LCOE). They do this within the data sources file.
-
-The parameters used to initialise the power plants are detailed in this Section. Periods have units of years and costs in unit of currency per MW unless otherwise stated: Efficiency ($\eta$) is defined as the percentage of energy from fuel that is converted into electrical energy (\%). Operating period ($OP$) is the total period in which a power plant is in operation. Pre-development period ($P_D$) and pre-development costs ($P_C$) include the time and costs for pre-licensing, technical and design, as well as costs incurred due to regulatory, licensing and public enquiry. The construction period ($C_D$) and construction costs ($C_C$) are incurred during the development of the plant, excluding network connections. The infrastructure costs ($I_C$) are the costs incurred by the developer in connecting the plant to the electricity or gas grid (\textsterling). Fixed operation \& maintenance costs ($F_C$) are costs incurred in operating the plant that do not vary based on output. Variable operation \& maintenance ($V_C$) costs are incurred in operating the plant that depends on generator output \cite{Ltd2016}.
-
-
-
-%\begin{table}[h]
-%	\centering
-%	\csvautobooktabular{tables/notation_formated.csv}
-%	\caption{Parameter notation. (Whilst the unit of currency displayed is \textsterling, this can be modified to other currencies eg. \$, \texteuro)}
-%	\label{table:parameter_notation}
-%\end{table}
-%\addtolength{\textfloatsep}{-0.2in}
-
-%Precise data is not available for every plant size. Linear interpolation is used to estimate individual prices between known points. When the plant to be estimated falls outside of the range of known data points, the closest power plant is used. We experimented with extrapolation but this would often lead to unrealistic costs. %{\color{red}For example, the parameters of a 1,500MW combined cycle gas plant (CCGT) are estimated to be the same as a 1,200MW CCGT plant if the 1,200MW plant was the largest available data point. }
-
-If specific parameters are not known, the LCOE can be used for parameter estimation, through the use of linear optimisation. Constraints can be set by the user, enabling, for example, varying operation and maintenance costs per country as a fraction of LCOE.
-
-To fully parametrise power plants, availability and capacity factors are required. Availability is the percentage of time that a power plant can produce electricity. This can be reduced by forced or planned outages. We integrate historical data to model improvements in reliability over time.
-
-The capacity factor is the actual electrical energy produced over a given time period divided by the maximum possible electrical energy it could have produced. The capacity factor can be impacted by regulatory constraints, market forces and resource availability. For example, higher capacity factors are common for photovoltaics in the summer and lower in winter. 
-
-To model the intermittency of wind and solar power, we allow them to contribute only a certain percentage of their total capacity (nameplate capacity) for each load segment. This percentage is based upon empirical wind and solar capacity factors. In this calculation, we consider the correlation between demand and renewable resources. 
-
-When initialised, $V_C$ is selected from a uniform distribution, with the ability for the user to set a maximum percentage increase or decrease. A uniform distribution was chosen to capture the large deviations that can occur in $V_C$, especially over a long time period. \vphantom{By doing this, the variance in costs between individual power plants for processes such as preventative and corrective maintenance, labour costs and skill, health and safety and chance are different per plant instant.}
-
-Fuel price is controlled by the user; however, there is inherent volatility in fuel price. To take into account this variability, an ARIMA \cite{ARIMA} model was fit to historical gas and coal price data. The standard deviation of the residuals was used to model the variance in price that a GenCo will buy fuel in a given year. This considers differences in chance and hedging strategies.
-
 
 %\vphantom{With historical power plants which have been refurbished, we sample their initialisation randomly between 15 years prior to the initialisation year and the initialisation year. This is done because there is rarely a comprehensive data set on when plants are refurbished. 15 years was chosen due to the fact that plants often have an operating period of 25 years, and therefore 15 years allowed for sufficient variance in results, whilst keeping plants in operation.}
 
 Figure \ref{fig:lowlevelsystem} demonstrates the simulation and how it co-ordinates runs. The world contains data and brings together GenCos, the Power Exchange and demand. The investment decisions are based on future demand and costs, which in turn influence bids made.
+
+To explain the simulation, we will start from the left side of Figure \ref{fig:lowlevelsystem} and move to the right. A database of power plants is parametrised by a database of parameters, as discussed in Table \ref{table:cost_parameters}. This ensures that the plants have realistic properties. 
+
+Generation companies (GenCos) own and invest in these power plants through the use of investment decisions. The GenCos than submit bids to dispatch these power plants. They do this using the parameters of the power plants, which for renewable energy inclues the renewable energy capacity factors. For instance, wind, solar and hydro have varying profiles throughout the day and year. 
+
+These bids are then augmented with the \ce{CO2} price (tax) and fuel price to create the actual bid. The yearly electricity spot market then takes the demand and matches this to the submitted bids in merit order. The demand grows (or falls) each year, depending on the scenario. 
 
 \begin{landscape}
 	\begin{figure*}
@@ -491,7 +537,7 @@ Exogenous variables include fuel and \ce{CO2} prices as well as demand growth. O
 \label{elecsim:sec:representative}
 
 
-In this Subsection, we describe how we decide the granularity of time-steps. Specifically, we use representative days. Representative days, in this context, are a subset of days which, when scaled up to 365 days can adequately represent a year. 
+In this Subsection, we describe the work which allowed us to determine the granularity of time-steps. In this problem, there is a trade-off between accuracy and compute time. We visualise this trade-off and choose a cut-off point, in which we receive diminishing returns for an increase in temporal granularity, in terms of accuracy. Specifically, for this, we use representative days. Representative days, in this context, are a subset of days which, when scaled up to 365 days can adequately represent a year. 
 
 In this paper, we initialised the model to a scenario of the United Kingdom as an example. However, the fundamental dynamics of the model remain the same for other decentralised electricity markets.
 
@@ -503,7 +549,7 @@ In this paper, we initialised the model to a scenario of the United Kingdom as a
 
 
 
-Similar to findings of other authors, using a relatively low number of time-steps leads to an overestimation of the uptake of intermittent renewable energy resources (IRES) and an underestimation of flexible technologies~\cite{Haydt2011,Ludig2011}. This is due to the fact that the full intermittent nature of renewable energy could not be accurately modelled in such a small number of time-steps. 
+Similar to findings of other authors, using a relatively low number of time-steps leads to an overestimation of the uptake of intermittent renewable energy resources (IRES) and an underestimation of flexible technologies~\cite{Haydt2011,Ludig2011}. This is due to the fact that the full intermittent nature of renewable energy could not be accurately modelled in such a small number of time-steps. For instance, by modelling the entire year in only 20 time-steps, reduces the ability for ElecSim to model hourly lulls in wind speed, the absence of solar irradiance at night time and differences in electricity demand. This is critically important for a power system with high amounts of electricity generated from renewable electricity. 
 
 
 To address this problem, whilst maintaining a tractable execution time, we approximated a single year as a subset of proportionally weighted, representative days. This enabled us to reduce computation time whilst maintaining accuracy. Each representative day consisted of 24 equally separated time-steps, which model hours in a day. Hourly data was chosen, as this was the highest resolution of the dataset available for offshore and onshore wind and solar irradiance \cite{Pfenninger2016}. A lower resolution would allow us to model more days; however, we would lose accuracy in terms of the variability of the renewable energy sources. 
@@ -1050,7 +1096,7 @@ Figure \ref{elecsim:fig:beis_elecsim_historic_comparison} displays the output of
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\columnwidth]{Chapter4/figures/e-Energy-2020/results/throughout_years_beis_elecsim_comparison_coal_dropout_leg_below.pdf}
-	\caption{Comparison of actual electricity mix vs. ElecSim vs. BEIS projections and taking three coal power plants out of service.}
+	\caption{Comparison of actual electricity mix vs. ElecSim vs. BEIS projections and taking three coal power plants out of service. The legend here is split into two: technologies and scenario type, with the coloured lines denoting technologies, and dotted/straight lines denoting scenario.}
 	\label{elecsim:fig:beis_elecsim_historic_comparison}
 \end{figure}
 
@@ -1128,7 +1174,7 @@ We are able to improve the projections for all generation types when compared to
 	\label{table:metrics}
 \end{table}
 
-Figure \ref{fig:best_price_curve} displays the optimal predicted price duration curve ($PPDC$) found by the genetic algorithm. This price curve was used by the GenCos to achieve the results shown in Figure \ref{fig:beis_elecsim_historic_comparison}. 
+Figure \ref{fig:best_price_curve} displays the optimal predicted price duration curve ($PPDC$) found by the genetic algorithm. This price curve was used by the GenCos to achieve the results shown in Figure \ref{fig:forward_scenario_beis_elecsim}. 
 
 
 \begin{figure}
@@ -1544,7 +1590,7 @@ Figure \ref{elecsim:fig:decreasing_demand} shows scenarios where demand increase
 	\includegraphics[width=0.6\linewidth]{Chapter4/figures/timing_plot.png}
 	\caption{Run times of different sized countries for 192 time steps per year (8 days with 24 time steps per day).}
 	\label{fig:timingplot}
-	\vskip -0.5cm
+%	\vskip -0.5cm
 \end{figure}
 
 
@@ -1639,7 +1685,7 @@ As with all models, ElecSim features a number of limitations. That is, ElecSim c
 A number of limitations exist of ElecSim, which have been listed in this Section. This list, however, is not exhaustive, due to the possibility for unknown unknowns.
 
 \begin{enumerate}
-	\item Requirement of exogenous price prediction curve
+	\item Requirement of exogenous price prediction curve.
 	\item Challenges with long-term validation
 	\item National model
 	\item Lack of spatial resolution
@@ -1649,7 +1695,7 @@ A number of limitations exist of ElecSim, which have been listed in this Section
 	\item Lack of contracts for difference modelling and other subsidies (apart from nuclear)
 \end{enumerate}
 
-\subsection*{Exogenous price duration curve}
+\subsection{Exogenous price duration curve}
 
 The prediction of electricity prices in the long-term future is difficult to predict with certainty. In ElecSim, we are required to predict electricity prices over the lifetime of a plant. These plants often have lifetimes of 25 years or more. Two methods, which were utilised by the GenCos, were used by ElecSim: Simulating a market ten years into the future and optimising for predicted price duration curve.
 
@@ -1658,25 +1704,40 @@ The first method of simulating a market ten years into the future has two major 
 To overcome this limitation, we removed the simulation to generate a predicted price curve and used optimisation to find an optimal predicted price duration curve to generate a scenario. We were then able to check whether the predicted price duration curve had reasonable values. Whilst this enabled us to remove the problem of simulating an uncertain market in the future, it removed the ability to rapidly and quickly trial significantly different scenarios. This is because the predicted price duration curves were optimised for a certain scenario. Whilst it remained possible to change multiple parameters, it became difficult to trial many different carbon prices, as these have a significant impact on the predicted price duration curve.
 
 
-\subsection*{National model}
-
-Due to the high granularity of ElecSim on a technical and temporal level, it becomes difficult to model electricity markets on a global scale. Modelling a single run of the United Kingdom can take ${\sim}$16 hours, therefore modelling the rest of the world would take an infeasible amount of time and computing power to function. 
-
-\subsection*{Supply curves}
-
-As ElecSim is a national model, and the UK is a relatively smaller country, we did not take into account the supply-demand curve for resources such as natural gas, coal and other fossil fuels. This is due to the fact that the fossil fuel market is much bigger than solely the United Kingdom. In other words, an increase in demand in the UK would not increase the price on a global scale. 
-
-We did not take into account limits of land usage for solar panels and wind turbines in the model either. This is due to the fact that future technologies may overcome such challenges. For example, currently, offshore wind turbines must be placed in geographies with suitable floors. However, with the advent of floating wind turbines, these limitations could be reduced. Additionally, solar panels may become more effective at being placed offshore.
-
-
-\subsection*{Long-term validation}
+\subsection{Long-term validation}
 
 Long-term validation, as mentioned in Section \ref{elecsim:sec:validation} is particularly difficult due to the uncertainties involved. We, therefore, do not propose that ElecSim is used as a ground truth. Instead, it should be used as a way to understand possibilities that could arise from scenarios under certain assumptions and conditions. It is only with this knowledge that the model should be used. However, we argue that, whilst limited, quantitative advice has a large role to play in understanding the future, and reducing the uncertainty through understanding complex systems, such as electricity markets. It is only through building and understanding such models that the uncertainty and complexity involved can be understood. 
 
 Additionally, when modelling the future, many other models compare their outcomes to other models for a specific scenario. Whilst this has the benefit of checking that the underlying dynamics of the models are similar, or the same, it does not test whether the models fit correctly to real-life. It is for this reason that we used cross-validation as well as comparing our model to that of the UK Government, BEIS department.
 
+\subsection{National model}
 
-\subsection*{Subsidy modelling}
+Due to the high granularity of ElecSim on a technical and temporal level, it becomes difficult to model electricity markets on a global scale. Modelling a single run of the United Kingdom can take ${\sim}$16 hours, therefore modelling the rest of the world would take an infeasible amount of time and computing power to function. 
+
+\subsection{Lack of spatial resolution}
+
+Within an electricity market, a component of space becomes important. This is because electricity is not created in the locations that it is consumed. For instance, offshore wind is typically clustered on banks which are shallow enough to install wind turbines, whilst demand is typically clustered on land in residential and urban areas. In addition to this, different areas may have different demand profiles, for instance with high income earners or industry, typically consuming more than low-income areas.
+
+By accounting for these variations in spatial resolution, one is able to optimise the location of power plants, to minimise electricity transfer losses. In addition, different distribution networks can be designed, to account for differences in demand.
+
+
+\subsection{Supply curves}
+
+As ElecSim is a national model, and the UK is a relatively smaller country, we did not take into account the supply-demand curve for resources such as natural gas, coal and other fossil fuels. This is due to the fact that the fossil fuel market is much bigger than solely the United Kingdom. In other words, an increase in demand in the UK would not increase the price on a global scale. 
+
+We did not take into account limits of land usage for solar panels and wind turbines in the model either. This is due to the fact that future technologies may overcome such challenges. For example, currently, offshore wind turbines must be placed in geographies with suitable floors. However, with the advent of floating wind turbines, these limitations could be reduced. Additionally, solar panels may become more effective at being placed offshore.
+
+\subsection{Model comparison}
+
+Whilst it is possible to compare multiple model outputs that look at a horizon of 20+ years, it is not possible to know whether all of these models are correct, or incorrect. Therefore, by comparing multiple models, it may be the case that all of the models are wrong and that no correct inference can be made. This is a significant challenge of long term energy modelling. Other approaches include cross-validation, where historic data is used to compare model outputs.
+
+\subsection{A changing future}
+
+Whilst it is possible that a model can closely match a scenario, it is not possible to know which scenario will occur in the future. Therefore, whilst one is able to model many different scenarios, it is reasonable to expect that none of these modelled scenarios actually occur. This means that although a model accurately models the system it is designed to replicate, none of the model outputs reflect that of real-life.
+
+This is a significant challenge of scenario modelling, to which there is no perfect solution. Increasing the number of scenarios and placing likelihoods to each of these scenarios is one option, it is not perfect.
+
+\subsection{Subsidy modelling}
 
 In this work, we did not model subsidies such as the contracts for difference auction, which is an auction found in the UK, where generators are able to sell their electricity at a stable level, irrespective of the daily price of electricity. This is because we focused on marking ElecSim a generalisable model for different countries. To ensure this, we had to focus on global parameters and reduce complexity. We did, however, model a simple subsidy where an extra price is paid for every MWh for Nuclear. 
 

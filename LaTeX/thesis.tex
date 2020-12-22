@@ -4,7 +4,6 @@
 %\documentclass[a4paper,12pt,times,numbered,print,index]{Classes/PhD/ThesisPSnPDF}
 \documentclass[a4paper,12pt,times,numbered,print,custommargin]{Classes/PhDThesisPSnPDF}
 
-
 %Thesis specific packages
 \usepackage[toc,nonumberlist,acronym]{glossaries}
 \usepackage[utf8]{inputenc}
@@ -205,7 +204,7 @@
 % ******************************** Glossaries **********************************
 
 \input{Glossaries/glossaries}
-
+\renewcommand{\glstextformat}[1]{\textbf{#1}}
 % ************************ Thesis Information & Meta-data **********************
 % Thesis title and author information, refernce file for biblatex
 \input{thesis-info}
