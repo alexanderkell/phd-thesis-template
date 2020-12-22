@@ -33,7 +33,28 @@ The integration of higher proportions of intermittent renewable energy sources (
 
 
 
-Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants; not all dispatchable plants are peaker plants. For example, coal, which is a dispatchable plant, is run as a baseload plant, due to its inability to deal with the fluctuating conditions required of a peaker plant.
+Typically, peaker plants, such as reciprocal gas engines, are used to fill fluctuations in demand that had not been previously planned for. Specifically, peaker plants meet the peaks in demand where other cheaper options are at full capacity. These peaker plants are typically expensive to run and have higher greenhouse gas emissions than their non-peaker counterparts \cite{Mahmood2014}. Whilst peaker plants are also dispatchable plants; not all dispatchable plants are peaker plants. 
+
+Figure \ref{fig:peaker_plants} shows the differences between baseload generation, peaking resources and those in between. Peaker power plants will match peak demand, as shown by the Figure, whereas baseload generation is run at all times. This includes some gas power plants and nuclear plants, which have a low short run marginal cost. It is unlikely that a nuclear power plant will be used as a peaker plant due to its inflexibility and slow ramp up and ramp down times, and low short run marginal cost. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.85\linewidth]{Chapter5/figures/peaker_plants}
+	\caption{Types of resources for electricity generation.}
+	\label{fig:peaker_plants}
+\end{figure}
+
+
+Figure \ref{fig:peaker_plants_types} displays an example load profile with different types of electricity generation. As can be seen, the electricity generation types with the lowest marginal costs, such as nuclear and water power are dispatched first. Next, natural gas is dispatched which has a low cost than coal and pump power, and finally the top power refers to the expensive peaker power plants, which are used to match peak demand only due to their high costs.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.85\linewidth]{Chapter5/figures/Tagesgang_engl}
+	\caption{Types of resources for electricity generation per demand.}
+	\label{fig:peaker_plants_types}
+\end{figure}
+
+
 
 
 To reduce reliance on peaker plants, it is helpful to know how much electricity demand there will be in the future so that more efficient plants can be used to meet this expected demand. This is so that these more efficient plants can be brought up to speed at a time suitable to match the demand. Forecasting a day into the future is especially useful in decentralised electricity markets which have day-ahead markets. Decentralised electricity markets are ones where electricity is provided by multiple generation companies, as opposed to a centralised source, such as a government. To aid in this prediction, machine learning and statistical techniques have been used to accurately predict demand based on several different factors and data sources \cite{Kell2018a}, such as weather \cite{Hong2014}, day of the week \cite{Al-Musaylh2018} and holidays \cite{Vrablecova2017}. 
@@ -286,12 +307,10 @@ Other methods for fitting linear regressions are by minimising a penalised versi
 
 In ridge regression, the OLS loss function is augmented so that we not only minimize the sum of squared residuals but also penalized the size of parameter estimates, in order to shrink them towards zero:
 \begin{equation}
-L_{ridge}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}\hat{\beta^2_j}=||y-X\hat{\beta}||^2+\lambda||\hat{\beta}||^2,
+L_{ridge}(\hat{\beta})=\sum^n_{i=1}(y_i-x'_i\hat{\beta})^2+\lambda\sum^m_{j=1}\hat{\beta^2_j}=||Y-X\hat{\beta}||^2+\lambda||\hat{\beta}||^2,
 \end{equation}
 
-\noindent where $\lambda$ is the regularisation penalty which can be chosen through cross-validation, or the value that minimises the cross-validated sum of squared residuals, for instance. $n$ is the number of observations of the response variable, $Y$, with a linear combination of $m$ predictor variables, $X$, and we solve for $\hat{\beta}$, where $\hat{\beta}$ are the OLS parameter estimates.
-
-
+\noindent we solve for $\hat{\beta}$, where $\hat{\beta}$ are the OLS parameter estimates. $\hat{\beta}$  is a vector. $n$ is the number of observations of the response variable, $Y$, Where $Y=\{y_0, y_1, \ldots,y_n\}$. With a linear combination of $m$ predictor variables, $X$, where $x=\{x_0,x_1,\ldots,x_n\}$. $\lambda$ is the regularisation penalty which can be chosen through cross-validation, or the value that minimises the cross-validated sum of squared residuals, for instance.
 
 Lasso is a linear regression technique which performs both variable selection and regularisation. It is a type of regression that uses shrinkage. Shrinkage is where data values are shrunk towards a central point, such as the mean. The lasso model encourages models with fewer parameters. This enables the selection of models with fewer parameters, or automate the process of variable selection.
 
@@ -552,7 +571,7 @@ y_{p+m+1} & =f_{W}(y_{p+1}, y_{p},\ldots,y_2)\\
 y_{N} & =f_{W}(y_{N-m},y_{N-m-1},\ldots,y_{N-m-p+1})
 \end{align}
 
-\noindent where $f_{W}(\cdot)$ represents the MLP network and $W$ are the weights. For brevity we omit $W$. The training patterns use previous time-series points, for example, $y_p, y_{p-1},\ldots,y_1$ as the time series is univariate. That is, we only have the time series in which we can draw inferences from. In addition, these time series points are correlated, and therefore provide information that can be used to predict the next time point.
+\noindent where $f_{W}(\cdot)$ represents the MLP network and $W$ are the weights. For brevity we omit $W$. The training patterns use previous time-series points, for example, $y_p, y_{p-1},\ldots,y_1$ as the time series is univariate. Where $p$ is the total number of points in the univariate time-series. That is, we only have the time series in which we can draw inferences from. In addition, these time series points are correlated, and therefore provide information that can be used to predict the next time point.
 
 The $m$ testing patterns are:
 
@@ -681,7 +700,7 @@ Figure \ref{fig:similar_customers} displays four different customers with simila
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/similar_cust.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/ebp_net-resizeimage-1.pdf}
 	\caption{Figure showing similar smart meter data load profiles for four different customers on the 22nd July 2009.}
 	\label{fig:similar_customers}
 \end{figure}
@@ -826,7 +845,7 @@ To initialise the LSTM, cross-validation was used to select the number of stacke
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/results.png}
+	\includegraphics[width=0.6\textwidth]{Chapter5/figures/short-term-forecasting/results.png}[H]
 	\caption{Comparison of accuracy of models 30-minute ahead forecasting electricity with varying number of clusters.}
 	\label{fig:results}
 \end{figure}
@@ -869,15 +888,6 @@ However, it is well known that the best machine learning technique for predictin
 For this work, the training time was tested by timing how long the models would take to fit to one cluster (single model trained on the training set). The Support Vector Regression took much less time than all of the other methods, whereas the LSTM took the longest. The Artificial Neural Network required 9 minutes and 5 seconds to run. The Support Vector Regression model required 3 minutes and 32 seconds to run. The Random Forest, on the same data, required 9 minutes and 44 seconds to run, whilst the LSTM took 12 minutes 55 seconds. 
 
 
-\subsection{Conclusion}
-
-The availability of high granularity data produced by the smart grid enables network operators to gain greater insights into their customer behaviour and electricity usage. This enables them to improve customer experience, utility operations and power management. We demonstrated that implementing the \textit{k}-means clustering algorithm to group similar customers improved the accuracy of every one of the different models tested. Distinct models were trained for each of the clusters and the individual forecasts aggregated for the total aggregated forecast. It was found that Random Forests outperformed the other models at all levels of clustering and that the optimum number of clusters was 4. Whilst the dataset used focused on residential data it is expected that applying a similar clustering technique on commercial properties would have a similar effect.
-
-In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as self-organising maps (SOM) to obtain better accuracy measures. We will also compare different prediction error measures.
-
-To utilise more of the data and increase the number of models trained, these results could be run in parallel and on the cloud in future.
-
-
 \section{Day-ahead forecasting}
 \label{forecast:sec:longterm}
 
@@ -915,7 +925,7 @@ Whilst there is room to increase the total number of parameters, due to the expo
 
 
 %\begin{landscape}
-\begin{sidewaystable*}[p]
+\begin{sidewaystable*}[ph!]
 	\centering
 	%\begin{adjustbox}{angle=90}
 	\begin{tabular}{@{}lllllll@{}}
@@ -1133,6 +1143,15 @@ Figure \ref{fig:both_actual_predicted} displays a comparison between the actual 
 	\label{fig:both_actual_predicted}
 \end{figure}
 
+Figure \ref{fig:both_pred_actuals_plot_difference} shows the differences between predicted values and actuals. Where the horizontal line $y=0$ would be perfect predictions. This figure shows that the Extra Trees over predicts during the week. The Box-Cox however, struggles with the weekends. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\columnwidth]{Chapter5/figures/market-forecasting/results/both_pred_actuals_plot_difference.png}
+	\caption{Best offline model compared to the best online model over a one week period for day-ahead forecasting.}
+	\label{fig:both_pred_actuals_plot_difference}
+\end{figure}
+
 Figures \ref{fig:online_test_vs_mae} and \ref{fig:online_train_vs_mae} display the mean absolute error versus test and training time respectively. In these graphs, a selection of models and parameter combinations are chosen. Clear clusters can be seen between different types of models and parameter types, with the passive aggressive (PA) model performing the slowest for both training and testing. Different parameter combinations show different results in terms of mean absolute error.
 
 The best performing model is the Box-Cox model, which is also the fastest to both train and test. The linear regression, which performs worse in terms of predictive performance, is as quick to train and test as the Box-Cox model. Additionally, the multilayer perceptron (MLP) is relatively quick to train and test when compared to the PA models. 
@@ -1179,14 +1198,14 @@ Running this simulation enabled us to see the effect on carbon emissions on the 
 	\begin{subfigure}{0.3\textwidth}
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/contributed_PV_mean_output}
-		\caption{Photovoltaic output.}
+		\caption{Photovoltaic output}
 		\label{fig:contributed_PV_mean_output}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.3\textwidth}  
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/contributed_Coal_mean_output.eps}
-		\caption{Coal output.}
+		\caption{Coal output}
 		\label{fig:contributed_Coal_mean_output}
 	\end{subfigure}
 	\hfil
@@ -1194,7 +1213,7 @@ Running this simulation enabled us to see the effect on carbon emissions on the 
 	\begin{subfigure}{0.3\textwidth}   
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/contributed_Nuclear_mean_output.eps}
-		\caption{Nuclear output.}
+		\caption{Nuclear output}
 		\label{fig:contributed_Nuclear_mean_output}
 	\end{subfigure}
 	%\quad
@@ -1202,14 +1221,14 @@ Running this simulation enabled us to see the effect on carbon emissions on the 
 	\begin{subfigure}{0.3\textwidth}   
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/contributed_Offshore_mean_output.eps}
-		\caption{Offshore output.}
+		\caption{Offshore output}
 		\label{fig:contributed_Offshore_mean_output.eps}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.3\textwidth}   
 		%\centering
 		\includegraphics[width=1\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/contributed_Recip_gas_mean_output.eps}
-		\caption{Reciprocal gas engine output.}
+		\caption{Reciprocal gas engine output}
 		\label{fig:contributed_Recip_gas_mean_output}
 	\end{subfigure}
 	\label{fig:pv_coal_nuclear_offshore_outputs}
@@ -1302,21 +1321,21 @@ CCGT and reciprocal gas engines may have decreased in capacity over this time, d
 	\begin{subfigure}{0.3\textwidth}
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_CCGT_mean_output.eps}
-		\caption{Total CCGT.}
+		\caption{Total CCGT}
 		\label{fig:total_CCGT_mean_output}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.3\textwidth}  
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_Coal_mean_output.eps}
-		\caption{Total Coal.}
+		\caption{Total Coal}
 		\label{fig:total_Coal_mean_output}
 	\end{subfigure}
 	\hfil
 	%\vskip\baselineskip
 	\begin{subfigure}{0.3\textwidth}   
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_Onshore_mean_output.eps}
-		\caption{Total Onshore.}
+		\caption{Total Onshore}
 		\label{fig:total_Onshore_mean_output}
 	\end{subfigure}
 	%\quad
@@ -1324,13 +1343,13 @@ CCGT and reciprocal gas engines may have decreased in capacity over this time, d
 	\begin{subfigure}{0.3\textwidth}   
 		%\centering
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_Offshore_mean_output.eps}
-		\caption{Total Offshore.}
+		\caption{Total Offshore}
 		\label{fig:total_Offshore_mean_output}
 	\end{subfigure}
 	\hfil
 	\begin{subfigure}{0.3\textwidth}
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_Nuclear_mean_output.eps}
-		\caption{Total nuclear.}
+		\caption{Total nuclear}
 		\label{fig:total_nuclear_mean_output}
 	\end{subfigure}
 	\hfil
@@ -1342,7 +1361,7 @@ CCGT and reciprocal gas engines may have decreased in capacity over this time, d
 		\label{fig:total_PV_mean_output}
 	\end{subfigure}
 	\label{fig:ccgt_coal_onshore_offshore_totals}
-	\caption{Total technologies invested in vs. mean absolute error from 2018 to 2035 in ElecSim.}
+	\caption{Total technologies invested in vs. mean absolute error from 2018 to 2035 in ElecSim}
 \end{figure*}
 
 
@@ -1357,7 +1376,7 @@ Figure \ref{fig:Carbon_emitted_mean_output} shows an increase in relative mean c
 	%\vskip\baselineskip
 	\begin{subfigure}{0.33\textwidth}   
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/total_Recip_gas_mean_output.eps}
-		\caption{Total Reciprocal gas engine.}
+		\caption{Total Reciprocal gas engine}
 		\label{fig:total_Recip_gas_mean_output.eps}
 	\end{subfigure}
 	%\quad
@@ -1365,7 +1384,7 @@ Figure \ref{fig:Carbon_emitted_mean_output} shows an increase in relative mean c
 	\hfil
 	\begin{subfigure}{0.33\textwidth}   
 		\includegraphics[width=\columnwidth]{Chapter5/figures/market-forecasting/results/elecsim_results/results_2/Carbon_emitted_mean_output.eps}
-		\caption{Mean carbon emitted.}
+		\caption{Mean carbon emitted}
 		\label{fig:Carbon_emitted_mean_output}
 	\end{subfigure}
 	\label{fig:nuclear_pv_carbon_totals}
@@ -1453,10 +1472,16 @@ For training time and prediction time, there is often a trade-off between traini
 Additionally, the impact on the broader electricity market has been shown to be significant. Principally, the investment behaviours of generation companies change as well as the dispatched electricity mix. The relative mean carbon emitted over this time period increases, due to an increase in the utilisation of coal and reciprocal gas engines, at the expense of offshore wind.
 
 
-\subsection{Conclusion}
+
+
+\section{Conclusion}
 \label{sec:conclusion}
 
-In this work, we evaluated 16 different machine learning and statistical models to predict electricity demand in the UK for the day-ahead market. Specifically, we used both online and offline algorithms to predict electricity demand 24 hours ahead. We compared the ability for the offline models: lasso regression, random forests, support vector regression, for both online and offline learning: linear regression, multilayer perceptron and for just online learning: the Box-Cox transformation and the passive aggressive regressor, amongst others. The Box-Cox, as well as the passive aggressive regressors, were used as online learning algorithms, the multilayer perceptron and linear regression were used as both, whereas the rest were used as offline learning algorithms.
+
+The availability of high granularity data produced by the smart grid enables network operators to gain greater insights into their customer behaviour and electricity usage. This enables them to improve customer experience, utility operations and power management. In the first piece of work, we demonstrated that implementing the \textit{k}-means clustering algorithm to group similar customers improved the accuracy of every one of the different models tested. Distinct models were trained for each of the clusters and the individual forecasts aggregated for the total aggregated forecast. It was found that Random Forests outperformed the other models at all levels of clustering and that the optimum number of clusters was 4. Whilst the dataset used focused on residential data it is expected that applying a similar clustering technique on commercial properties would have a similar effect.
+
+
+Next, we evaluated 16 different machine learning and statistical models to predict electricity demand in the UK for the day-ahead market. Specifically, we used both online and offline algorithms to predict electricity demand 24 hours ahead. We compared the ability for the offline models: lasso regression, random forests, support vector regression, for both online and offline learning: linear regression, multilayer perceptron and for just online learning: the Box-Cox transformation and the passive aggressive regressor, amongst others. The Box-Cox, as well as the passive aggressive regressors, were used as online learning algorithms, the multilayer perceptron and linear regression were used as both, whereas the rest were used as offline learning algorithms.
 
 We measured the errors and compared these to each model as well as the national grid reserve. We found that through the use of an online learning approach, we were able to significantly reduce error by 30\% on the best offline algorithm.  We were also able to reduce our errors to significantly below the national grid's mean and maximum tendered reserve, thus significantly reducing the chances of blackouts.
 
@@ -1464,7 +1489,16 @@ In addition to this, we took these errors, or residuals, and perturbed the elect
 
 We observed that with an increase in prediction errors, we get a higher proportion of electricity generated by coal, offshore, nuclear, reciprocal gas engines and photovoltaics. This could be due to the fact that more peaker and dispatchable plants are required to fill in for unexpected demand. In addition, a higher proportion of intermittent renewable energy sources leads to a higher use of peaker power plants to fill in the gaps of intermittency of wind and solar irradiance. However, by reducing the mean absolute error, we are able to significantly reduce the amount of reciprocal gas engines and coal usage.
 
-In future work, we would like to trial a different selection of algorithms and statistical models and trial different inputs to the models, for instance, by providing the model with two months worth of historical data as dependent variables. Additionally, we would like to see the impact of predicting wind speed and solar irradiance to see how these impact the overall investment patterns and electricity mix. 
+
+In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as self-organising maps (SOM) to obtain better accuracy measures. We will also compare different prediction error measures. 
+
+We would also like to trial a different selection of algorithms and statistical models and trial different inputs to the models, for instance, by providing the model with two months worth of historical data as dependent variables. Additionally, we would like to see the impact of predicting wind speed and solar irradiance to see how these impact the overall investment patterns and electricity mix. 
+
+
+
+
+
+
 
 
 
