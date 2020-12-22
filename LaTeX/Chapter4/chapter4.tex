@@ -192,7 +192,7 @@ A major contribution of this work is to demonstrate that it is possible for agen
 \section{Literature Review}
 \label{elecsim:sec:litreview}
 
-Whilst Chapter \ref{chapter:litreview} provided a review of the literature of models; this Section covers the difficulties inherent in validating energy models and the approaches taken in the literature to validate these models..
+Whilst Chapter \ref{chapter:litreview} provided a review of the literature of models; this Section covers the difficulties inherent in validating energy models and the approaches taken in the literature to validate these models.
 
 \subsection{Limits of Validating Energy Models}
 
@@ -825,31 +825,6 @@ GenCos make bids at the beginning of every time-step, and the Power Exchange mat
 \end{figure}
 
 
-\subsubsection{Evaluation of representative days}
-\label{ssec:res_repr_days}
-
-Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics versus number of clusters. Both $CE_{av}$ and $NRMSE_{av}$ display similar behaviour for the $k$-means approach (centroids and medoids), namely the error improves significantly from a single cluster to eight clusters for both centroids and medoids. For the number of clusters greater than eight, there are diminishing returns. For $REE_{av}$, however, the error metric is best at a single cluster, and gets worse with the number of clusters. The Wards approach, however, performs significantly worse for all metrics at every number of clusters. 
-
-
-
-We chose eight clusters, for centroids and medoids, as a compromise between accuracy of the three error metrics and compute time of the simulation. This is because eight was the largest number of clusters that gave us the lowest score for $CE_{av}$, $NRMSE_{av}$ and $REE_{av}$ without significantly increasing compute time. Whilst there was little significant difference between centroid and medoid, we chose to use the medoids due to the fact that the extreme high and low values would not be lost due to averaging \cite{Hilbers2019}.
-
-
-
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
-%	\caption{Number of clusters compared to error metrics.}
-%	\label{fig:error_metrics_vs_cluster_number}
-%\end{figure}
-
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\textwidth]{Chapter4/figures/clusters_compared_wards.pdf}
-	\caption{Number of clusters compared to error metrics for clustering methods.}
-	\label{fig:error_metrics_vs_cluster_number}
-\end{figure}
 
 
 
@@ -916,10 +891,42 @@ Table \ref{table:validation_metrics} shows performance metrics of the stochastic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\subsection{Representative days validation}
+\subsection{Validation of model with representative days}
 \label{elecsim:ssec:representative_validation}
 
 In this Section, we detail the approach taken in this paper to validate our model using representative days as time-steps. 
+
+
+Figure \ref{fig:error_metrics_vs_cluster_number} displays the error metrics versus number of clusters. Both $CE_{av}$ and $NRMSE_{av}$ display similar behaviour for the $k$-means approach (centroids and medoids), namely the error improves significantly from a single cluster to eight clusters for both centroids and medoids. For the number of clusters greater than eight, there are diminishing returns. For $REE_{av}$, however, the error metric is best at a single cluster, and gets worse with the number of clusters. The Wards approach, however, performs significantly worse for all metrics at every number of clusters. 
+
+
+
+We chose eight clusters, for centroids and medoids, as a compromise between accuracy of the three error metrics and compute time of the simulation. This is because eight was the largest number of clusters that gave us the lowest score for $CE_{av}$, $NRMSE_{av}$ and $REE_{av}$ without significantly increasing compute time. Whilst there was little significant difference between centroid and medoid, we chose to use the medoids due to the fact that the extreme high and low values would not be lost due to averaging \cite{Hilbers2019}.
+
+
+
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{Chapter4/figures/e-Energy-2020/methods_and_materials/clusters_compared_ggplot.pdf}
+%	\caption{Number of clusters compared to error metrics.}
+%	\label{fig:error_metrics_vs_cluster_number}
+%\end{figure}
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.9\textwidth]{Chapter4/figures/clusters_compared_wards.pdf}
+	\caption{Number of clusters compared to error metrics for clustering methods.}
+	\label{fig:error_metrics_vs_cluster_number}
+\end{figure}
+
+
+
+
+
+
+
+
 
 To achieve this, we use a genetic algorithm to find the predicted price duration curves, which lead to the smallest error between our simulated electricity mix and the scenarios tested. The scenarios examined here are the observed electricity mix of the UK between 2013 and 2018 and the BEIS reference scenario projected in 2018 till 2035. When projecting the BEIS reference scenario, we also optimise for nuclear subsidy and uncertainty in the price duration curves.
 
@@ -1172,6 +1179,25 @@ We are able to improve the projections for all generation types when compared to
 	\csvautobooktabular{Chapter4/table_data/results/error_metrics.csv}
 	\caption{Error metrics for time series forecast from 2013 to 2018 for validation.}
 	\label{table:metrics}
+\end{table}
+
+
+Table \ref{table:metrics_beis} displays the same set of error metrics for BEIS' projections. The technologies displayed here are slightly different to those displayed in Table \ref{table:metrics} due to the presentation of the data by BEIS. As shown in Figure \ref{elecsim:fig:beis_elecsim_historic_comparison}, we are able to predict the rise in renewables and nuclear better than that of BEIS, however, perform slightly worse for coal and gas.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+\begin{table}[]
+	\centering
+	\begin{tabular}{@{}llll@{}}
+		\toprule
+		Technology       & MAE   & MASE  & RMSE  \\ \midrule
+		Coal             & 6.413 & 0.311 & 7.096 \\
+		Gas              & 3.99  & 0.311 & 4.884 \\
+		Nuclear          & 6.192 & 2.545 & 6.406 \\
+		Renewables       & 2.558 & 0.475 & 3.209 \\ \bottomrule
+	\end{tabular}
+	\caption{Error metrics for BEIS scenario from 2013 to 2018.}
+	\label{table:metrics_beis}
 \end{table}
 
 Figure \ref{fig:best_price_curve} displays the optimal predicted price duration curve ($PPDC$) found by the genetic algorithm. This price curve was used by the GenCos to achieve the results shown in Figure \ref{fig:forward_scenario_beis_elecsim}. 
@@ -1501,7 +1527,7 @@ In this Section, we discuss various scenarios under the model which uses represe
 	\label{elecsim:fig:optimal_carbon_tax_strategy}
 \end{figure}
 
-Figures \ref{elecsim:fig:increasing_demand} and \ref{elecsim:fig:decreasing_demand} show the electricity mixes of various demand scenarios. Figure \ref{elecsim:fig:increasing_demand} displays the scenarios in which demand either stays flat, or decreases by 1\% and 2\%. For these scenarios, it can be seen that solar is the dominant electricity supply, supplying ${\sim}$50\%, with nuclear power in second supplying between 20\% and 30\%. With a decreasing demand scenario of 1\% per year, as shown by Figure \ref{fig:demand099}, nuclear provides a higher proportion by the year 2034, of ${\sim}$30\%, however before the year 2033, provides a similar proportion to the other scenarios as shown by Figures \ref{fig:demand10} and \ref{fig:demand098}.
+Figures \ref{elecsim:fig:increasing_demand} and \ref{elecsim:fig:decreasing_demand} show the electricity mixes of various demand scenarios. Figure \ref{elecsim:fig:increasing_demand} displays the scenarios in which demand either stays flat, or decreases by 1\% and 2\%. For these scenarios, it can be seen that solar is the dominant electricity supply, supplying ${\sim}$50\%, with nuclear power second supplying between 20\% and 30\%. With a decreasing demand scenario of 1\% per year, as shown by Figure \ref{fig:demand099}, nuclear provides a higher proportion by the year 2034, of ${\sim}$30\%, however before the year 2033, provides a similar proportion to the other scenarios as shown by Figures \ref{fig:demand10} and \ref{fig:demand098}.
 
 For the scenarios shown in Figure \ref{elecsim:fig:increasing_demand}, CCGT, coal and onshore provide around ${\sim}$10\% each by 2034.  Coal and CCGT, however, progress towards 0\% whereas onshore wind increases. This is to be expected due to the high carbon price, as shown by Figure \ref{elecsim:fig:optimal_carbon_tax_strategy}. Offshore does not exhibit a high amount of investment. We believe this is the case as offshore wind is more expensive than onshore wind, and in our scenario subsidies other than for nuclear are not modelled.
 
@@ -1723,7 +1749,7 @@ By accounting for these variations in spatial resolution, one is able to optimis
 
 \subsection{Supply curves}
 
-As ElecSim is a national model, and the UK is a relatively smaller country, we did not take into account the supply-demand curve for resources such as natural gas, coal and other fossil fuels. This is due to the fact that the fossil fuel market is much bigger than solely the United Kingdom. In other words, an increase in demand in the UK would not increase the price on a global scale. 
+As ElecSim is a national model, and the UK is a relatively small country, we did not take into account the supply-demand curve for resources such as natural gas, coal and other fossil fuels. This is due to the fact that the fossil fuel market is much bigger than solely the United Kingdom. In other words, an increase in demand in the UK would not increase the price on a global scale. 
 
 We did not take into account limits of land usage for solar panels and wind turbines in the model either. This is due to the fact that future technologies may overcome such challenges. For example, currently, offshore wind turbines must be placed in geographies with suitable floors. However, with the advent of floating wind turbines, these limitations could be reduced. Additionally, solar panels may become more effective at being placed offshore.
 
