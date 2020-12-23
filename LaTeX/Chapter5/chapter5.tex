@@ -507,11 +507,17 @@ y_i-(\omega^T\phi(x_i)+b)\leq\varepsilon+\xi_i^{*},\\
 The constant $C>0$ determines the trade-off between the flatness of the support vector function. $\omega$ is the model fit by the SVR. The parameters which control regression quality are the cost of error $C$, the width of the tube $\varepsilon$, and the mapping function $\phi$ \cite{Chen2004, Shu2006}. 
 
 
-\subsection{K-Neighbours Regressor}
+\subsection{\textit{k}-Neighbours Regressor}
 
-K-Neighbours regression is a non-parametric method used for regression \cite{forgy65}. The input consists of a new data point, and the algorithm finds the \textit{k} closest training examples in the feature space. The output is the average value of the \textit{k} nearest neighbours.
+\textit{k}-Neighbours regression is a non-parametric method used for regression \cite{forgy65}. One such \textit{k}-NN algorithm uses a weighted average of the \textit{k} nearest neighbours, weighted by the inverse of their distance.
 
-
+The algorithm works as follows:
+\begin{itemize}
+	\item Compute the Euclidean or Mahalanobis distance from the test example to the labelled examples.
+	\item Order the labelled examples by increasing distance.
+	\item Find a heuristically optimal number \textit{k} of nearest neighbours, based on cross-validation.
+	\item Calculate an inverse distance weighted average with the \textit{k}-nearest multivariate neighbours.
+\end{itemize}
 
 %\subsection{Multilayer perceptron}
 
