@@ -147,12 +147,21 @@ Electricity market liberalisation in many western democracies has changed the fr
 
 A number of ABM tools have emerged over the years to model electricity markets: SEPIA~\cite{Harp2000}, EMCAS~\cite{Conzelmann}, NEMSIM~\cite{Batten2006}, AMES~\cite{Sun2007}, GAPEX~\cite{Cincotti2013}, PowerACE~\cite{Rothengatter2007}, EMLab~\cite{Chappin2017} and MACSEM ~\cite{Praca2003}. Table \ref{table:litreview:abm_comparison} shows, however, that these do not suit the needs of an open source, long-term market model. 
 
-There have been a number of recent studies using ABMs which focus on electricity markets. However, they often utilise ad-hoc tools which are designed for a particular application \cite{hadar2019, Kunzel2018, Saxena2019}. In our work, we develop the model ElecSim, which has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address by being open source and releasing parameters.
 
 Table \ref{table:litreview:abm_comparison} contains six columns: tool name, whether the tool is open source or not, whether they model long-term investment in electricity infrastructure and the markets they model. We determine how the stochasticity of real life is modelled and determine whether the model is generalisable to different countries. 
 
-
 An open-source toolkit is important for reproducibility, transparency and lowering barriers to entry. It enables users to expand the model to their requirements and respective country. The modelling of long-term investment enables scenarios to emerge and enable users to model investment behaviour. 
+
+We chose these columns to compare the models due to their importance in the application of understanding long-term electricity market scenarios. Firstly, an open-source tool enables independent users to verify the code developed for these models. It is important that this can be achieved, so that the outputs are not obfuscated by a closed system. Long-term investment allows for the endogenous propagation of an electricity market. Without this component, the development of such a market will not be due to the underlying dynamics of the system.
+
+We believe that a model which models both day-ahead and futures markets is of importance. This is because these markets a interlinked and correlated. For instance, a day-ahead market determines the economic success of a particular GenCo and therefore the future investments it can make. In addition, the futures markets are closely linked to the present day markets.
+
+In addition, the ability to model stochasticity is of importance, due to the non-deterministic nature of the real-world. For instance, the price paid by GenCos is non-deterministic and can vary at any point in time between GenCos. Without this ability, the outputs of the model are unlikely to be as accurate. 
+
+Finally, the generalisability of the model is of important to many practitioners. A model may have been developed for a particular country, however, the insights made are limited if a practitioner would like to learn from other countries. In addition, a non-generalisable model limits the ability to improve over time as practitioners around the world find inconsistencies or errors and make improvements for their respective use case.
+
+There have been a number of recent studies using ABMs which focus on electricity markets. However, they often utilise ad-hoc tools which are designed for a particular application \cite{hadar2019, Kunzel2018, Saxena2019}. In our work, we develop the model ElecSim, which has been built for re-use and reproducibility. The survey \cite{Weidlich2008} cites that many of these tools do not release source code or parameters, which is a problem that ElecSim seeks to address by being open source and releasing parameters.
+
 
 SEPIA \cite{Harp2000} is a discrete event ABM which utilises Q-learning to model the bids made by GenCos. SEPIA models plants as being always on and does not have an independent system operator (ISO), which in an electricity market, is an independent non-profit organisation for coordinating and controlling of regular operations of the electric power system and market \cite{Zhou2007}. SEPIA does not model a spot market, instead focusing on bilateral contracts. As opposed to this, ElecSim has been designed with a merit-order, spot market in mind. As shown in Table \ref{table:litreview:abm_comparison}, SEPIA does not include a long-term investment mechanism. 
 
@@ -169,7 +178,7 @@ EMLab ~\cite{Chappin2017} is an open-source ABM toolkit for the electricity mark
 MACSEM \cite{Praca2003} has been used to probe the effects of market rules and conditions by testing different bidding strategies. MACSEM does not model long term investments or stochastic inputs.
 
 
-As can be seen from Table \ref{table:litreview:abm_comparison}, none of the tools fill each of the characteristics we have defined. We therefore propose ElecSim to contribute an open-source, long-term, stochastic investment model. 
+As can be seen from Table \ref{table:litreview:abm_comparison}, none of the tools fill each of the characteristics we have defined. We therefore propose ElecSim to contribute an open-source, long-term, stochastic investment model. For this work, we decided that a novel agent-based simulation was required to fill all of these categories, as the use-cases developed for our work is specific towards the requirements of our model.
 
 \begin{table*}[]
 	\centering
@@ -200,7 +209,16 @@ As can be seen from Table \ref{table:litreview:abm_comparison}, none of the tool
 \section{Energy models classification}
 \label{sec:litreview:modelclassification}
 
-In this Section, we present a high-level overview of the various models that are in existence, which fall into various categories as presented by table \ref{tab:litreview:modeltypes}. Table \ref{tab:litreview:modelreview} shows the various models and their analytical approach, underlying methodology, mathematical approach and other information such as sectoral coverage, time horizon and number of time-steps. This list is not exhaustive, however, as we have focused on the major models. 
+In this Section, we present a high-level overview of the various models that are in existence, which fall into various categories as presented by Table \ref{tab:litreview:modeltypes}. Table \ref{tab:litreview:modelreview} shows the various models and their analytical approach, underlying methodology, mathematical approach and other information such as sectoral coverage, time horizon and number of time-steps. This list is not exhaustive, however, as we have focused on the major models. 
+
+The analytical approach column defines whether a bottom-up, or hybrid top-down/bottom-up approach was pursued. A bottom-up approach is one in which technology is defined explicitly. Whereas a top-down approach relies on economic models and forecasts.
+
+The underlying methodology specifies the methodology used to create these models. These fall into the categories of agent-based, optimisation, and economic type models. The mathematical approach defines the way in which these models are solved, for instance, through linear, non-linear or dynamic programming.
+
+The sectoral coverage column defines what sectors of the energy are modelled. For example, does the model solely cover the electricity sector, like ElecSim, or does it also include environment, demand and industry? The time horizon details what the main purpose of the model is, is it a long-term model, or a short-term dispatch model. A short-term dispatch model can help optimise a current day system, but is limited in terms of its long-term offerings. 
+
+Finally, the time-step column details the time resolution granularity. Short-term models typically are able to have minutely time-steps, whereas long-term models can make yearly, or 5-yearly time-steps.
+
 
 % Please add the following required packages to your document preamble:
 % \usepackage{booktabs}
