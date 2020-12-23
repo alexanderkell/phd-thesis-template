@@ -362,7 +362,45 @@ ExtraTrees adds one further step of randomisation \cite{Fike1988}. ExtraTrees st
 
 \subsection{Gradient Boosting}
 
-Gradient boosting is also an ensemble model \cite{316}. Gradient boosting optimises a cost-function over function space by iteratively choosing a function that points in the negative gradient descent direction, known as a gradient descent method.
+%Gradient boosting is also an ensemble model \cite{316}. Gradient boosting optimises a cost-function over function space by iteratively choosing a function that points in the negative gradient descent direction, known as a gradient descent method.
+
+Gradient boosting is a machine learning technique which is used for both regression and classification problems \cite{316}. Typically, decision trees are used to produce a prediction model in the form of an ensemble of weak prediction models. The model is built in a stage-wise fashion. These model types are generalisable by allowing for an optimisation of an arbitrary differentiable loss function.
+
+The outline of the algorithm is defined here. As discussed, in many supervised learning problems, one has an output variable $y$ and a vector of input variables $x$. These two variables are described via a joint probability distribution $P(x,y)$. The goal of supervised learning is to use a training set $\{(x_1,y_1),\ldots,(x_n,y_n))\}$ of known $x$ and $y$ values to find an approximation of $F(x)$, $\hat{F}(x)$. $\hat{F}(x)$ is found by minimizing the expected value of some specified loss function $L(y,F(x))$:
+
+\begin{equation}
+\hat{F}=\underset{F}{\arg\min}\mathbb{E}_{x,y}[L(y,F(x))].
+\end{equation}
+
+The gradient boosting method assumes a real-valued $y$ and seeks an approximation $\hat{F}(x)$, where $\hat{F}(x)$ is a weighted sum of function $h_i(x)$ from some class $H$. Where $H$ are called weak leaners:
+
+\begin{equation}
+\hat{F}(x)=\sum_{i=1}^{M}\gamma_i h_i(x)+const.
+\end{equation}
+
+This method tries to find an approximation $\hat{F}(x)$ that minimizes the average value of the loss function on the training set. It does so, by starting with a constant function model. $F_0(x)$ and incrementally expands it in a greedy fashion:
+
+\begin{equation}
+F_0(x)=\underset{\gamma}{\arg\min}\sum_{i=1}^{n}L(y_i,\gamma),
+\end{equation}
+
+\begin{equation}
+F_m(x)=F_{m-1}(x)+\underset{h_m\in\mathcal{H}}{\arg\min}\left[\sum_{i=1}^{n}L(y_i,F_{m-1}(x_i)+h_m(x_i))\right],
+\end{equation}
+
+\noindent where $h_m\in H$ is a weak learner function. Due to the fact that choosing the best function $h$ is computationally infeasible, an approximation must be sought. This approximation is found using functional gradient descent to this minimization problem. If we consider the continuous case, i.e. where $H$ is the set of arbitrary differentiable functions on $\mathbb{R}$, we would update the model in accordance with the following equations:
+
+\begin{equation}
+F_m(x)=F_{m-1}(x)-\gamma_m\sum_{i=1}^{n}\nabla_{F_{m-1}}L(y_i,F_{m-1}(x_i)),
+\end{equation}
+
+\begin{equation}
+\gamma_m=\underset{\gamma}{\arg\min}\sum_{i=1}^{n}L(y_i,F_{m-1}(x_i)-\gamma\nabla_{F_{m-1}}L(y_i,F_{m-1}(x_i))),
+\end{equation}
+
+\noindent where the derivatives are taken with respect to the function $F_i$ for $i \in \{1,\ldots,m\}$ and $\gamma_m$ is the step length. 
+
+
 
 \subsection{Support vector regression}
 
@@ -469,9 +507,9 @@ y_i-(\omega^T\phi(x_i)+b)\leq\varepsilon+\xi_i^{*},\\
 The constant $C>0$ determines the trade-off between the flatness of the support vector function. $\omega$ is the model fit by the SVR. The parameters which control regression quality are the cost of error $C$, the width of the tube $\varepsilon$, and the mapping function $\phi$ \cite{Chen2004, Shu2006}. 
 
 
-\subsection{K-Neighbors Regressor}
+\subsection{K-Neighbours Regressor}
 
-K-Neighbors regression is a non-parametric method used for regression \cite{forgy65}. The input consists of a new data point, and the algorithm finds the \textit{k} closest training examples in the feature space. The output is the average value of the \textit{k} nearest neighbours.
+K-Neighbours regression is a non-parametric method used for regression \cite{forgy65}. The input consists of a new data point, and the algorithm finds the \textit{k} closest training examples in the feature space. The output is the average value of the \textit{k} nearest neighbours.
 
 
 
