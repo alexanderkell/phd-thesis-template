@@ -512,12 +512,12 @@ The constant $C>0$ determines the trade-off between the flatness of the support 
 \textit{k}-Neighbours regression is a non-parametric method used for regression \cite{forgy65}. One such \textit{k}-NN algorithm uses a weighted average of the \textit{k} nearest neighbours, weighted by the inverse of their distance.
 
 The algorithm works as follows:
-\begin{itemize}
+\begin{enumerate}
 	\item Compute the Euclidean or Mahalanobis distance from the test example to the labelled examples.
 	\item Order the labelled examples by increasing distance.
 	\item Find a heuristically optimal number \textit{k} of nearest neighbours, based on cross-validation.
 	\item Calculate an inverse distance weighted average with the \textit{k}-nearest multivariate neighbours.
-\end{itemize}
+\end{enumerate}
 
 %\subsection{Multilayer perceptron}
 
@@ -633,7 +633,17 @@ SSE = \sum_{i=p+m}^N(y_i-\hat{y}_i),
 
 \noindent where $\hat{y}_i$ is the prediction from the network. The number of input nodes corresponds to the number of lagged observations. Having too few or too many input nodes can affect the predictive ability of the neural network \cite{Pao2007}.
 
-It is also possible to vary the hyperparameter or the number of input units. Typically, various different configurations of units are trialled, with the best configuration being used in production. The weights $W$ in $f_W$ are trained using a process called backpropagation\cite{rumelhart1986learning}, which uses labelled data and gradient descent to update and optimise the weights.
+It is also possible to vary the hyperparameter or the number of input units. Typically, various different configurations of units are trialled, with the best configuration being used in production. The weights $W$ in $f_W$ are trained using a process called backpropagation \cite{rumelhart1986learning}, which uses labelled data and gradient descent to update and optimise the weights.
+
+\subsection{Long-Short Term Neural Networks}
+
+Long short-term memory (LSTM) \cite{Hochreiter1997} is an artificial recurrent neural network (RNN) architecture, which is used in the field of deep learning. They are able to process entire sequences of time-series data. A common LSTM unit is composed of a cell, an input gate, an output gate and a forget gate. The cell is able to remember values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. 
+
+LSTMs are well suited to time-series data, due to the presence of lags between important events, with an unknown duration. LSTMs have an advantage over traditional RNNs by solving the vanishing gradient problem. This is where the gradients which are back-propagated can tend to zero or infinity. This is due to the computations involved in the process, which use finite-precision numbers. LSTMs partially solve this problem by allowing gradients to flow unchanged in the back-propagation process.
+
+
+
+
 
 \subsection{Online Algorithms}
 
@@ -880,7 +890,9 @@ Using this technique, an optimal architecture with three layers is obtained. The
 
 \subsubsection{LSTM}
 
-To initialise the LSTM, cross-validation was used to select the number of stacked layers and memory units. Similarly to the technique used for the Multilayer Perceptron, the Levenberg-Marquardt was used. The optimum number of layers was found to be 2, with a total of 50 memory units. Different combinations of layers and memory units displayed worse results.
+To initialise the LSTM, cross-validation was used to select the number of stacked layers and memory units. We trialled the number of stacks from the following list: $[1,2,3,4]$ and the number of memory units from the following list: $[5,6,7,8,9,10,20,30,40,50,75,100]$.
+
+The optimum number of layers was found to be 2, with a total of 50 memory units. Different combinations of layers and memory units displayed worse results.
 
 
 
