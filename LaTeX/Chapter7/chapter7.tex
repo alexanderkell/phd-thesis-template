@@ -75,7 +75,16 @@ Intelligent bidding strategies for day-ahead electricity markets can be divided 
 
 \subsection{Game-theoretic approaches}
 
-Here, we explore game-theoretic approaches. Kumar \textit{et al.} \cite{VijayaKumar2014} propose a Shuffled Frog Leaping Algorithm (SFLA) to find bidding strategies for GenCos in electricity markets. SFLA is a meta-heuristic that is based on the evolution of memes carried by active individuals, as well as a global exchange of information among the frog population. They test the effectiveness of the SFLA algorithm on an IEEE 30-bus system and a practical 75-bus Indian system. A bus in a power system is a vertical line which several components are connected in a power system. For example, generators, loads, and feeders can all be connected to a bus. Kumar \textit{et al.} find superior results when compared to particle swarm optimisation and the genetic algorithm with respect to total profit and convergence with CPU time. They assume that each GenCo bids a linear supply function, and model the expectation of bids from rivals as a joint normal distribution. In contrast to their work, we do not require an estimation of the rivals bids.
+Here, we explore game-theoretic approaches. Kumar \textit{et al.} \cite{VijayaKumar2014} propose a Shuffled Frog Leaping Algorithm (SFLA) to find bidding strategies for GenCos in electricity markets. SFLA is a meta-heuristic that is based on the evolution of memes carried by active individuals, as well as a global exchange of information among the frog population. They test the effectiveness of the SFLA algorithm on an IEEE 30-bus system and a practical 75-bus Indian system. A bus in a power system is a vertical line which several components are connected in a power system. For example, generators, loads, and feeders can all be connected to a bus, an example is shown in Figure \ref{fig:30-bus-system.}. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\columnwidth]{Chapter7/figures/lit-review/IEEE_30bus.png}
+	\caption{Example 30 bus system.}
+	\label{fig:30-bus-system.}
+\end{figure}
+
+Kumar \textit{et al.} find superior results when compared to particle swarm optimisation and the genetic algorithm with respect to total profit and convergence with CPU time. They assume that each GenCo bids a linear supply function, and model the expectation of bids from rivals as a joint normal distribution. In contrast to their work, we do not require an estimation of the rivals bids.
 
 Wang \textit{et al.} \cite{Wang2011} propose an evolutionary imperfect information game approach to analysing bidding strategies with price-elastic demand. Their evolutionary approach allows for GenCos to adapt and update their beliefs about an opponents' bidding strategy during the simulation. They model a 2-bus system with three GenCos. Our work, however, models a simulation with 60 GenCos across the entire UK, which would require a 28-bus system model \cite{Bell2010}. 
 
@@ -94,7 +103,7 @@ Ye \textit{et al.} \cite{Ye2020a} propose a novel deep RL based methodology whic
 
 
 
-Zhao \textit{et al.} \cite{Zhao2016} propose a modified RL method, known as the gradient descent continuous Actor-Critic (GDCAC) algorithm. This algorithm is used in a double-sided day-ahead electricity market simulation. Where in this case, a double-sided day-ahead market refers to GenCos selling their supply to distribution companies, retailers or large consumers. Their approach performs better in terms of participant's profit or social welfare compared with traditional table-based RL methods, such as Q-Learning. Our work also looks at improving on table-based methods by using function approximators.
+Zhao \textit{et al.} \cite{Zhao2016} propose a modified RL method, known as the gradient descent continuous Actor-Critic (GDCAC) algorithm. This algorithm is used in a double-sided day-ahead electricity market simulation. Where in this case, a double-sided day-ahead market refers to GenCos selling their supply to distribution companies, retailers or large consumers. Their approach performs better in terms of participant's profit or social welfare compared with traditional table-based RL methods, such as Q-Learning. Our work also looks at improving on table-based methods by using function approximators, however our work looks at the entire electricity market as a whole, instead of from the point of view of GenCos.
 
 
 
@@ -117,7 +126,7 @@ An agent's behaviour is defined by a policy, $\pi$. $\pi$ maps states to a proba
 R_t=\sum_{i=t}^T\gamma^{(i-t)}r(s_i,a_i).
 \end{equation}
 
-Where $\gamma$ is a discounting factor $\gamma \in [0,1]$. The return is dependent on the action chosen, which is dependent on the policy $\pi$. The goal in reinforcement learning is to learn a policy that maximizes the expected return from the start distribution $J=\mathbb{E}_{r_i,s_i \sim E,a_i \sim \pi}[R_1]$. 
+Where $\gamma$ is a discounting factor $\gamma \in [0,1]$. The return is dependent on the action chosen, which is dependent on the policy $\pi$. Where $r(s_i, a_i)$ is the reward for state $s_i$ and action $a_i$. The goal in reinforcement learning is to learn a policy that maximizes the expected return from the start distribution $J=\mathbb{E}_{r_i,s_i \sim E,a_i \sim \pi}[R_1]$. 
 
 The expected return after taking an action $a_t$ in state $s_t$ after following policy $\pi$ can be found by the action-value function. The action-value function is used in many reinforcement learning algorithms and is defined in Equation \ref{eq:action-value}.
 \begin{equation}
@@ -133,7 +142,7 @@ An optimal policy can be derived from the optimal $Q$-values $Q_*(s_t,a_t)=\max_
 Many approaches in reinforcement learning use the recursive relationship known as the Bellman equation, as defined in Equation \ref{eq:bellman}:
 \begin{dmath}
 	\label{eq:bellman}
-	Q^\pi(s_t,a_t)=\mathbb{E}_{{r_t},s_{t+1}\sim E} [r(s_t,a_t)+
+	Q_\pi(s_t,a_t)=\mathbb{E}_{{r_t},s_{t+1}\sim E} [r(s_t,a_t)+
 	\gamma\mathbb{E}_{a_{t+1}\sim \pi}[Q_\pi(s_{t+1},\pi(s_{t+1}))]].
 \end{dmath}
 \noindent The Bellman equation is equal to the action which maximizes the reward plus the discount factor multiplied by the next state's value, by taking the action after following the policy in state $s_{t+1}$ or $\pi(s_{t+1})$.
@@ -156,7 +165,7 @@ However, it is often the case that Q-learning suffers from the curse of dimensio
 \subsection{Deep Deterministic Gradient Policy}
 
 
-It is not straightforward to apply Q-learning to continuous action spaces. This is because in continuous spaces, finding the greedy policy requires an optimisation of $a_t$ at every time step. Optimising for $a_t$ at every time step would be too slow to be practical with large, unconstrained function approximators and nontrivial action spaces \cite{hunt2016a}. To solve this, an actor-critic approach based on the deterministic policy gradient (DPG) algorithm is used \cite{Silver2014}.
+It is not straightforward to apply Q-learning to continuous action spaces. This is because in continuous spaces, finding the greedy policy requires an optimisation of $a_t$ at every time step. Optimising for $a_t$ at every time step would be too slow to be practical with large, unconstrained function approximators and nontrivial action spaces \cite{Hunt2016a}. To solve this, an actor-critic approach based on the deterministic policy gradient (DPG) algorithm is used \cite{Silver2014}.
 
 
 The DPG algorithm maintains a parameterized actor function $\mu(s|\theta^\mu)$ which specifies the current policy by deterministically mapping states to a specific action. The critic $Q(s,a)$ is learned using the Bellman equation as in Q-learning. The actor is updated by applying the chain rule to the expected return from the start distribution $J$ with respect to the actor parameters:
@@ -244,7 +253,7 @@ By modelling bidding decisions as an RL algorithm, we hoped to observe the abili
 
 
 
-\begin{table*}
+\begin{sidewaystable}
 	\footnotesize
 	\renewcommand{\arraystretch}{1.25}
 	\centering
@@ -269,13 +278,13 @@ By modelling bidding decisions as an RL algorithm, we hoped to observe the abili
 	%\bigskip
 	\caption{Groups of GenCos that used reinforcement learning bidding strategies, number of plants and total electricity generating capacity.}
 	\label{table:genco_table}
-\end{table*}
+\end{sidewaystable}
 
 
 For the reinforcement learning problem we have the following tuple: $(s_t,a_t,r_t,s_{t+1})$, where $(s_t, s_{t+1})$ is the state at time $t$ and $t+1$ respectively, $a_t$ is the action at time $t$ and $r_t$ is the reward at time $t$. For our problem the state space is given by the tuple shown in Equation \ref{eq:observation_tuple}:
 \begin{equation}
 \label{eq:observation_tuple}
-s_t=(H_i,D_i,p_{C02},p_{gas},p_{coal},p_{c}),
+s_t=(H_i,D_i,p_{gas},p_{coal},p_{C02},p_{c}),
 \end{equation}
 \noindent where $H_i$ is the segment hour to bid into at timestep $i$, $D_i$ is the demand of the segment hour at timestep $t$, $p_{gas}$ is the price of gas, $p_{coal}$ the price of coal, $p_{C02}$ is the carbon tax price, and $p_{c}$ is the clearing price. We set the reward, $r_t$ to be the average electricity price of that time step, $p_{avg}$.
 
