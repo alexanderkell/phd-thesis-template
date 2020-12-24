@@ -14,10 +14,11 @@
 
 \section*{Prologue}
 
-In this chapter, we motivate and introduce the agent-based model, ElecSim. The majority of the work presented here was published in \cite{Kell} and \cite{Kell2020}.The contribution of this Chapter is a new open-source framework for the long-term modelling of electricity markets. We provide curated data for the simulation, to improve realism with Monte Carlo sampling, and validate our model using genetic algorithm-based optimisation. We validate our model using observed data between 2013 and 2018, as well as compare our model to the UK Government's baseline scenario up until 2035. We also provide a sensitivity analysis of important variables. For example the weighted average cost of capital (WACC) as well as the percentage of down payment required for a particular investment. The sensitivity analysis, as well as additional scenarios shown in Section \ref{elecsim:sec:sensitivity} and Subsection \ref{elecsim:sec:representative-days-scenarios} were previously unpublished in \cite{Kell} and \cite{Kell2020}.
+In this chapter, we motivate and introduce the agent-based model, ElecSim. The majority of the work presented here was published in \cite{Kell} and \cite{Kell2020}.The contribution of this Chapter is a new open-source framework for the long-term modelling of electricity markets. We provide curated data for the simulation, to improve realism with Monte Carlo sampling, and validate our model using genetic algorithm-based optimisation. We validate our model using observed data between 2013 and 2018, as well as compare our model to the UK Government's baseline scenario up until 2035. We also provide a sensitivity analysis of important variables. For example the \acrfull{wacc} as well as the percentage of down payment required for a particular investment. The sensitivity analysis, as well as additional scenarios shown in Section \ref{elecsim:sec:sensitivity} and Subsection \ref{elecsim:sec:representative-days-scenarios} were previously unpublished in \cite{Kell} and \cite{Kell2020}.
 
 We introduce our work in Section \ref{elecsim:sec:intro}, including why a simulation model is required to aid in a low carbon transition. In addition to the literature review on energy-based simulations presented in Chapter \ref{chapter:litreview}, we provide a literature review of work done to validate energy models in Section \ref{elecsim:sec:litreview}. The architecture of the model is presented in Section \ref{elecsim:sec:architecture}. The model is validated in Section \ref{elecsim:sec:validation}. Various scenarios are presented in Section \ref{elecsim:sec:scenarios}, where we vary demand until 2035. A sensitivity analysis is provided in Section \ref{elecsim:sec:sensitivity}, where we vary the weighted average cost of capital, as well as the down payment required for investments. Finally, we present the limitations of our model in Section \ref{elecsim:sec:limitations} and conclude our work in Section \ref{elecsim:sec:conclusions}.
 
+The ElecSim model, and all related code can be accessed at: \url{https://github.com/alexanderkell/elecsim}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -165,7 +166,7 @@ We measure the accuracy of projections for our improved \acrshort{abm} with thos
 \subsection{Model outputs}
 \label{elecsim:sec:results}
 
-Through this validation process, we are able to adequately model the transitional dynamics of the electricity mix in the United Kingdom between 2013 and 2018. During this time there was an ${\sim}88\%$ drop in coal use, ${\sim}44\%$ increase in Combined Cycle Gas Turbines (CCGT), ${\sim}111\% $ increase in wind energy and increase in solar from near zero to ${\sim}1250$MW. We are therefore able to test our model in a transition of sufficient magnitude.
+Through this validation process, we are able to adequately model the transitional dynamics of the electricity mix in the United Kingdom between 2013 and 2018. During this time there was an ${\sim}88\%$ drop in coal use, ${\sim}44\%$ increase in \acrfull{ccgt}, ${\sim}111\% $ increase in wind energy and increase in solar from near zero to ${\sim}1250$MW. We are therefore able to test our model in a transition of sufficient magnitude.
 
 %- What are the key take-home messages
 
@@ -300,7 +301,7 @@ Power plants are made up of various parameters which dictate their behaviour wit
 
 Costs form an important element of markets and investment, and publicly available data for power plant costs for individual countries can be scarce, and when available is presented in different formats. Thus, extrapolation and interpolation is required to estimate costs for power plants of differing sizes, types and years of construction.
 
-Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the levelised cost of electricity (LCOE). They do this within the data sources file.
+Users are able to initialise costs relevant to their particular country by providing detailed cost parameters. They can also provide an average cost per MWh produced over the lifetime of a plant, known as the \acrfull{lcoe}. They do this within the data sources file.
 
 The parameters used to initialise the power plants are detailed in Table \ref{table:cost_parameters}. Periods have units of years and costs in unit of currency per MW unless otherwise stated.
 
@@ -369,7 +370,7 @@ To calculate the NPV, future market conditions must be considered. For this, eac
 
 This is a notoriously difficult task, and there are multiple different ways in which this can be achieved \cite{Tao2021}. However for this work, we forecast fuel and carbon price using two different linear regression functions. Linear regression was chosen due to the simplicity of the function, and the absence of unrealistic growth seen in other functions. Demand, however, is forecast using an exponential function, which considers compounded growth, as seen in the real-world. Linear regression is used if an exponential function is found to be sub-optimal. We define sub-optimal as the case that a solution can not be found. We use the linear regression for this, due to its characteristics of reducing unrealistic growth.
 
-The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted price duration curve (PDC ) using a genetic algorithm. We describe this optimisation in Section \ref{elecsim:sec:validation}.
+The forecasted electricity price $N$ years ahead is difficult to ascertain accurately. We therefore use two methods for forecasting these. The first is to simulate a market $N$ years ahead. The second is to optimise for the predicted \acrfull{pdc} using a genetic algorithm. We describe this optimisation in Section \ref{elecsim:sec:validation}.
 
 For the simulated market, the forecasted data is used to simulate a market $N$ years into the future using the electricity market algorithm. We simulate a market based on the expected bids -- based on short run marginal cost (SRMC) -- that every operating power plant will make. SRMC is the cost for a power plant to produce one unit of electricity, excluding fixed and capital costs. We include the removal of plants that will be past their operating period, and the introduction of plants that are in construction or pre-development stages. This effectively runs a simulation within a simulation here. Where the GenCos must use a simulation technique to understand future market conditions.
 
@@ -609,7 +610,7 @@ Finally, each of the scaled representative days were concatenated to create a si
 
 \subsection{Error Metrics}
 
-To measure the validity of our approximation using representative days and also compare the optimum number of days, or clusters, we used a technique similar to Poncelet \textit{et al.} \cite{Dhaeseleer2015, Poncelet2017}. We trialled the number of clusters against three different metrics: correlation ($CE_{av}$), normalised root mean squared error ($nRMSE$) and relative energy error ($REE_{av}$). 
+To measure the validity of our approximation using representative days and also compare the optimum number of days, or clusters, we used a technique similar to Poncelet \textit{et al.} \cite{Dhaeseleer2015, Poncelet2017}. We trialled the number of clusters against three different metrics: \acrfull{ce} ($CE_{av}$), \acrfull{nrmse} and \acrfull{ree} ($REE_{av}$). 
 
 $REE_{av}$ is the average value over all the considered time series $\widetilde{P}^x{\in} \widetilde{P}$ compared to the observed average value of the set $P^x\in P$. Where $P^x\in P$ are the observed time series and $\widetilde{P}^x{\in} \widetilde{P}$ are the scaled, approximated time series using representative days. $REE_{av}$ is shown formally by Equation \ref{eq:ree_av}:
 
@@ -867,7 +868,7 @@ We ran the initialisation of the model 40 times to capture the price variance. O
 
 Figure \ref{fig:price_duration_curve} demonstrates very little variance in the non-stochastic case. This is due to the fact that combined cycle gas turbines (CCGTs) set the spot price. These CCGTs have little variance between one another as they were calibrated using the same dataset. By adding stochasticity of fuel prices and operation and maintenance prices, a curve that more closely resembles the actual data occurs. The stochastic curve, however, does not perfectly fit the real data, which may be due to higher variance in fuel prices and historical differences in operation and maintenance costs between power plants. One method of improving this would be fitting the data used to parametrise to the curve.
 
-Table \ref{table:validation_metrics} shows performance metrics of the stochastic and non-stochastic runs versus the actual price duration curve. The stochastic implementation improves the mean absolute error (MAE) of the non-stochastic case by $52.5\%$.
+Table \ref{table:validation_metrics} shows performance metrics of the stochastic and non-stochastic runs versus the actual price duration curve. The stochastic implementation improves the \acrfull{mae} of the non-stochastic case by $52.5\%$.
 
 \begin{table}[]
 	\begin{tabular}{p{4cm}p{4cm}p{2.5cm}p{3cm}}
@@ -928,7 +929,7 @@ We chose eight clusters, for centroids and medoids, as a compromise between accu
 
 
 
-To achieve this, we use a genetic algorithm to find the predicted price duration curves, which lead to the smallest error between our simulated electricity mix and the scenarios tested. The scenarios examined here are the observed electricity mix of the UK between 2013 and 2018 and the BEIS reference scenario projected in 2018 till 2035. When projecting the BEIS reference scenario, we also optimise for nuclear subsidy and uncertainty in the price duration curves.
+To achieve this, we use a \acrfull{ga} to find the predicted price duration curves, which lead to the smallest error between our simulated electricity mix and the scenarios tested. The scenarios examined here are the observed electricity mix of the UK between 2013 and 2018 and the \acrfull{beis} reference scenario projected in 2018 till 2035. When projecting the BEIS reference scenario, we also optimise for nuclear subsidy and uncertainty in the price duration curves.
 
 
 %For GenCos to adequately make investments, they must formulate an expectation of future electricity prices over the lifetime of a plant. For this paper, we use the net present value (NPV) metric to compare investments. 
@@ -958,7 +959,7 @@ C_{var_{h,t}})\right)
 - C_c,
 \end{equation}
 
-\noindent where $m_{h,t}$ is the expected quantity of megawatts sold in hour $h$ of year $t$. $PPDC_{h,t}$ is the predicted price duration curve at year $t$ and hour $h$. $C_{var_{h,t}}$ is the variable cost of the power plant, which is dependent on expected megawatts of electricity produced, $C_c$ is the capital cost.
+\noindent where $m_{h,t}$ is the expected quantity of megawatts sold in hour $h$ of year $t$. $PPDC_{h,t}$ is the \acrfull{ppdc} at year $t$ and hour $h$. $C_{var_{h,t}}$ is the variable cost of the power plant, which is dependent on expected megawatts of electricity produced, $C_c$ is the capital cost.
 
 The predicted price duration curve ($PPDC_{h,t}$) is an expectation of future electricity prices over the lifetime of the plant. The $PPDC_{h,t}$ is a function of supply and demand. However, with renewable electricity generator costs falling  \cite{IRENA2014}, future prices are uncertain and largely dependent upon long-term scenarios of electricity generator costs, fuel prices, carbon taxes and investment decisions \cite{IRENA2014}. Due to the uncertainty of future electricity prices over the horizon of the lifetime of a power plant, we have set future electricity prices as an exogenous variable that can be set by the user in ElecSim. 
 
@@ -1170,7 +1171,7 @@ ElecSim was able to better model the observed fluctuation in nuclear power in 20
 
 
 
-We display the error metrics to evaluate our models 5-year projections in Table \ref{table:metrics}. Where MAE is mean absolute squared error, MASE is mean absolute scaled error and RMSE is the root mean squared error.
+We display the error metrics to evaluate our models 5-year projections in Table \ref{table:metrics}. Where MAE is mean absolute squared error, MASE is \acrfull{mase} and \acrfull{rmse} is the root mean squared error.
 
 We are able to improve the projections for all generation types when compared to the naive forecasting approach using ElecSim, as shown by the MASE. Where the naive approach is simply predicting the next time-step by using the last known time-step, in this case, the last known time-step is the electricity mix percentage for each generation type in 2013. 
 
@@ -1611,12 +1612,11 @@ Figure \ref{elecsim:fig:decreasing_demand} shows scenarios where demand increase
 \subsection{Performance}
 
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 	\includegraphics[width=0.6\linewidth]{Chapter4/figures/timing_plot.png}
 	\caption{Run times of different sized countries for 192 time steps per year (8 days with 24 time steps per day).}
 	\label{fig:timingplot}
-%	\vskip -0.5cm
 \end{figure}
 
 

@@ -154,11 +154,11 @@ Chen \textit{et al.}  \cite{Chen1996} used an \Gls{ANN} to predict electricity d
 
 \subsubsection{Time Series Methods}
 
-Al-Musaylh \textit{et al.} \cite{Al-Musaylh2018} proposed the use of \acrfull{svr}, an autoregressive integrated moving average (ARIMA) model and a multivariate adaptive regression spline (MARS) in their short term electricity demand forecasting system. They found that for a half, and one-hour forecasting horizons, the MARS model outperformed both the ARIMA and SVR.
+Al-Musaylh \textit{et al.} \cite{Al-Musaylh2018} proposed the use of \acrfull{svr}, an \acrfull{arima} model and a multivariate adaptive regression spline (MARS) in their short term electricity demand forecasting system. They found that for a half, and one-hour forecasting horizons, the MARS model outperformed both the ARIMA and SVR.
 
 Taylor \cite{Taylor2008} evaluates different statistical methods including ARIMA, an adaptation of Holt-Winters' exponential smoothing \cite{Holt2004}, and an exponential smoothing method which focuses on the evolution of the intra-day cycle . He found that the double seasonal adaptation of the Holt-Winters' exponential smoothing method was the most accurate method for short lead times between 10 and 30 minutes. 
 
-In contrast to Taylor, Fard \textit{et al.} \cite{Fard2014} proposed a novel hybrid forecasting method based on both artificial intelligence and classical time series approaches. They utilised the wavelet transform, ARIMA and ANNs for short term load forecasting . The ARIMA model is created by finding the appropriate order using the Akaike information criterion \cite{Akaike1974}. The ARIMA model models the linear component of the load time series, and the residuals contain the non-linear components. These residuals are then decomposed by the discrete wavelet transform into its sub-frequencies. ANNs are then applied to these sub-frequencies, and the outputs of both the ANN and ARIMA models are summed to make the final prediction. They found that this hybrid technique outperformed traditional methods. Our work does not integrate artificial intelligence and classical time series techniques, due to time constraints.
+In contrast to Taylor, Fard \textit{et al.} \cite{Fard2014} proposed a novel hybrid forecasting method based on both artificial intelligence and classical time series approaches. They utilised the wavelet transform, ARIMA and ANNs for short term load forecasting . The ARIMA model is created by finding the appropriate order using the Akaike information criterion \cite{Akaike1974}. The ARIMA model models the linear component of the load time series, and the residuals contain the non-linear components. These residuals are then decomposed by the discrete wavelet transform into its sub-frequencies. ANNs are then applied to these sub-frequencies, and the outputs of both the \acrfull{ann} and ARIMA models are summed to make the final prediction. They found that this hybrid technique outperformed traditional methods. Our work does not integrate artificial intelligence and classical time series techniques, due to time constraints.
 
 \subsubsection{Clustering}
 
@@ -181,7 +181,7 @@ Baram \textit{et al}. \cite{Baram2003} combine an ensemble of active learners by
 
 Schmitt \textit{et al}.\cite{Schmitt2008} also extends on existing algorithms through an extension of the FLORA algorithm \cite{Widmer1996}. The FLORA algorithm generates a rule-based model, which has the ability to make binary decisions. Their FLORA-MC enhances the FLORA algorithm for multi-classification and numerical input values. They use this algorithm for an ambient computing application. Ambient computing is where computing and communication merges into everyday life. They find that their model outperforms traditional offline learners by orders of magnitude.
 
-Similarly to our work, Pindoriya \textit{et al}. \cite{Pindoriya2008} trial several different machine learning methods such as adaptive wavelet neural network (AWNN). They find that AWNN has good prediction properties when compared to other forecasting techniques such as wavelet-ARIMA, multilayer perceptron (MLP) and radial basis function (RBF) neural networks as well as the fuzzy neural network (FNN).
+Similarly to our work, Pindoriya \textit{et al}. \cite{Pindoriya2008} trial several different machine learning methods such as adaptive wavelet neural network (AWNN). They find that AWNN has good prediction properties when compared to other forecasting techniques such as wavelet-ARIMA, multilayer perceptron (MLP) and \acrfull{rbf} neural networks as well as the fuzzy neural network (FNN).
 
 
 Goncalves Da Silva \textit{et al}. \cite{GoncalvesDaSilva2014} show the effect of prediction accuracy on local electricity markets. To this end, they compare forecasting of groups of consumers in comparison to single individuals. They trial the use of the Seasonal-Naïve and Holt-Winters algorithms and look at the effect that the errors have on trading in an intra-day electricity market of consumers and prosumers. They found that with a photovoltaic penetration of 50\%, over 10\% of the total generation capacity was uncapitalised and roughly 10, 25 and 28\% of the total traded volume were unnecessary buys, demand imbalances and unnecessary sells respectively. This represents energy that the participant has no control. Uncapitalised generation capacity is where a participant could have produced energy; however, it was not sold on the market. Additionally, due to forecast errors, the participant might have sold less than it should have. Our work, however, focuses on a national electricity market, as opposed to a local market.
@@ -214,7 +214,7 @@ In this Section, we explore the principles behind the methods used in this Chapt
 
 \subsubsection{Mean Absolute Percentage Error}
 
-The mean absolute percentage error (MAPE) is a measure of prediction accuracy which is used in this thesis. It can be defined as follows:
+The \acrfull{mape} is a measure of prediction accuracy which is used in this thesis. It can be defined as follows:
 
 \begin{equation}
 MAPE=\frac{1}{n}\sum_{i=1}^n\left|\frac{y_i-\hat{y}_i}{y_i}\right|\times 100\%,
@@ -637,7 +637,7 @@ It is also possible to vary the hyperparameter or the number of input units. Typ
 
 \subsection{Long-Short Term Neural Networks}
 
-Long short-term memory (LSTM) \cite{Hochreiter1997} is an artificial recurrent neural network (RNN) architecture, which is used in the field of deep learning. They are able to process entire sequences of time-series data. A common LSTM unit is composed of a cell, an input gate, an output gate and a forget gate. The cell is able to remember values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. 
+\acrfull{lstm} \cite{Hochreiter1997} is an artificial recurrent neural network (RNN) architecture, which is used in the field of deep learning. They are able to process entire sequences of time-series data. A common LSTM unit is composed of a cell, an input gate, an output gate and a forget gate. The cell is able to remember values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. 
 
 LSTMs are well suited to time-series data, due to the presence of lags between important events, with an unknown duration. LSTMs have an advantage over traditional RNNs by solving the vanishing gradient problem. This is where the gradients which are back-propagated can tend to zero or infinity. This is due to the computations involved in the process, which use finite-precision numbers. LSTMs partially solve this problem by allowing gradients to flow unchanged in the back-propagation process.
 
@@ -1058,7 +1058,7 @@ In this Section, we detail the accuracy of the algorithms and statistical models
 
 To generate these results, we use a training set to train the data, and a test set to see how well each algorithm performs on the testing data. That is, how well the algorithm can predict data it is yet to see. In our case, the training data was from 2011 to 2017, and the testing data was from 2017 to 2018.
 
-Figure \ref{fig:beis_elecsim_historic_comparison} displays the mean absolute error of each of the offline statistical and machine learning models on a log scale. It can be seen that the different models have varying degrees of success. The least accurate models were linear regression, the multilayer perceptron (MLP) model and the Least Angle Regression (LARS). These all have mean absolute errors over 10,000MWh. This error would be prohibitively high in practice; the max tendered national grid reserve is 6,000MWh, while the average tendered national grid reserve is 2,000MWh \cite{ESO2019}.
+Figure \ref{fig:beis_elecsim_historic_comparison} displays the mean absolute error of each of the offline statistical and machine learning models on a log scale. It can be seen that the different models have varying degrees of success. The least accurate models were linear regression, the \acrfull{mlp} model and the Least Angle Regression (LARS). These all have mean absolute errors over 10,000MWh. This error would be prohibitively high in practice; the max tendered national grid reserve is 6,000MWh, while the average tendered national grid reserve is 2,000MWh \cite{ESO2019}.
 
 A number of models perform well, with a low mean absolute error. These include the Lasso, gradient Boosting Regressor and K-neighbours regressor. The best model, similar to the work presented in the 30-minute ahead forecasting  \cite{Kell2018a}, was the decision tree-based model, Extra Trees Regressor, with a mean absolute error of $1,604$MWh. This level is well within the average national grid reserve of 2,000MWh.
 
@@ -1546,7 +1546,7 @@ In addition to this, we took these errors, or residuals, and perturbed the elect
 We observed that with an increase in prediction errors, we get a higher proportion of electricity generated by coal, offshore, nuclear, reciprocal gas engines and photovoltaics. This could be due to the fact that more peaker and dispatchable plants are required to fill in for unexpected demand. In addition, a higher proportion of intermittent renewable energy sources leads to a higher use of peaker power plants to fill in the gaps of intermittency of wind and solar irradiance. However, by reducing the mean absolute error, we are able to significantly reduce the amount of reciprocal gas engines and coal usage.
 
 
-In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as self-organising maps (SOM) to obtain better accuracy measures. We will also compare different prediction error measures. 
+In future work, we will look into the features that best aid in the forecasting of electricity consumption, try a wider variety of models in an ensemble manner and try different clustering techniques such as \acrfull{som} to obtain better accuracy measures. We will also compare different prediction error measures. 
 
 We would also like to trial a different selection of algorithms and statistical models and trial different inputs to the models, for instance, by providing the model with two months worth of historical data as dependent variables. Additionally, we would like to see the impact of predicting wind speed and solar irradiance to see how these impact the overall investment patterns and electricity mix. 
 
