@@ -19,10 +19,10 @@ In this Chapter, we give an introduction to the relevant energy modelling litera
 \label{sec:litreview:energymodelling}
 
 
-In this thesis, we define energy systems as the entire energy system; from the extraction of primary energy to the final use of energy to produce and supply services and goods \cite{Pfenninger2014b}. An Energy system models can often be modelled by different submodules. These submodules can model technical, environmental and social elements.
+In this thesis, we define energy systems as the entire energy system; from the extraction of primary energy to the final use of energy to produce and supply services and goods \cite{Pfenninger2014}. An Energy system models can often be modelled by different submodules. These submodules can model technical, environmental and social elements.
 
 
-Energy modelling is a broad field, and so, there have been multiple reviews which attempt to separate these models into different classifications \cite{Savvidis2019a, Sensfub2007,Ringkjob2018}. Examples of the metrics for classification are the mathematical underpinning, the underlying methodology, analytical approach or data requirements. Table \ref{tab:litreview:reviews} shows the various reviews that were used to inform part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016a, Savvidis2019a} and provide future research direction \cite{Pfenninger2014b,Savvidis2019a}. 
+Energy modelling is a broad field, and so, there have been multiple reviews which attempt to separate these models into different classifications \cite{Savvidis2019a,Sensfub2007,Ringkjob2018}. Examples of the metrics for classification are the mathematical underpinning, the underlying methodology, analytical approach or data requirements. Table \ref{tab:litreview:reviews} shows the various reviews that were used to inform part of this literature review. Many of these reviews attempt to provide a classification schema to classify models \cite{Hall2016,Savvidis2019a} and provide future research direction \cite{Pfenninger2014,Savvidis2019a}. 
 
 
 \begin{table}[]
@@ -33,8 +33,8 @@ Energy modelling is a broad field, and so, there have been multiple reviews whic
 		The gap between energy policy challenges and model capabilities \cite{Savvidis2019a}                                        & Assesses the ability of energy systems models to answer major energy policy questions.                       \\ \midrule
 		Agent-based simulation of electricity markets: a literature review \cite{Sensfub2007}                                       & An overview of the work applying agent-based models to the analysis of electricity markets.                  \\ \midrule
 		A review of modelling tools for energy and electricity systems with large shares of variable renewables \cite{Ringkjob2018} & An aid for modellers to choose an appropriate model which can cater for large shares of variable renewables. \\ \midrule
-		Energy systems modeling for twenty-first century energy challenges \cite{Pfenninger2014b}                                   & The issues of using existing models for twenty-first century challenges in energy.                           \\ \midrule
-		A review of energy systems models in the UK: Prevalent usage and categorisation \cite{Hall2016a}                            & Provide a classification schema for energy models.                                                           \\ \midrule
+		Energy systems modeling for twenty-first century energy challenges \cite{Pfenninger2014}                                   & The issues of using existing models for twenty-first century challenges in energy.                           \\ \midrule
+		A review of energy systems models in the UK: Prevalent usage and categorisation \cite{Hall2016}                            & Provide a classification schema for energy models.                                                           \\ \midrule
 		A survey of stochastic modelling approaches for liberalised electricity markets \cite{Most2010}                             & Overview and classification of stochastic models dealing with price risks in electricity markets.            \\ \bottomrule
 	\end{tabular}
 	\caption{Different reviews of energy system models}
@@ -45,7 +45,7 @@ Energy modelling is a broad field, and so, there have been multiple reviews whic
 
 Energy models can typically be classified as top-down macro-economic models or bottom-up techno-economic models~\cite{Bohringer1998}. Top-down models typically focus on behavioural realism with a focus on macro-economic metrics. They are useful for studying economy-wide responses to policies ~\cite{Hall2016}. Examples of these types of model are MARKAL-MACRO \cite{Fishbone1981} and LEAP \cite{Heaps2016}. Bottom-up models represent the energy sector in detail, and are written as mathematical programming problems~\cite{Gargiulo2013}. They detail technology explicitly, and can include cost and emissions implications~\cite{Hall2016}.
 
-Within these two classifications, there exist four further paradigms of models within the literature: (1) energy systems optimisation models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014b}. These four paradigms can be described as follows:
+Within these two classifications, there exist four further paradigms of models within the literature: (1) energy systems optimisation models, (2) energy system simulation models, (3) power system and electricity market models and (4) economic models \cite{Pfenninger2014}. These four paradigms can be described as follows:
 
 \begin{description}
 	\item[Energy systems optimisation] These models cover the entire energy system and use optimisation methods. The primary aim of these is to provide scenarios of how the system can evolve.
@@ -62,19 +62,19 @@ In practice, it is possible for models to lie between any of these paradigms and
 	\begin{tabular}{p{5cm}p{7cm}ll@{}}
 		\toprule
 		Model family                               & Examples                                 & Primary focus                            \\ \midrule
-		Energy system optimisation models          & MARKAL~\cite{Fishbone1981a}, TIMES~\cite{Giannakidis2013}, MESSAGE~\cite{Schrattenholzer1981}, OSeMOSYS~\cite{Howells2011a}        & Normative scenarios                      \\
-		Energy system simulation models            & LEAP\cite{LEAP2012a}, NEMS~\cite{Grozev2005a}, PRIMES\cite{Capros2012}                       & Forecasts, predictions                   \\
+		Energy system optimisation models          & MARKAL~\cite{Fishbone1981a}, TIMES~\cite{Giannakidis2013}, MESSAGE~\cite{Schrattenholzer1981}, OSeMOSYS~\cite{Howells2011}        & Normative scenarios                      \\
+		Energy system simulation models            & LEAP\cite{LEAP2012a}, NEMS~\cite{Grozev2005}, PRIMES\cite{Capros2012}                       & Forecasts, predictions                   \\
 		Power system and electricity market models & WASP~\cite{WASP2001}, PLEXOS~\cite{PLEXOS2013}, EMCAS \cite{Conzelmann}, ElecSim\cite{Kell}             & Operational decisions \\
 		Economic models & MARKAL-MACRO, E3MG, POLES   & Operational decisions \\
 		\bottomrule
 	\end{tabular}
-	\caption{Four different energy system model types \cite{Pfenninger2014b}}
+	\caption{Four different energy system model types \cite{Pfenninger2014}}
 	\label{tab:litreview:modeltypes}
 \end{table}
 
 
 
-Within the models previously presented, there is a dichotomy between planning models and operational models. Operational models allow for a high-resolution analysis of dispatch within an energy grid. In contrast, planning models allow for long-term analysis of systems. Traditionally these planning models have used a coarse-grained temporal and spatial resolution. However, with the increase in \acrshort{ires} there has been an amalgamation of these two approaches \cite{Pfenninger2014a}. This is due to the fact that long-term planning models must model the intermittency of \acrshort{ires} to capture the variance of supply of renewable energy.
+Within the models previously presented, there is a dichotomy between planning models and operational models. Operational models allow for a high-resolution analysis of dispatch within an energy grid. In contrast, planning models allow for long-term analysis of systems. Traditionally these planning models have used a coarse-grained temporal and spatial resolution. However, with the increase in \acrshort{ires} there has been an amalgamation of these two approaches \cite{Pfenninger2014}. This is due to the fact that long-term planning models must model the intermittency of \acrshort{ires} to capture the variance of supply of renewable energy.
 
 With \acrshort{ires}, such as wind and solar power, the output can vary temporally on many time scales. For example, there may be a gust of wind which lasts a number of seconds, or cloud cover which lasts for less than a minute. In an electricity grid, where supply must meet demand at all times, this can lead to challenges. Currently, conventional technologies provide a spinning reserve. Where a spinning reserve can increase or decrease capacity rapidly by increasing or decreasing the torque applied to a generator. However, if \acrshort{ires} is to reduce the size of this spinning reserve, then battery technologies will be required. It is for reasons such as this, that long-term energy models require an increase in temporal granularity.
 
@@ -108,13 +108,13 @@ There are, however, limitations to optimisation based models: traditional centra
 \section{Equilibrium models}
 \label{sec:litreview:equilibrium}
 
-Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, determine the equilibrium across all markets and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016a}. 
+Equilibrium models take an economic approach. They model the energy sector as a part of the whole economy and study how it relates to the rest of the economy \cite{Ringkjob2018}. There exist two types of equilibrium models: general equilibrium models or computable general equilibrium models (CGE). Both of these consider the whole economy, determine the equilibrium across all markets and determine important economic parameters such as the gross domestic product (GDP) endogenously. Partial equilibrium models (PE) focus on balancing one market. In this case, the market which is modelled is the electricity or energy market. They do not model the rest of the economy \cite{Ringkjob2018, Hall2016}. 
 
 POLES \cite{Soria2012} is a global detailed econometric model developed by the European Commission. POLES is able to evaluate long-term global energy outlooks with demand, supply and price projections by each main region. In addition, \ce{CO2} emissions are recorded, and technological change can be both endogenous and exogenous. The time step of POLES is yearly.
 
 E3MG is an econometric simulation developed by Cambridge Econometrics. It models the global energy-environment-economy system \cite{Dagoumas2010}. It represents each technology by 21 characteristics, and has a horizon up to 2100. It runs on a yearly time-step until 2030, and then every ten years until 2100. The demand is calculated endogenously using econometrics.
 
-MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibrium through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic programming approach as the mathematical underpinning \cite{Hall2016a}.
+MARKAL-MACRO is a hybrid model. Were MARKAL is bottom-up, and MACRO is top-down. MACRO is a macro-economic model and uses partial equilibrium through optimisation for matching demand and supply in MARKAL. MARKAL MACRO uses a non-linear dynamic programming approach as the mathematical underpinning \cite{Hall2016}.
 
 
 \section{Simulation models}
@@ -241,7 +241,7 @@ Finally, the time-step column details the time resolution granularity. Short-ter
 		PLEXOS         & Bottom-up                    & Optimisation                                      & Linear programming                               & Electricity sector         & Short-term                       & 1-minute                                            \\
 		ELMOD          & Bottom-up                    & Optimisation                                      & Non-linear programming                           & Electricity sector         & Short-term                       & Hourly                                              \\ 
 		ElecSim        & Bottom-up                    & Agent-based model                                 & Simulation                                       & Electricity market         & Short, medium and long-term      & Hourly                                              \\ \bottomrule	\end{tabular}
-	\caption{Model schema and presentation of various energy models \cite{Hall2016a}}
+	\caption{Model schema and presentation of various energy models \cite{Hall2016}}
 	\label{tab:litreview:modelreview}
 \end{table} 
 

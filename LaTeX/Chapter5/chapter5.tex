@@ -65,7 +65,7 @@ The introduction of smart meters in many countries (USA, Europe, Canada and Sout
 
 %%%%%%%%%%%%%% 30-minute ahead forecasting
 
-Firstly, we explore short term load-forecasting at an interval of 30 minutes ahead and cluster similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{ho1995random}, Long-Short Term Memory neural networks (LSTM) \cite{lstm}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
+Firstly, we explore short term load-forecasting at an interval of 30 minutes ahead and cluster similar users based on their electricity usage. A variety of different forecasting techniques were evaluated such as Random Forests \cite{ho1995random}, Long-Short Term Memory neural networks (LSTM) \cite{Hochreiter1997}, Multilayer Perceptron neural networks \cite{book:984557} and \acrfull{svr} \cite{Drucker1997}.
 
 Random Forests are an ensemble-based learning method for classification and regression, and are made up of many decision trees. LSTM networks are recurrent neural networks which remember values over arbitrary time intervals. Multilayer Perceptrons are a popular type of neural network which are made up of a minimum of three layers and can be used to make non-linear predictions. \acrshort{svr}s are supervised learning models which analyse data used for regression analysis.
 
@@ -303,7 +303,7 @@ Examples of online learning algorithms are Passive Aggressive (PA) Regressor \ci
 
 Linear regression is an approach to modelling linear relationships between a dependent variable and one or more independent variables. Linear regressions can be used for both online and offline learning. In this work, we used them for both online and offline learning. Linear regression models are often fitted using the least-squares approach. The least-squares approach minimises the sum of the squares of the residuals. 
 
-Other methods for fitting linear regressions are by minimising a penalised version of the least-squares cost function, such as in ridge and lasso regression \cite{GeladiPaul1994Mrac. Tibshirani1996a}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
+Other methods for fitting linear regressions are by minimising a penalised version of the least-squares cost function, such as in ridge and lasso regression \cite{GeladiPaul1994Mrac,Tibshirani1996a}. Ridge regression is a useful approach for mitigating the problem of multicollinearity in linear regression. Multicollinearity is where one predictor variable can be linearly predicted from the others with a high degree of accuracy. This phenomenon often occurs in models with a large number of parameters. 
 
 In ridge regression, the OLS loss function is augmented so that we not only minimize the sum of squared residuals but also penalized the size of parameter estimates, in order to shrink them towards zero:
 \begin{equation}
@@ -759,7 +759,7 @@ Figure \ref{fig:similar_customers} displays four different customers with simila
 	\label{fig:similar_customers}
 \end{figure}
 
-To cluster the load profiles, different options were considered. Hierarchical clustering using metrics such as Euclidean and wavelet distance metrics were evaluated \cite{BIMJ:BIMJ4710240520}, as was \textit{k}-means \cite{forgy1965cluster}.\textit{ K}-means demonstrated to be the most robust and best-performing clustering algorithm, and thus was chosen for use in this work.
+To cluster the load profiles, different options were considered. Hierarchical clustering using metrics such as Euclidean and wavelet distance metrics were evaluated \cite{BIMJ:BIMJ4710240520}, as was \textit{k}-means \cite{forgy65}.\textit{ K}-means demonstrated to be the most robust and best-performing clustering algorithm, and thus was chosen for use in this work.
 
 To select the optimum number of clusters (\textit{k}) cross-validation was explored. This allowed us to compare the results of each of the models and select \textit{k} with the highest MAPE accuracy.
 
@@ -1580,9 +1580,6 @@ We would also like to trial a different selection of algorithms and statistical 
 %	
 %	Short term load forecasting is utilised in real-time scheduling of electricity as well as load-frequency control. This paper aims to improve the accuracy of load-forecasting by using different machine learning techniques to predict 30 minutes ahead using smart meter data. We utilised a \textit{k}-means clustering algorithm to cluster similar individual consumers and fit distinct models for each cluster. Public holidays were taken into consideration to account for changing customer behaviour on these days. We implemented random forests, neural networks, long short-term memory neural networks and support vector regression models and compared their accuracy using mean absolute percentage error (MAPE). The model with the highest accuracy was a random forest, and we found that clustering similar consumers and aggregating their predictions outperformed a single model in each case.
 %\end{abstract}
-
-
-
 
 
 
